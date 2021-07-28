@@ -329,38 +329,78 @@ drop-table:
     - MATERIAL:
         etc.
   leather_defense:
-    - MATERIAL:
-        etc.
+    - LEATHER_HELMET:
+    - LEATHER_CHESTPLATE:
+    - LEATHER_LEGGINGS:
+    - LEATHER_BOOTS:
+    - SHIELD:
   wooden_weapons:
-    - MATERIAL:
-        etc.
+    - WOODEN_SWORD:
+    - WOODEN_AXE:
+    - CROSSBOW_ARROW:
+    - CROSSBOW_FIREWORK:
+    - ARROW:
+    - BOW:
   wooden_tools:
-    - MATERIAL:
-        etc.
+    - WOODEN_SHOVEL:
+    - WOODEN_PICKAXE:
+    - WOODEN_HOE:
   iron_defense:
-    - MATERIAL:
-        etc.
+    - IRON_HELMET:
+    - IRON_CHESTPLATE:
+    - IRON_LEGGINGS:
+    - IRON_BOOTS:
+    - SHIELD:
   iron_weapons:
-    - MATERIAL:
-        etc.
+    - IRON_SWORD:
+    - IRON_AXE:
+    - CROSSBOW_ARROW:
+    - CROSSBOW_FIREWORK:
+    - ARROW:
+    - TIPPED_ARROW:
+        nbt-data: ''
+    - BOW:
+    - TRIDENT:
   iron_tools:
-    - MATERIAL:
-        etc.
+    - IRON_SHOVEL:
+    - IRON_PICKAXE:
+    - IRON_HOE:
   diamond_defense:
-    - MATERIAL:
-        etc.
+    - DIAMOND_HELMET:
+    - DIAMOND_CHESTPLATE:
+    - DIAMOND_LEGGINGS:
+    - DIAMOND_BOOTS:
+    - SHIELD:
   diamond_weapons:
-    - MATERIAL:
-        etc.
+    - DIAMOND_SWORD:
+    - DIAMOND_AXE:
+    - CROSSBOW_ARROW:
+    - CROSSBOW_FIREWORK:
+    - ARROW:
+    - TIPPED_ARROW:
+        nbt-data: ''
+    - BOW:
+    - TRIDENT:
   diamond_tools:
-    - MATERIAL:
-        etc.
+    - DIAMOND_SHOVEL:
+    - DIAMOND_PICKAXE:
+    - DIAMOND_HOE:
   netherite_defense:
-    - MATERIAL:
-        etc.
+    - NETHERITE_HELMET:
+    - NETHERITE_CHESTPLATE:
+    - NETHERITE_LEGGINGS:
+    - NETHERITE_BOOTS:
+    - SHIELD:
   netherite_weapons:
-    - MATERIAL:
-        etc.
+    - NETHERITE_SWORD:
+    - NETHERITE_AXE:
+    - CROSSBOW_ARROW:
+    - CROSSBOW_FIREWORK:
+    - ARROW:
+    - TIPPED_ARROW:
+        nbt-data: ''
+    - BOW:
+    - TRIDENT:
   netherite_tools:
     - MATERIAL:
         etc.
