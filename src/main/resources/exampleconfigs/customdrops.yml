@@ -37,21 +37,21 @@
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 defaults:
-  chance: 0.2
+  chance: 0.0
   amount: 1
   minLevel: -1
   maxLevel: -1
   custommodeldata: -1
-  nomultiplier: false
-  nospawner: false
-  equipped: 1.0
-  override: false
+  nomultiplier: true
+  nospawner: true
+  equipped: true
+  override: true
   maxdropgroup: 1
-  priority: 0
+  priority: 1
   player-caused: true
   item-flags: ''
   groupid: ''
-  overall_chance: 0.0
+  overall_chance: 1.0
   nbt-data: ''
 
 
@@ -61,7 +61,8 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-  -
+  - usedroptable: netherite_weapons
+  - usedroptable: diamond_weapons
 
 all_levellable_mobs:
   -
@@ -316,18 +317,18 @@ ZOMBIFIED_PIGLIN:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 drop-table:
-  c_tier:
-    - MATERIAL:
-        etc.
-  b_tier:
-    - MATERIAL:
-        etc.
-  a_tier:
-    - MATERIAL:
-        etc.
-  s_tier:
-    - MATERIAL:
-        etc.
+#  c_tier:
+#    - MATERIAL:
+#        etc.
+#  b_tier:
+#    - MATERIAL:
+#        etc.
+#  a_tier:
+#    - MATERIAL:
+#        etc.
+#  s_tier:
+#    - MATERIAL:
+#        etc.
   leather_defense:
     - LEATHER_HELMET:
     - LEATHER_CHESTPLATE:
@@ -337,8 +338,7 @@ drop-table:
   wooden_weapons:
     - WOODEN_SWORD:
     - WOODEN_AXE:
-    - CROSSBOW_ARROW:
-    - CROSSBOW_FIREWORK:
+    - CROSSBOW:
     - ARROW:
     - BOW:
   wooden_tools:
@@ -354,8 +354,7 @@ drop-table:
   iron_weapons:
     - IRON_SWORD:
     - IRON_AXE:
-    - CROSSBOW_ARROW:
-    - CROSSBOW_FIREWORK:
+    - CROSSBOW:
     - ARROW:
     - TIPPED_ARROW:
         nbt-data: ''
@@ -374,11 +373,32 @@ drop-table:
   diamond_weapons:
     - DIAMOND_SWORD:
     - DIAMOND_AXE:
-    - CROSSBOW_ARROW:
-    - CROSSBOW_FIREWORK:
+    - CROSSBOW:
     - ARROW:
+#   Damage Tipped Arrow LVL 1
     - TIPPED_ARROW:
-        nbt-data: ''
+        chance: 1.0
+        equipped: false
+        name: '&2█&f████&8 | &7Tipped &a&oHealing&r&f Arrow'
+        nbt-data: "{CustomPotionColor:4055133,HideFlags:35,CustomPotionEffects:[{Id:6,Duration:5,Amplifier:0,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 2
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&2██&f███&8 | &7Tipped &a&oHealing&r&f Arrow'
+        nbt-data: "{CustomPotionColor:4055133,HideFlags:35,CustomPotionEffects:[{Id:6,Duration:5,Amplifier:1,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 1
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&4█&f████&8 | &7Tipped &c&oDamage&r&f Arrow'
+        nbt-data: "{CustomPotionColor:14695741,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:0,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 2
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&4██&f███&8 | &7Tipped &c&oDamage&r&f Arrow'
+        nbt-data: "{CustomPotionColor:14695741,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:1,Ambient:1}]}"
     - BOW:
     - TRIDENT:
   diamond_tools:
@@ -394,16 +414,50 @@ drop-table:
   netherite_weapons:
     - NETHERITE_SWORD:
     - NETHERITE_AXE:
-    - CROSSBOW_ARROW:
-    - CROSSBOW_FIREWORK:
+    - CROSSBOW:
     - ARROW:
+#   Damage Tipped Arrow LVL 3
     - TIPPED_ARROW:
-        nbt-data: ''
+        chance: 1.0
+        equipped: false
+        name: '&2███&f██&8 | &7Tipped &a&oHealing&r&f Arrow'
+        nbt-data: "{CustomPotionColor:4055133,HideFlags:35,CustomPotionEffects:[{Id:6,Duration:5,Amplifier:2,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 4
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&2████&f█&8 | &7Tipped &a&oHealing&r&f Arrow'
+        nbt-data: "{CustomPotionColor:4055133,HideFlags:35,CustomPotionEffects:[{Id:6,Duration:5,Amplifier:3,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 5
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&2█████&8 | &7Tipped &a&oHealing&r&f Arrow'
+        nbt-data: "{CustomPotionColor:4055133,HideFlags:35,CustomPotionEffects:[{Id:6,Duration:5,Amplifier:4,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 3
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&4███&f██&8 | &7Tipped &c&oDamage&r&f Arrow'
+        nbt-data: "{CustomPotionColor:14695741,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:2,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 4
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&4████&f█&8 | &7Tipped &c&oDamage&r&f Arrow'
+        nbt-data: "{CustomPotionColor:14695741,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:3,Ambient:1}]}"
+#   Damage Tipped Arrow LVL 5
+    - TIPPED_ARROW:
+        chance: 1.0
+        equipped: false
+        name: '&4█████&8 | &7Tipped &c&oDamage&r&f Arrow'
+        nbt-data: "{CustomPotionColor:14695741,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:4,Ambient:1}]}"
     - BOW:
     - TRIDENT:
   netherite_tools:
-    - MATERIAL:
-        etc.
+    - NETHERITE_SHOVEL:
+    - NETHERITE_PICKAXE:
+    - NETHERITE_HOE:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
