@@ -61,7 +61,7 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-  - usedroptable: tipped_wither_arrows_1-5
+  - 
 
 all_levellable_mobs:
   -
