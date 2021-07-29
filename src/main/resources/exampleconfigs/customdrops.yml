@@ -61,10 +61,13 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-  - 
+  -
 
 all_levellable_mobs:
-  -
+  - usedroptable: tipped_damage_arrows_1-5
+  - usedroptable: tipped_levitation_arrows_1-5
+  - usedroptable: tipped_poison_arrows_1-5
+  - usedroptable: tipped_wither_arrows_1-5
 
 all_hostile_mobs:
   -
@@ -414,35 +417,35 @@ drop-table:
   tipped_damage_arrows_1-5:
 # Damage Tipped Arrow LVL 1 +0
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_damage
         chance: 0.05 # 5% Chance
         equipped: false
         name: '&#951703█&f████&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
         nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:0,Ambient:1}]}"
 # Damage Tipped Arrow LVL 2 +1
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_damage
         chance: 0.025 # 2.5% Chance
         equipped: false
         name: '&#951703██&f███&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
         nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:1,Ambient:1}]}"
 # Damage Tipped Arrow LVL 3 +2
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_damage
         chance: 0.01 # 1% Chance
         equipped: false
         name: '&#951703███&f██&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
         nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:2,Ambient:1}]}"
 # Damage Tipped Arrow LVL 4 +3
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_damage
         chance: 0.001 # 0.1% Chance
         equipped: false
         name: '&#951703████&f█&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
         nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:3,Ambient:1}]}"
 # Damage Tipped Arrow LVL 5 +4
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_damage
         chance: 0.0001 # 0.01% Chance
         equipped: false
         name: '&#951703█████&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
@@ -452,35 +455,35 @@ drop-table:
   tipped_poison_arrows_1-5:
 # Poison Tipped Arrow LVL 1 5s
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_poison
         chance: 0.05 # 5% Chance
         equipped: false
         name: '&#750062█&f████&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:100,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 2 7.5s
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_poison
         chance: 0.025 # 2.5% Chance
         equipped: false
         name: '&#750062██&f███&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:150,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 3 10s
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_poison
         chance: 0.01 # 1% Chance
         equipped: false
         name: '&#750062███&f██&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 4 12.5s
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_poison
         chance: 0.001 # 0.1% Chance
         equipped: false
         name: '&#750062████&f█&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:250,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 5 15s
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_poison
         chance: 0.0001 # 0.01% Chance
         equipped: false
         name: '&#750062█████&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
@@ -490,35 +493,35 @@ drop-table:
   tipped_wither_arrows_1-5:
 # Wither Tipped Arrow LVL 1 5s +1
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_wither
         chance: 0.05 # 5% Chance
         equipped: false
         name: '&#56626C█&f████&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:100,Amplifier:1,Ambient:1}]}"
 # Wither Tipped Arrow LVL 2 10s +1
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_wither
         chance: 0.025 # 2.5% Chance
         equipped: false
         name: '&#56626C██&f███&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:1,Ambient:1}]}"
 # Wither Tipped Arrow LVL 3 10s +2
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_wither
         chance: 0.01 # 1% Chance
         equipped: false
         name: '&#56626C███&f██&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:2,Ambient:1}]}"
 # Wither Tipped Arrow LVL 4 10s +3
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_wither
         chance: 0.001 # 0.1% Chance
         equipped: false
         name: '&#56626C████&f█&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:3,Ambient:1}]}"
 # Wither Tipped Arrow LVL 5 10s +4
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_wither
         chance: 0.0001 # 0.01% Chance
         equipped: false
         name: '&#56626C█████&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
@@ -528,35 +531,35 @@ drop-table:
   tipped_levitation_arrows_1-5:
 # Levitation Tipped Arrow LVL 1 2.5s +0
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_levitation
         chance: 0.05 # 5% Chance
         equipped: false
         name: '&#56C7F2█&f████&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
-        nbt-data: "{CustomPotionColor:12255226,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:0,Ambient:1}]}"
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:0,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 2 2.5s +1
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_levitation
         chance: 0.025 # 2.5% Chance
         equipped: false
         name: '&#56C7F2██&f███&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 3 5s +1
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_levitation
         chance: 0.01 # 1% Chance
         equipped: false
         name: '&#56C7F2███&f██&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 4 5s +2
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_levitation
         chance: 0.001 # 0.1% Chance
         equipped: false
         name: '&#56C7F2████&f█&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:2,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 5 10s +2
     - TIPPED_ARROW:
-        groupid: 1
+        groupid: tipped_levitation
         chance: 0.0001 # 0.01% Chance
         equipped: false
         name: '&#56C7F2█████&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
