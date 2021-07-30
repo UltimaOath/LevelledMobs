@@ -46,7 +46,7 @@ defaults:
   nospawner: true
   equipped: true
   override: true
-  maxdropgroup: 3
+  maxdropgroup:1
   priority: 1
   player-caused: true
   item-flags: ''
