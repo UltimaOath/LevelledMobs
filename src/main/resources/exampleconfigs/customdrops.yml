@@ -514,37 +514,37 @@ drop-table:
         groupid: potions_swiftness_single
         chance: 0.01 # 1% Chance
         name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
 # Swiftness Single-Use Potion LVL 2 10s +2
     - POTION:
         groupid: potions_swiftness_single
         chance: 0.01 # 1% Chance
         name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
 # Swiftness Single-Use Potion LVL 3 20s +2
     - POTION:
         groupid: potions_swiftness_single
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
 # Swiftness Single-Use Potion LVL 4 20s +3
     - POTION:
         groupid: potions_swiftness_single
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
 # Swiftness Single-Use Potion LVL 5 30s +3
     - POTION:
         groupid: potions_swiftness_single
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
 # Swiftness Single-Use Potion LVL 6 30s +4
     - POTION:
         groupid: potions_swiftness_single
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
         
         
         
@@ -555,37 +555,37 @@ drop-table:
         groupid: potions_swiftness_splash
         chance: 0.01 # 1% Chance
         name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
 # Swiftness Splash Potion LVL 2 10s +2
     - SPLASH_POTION:
         groupid: potions_swiftness_splash
         chance: 0.01 # 1% Chance
         name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
 # Swiftness Splash Potion LVL 3 20s +2
     - SPLASH_POTION:
         groupid: potions_swiftness_splash
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
 # Swiftness Splash Potion LVL 4 20s +3
     - SPLASH_POTION:
         groupid: potions_swiftness_splash
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
 # Swiftness Splash Potion LVL 5 30s +3
     - SPLASH_POTION:
         groupid: potions_swiftness_splash
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
 # Swiftness Splash Potion LVL 6 30s +4
     - SPLASH_POTION:
         groupid: potions_swiftness_splash
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
         
         
         
@@ -596,37 +596,37 @@ drop-table:
         groupid: potions_swiftness_lingering
         chance: 0.01 # 1% Chance
         name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
 # Swiftness Lingering Potion LVL 2 10s +2
     - LINGERING_POTION:
         groupid: potions_swiftness_lingering
         chance: 0.01 # 1% Chance
         name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
 # Swiftness Lingering Potion LVL 3 15s +2
     - LINGERING_POTION:
         groupid: potions_swiftness_lingering
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:2}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:2}]}"
 # Swiftness Lingering Potion LVL 4 15s +3
     - LINGERING_POTION:
         groupid: potions_swiftness_lingering
         chance: 0.001 # 0.1% Chance
         name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:3}]}"
 # Swiftness Lingering Potion LVL 5 30s +3
     - LINGERING_POTION:
         groupid: potions_swiftness_lingering
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
 # Swiftness Lingering Potion LVL 6 30s +4
     - LINGERING_POTION:
         groupid: potions_swiftness_lingering
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
         
         
         
