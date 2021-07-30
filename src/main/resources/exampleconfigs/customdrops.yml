@@ -61,25 +61,35 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-  - usedroptable: disc
+#  - usedroptable: disc
   
   
 all_levellable_mobs:
-  - usedroptable: tipped_damage_arrows
-  - usedroptable: tipped_levitation_arrows
-  - usedroptable: tipped_poison_arrows
-  - usedroptable: tipped_wither_arrows
-  - usedroptable: tipped_slowness_arrows
-  - usedroptable: potions_regeneration_single
-  - usedroptable: potions_regeneration_splash
-  - usedroptable: potions_regeneration_lingering
-  - usedroptable: potions_swiftness_single
-  - usedroptable: potions_swiftness_splash
-  - usedroptable: potions_swiftness_lingering
-  
+#  - usedroptable: tipped_damage_arrows
+#  - usedroptable: tipped_levitation_arrows
+#  - usedroptable: tipped_poison_arrows
+#  - usedroptable: tipped_wither_arrows
+#  - usedroptable: tipped_slowness_arrows
+#  - usedroptable: potions_regeneration_single
+#  - usedroptable: potions_regeneration_splash
+#  - usedroptable: potions_regeneration_lingering
+#  - usedroptable: potions_swiftness_single
+#  - usedroptable: potions_swiftness_splash
+#  - usedroptable: potions_swiftness_lingering
+
 
 all_hostile_mobs:
-  -
+#  - usedroptable: leather_defense
+#  - usedroptable: leather_defense_plus
+#  - usedroptable: iron_defense
+#  - usedroptable: iron_defense_plus
+#  - usedroptable: diamond_defense
+#  - usedroptable: diamond_defense_plus
+#  - usedroptable: netherite_defense
+#  - usedroptable: netherite_defense_plus
+
+# Need to Modify the '_plus' versions of defense items before continuing.
+
 
 all_passive_mobs:
   -
@@ -381,10 +391,14 @@ drop-table:
     - music_disc_pigstep:
         groupid: disc
         chance: 0.00001 # 0.001% Chance
-
-
-
-
+        
+        
+        
+        
+        
+        
+        
+        
   potions_regeneration_single:
 # Regeneration Single-Use Potion LVL 1 10s +1
     - POTION:
@@ -424,8 +438,6 @@ drop-table:
         nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
         
         
-        
-        
   potions_regeneration_splash:
 # Regeneration Splash Potion LVL 1 10s +1
     - SPLASH_POTION:
@@ -463,8 +475,6 @@ drop-table:
         chance: 0.0001 # 0.01% Chance
         name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
         nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
-        
-        
         
         
   potions_regeneration_lingering:
@@ -547,8 +557,6 @@ drop-table:
         nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
         
         
-        
-        
   potions_swiftness_splash:
 # Swiftness Splash Potion LVL 1 10s +1
     - SPLASH_POTION:
@@ -586,8 +594,6 @@ drop-table:
         chance: 0.0001 # 0.01% Chance
         name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
         nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
-        
-        
         
         
   potions_swiftness_lingering:
@@ -631,12 +637,230 @@ drop-table:
         
         
         
+        
+        
+        
+        
   leather_defense:
     - LEATHER_HELMET:
+        groupid: leather_defense_armor
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
     - LEATHER_CHESTPLATE:
+        groupid: leather_defense_armor
+        equipped: true
+        chance: 0.01 # 1% Chance
     - LEATHER_LEGGINGS:
+        groupid: leather_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
     - LEATHER_BOOTS:
+        groupid: leather_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Brown/Gold Wooden Shield Design
     - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:4,Patterns:[{Color:15,Pattern:"bo"},{Color:13,Pattern:"gra"},{Color:12,Pattern:"gru"},{Color:5,Pattern:"drs"},{Color:5,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+  leather_defense_plus:
+    - LEATHER_HELMET:
+        groupid: leather_defense_armor_plus
+        maxdropgroup: 2
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - LEATHER_CHESTPLATE:
+        groupid: leather_defense_armor_plus
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - LEATHER_LEGGINGS:
+        groupid: leather_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - LEATHER_BOOTS:
+        groupid: leather_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Brown/Gold Wooden Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:4,Patterns:[{Color:15,Pattern:"bo"},{Color:13,Pattern:"gra"},{Color:12,Pattern:"gru"},{Color:5,Pattern:"drs"},{Color:5,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+        
+        
+  iron_defense:
+    - IRON_HELMET:
+        groupid: iron_defense_armor
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - IRON_CHESTPLATE:
+        groupid: iron_defense_armor
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - IRON_LEGGINGS:
+        groupid: iron_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - IRON_BOOTS:
+        groupid: iron_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Silver/Gray Iron Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:3,Patterns:[{Color:15,Pattern:"bo"},{Color:8,Pattern:"gra"},{Color:7,Pattern:"gru"},{Color:0,Pattern:"drs"},{Color:0,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+  iron_defense_plus:
+    - IRON_HELMET:
+        groupid: iron_defense_armor_plus
+        maxdropgroup: 2
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - IRON_CHESTPLATE:
+        groupid: iron_defense_armor_plus
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - IRON_LEGGINGS:
+        groupid: iron_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - IRON_BOOTS:
+        groupid: iron_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Silver/Gray Iron Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:3,Patterns:[{Color:15,Pattern:"bo"},{Color:8,Pattern:"gra"},{Color:7,Pattern:"gru"},{Color:0,Pattern:"drs"},{Color:0,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+        
+        
+  diamond_defense:
+    - DIAMOND_HELMET:
+        groupid: diamond_defense_armor
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_defense_armor
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - DIAMOND_BOOTS:
+        groupid: diamond_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Blue/Black Diamond Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:2,Patterns:[{Color:15,Pattern:"bo"},{Color:11,Pattern:"gra"},{Color:11,Pattern:"gru"},{Color:3,Pattern:"drs"},{Color:3,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+  diamond_defense_plus:
+    - DIAMOND_HELMET:
+        groupid: diamond_defense_armor_plus
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_defense_armor_plus
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - DIAMOND_BOOTS:
+        groupid: diamond_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Blue/Black Diamond Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:2,Patterns:[{Color:15,Pattern:"bo"},{Color:11,Pattern:"gra"},{Color:11,Pattern:"gru"},{Color:3,Pattern:"drs"},{Color:3,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+        
+        
+  netherite_defense:
+    - NETHERITE_HELMET:
+        groupid: netherite_defense_armor
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_defense_armor
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - NETHERITE_BOOTS:
+        groupid: netherite_defense_armor
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Black/Gray Netherite Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:9,Patterns:[{Color:15,Pattern:"bo"},{Color:7,Pattern:"gra"},{Color:15,Pattern:"gru"},{Color:8,Pattern:"drs"},{Color:8,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+  netherite_defense_plus:
+    - NETHERITE_HELMET:
+        groupid: netherite_defense_armor_plus
+        maxdropgroup: 4
+        overall_chance: 1.0
+        equipped: true
+        chance: 0.05 # 5% Chance
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_defense_armor_plus
+        equipped: true
+        chance: 0.01 # 1% Chance
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+    - NETHERITE_BOOTS:
+        groupid: netherite_defense_armor_plus
+        equipped: true
+        chance: 0.075 # 7.5% Chance
+# Black/Gray Netherite Shield Design
+    - SHIELD:
+        chance: 0.05 # 5% Chance
+        equipped: true
+        nbt-data: "{BlockEntityTag:{Base:9,Patterns:[{Color:15,Pattern:"bo"},{Color:7,Pattern:"gra"},{Color:15,Pattern:"gru"},{Color:8,Pattern:"drs"},{Color:8,Pattern:"dls"},{Color:15,Pattern:"cr"}]}}"
+        
+        
+        
+        
+        
+        
+        
+        
   wooden_weapons:
     - WOODEN_SWORD:
     - WOODEN_AXE:
@@ -647,12 +871,6 @@ drop-table:
     - WOODEN_SHOVEL:
     - WOODEN_PICKAXE:
     - WOODEN_HOE:
-  iron_defense:
-    - IRON_HELMET:
-    - IRON_CHESTPLATE:
-    - IRON_LEGGINGS:
-    - IRON_BOOTS:
-    - SHIELD:
   iron_weapons:
     - IRON_SWORD:
     - IRON_AXE:
@@ -664,12 +882,6 @@ drop-table:
     - IRON_SHOVEL:
     - IRON_PICKAXE:
     - IRON_HOE:
-  diamond_defense:
-    - DIAMOND_HELMET:
-    - DIAMOND_CHESTPLATE:
-    - DIAMOND_LEGGINGS:
-    - DIAMOND_BOOTS:
-    - SHIELD:
   diamond_weapons:
     - DIAMOND_SWORD:
     - DIAMOND_AXE:
@@ -681,12 +893,6 @@ drop-table:
     - DIAMOND_SHOVEL:
     - DIAMOND_PICKAXE:
     - DIAMOND_HOE:
-  netherite_defense:
-    - NETHERITE_HELMET:
-    - NETHERITE_CHESTPLATE:
-    - NETHERITE_LEGGINGS:
-    - NETHERITE_BOOTS:
-    - SHIELD:
   netherite_weapons:
     - NETHERITE_SWORD:
     - NETHERITE_AXE:
@@ -698,6 +904,10 @@ drop-table:
     - NETHERITE_SHOVEL:
     - NETHERITE_PICKAXE:
     - NETHERITE_HOE:
+    
+    
+    
+    
     
     
     
@@ -895,10 +1105,14 @@ drop-table:
         chance: 0.00001 # 0.001% Chance
         name: '&#0543EE★★★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:600,Amplifier:4,Ambient:1}]}"
-
-
-
-
+        
+        
+        
+        
+        
+        
+        
+        
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
 # +   Section 05 - Advanced Message Settings                                                 +LM3
