@@ -44,9 +44,9 @@ defaults:
   custommodeldata: -1
   nomultiplier: true
   nospawner: true
-  equipped: true
+  equipped: false
   override: true
-  maxdropgroup: 1
+  maxdropgroup: 10
   priority: 1
   player-caused: true
   item-flags: ''
@@ -61,21 +61,22 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-#  - usedroptable: disc   
+  - usedroptable: disc
   
   
 all_levellable_mobs:
-#  - usedroptable: tipped_damage_arrows_1-5
-#  - usedroptable: tipped_levitation_arrows_1-5
-#  - usedroptable: tipped_poison_arrows_1-5
-#  - usedroptable: tipped_wither_arrows_1-5
-#  - usedroptable: tipped_slowness_arrows_1-5
-#  - usedroptable: potions_regeneration_single_1-3
-#  - usedroptable: potions_regeneration_splash_1-3
-#  - usedroptable: potions_regeneration_lingering_1-3
-#  - usedroptable: potions_neutral
-#  - usedroptable: potions_negative
-
+  - usedroptable: tipped_damage_arrows
+  - usedroptable: tipped_levitation_arrows
+  - usedroptable: tipped_poison_arrows
+  - usedroptable: tipped_wither_arrows
+  - usedroptable: tipped_slowness_arrows
+  - usedroptable: potions_regeneration_single
+  - usedroptable: potions_regeneration_splash
+  - usedroptable: potions_regeneration_lingering
+  - usedroptable: potions_swiftness_single
+  - usedroptable: potions_swiftness_splash
+  - usedroptable: potions_swiftness_lingering
+  
 
 all_hostile_mobs:
   -
@@ -380,89 +381,254 @@ drop-table:
     - music_disc_pigstep:
         groupid: disc
         chance: 0.00001 # 0.001% Chance
-        
-        
+
+
+
+
   potions_regeneration_single:
-# Regeneration Single-Use Potion 15s +1
+# Regeneration Single-Use Potion LVL 1 10s +1
     - POTION:
         groupid: potions_regeneration_single
-        chance: 1.0
-        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:1}]}"
-# Regeneration Single-Use Potion 15s +2
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Single-Use Potion LVL 2 10s +2
     - POTION:
         groupid: potions_regeneration_single
-        chance: 1.0
-        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
-# Regeneration Single-Use Potion 15s +3
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Single-Use Potion LVL 3 20s +2
     - POTION:
         groupid: potions_regeneration_single
-        chance: 1.0
-        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
-
-
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Single-Use Potion LVL 4 20s +3
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Single-Use Potion LVL 5 30s +3
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Single-Use Potion LVL 6 30s +4
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
+        
+        
+        
+        
   potions_regeneration_splash:
-# Regeneration Splash Potion 15s +1
+# Regeneration Splash Potion LVL 1 10s +1
     - SPLASH_POTION:
         groupid: potions_regeneration_splash
-        chance: 1.0
-        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
-# Regeneration Splash Potion 15s +2
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Splash Potion LVL 2 10s +2
     - SPLASH_POTION:
         groupid: potions_regeneration_splash
-        chance: 1.0
-        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
-# Regeneration Splash Potion 15s +3
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Splash Potion LVL 3 20s +2
     - SPLASH_POTION:
         groupid: potions_regeneration_splash
-        chance: 1.0
-        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:4}]}"
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Splash Potion LVL 4 20s +3
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Splash Potion LVL 5 30s +3
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Splash Potion LVL 6 30s +4
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
+        
+        
         
         
   potions_regeneration_lingering:
-# Regeneration Lingering Potion 15s +1
+# Regeneration Lingering Potion LVL 1 10s +1
     - LINGERING_POTION:
         groupid: potions_regeneration_lingering
-        chance: 1.0
-        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
-# Regeneration Lingering Potion 15s +2
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Lingering Potion LVL 2 10s +2
     - LINGERING_POTION:
         groupid: potions_regeneration_lingering
-        chance: 1.0
-        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
-# Regeneration Lingering Potion 15s +3
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Lingering Potion LVL 3 20s +2
     - LINGERING_POTION:
         groupid: potions_regeneration_lingering
-        chance: 1.0
-        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
-        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:4}]}"
-
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Lingering Potion LVL 4 20s +3
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Lingering Potion LVL 5 30s +3
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Lingering Potion LVL 6 30s +4
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
         
-  potions_neutral:
-# Name of Potion 
+        
+        
+        
+  potions_swiftness_single:
+# Swiftness Single-Use Potion LVL 1 10s +1
     - POTION:
-        groupid: potions_neutral
-        chance: 1.0
-        name: ''
-        nbt-data: ""
-        
-        
-  potions_negative:
-# Name of Potion 
+        groupid: potions_swiftness_single
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Single-Use Potion LVL 2 10s +2
     - POTION:
-        groupid: potions_negative
-        chance: 1.0
-        name: ''
-        nbt-data: ""
-    
-    
+        groupid: potions_swiftness_single
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Single-Use Potion LVL 3 20s +2
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+# Swiftness Single-Use Potion LVL 4 20s +3
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+# Swiftness Single-Use Potion LVL 5 30s +3
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Single-Use Potion LVL 6 30s +4
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
+        
+        
+  potions_swiftness_splash:
+# Swiftness Splash Potion LVL 1 10s +1
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Splash Potion LVL 2 10s +2
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Splash Potion LVL 3 20s +2
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+# Swiftness Splash Potion LVL 4 20s +3
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+# Swiftness Splash Potion LVL 5 30s +3
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Splash Potion LVL 6 30s +4
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
+        
+        
+  potions_swiftness_lingering:
+# Swiftness Lingering Potion LVL 1 10s +1
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Lingering Potion LVL 2 10s +2
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Lingering Potion LVL 3 15s +2
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:2}]}"
+# Swiftness Lingering Potion LVL 4 15s +3
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:3}]}"
+# Swiftness Lingering Potion LVL 5 30s +3
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Lingering Potion LVL 6 30s +4
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
         
         
   leather_defense:
@@ -534,194 +700,201 @@ drop-table:
     - NETHERITE_HOE:
     
     
-  tipped_damage_arrows_1-5:
+    
+    
+  tipped_damage_arrows:
 # Damage Tipped Arrow LVL 1 +0
     - TIPPED_ARROW:
-        groupid: tipped_damage_arrows_1-5
+        groupid: tipped_damage_arrows
         chance: 0.05 # 5% Chance
-        equipped: false
-        name: '&#951703█&f████&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
-        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:0,Ambient:1}]}"
+        name: '&#951703☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:0,Ambient:1}]}"
 # Damage Tipped Arrow LVL 2 +1
     - TIPPED_ARROW:
-        groupid: tipped_damage_arrows_1-5
+        groupid: tipped_damage_arrows
         chance: 0.025 # 2.5% Chance
-        equipped: false
-        name: '&#951703██&f███&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
-        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:1,Ambient:1}]}"
+        name: '&#951703★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:1,Ambient:1}]}"
 # Damage Tipped Arrow LVL 3 +2
     - TIPPED_ARROW:
-        groupid: tipped_damage_arrows_1-5
+        groupid: tipped_damage_arrows
         chance: 0.01 # 1% Chance
-        equipped: false
-        name: '&#951703███&f██&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
-        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:2,Ambient:1}]}"
+        name: '&#951703★☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:2,Ambient:1}]}"
 # Damage Tipped Arrow LVL 4 +3
     - TIPPED_ARROW:
-        groupid: tipped_damage_arrows_1-5
+        groupid: tipped_damage_arrows
         chance: 0.001 # 0.1% Chance
-        equipped: false
-        name: '&#951703████&f█&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
-        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:3,Ambient:1}]}"
+        name: '&#951703★★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:3,Ambient:1}]}"
 # Damage Tipped Arrow LVL 5 +4
     - TIPPED_ARROW:
-        groupid: tipped_damage_arrows_1-5
+        groupid: tipped_damage_arrows
         chance: 0.0001 # 0.01% Chance
-        equipped: false
-        name: '&#951703█████&8 | &7Tipped &#DF1019&oDamage&r&f Arrow'
-        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:5,Amplifier:4,Ambient:1}]}"
+        name: '&#951703★★☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:4,Ambient:1}]}"
+# Damage Tipped Arrow LVL 6 +5
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#951703★★★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:5,Ambient:1}]}"
         
         
-  tipped_poison_arrows_1-5:
+  tipped_poison_arrows:
 # Poison Tipped Arrow LVL 1 5s
     - TIPPED_ARROW:
-        groupid: tipped_poison_arrows_1-5
+        groupid: tipped_poison_arrows
         chance: 0.05 # 5% Chance
-        equipped: false
-        name: '&#750062█&f████&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
+        name: '&#750062☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:100,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 2 7.5s
     - TIPPED_ARROW:
-        groupid: tipped_poison_arrows_1-5
+        groupid: tipped_poison_arrows
         chance: 0.025 # 2.5% Chance
-        equipped: false
-        name: '&#750062██&f███&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
+        name: '&#750062★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:150,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 3 10s
     - TIPPED_ARROW:
-        groupid: tipped_poison_arrows_1-5
+        groupid: tipped_poison_arrows
         chance: 0.01 # 1% Chance
-        equipped: false
-        name: '&#750062███&f██&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
+        name: '&#750062★☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 4 12.5s
     - TIPPED_ARROW:
-        groupid: tipped_poison_arrows_1-5
+        groupid: tipped_poison_arrows
         chance: 0.001 # 0.1% Chance
-        equipped: false
-        name: '&#750062████&f█&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
+        name: '&#750062★★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:250,Amplifier:1,Ambient:1}]}"
 # Poison Tipped Arrow LVL 5 15s
     - TIPPED_ARROW:
-        groupid: tipped_poison_arrows_1-5
+        groupid: tipped_poison_arrows
         chance: 0.0001 # 0.01% Chance
-        equipped: false
-        name: '&#750062█████&8 | &7Tipped &#FF7AE9&oPoison&r&f Arrow'
+        name: '&#750062★★☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:300,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 6 30s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#750062★★★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:600,Amplifier:1,Ambient:1}]}"
         
         
-  tipped_wither_arrows_1-5:
+  tipped_wither_arrows:
 # Wither Tipped Arrow LVL 1 5s +1
     - TIPPED_ARROW:
-        groupid: tipped_wither_arrows_1-5
+        groupid: tipped_wither_arrows
         chance: 0.05 # 5% Chance
-        equipped: false
-        name: '&#56626C█&f████&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
+        name: '&#56626C☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:100,Amplifier:1,Ambient:1}]}"
 # Wither Tipped Arrow LVL 2 10s +1
     - TIPPED_ARROW:
-        groupid: tipped_wither_arrows_1-5
+        groupid: tipped_wither_arrows
         chance: 0.025 # 2.5% Chance
-        equipped: false
-        name: '&#56626C██&f███&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
+        name: '&#56626C★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:1,Ambient:1}]}"
 # Wither Tipped Arrow LVL 3 10s +2
     - TIPPED_ARROW:
-        groupid: tipped_wither_arrows_1-5
+        groupid: tipped_wither_arrows
         chance: 0.01 # 1% Chance
-        equipped: false
-        name: '&#56626C███&f██&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
+        name: '&#56626C★☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:2,Ambient:1}]}"
 # Wither Tipped Arrow LVL 4 10s +3
     - TIPPED_ARROW:
-        groupid: tipped_wither_arrows_1-5
+        groupid: tipped_wither_arrows
         chance: 0.001 # 0.1% Chance
-        equipped: false
-        name: '&#56626C████&f█&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
+        name: '&#56626C★★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:3,Ambient:1}]}"
 # Wither Tipped Arrow LVL 5 10s +4
     - TIPPED_ARROW:
-        groupid: tipped_wither_arrows_1-5
+        groupid: tipped_wither_arrows
         chance: 0.0001 # 0.01% Chance
-        equipped: false
-        name: '&#56626C█████&8 | &7Tipped &#2D3C48&oWither&r&f Arrow'
+        name: '&#56626C★★☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:3,Ambient:1}]}"
+# Wither Tipped Arrow LVL 6 10s +5
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#56626C★★★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:4,Ambient:1}]}"
         
         
-  tipped_levitation_arrows_1-5:
+  tipped_levitation_arrows:
 # Levitation Tipped Arrow LVL 1 2.5s +0
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows_1-5
+        groupid: tipped_levitation_arrows
         chance: 0.05 # 5% Chance
-        equipped: false
-        name: '&#56C7F2█&f████&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
+        name: '&#56C7F2☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:0,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 2 2.5s +1
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows_1-5
+        groupid: tipped_levitation_arrows
         chance: 0.025 # 2.5% Chance
-        equipped: false
-        name: '&#56C7F2██&f███&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
+        name: '&#56C7F2★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 3 5s +1
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows_1-5
+        groupid: tipped_levitation_arrows
         chance: 0.01 # 1% Chance
-        equipped: false
-        name: '&#56C7F2███&f██&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
+        name: '&#56C7F2★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 4 5s +2
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows_1-5
+        groupid: tipped_levitation_arrows
         chance: 0.001 # 0.1% Chance
-        equipped: false
-        name: '&#56C7F2████&f█&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
+        name: '&#56C7F2★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:2,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 5 10s +2
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows_1-5
+        groupid: tipped_levitation_arrows
         chance: 0.0001 # 0.01% Chance
-        equipped: false
-        name: '&#56C7F2█████&8 | &7Tipped &#B9FAF8&oLevitation&r&f Arrow'
+        name: '&#56C7F2★★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:200,Amplifier:2,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 6 15s +2
+    - TIPPED_ARROW:
+        groupid: tipped_levitation_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#56C7F2★★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:300,Amplifier:2,Ambient:1}]}"
         
         
-  tipped_slowness_arrows_1-5:
+  tipped_slowness_arrows:
 # Slowness Tipped Arrow LVL 1 5s +1
     - TIPPED_ARROW:
-        groupid: tipped_slowness_arrows_1-5
+        groupid: tipped_slowness_arrows
         chance: 0.05 # 5% Chance
-        equipped: false
-        name: '&#0543EE█&f████&8 | &7Tipped &#698EF4&oSlowness&r&f Arrow'
+        name: '&#0543EE☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:100,Amplifier:1,Ambient:1}]}"
 # Slowness Tipped Arrow LVL 2 5s +2
     - TIPPED_ARROW:
-        groupid: tipped_slowness_arrows_1-5
+        groupid: tipped_slowness_arrows
         chance: 0.025 # 2.5% Chance
-        equipped: false
-        name: '&#0543EE██&f███&8 | &7Tipped &#698EF4&oSlowness&r&f Arrow'
+        name: '&#0543EE★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:100,Amplifier:2,Ambient:1}]}"
 # Slowness Tipped Arrow LVL 3 10s +2
     - TIPPED_ARROW:
-        groupid: tipped_slowness_arrows_1-5
+        groupid: tipped_slowness_arrows
         chance: 0.01 # 1% Chance
-        equipped: false
-        name: '&#0543EE███&f██&8 | &7Tipped &#698EF4&oSlowness&r&f Arrow'
+        name: '&#0543EE★☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:200,Amplifier:2,Ambient:1}]}"
 # Slowness Tipped Arrow LVL 4 10s +3
     - TIPPED_ARROW:
-        groupid: tipped_slowness_arrows_1-5
+        groupid: tipped_slowness_arrows
         chance: 0.001 # 0.1% Chance
-        equipped: false
-        name: '&#0543EE████&f█&8 | &7Tipped &#698EF4&oSlowness&r&f Arrow'
+        name: '&#0543EE★★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:200,Amplifier:3,Ambient:1}]}"
 # Slowness Tipped Arrow LVL 5 15s +4
     - TIPPED_ARROW:
-        groupid: tipped_slowness_arrows_1-5
+        groupid: tipped_slowness_arrows
         chance: 0.0001 # 0.01% Chance
-        equipped: false
-        name: '&#0543EE█████&8 | &7Tipped &#698EF4&oSlowness&r&f Arrow'
+        name: '&#0543EE★★☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:300,Amplifier:4,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 6 30s +4
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#0543EE★★★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:600,Amplifier:4,Ambient:1}]}"
 
 
 
