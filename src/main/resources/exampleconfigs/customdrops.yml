@@ -46,7 +46,7 @@ defaults:
   nospawner: true
   equipped: true
   override: true
-  maxdropgroup: 1
+  maxdropgroup: 3
   priority: 1
   player-caused: true
   item-flags: ''
@@ -61,15 +61,20 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-  - usedroptable: disc
+#  - usedroptable: disc   
   
   
 all_levellable_mobs:
-  - usedroptable: tipped_damage_arrows_1-5
-  - usedroptable: tipped_levitation_arrows_1-5
-  - usedroptable: tipped_poison_arrows_1-5
-  - usedroptable: tipped_wither_arrows_1-5
-  - usedroptable: tipped_slowness_arrows_1-5
+#  - usedroptable: tipped_damage_arrows_1-5
+#  - usedroptable: tipped_levitation_arrows_1-5
+#  - usedroptable: tipped_poison_arrows_1-5
+#  - usedroptable: tipped_wither_arrows_1-5
+#  - usedroptable: tipped_slowness_arrows_1-5
+#  - usedroptable: potions_regeneration_single_1-3
+#  - usedroptable: potions_regeneration_splash_1-3
+#  - usedroptable: potions_regeneration_lingering_1-3
+#  - usedroptable: potions_neutral
+#  - usedroptable: potions_negative
 
 
 all_hostile_mobs:
@@ -375,6 +380,89 @@ drop-table:
     - music_disc_pigstep:
         groupid: disc
         chance: 0.00001 # 0.001% Chance
+        
+        
+  potions_regeneration_single:
+# Regeneration Single-Use Potion 15s +1
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 1.0
+        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:1}]}"
+# Regeneration Single-Use Potion 15s +2
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 1.0
+        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
+# Regeneration Single-Use Potion 15s +3
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 1.0
+        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
+
+
+  potions_regeneration_splash:
+# Regeneration Splash Potion 15s +1
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 1.0
+        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
+# Regeneration Splash Potion 15s +2
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 1.0
+        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
+# Regeneration Splash Potion 15s +3
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 1.0
+        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:4}]}"
+        
+        
+  potions_regeneration_lingering:
+# Regeneration Lingering Potion 15s +1
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 1.0
+        name: '&#8EF469♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:2}]}"
+# Regeneration Lingering Potion 15s +2
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 1.0
+        name: '&#8EF469♥♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:3}]}"
+# Regeneration Lingering Potion 15s +3
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 1.0
+        name: '&#8EF469♥♥♥ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:300,Amplifier:4}]}"
+
+        
+  potions_neutral:
+# Name of Potion 
+    - POTION:
+        groupid: potions_neutral
+        chance: 1.0
+        name: ''
+        nbt-data: ""
+        
+        
+  potions_negative:
+# Name of Potion 
+    - POTION:
+        groupid: potions_negative
+        chance: 1.0
+        name: ''
+        nbt-data: ""
+    
+    
         
         
   leather_defense:
