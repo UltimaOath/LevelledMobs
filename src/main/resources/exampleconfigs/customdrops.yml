@@ -46,7 +46,7 @@ defaults:
   nospawner: true
   equipped: false
   override: true
-  maxdropgroup: 1
+  maxdropgroup: 10
   priority: 1
   player-caused: true
   item-flags: ''
@@ -83,22 +83,22 @@ all_hostile_mobs:
 #  - usedroptable: simple_tier_b
 #  - usedroptable: simple_tier_a
 #  - usedroptable: simple_tier_s
-#  - usedroptable: leather_helmet_tiered
-#  - usedroptable: leather_chestplate_tiered
-#  - usedroptable: leather_leggings_tiered
-#  - usedroptable: leather_boots_tiered
-#  - usedroptable: iron_helmet_tiered
-#  - usedroptable: iron_chestplate_tiered
-#  - usedroptable: iron_leggings_tiered
-#  - usedroptable: iron_boots_tiered
-#  - usedroptable: diamond_helmet_tiered
-#  - usedroptable: diamond_chestplate_tiered
-#  - usedroptable: diamond_leggings_tiered
-#  - usedroptable: diamond_boots_tiered
-#  - usedroptable: netherite_helmet_tiered
-#  - usedroptable: netherite_chestplate_tiered
-#  - usedroptable: netherite_leggings_tiered
-#  - usedroptable: netherite_boots_tiered
+#  - usedroptable: leather_helmet_damage_tiers
+#  - usedroptable: leather_chestplate_damage_tiers
+#  - usedroptable: leather_leggings_damage_tiers
+#  - usedroptable: leather_boots_damage_tiers
+#  - usedroptable: iron_helmet_damage_tiers
+#  - usedroptable: iron_chestplate_damage_tiers
+#  - usedroptable: iron_leggings_damage_tiers
+#  - usedroptable: iron_boots_damage_tiers
+#  - usedroptable: diamond_helmet_damage_tiers
+#  - usedroptable: diamond_chestplate_damage_tiers
+#  - usedroptable: diamond_leggings_damage_tiers
+#  - usedroptable: diamond_boots_damage_tiers
+#  - usedroptable: netherite_helmet_damage_tiers
+#  - usedroptable: netherite_chestplate_damage_tiers
+#  - usedroptable: netherite_leggings_damage_tiers
+#  - usedroptable: netherite_boots_damage_tiers
 
 
 all_passive_mobs:
@@ -531,1290 +531,638 @@ drop-table:
         chance: 0.1 # 10% Chance to Drop
         
         
-  netherite_helmet_tiered:
-# Netherite Helmet LVL 0
+        
+        
+        
+        
+  netherite_helmet_damage_tiers:
+# Netherite Helmet [0 Damage]
     - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        maxdropgroup: 1
+        groupid: netherite_helmet_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Netherite Helmet LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Helmet'
+# Netherite Helmet [1-100 Damage]
     - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Helmet LVL 2 DETAILS
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 1-100
+# Netherite Helmet [101-200 Damage]
     - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Helmet LVL 3 DETAILS
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 100-200
+# Netherite Helmet [201-300 Damage]
     - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Helmet LVL 4 DETAILS
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 200-300
+# Netherite Helmet [301-400 Damage]
     - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Helmet LVL 5 DETAILS
-    - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Helmet LVL 6 DETAILS
-    - NETHERITE_HELMET:
-        groupid: netherite_helmet_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  diamond_helmet_tiered:
-# Diamond Helmet LVL 0
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 300-400
+        
+        
+  diamond_helmet_damage_tiers:
+# Diamond Helmet [0 Damage]
     - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        maxdropgroup: 1
+        groupid: diamond_helmet_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Diamond Helmet LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Helmet'
+# Diamond Helmet [1-85 Damage]
     - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Helmet LVL 2 DETAILS
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Helmet'
+        damage: 1-85
+# Diamond Helmet [86-170 Damage]
     - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Helmet LVL 3 DETAILS
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 85-170
+# Diamond Helmet [171-255 Damage]
     - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Helmet LVL 4 DETAILS
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 170-255
+# Diamond Helmet [256-340 Damage]
     - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Helmet LVL 5 DETAILS
-    - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Helmet LVL 6 DETAILS
-    - DIAMOND_HELMET:
-        groupid: diamond_helmet_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  iron_helmet_tiered:
-# Iron Helmet LVL 0
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 255-340
+        
+        
+  iron_helmet_damage_tiers:
+# Iron Helmet [0 Damage]
     - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        maxdropgroup: 1
+        groupid: iron_helmet_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Iron Helmet LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Helmet'
+# Iron Helmet [1-85 Damage]
     - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Helmet LVL 2 DETAILS
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Helmet'
+        damage: 1-40
+# Iron Helmet [86-170 Damage]
     - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Helmet LVL 3 DETAILS
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 40-80
+# Iron Helmet [171-255 Damage]
     - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Helmet LVL 4 DETAILS
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 80-120
+# Iron Helmet [256-340 Damage]
     - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Helmet LVL 5 DETAILS
-    - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Helmet LVL 6 DETAILS
-    - IRON_HELMET:
-        groupid: iron_helmet_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  leather_helmet_tiered:
-# Leather Helmet LVL 0
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 120-160
+        
+        
+  leather_helmet_damage_tiers:
+# Leather Helmet [0 Damage]
     - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        maxdropgroup: 1
+        groupid: leather_helmet_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Leather Helmet LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Helmet'
+# Leather Helmet [1-15 Damage]
     - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Helmet LVL 2 DETAILS
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Helmet'
+        damage: 1-15
+# Leather Helmet [15-30 Damage]
     - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Helmet LVL 3 DETAILS
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 15-30
+# Leather Helmet [30-45 Damage]
     - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Helmet LVL 4 DETAILS
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 30-45
+# Leather Helmet [40-50 Damage]
     - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Helmet LVL 5 DETAILS
-    - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Helmet LVL 6 DETAILS
-    - LEATHER_HELMET:
-        groupid: leather_helmet_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  netherite_chestplate_tiered:
-# Netherite Chestplate LVL 0
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 40-50
+        
+        
+        
+        
+        
+  netherite_chestplate_damage_tiers:
+# Netherite Chestplate [0 Damage]
     - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        maxdropgroup: 1
+        groupid: netherite_chestplate_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Netherite Chestplate LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Chestplate'
+# Netherite Chestplate [1-100 Damage]
     - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Chestplate LVL 2 DETAILS
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 1-100
+# Netherite Chestplate [100-250 Damage]
     - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Chestplate LVL 3 DETAILS
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 100-250
+# Netherite Chestplate [250-400 Damage]
     - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Chestplate LVL 4 DETAILS
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 250-400
+# Netherite Chestplate [400-550 Damage]
     - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Chestplate LVL 5 DETAILS
-    - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Chestplate LVL 6 DETAILS
-    - NETHERITE_CHESTPLATE:
-        groupid: netherite_chestplate_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  diamond_chestplate_tiered:
-# Diamond Chestplate LVL 0
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 400-550
+        
+        
+  diamond_chestplate_damage_tiers:
+# Diamond Chestplate [0 Damage]
     - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        maxdropgroup: 1
+        groupid: diamond_chestplate_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Diamond Chestplate LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Chestplate'
+# Diamond Chestplate [1-150 Damage]
     - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Chestplate LVL 2 DETAILS
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 1-150
+# Diamond Chestplate [150-300 Damage]
     - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Chestplate LVL 3 DETAILS
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 150-300
+# Diamond Chestplate [300-450 Damage]
     - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Chestplate LVL 4 DETAILS
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 300-450
+# Diamond Chestplate [400-500 Damage]
     - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Chestplate LVL 5 DETAILS
-    - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Chestplate LVL 6 DETAILS
-    - DIAMOND_CHESTPLATE:
-        groupid: diamond_chestplate_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  iron_chestplate_tiered:
-# Iron Chestplate LVL 0
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 400-500
+        
+        
+  iron_chestplate_damage_tiers:
+# Iron Chestplate [0 Damage]
     - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        maxdropgroup: 1
+        groupid: iron_chestplate_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Iron Chestplate LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Chestplate'
+# Iron Chestplate [1-50 Damage]
     - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Chestplate LVL 2 DETAILS
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Chestplate'
+        damage: 1-50
+# Iron Chestplate [50-100 Damage]
     - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Chestplate LVL 3 DETAILS
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 50-100
+# Iron Chestplate [100-150 Damage]
     - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Chestplate LVL 4 DETAILS
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 100-150
+# Iron Chestplate [150-200 Damage]
     - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Chestplate LVL 5 DETAILS
-    - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Chestplate LVL 6 DETAILS
-    - IRON_CHESTPLATE:
-        groupid: iron_chestplate_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  leather_chestplate_tiered:
-# Leather Chestplate LVL 0
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 150-200
+        
+        
+  leather_chestplate_damage_tiers:
+# Leather Chestplate [0 Damage]
     - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        maxdropgroup: 1
+        groupid: leather_chestplate_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Leather Chestplate LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Chestplate'
+# Leather Chestplate [1-15 Damage]
     - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Chestplate LVL 2 DETAILS
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Chestplate'
+        damage: 1-25
+# Leather Chestplate [15-30 Damage]
     - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Chestplate LVL 3 DETAILS
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 25-40
+# Leather Chestplate [30-45 Damage]
     - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Chestplate LVL 4 DETAILS
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 40-55
+# Leather Chestplate [40-50 Damage]
     - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Chestplate LVL 5 DETAILS
-    - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Chestplate LVL 6 DETAILS
-    - LEATHER_CHESTPLATE:
-        groupid: leather_chestplate_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  netherite_leggings_tiered:
-# Netherite Leggings LVL 0
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 55-70
+        
+        
+        
+        
+        
+  netherite_leggings_damage_tiers:
+# Netherite Leggings [0 Damage]
     - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        maxdropgroup: 1
+        groupid: netherite_leggings_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Netherite Leggings LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Leggings'
+# Netherite Leggings [1-100 Damage]
     - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Leggings LVL 2 DETAILS
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 1-100
+# Netherite Leggings [100-250 Damage]
     - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Leggings LVL 3 DETAILS
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 100-250
+# Netherite Leggings [250-400 Damage]
     - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Leggings LVL 4 DETAILS
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 250-400
+# Netherite Leggings [400-550 Damage]
     - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Leggings LVL 5 DETAILS
-    - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Leggings LVL 6 DETAILS
-    - NETHERITE_LEGGINGS:
-        groupid: netherite_leggings_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  diamond_leggings_tiered:
-# Diamond Leggings LVL 0
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 400-550
+        
+        
+  diamond_leggings_damage_tiers:
+# Diamond Leggings [0 Damage]
     - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        maxdropgroup: 1
+        groupid: diamond_leggings_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Diamond Leggings LVL 1 DETAILS
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Leggings'
+# Diamond Leggings [1-150 Damage]
     - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Leggings LVL 2 DETAILS
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Leggings'
+        damage: 1-100
+# Diamond Leggings [150-300 Damage]
     - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Leggings LVL 3 DETAILS
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 100-200
+# Diamond Leggings [300-450 Damage]
     - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Leggings LVL 4 DETAILS
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 200-300
+# Diamond Leggings [400-500 Damage]
     - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Leggings LVL 5 DETAILS
-    - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Leggings LVL 6 DETAILS
-    - DIAMOND_LEGGINGS:
-        groupid: diamond_leggings_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  iron_leggings_tiered:
-# Iron Leggings LVL 0
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 300-450
+        
+        
+  iron_leggings_damage_tiers:
+# Iron Leggings [0 Damage]
     - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        maxdropgroup: 1
+        groupid: iron_leggings_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Iron Leggings LVL 1 DETAILS
-    - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Leggings LVL 2 DETAILS
-    - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Leggings LVL 3 DETAILS
-    - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Leggings LVL 4 DETAILS
-    - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Leggings LVL 5 DETAILS
-    - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Leggings LVL 6 DETAILS
+        name: '&#808080Iron Leggings'
+# Iron Leggings [1-50 Damage]
     - IRON_LEGGINGS:
-        groupid: iron_leggings_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  leather_leggings_tiered:
-# Leather Leggings LVL 0
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Leggings'
+        damage: 1-50
+# Iron Leggings [50-100 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 50-100
+# Iron Leggings [100-150 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 100-150
+# Iron Leggings [150-200 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 150-200
+        
+        
+  leather_leggings_damage_tiers:
+# Leather Leggings [0 Damage]
     - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        maxdropgroup: 1
+        groupid: leather_leggings_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Leather Leggings LVL 1 DETAILS
-    - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Leggings LVL 2 DETAILS
-    - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Leggings LVL 3 DETAILS
-    - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Leggings LVL 4 DETAILS
-    - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Leggings LVL 5 DETAILS
-    - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Leggings LVL 6 DETAILS
+        name: '&#765E46Leather Leggings'
+# Leather Leggings [1-25 Damage]
     - LEATHER_LEGGINGS:
-        groupid: leather_leggings_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  netherite_boots_tiered:
-# Netherite Boots LVL 0
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Leggings'
+        damage: 1-25
+# Leather Leggings [25-40 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 25-40
+# Leather Leggings [40-55 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 40-55
+# Leather Leggings [55-70 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 55-70
+        
+        
+        
+        
+        
+        
+  netherite_boots_damage_tiers:
+# Netherite Boots [0 Damage]
     - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        maxdropgroup: 1
+        groupid: netherite_boots_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Netherite Boots LVL 1 DETAILS
-    - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Boots LVL 2 DETAILS
-    - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Boots LVL 3 DETAILS
-    - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Boots LVL 4 DETAILS
-    - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Boots LVL 5 DETAILS
-    - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Netherite Boots LVL 6 DETAILS
+        name: '&#7A888FNetherite Boots'
+# Netherite Boots [1-150 Damage]
     - NETHERITE_BOOTS:
-        groupid: netherite_boots_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  diamond_boots_tiered:
-# Diamond Boots LVL 0
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 1-150
+# Netherite Boots [150-300 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 150-300
+# Netherite Boots [300-400 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 300-400
+# Netherite Boots [400-475 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 400-475
+        
+        
+  diamond_boots_damage_tiers:
+# Diamond Boots [0 Damage]
     - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        maxdropgroup: 1
+        groupid: diamond_boots_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Diamond Boots LVL 1 DETAILS
-    - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Boots LVL 2 DETAILS
-    - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Boots LVL 3 DETAILS
-    - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Boots LVL 4 DETAILS
-    - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Boots LVL 5 DETAILS
-    - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Diamond Boots LVL 6 DETAILS
+        name: '&#1F82FFDiamond Boots'
+# Diamond Boots [1-100 Damage]
     - DIAMOND_BOOTS:
-        groupid: diamond_boots_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  iron_boots_tiered:
-# Iron Boots LVL 0
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Boots'
+        damage: 1-100
+# Diamond Boots [100-200 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 100-200
+# Diamond Boots [200-300 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 200-300
+# Diamond Boots [300-400 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 300-400
+        
+        
+  iron_boots_damage_tiers:
+# Iron Boots [0 Damage]
     - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        maxdropgroup: 1
+        groupid: iron_boots_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Iron Boots LVL 1 DETAILS
-    - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Boots LVL 2 DETAILS
-    - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Boots LVL 3 DETAILS
-    - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Boots LVL 4 DETAILS
-    - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Boots LVL 5 DETAILS
-    - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Iron Boots LVL 6 DETAILS
+        name: '&#808080Iron Boots'
+# Iron Boots [1-50 Damage]
     - IRON_BOOTS:
-        groupid: iron_boots_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-  leather_boots_tiered:
-# Leather Boots LVL 0
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Boots'
+        damage: 1-50
+# Iron Boots [25-75 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 25-75
+# Iron Boots [75-125 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 75-125
+# Iron Boots [125-175 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 125-175
+        
+        
+  leather_boots_damage_tiers:
+# Leather Boots [0 Damage]
     - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        maxdropgroup: 1
+        groupid: leather_boots_damage_tiers
         overall_chance: 1.0
-        equipped: true
-        chance: 0.1 # 10% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-# Enchanted Leather Boots LVL 1 DETAILS
-    - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
-        chance: 0.05 # 5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Boots LVL 2 DETAILS
-    - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
-        chance: 0.025 # 2.5% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Boots LVL 3 DETAILS
-    - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
-        chance: 0.01 # 1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Boots LVL 4 DETAILS
-    - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
-        chance: 0.001 # 0.1% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Boots LVL 5 DETAILS
-    - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
+        equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-# Enchanted Leather Boots LVL 6 DETAILS
+        name: '&#765E46Leather Boots'
+# Leather Boots [1-20 Damage]
     - LEATHER_BOOTS:
-        groupid: leather_boots_tiered
-        equipped: true
-        chance: 0.00001 # 0.001% Chance
-        name: ''
-        lore:
-          - ''
-          - ''
-        enchantment:
-          ENCHANTMENT:
-          
-          
-          
-          
-          
-          
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Boots'
+        damage: 1-20
+# Leather Boots [20-40 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 20-40
+# Leather Boots [40-50 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 40-50
+# Leather Boots [50-60 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 50-60
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
   wooden_weapons:
     - WOODEN_SWORD:
     - WOODEN_AXE:
@@ -2218,38 +1566,38 @@ drop-table:
   tipped_levitation_arrows:
 # Levitation Tipped Arrow LVL 1 2.5s +0
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.05 # 5% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.05 # 5% Chance
         name: '&#56C7F2☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:0,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 2 2.5s +1
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.025 # 2.5% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.025 # 2.5% Chance
         name: '&#56C7F2★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 3 5s +1
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.01 # 1% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.01 # 1% Chance
         name: '&#56C7F2★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:1,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 4 5s +2
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.001 # 0.1% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.001 # 0.1% Chance
         name: '&#56C7F2★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:2,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 5 10s +2
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.0001 # 0.01% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.0001 # 0.01% Chance
         name: '&#56C7F2★★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:200,Amplifier:2,Ambient:1}]}"
 # Levitation Tipped Arrow LVL 6 15s +2
     - TIPPED_ARROW:
-        groupid: tipped_levitation_arrows
-        chance: 0.00001 # 0.001% Chance
+#        groupid: tipped_levitation_arrows
+#        chance: 0.00001 # 0.001% Chance
         name: '&#56C7F2★★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
         nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:300,Amplifier:2,Ambient:1}]}"
         
