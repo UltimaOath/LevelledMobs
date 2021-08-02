@@ -87,18 +87,26 @@ all_hostile_mobs:
 #  - usedroptable: leather_chestplate_damage_tiers
 #  - usedroptable: leather_leggings_damage_tiers
 #  - usedroptable: leather_boots_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
 #  - usedroptable: iron_helmet_damage_tiers
 #  - usedroptable: iron_chestplate_damage_tiers
 #  - usedroptable: iron_leggings_damage_tiers
 #  - usedroptable: iron_boots_damage_tiers
+#  - usedroptable: iron_sword_damage_tiers
+#  - usedroptable: iron_axe_damage_tiers
 #  - usedroptable: diamond_helmet_damage_tiers
 #  - usedroptable: diamond_chestplate_damage_tiers
 #  - usedroptable: diamond_leggings_damage_tiers
 #  - usedroptable: diamond_boots_damage_tiers
+#  - usedroptable: diamond_sword_damage_tiers
+#  - usedroptable: diamond_axe_damage_tiers
 #  - usedroptable: netherite_helmet_damage_tiers
 #  - usedroptable: netherite_chestplate_damage_tiers
 #  - usedroptable: netherite_leggings_damage_tiers
 #  - usedroptable: netherite_boots_damage_tiers
+#  - usedroptable: netherite_sword_damage_tiers
+#  - usedroptable: netherite_axe_damage_tiers
 
 
 all_passive_mobs:
@@ -1156,52 +1164,357 @@ drop-table:
         
         
         
-        
-        
-        
-        
-        
-        
-        
-  wooden_weapons:
+  wooden_sword_damage_tiers:
+# Wooden Sword [0 Damage]
     - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Sword'
+# Wooden Sword [1-20 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Sword'
+        damage: 1-20
+# Wooden Sword [20-35 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 20-35
+# Wooden Sword [35-45 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 35-45
+# Wooden Sword [45-55 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 45-55
+        
+        
+  wooden_axe_damage_tiers:
+# Wooden Axe [0 Damage]
     - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Axe'
+# Wooden Axe [1-20 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Axe'
+        damage: 1-20
+# Wooden Axe [20-35 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 20-35
+# Wooden Axe [35-45 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 35-45
+# Wooden Axe [45-55 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 45-55
+        
+        
+  iron_sword_damage_tiers:
+# Iron Sword [0 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Sword'
+# Iron Sword [1-100 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Sword'
+        damage: 1-100
+# Iron Sword [100-150 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 100-150
+# Iron Sword [150-200 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 150-200
+# Iron Sword [200-250 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 200-250
+        
+        
+  iron_axe_damage_tiers:
+# Iron Axe [0 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Axe'
+# Iron Axe [1-100 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Axe'
+        damage: 1-100
+# Iron Axe [100-150 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 100-150
+# Iron Axe [150-200 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 150-200
+# Iron Axe [200-250 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 200-250
+        
+        
+  diamond_sword_damage_tiers:
+# Diamond Sword [0 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Sword'
+# Diamond Sword [1-300 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1-300
+# Diamond Sword [300-750 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 300-750
+# Diamond Sword [750-1200 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 900-1200
+# Diamond Sword [1200-1500 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1200-1500
+        
+        
+  diamond_axe_damage_tiers:
+# Diamond Axe [0 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Axe'
+# Diamond Axe [1-300 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1-300
+# Diamond Axe [300-600 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 300-750
+# Diamond Axe [750-1200 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 750-1200
+# Diamond Axe [1200-1500 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1200-1500
+        
+        
+  netherite_sword_damage_tiers:
+# Netherite Sword [0 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Sword'
+# Netherite Sword [1-500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Sword'
+        damage: 1-500
+# Netherite Sword [500-1000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 500-1000
+# Netherite Sword [1000-1500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1000-1500
+# Netherite Sword [1500-2000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1500-2000
+        
+        
+  netherite_axe_damage_tiers:
+# Netherite Axe [0 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Axe'
+# Netherite Axe [1-500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Axe'
+        damage: 1-500
+# Netherite Axe [500-1000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 500-1000
+# Netherite Axe [1000-1500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1000-1500
+# Netherite Axe [1500-2000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1500-2000
+        
+        
+        
+        
+        
+        
+
+        
+  ranged_damage_tiers:
     - CROSSBOW:
-    - ARROW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ACrossbow'
     - BOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ALongbow'
+    - TRIDENT:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.05 # 5% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6283ACTrident'
+    - ARROW:
+        amount: 1-5
+        chance: 0.25 # 25% Chance to Drop
+        equipped: 0.0 # 0% Chance to Equip
+        
+        
+        
+        
+        
+        
+        
+        
+
   wooden_tools:
     - WOODEN_SHOVEL:
     - WOODEN_PICKAXE:
     - WOODEN_HOE:
-  iron_weapons:
-    - IRON_SWORD:
-    - IRON_AXE:
-    - CROSSBOW:
-    - ARROW:
-    - BOW:
-    - TRIDENT:
   iron_tools:
     - IRON_SHOVEL:
     - IRON_PICKAXE:
     - IRON_HOE:
-  diamond_weapons:
-    - DIAMOND_SWORD:
-    - DIAMOND_AXE:
-    - CROSSBOW:
-    - ARROW:
-    - BOW:
-    - TRIDENT:
   diamond_tools:
     - DIAMOND_SHOVEL:
     - DIAMOND_PICKAXE:
     - DIAMOND_HOE:
-  netherite_weapons:
-    - NETHERITE_SWORD:
-    - NETHERITE_AXE:
-    - CROSSBOW:
-    - ARROW:
-    - BOW:
-    - TRIDENT:
   netherite_tools:
     - NETHERITE_SHOVEL:
     - NETHERITE_PICKAXE:
