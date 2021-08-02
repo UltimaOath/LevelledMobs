@@ -107,6 +107,7 @@ all_hostile_mobs:
 #  - usedroptable: netherite_boots_damage_tiers
 #  - usedroptable: netherite_sword_damage_tiers
 #  - usedroptable: netherite_axe_damage_tiers
+#  - usedroptable: ranged_damage_tiers
 
 
 all_passive_mobs:
