@@ -3,7 +3,7 @@
 #                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
 #                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
 #                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
-#                             Die Ultimative RPG Levelled Mobs Lösung
+#                  Die Ultimative Lösung Für Gelevelte Entitäten in Rollenspielen
 #
 #                             German Translation █ Deutsch Übersetzung
 #
@@ -80,7 +80,7 @@ command:
       invalid-summon-type:
         - '%prefix% Beschwörung ungültig: ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Nur Spieler können den Beschwörungsbefehl `'&bhere'` verwenden, du musst stattdessen `'&batPlayer&7'` oder `'&batLocation&7'` verwenden.'
+        - '%prefix% Nur Spieler können den Beschwörungsbefehl ''&bhere'' verwenden, du musst stattdessen ''&batPlayer&7'' oder ''&batLocation&7'' verwenden.'
       invalid-location:
         - '%prefix% Standort ungültig.'
       here:
@@ -135,20 +135,20 @@ command:
         invalid-world:
           - '%prefix% Welt ungültig: ''&b%world%&7''.'
         success:
-          - '%prefix% Killed &b%killed%&7 levelled mobs in &b%worlds%&7 world(s) &8(&b%skipped%&7 mobs were skipped&8)&7.'
+          - '%prefix% &b%killed%&7 gelevelte entitäten in &b%worlds%&7 welt(en) &8(&b%skipped%&7 entitäten wurden übersprungen&8)&7.'
         usage:
           - '%prefix% Verwendung: &b/%label% kill all [world/*]'
         usage-console:
-          - '%prefix% Verwendung (console): /%label% kill all <world/*>'
+          - '%prefix% Verwendung (konsole): /%label% kill all <world/*>'
       near:
         invalid-radius:
-          - '%prefix% Invalid radius ''&b%radius%&7''.'
+          - '%prefix% Ungültiger radius: ''&b%radius%&7''.'
         invalid-radius-min:
-          - '%prefix% Specified radius has been adjusted to the minimum radius &8(&b%minRadius%&8)&7.'
+          - '%prefix% Der angegebene Radius wurde auf de mindestwert &b%minRadius%&7 eingestellt.'
         invalid-radius-max:
-          - '%prefix% Specified radius has been adjusted to the maximum radius &8(&b%maxRadius%&8)&7.'
+          - '%prefix% Der angegebene Radius wurde auf de maximalwert &b%minRadius%&7 eingestellt.'
         success:
-          - '%prefix% Killed &b%killed%&7 levelled mobs within a radius of &b%radius%&7 block(s) &8(&b%skipped%&7 mobs were skipped&8)&7.'
+          - '%prefix% &b%killed%&7 gelevelte entitäten innerhalb eines radius von &b%radius%&7 blöck(en) getötet (&b%skipped%&7 entitäten wurden übersprungen).'
         usage:
           - '%prefix% Verwendung: &b/%label% kill near <radius>'
 
@@ -160,19 +160,19 @@ command:
 # +-------------------------------------------------------------------------------------------LM3
     spawner:
       usage:
-        - '%prefix% Verwendung: &b/%label%&7 spawner &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
+        - '%prefix% Verwendung: &b/%label%&7 spawner &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Mein Benutzerdefinierter Würfel" &b/customDropsId&7 Id1'
       no-value:
-        - '%prefix% No value was specified for: &b%keyname%&7'
+        - '%prefix% Für &b%keyname%&7 wurde kein Wert angegeben.'
       invalid-value:
-        - '%prefix% Invalid value for &b%keyname%&7, must be a number'
+        - '%prefix% Der &b%keyname%&7 muss eine Zahl sein.'
       no-level-specified:
-        - '%prefix% You must specify minLevel and/or maxLevel'
+        - '%prefix% Sie müssen den &b"minLevel"&7 und / oder den &b"maxLevel"&7 angeben.'
       inventory-full:
-        - '%prefix% &4Your inventory is full!'
+        - '%prefix% &4Ihr Inventar ist voll!'
       spawner-give-message:
-        - '%prefix% Gave you a LM spawner, minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+        - '%prefix% Sie haben einen gelevelten Entity-Spawner erhalten; minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
       spawner-give-message-console:
-        - '%prefix% Gave &r%playername%&7 a LM spawner, minLevel &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+        - '%prefix% Hat &r%playername%&7 einen geebneten entitätswürfel gegeben; minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
 
 
 # +-------------------------------------------------------------------------------------------LM3
@@ -182,26 +182,27 @@ command:
 # +-------------------------------------------------------------------------------------------LM3
     reload:
       started:
-        - '%prefix% Reloading configuration files...'
+        - '%prefix% Erneutes Laden der Konfigurationsdateien...'
       finished:
-        - '%prefix% Reload complete.'
+        - '%prefix% Neuladen abgeschlossen.'
       usage:
         - '%prefix% Verwendung: &b/%label% reload'
     info:
       about:
         - ' '
-        - '&b&lLevelledMobs &fv%version%&7 by lokka30 & stumper66'
-        - '&7&o%description%'
+        - '&b&lLevelledMobs &fv%version%&7 von lokka30 & stumper66'
+        - '&7&oDie Ultimative Lösung Für'
+        - '&7&oGelevelte Entitäten in Rollenspielen'
         - ' '
-        - '&7This version of the plugin supports: &fMinecraft %supportedVersions%'
-        - '&7Code contributors: &f%contributors%'
+        - '&7Diese Version des Plugins unterstützt: &fMinecraft %supportedVersions%'
+        - '&7Code-Mitwirkende: &f%contributors%'
         - ' '
       listSeparator: '&7, &f'
       usage:
         - '%prefix% Verwendung: &b/%label% info'
     compatibility:
       notice:
-        - '%prefix% Compatibility checks have been printed to your logs. Please check the console :)'
+        - '%prefix% Die Kompatibilitätsprotokolle wurden auf ihrer konsole ausgegeben. Bitte überprüfen sie diese für details!'
       usage:
         - '%prefix% Verwendung: &b/%label% compatibility'
 
@@ -215,18 +216,18 @@ other:
   compatibility-notice:
     enabled: true
     messages:
-      - '%prefix% LevelledMobs compatibility notice:'
-      - '&8 &m->&r &b%incompatibilities% &7possible incompatibilities were found. Please run ''&b/levelledmobs compatibility&7'' to check them.'
-      - '&8 &m->&7 This message is sent as you have the permission &blevelledmobs.compatibility-notice&7. You can disable this message in &bmessages.yml&7.'
-      - '&8 &m->&7 Please ensure you have followed all instructions on the plugin''s Wiki page.'
+      - '%prefix% Hinweis zur Kompatibilität:'
+      - '&8 &m->&r &b%incompatibilities% &7potenzielle unvereinbarkeiten entdeckt wurden. Bitte führen sie &b/levelledmobs compatibility&7 aus, um eine diagnose zu stellen.'
+      - '&8 &m->&7 Diese nachricht wurde gesendet, weil Sie die folgende berechtigung haben: &blevelledmobs.compatibility-notice&7. Sie können diese Meldung in der Datei &8messages.yml&7 deaktivieren.'
+      - '&8 &m->&7 Bitte stellen sie sicher, dass sie alle anweisungen im &8Wiki&7 befolgt haben.'
   update-notice:
     messages:
-      - '&b&nLevelledMobs Update Checker Notice:'
-      - '&7Your &bLevelledMobs&7 version is &boutdated&7! Please update to &bv%latestVersion%&7 as soon as possible. &8(&7You''re running &bv%currentVersion%&8)'
+      - '&b&nLevelledMobs | Auf aktualisierungen prüfen benachrichtigung:'
+      - '&7Ihre &bLevelledMobs&7-Version ist veraltet! Bitte aktualisieren sie so schnell wie möglich auf &bv%latestVersion%&7. &8(&7Sie verwenden derzeit &bv%currentVersion%&8)'
     send-in-console: true
     send-on-join: true
 
-  mob-head-drop-name: '%mob_name%''s head'
+  mob-head-drop-name: '%mob_name%-Schädel'
 
 
 # +-------------------------------------------------------------------------------------------LM3
