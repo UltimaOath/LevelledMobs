@@ -100,6 +100,68 @@ all_mobs:
 #  - usedroptable: enchanted_book-sweeping_edge-1_3
 #  - usedroptable: enchanted_book-thorns-1_3
 #  - usedroptable: enchanted_book-unbreaking-1_3
+#  - usedroptable: xeffect-ambient_entity_effect
+#  - usedroptable: xeffect-angry_villager
+#  - usedroptable: xeffect-ash
+#  - usedroptable: xeffect-bubble_pop
+#  - usedroptable: xeffect-campfire_cosy_smoke
+#  - usedroptable: xeffect-campfire_signal_smoke
+#  - usedroptable: xeffect-cloud
+#  - usedroptable: xeffect-composter
+#  - usedroptable: xeffect-crimson_spore
+#  - usedroptable: xeffect-crit
+#  - usedroptable: xeffect-damage_indicator
+#  - usedroptable: xeffect-dolphin
+#  - usedroptable: xeffect-dragon_breath
+#  - usedroptable: xeffect-dripping_lava
+#  - usedroptable: xeffect-dripping_water
+#  - usedroptable: xeffect-dripping_honey
+#  - usedroptable: xeffect-dripping_obsidian_tear
+#  - usedroptable: xeffect-effect
+#  - usedroptable: xeffect-elder_guardian
+#  - usedroptable: xeffect-enchant
+#  - usedroptable: xeffect-enchanted_hit
+#  - usedroptable: xeffect-end_rod
+#  - usedroptable: xeffect-entity_effect
+#  - usedroptable: xeffect-explosion
+#  - usedroptable: xeffect-explosion_emitter
+#  - usedroptable: xeffect-falling_lava
+#  - usedroptable: xeffect-falling_water
+#  - usedroptable: xeffect-falling_obsidian_tear
+#  - usedroptable: xeffect-falling_nectar
+#  - usedroptable: xeffect-falling_honey
+#  - usedroptable: xeffect-firework
+#  - usedroptable: xeffect-fishing
+#  - usedroptable: xeffect-flame
+#  - usedroptable: xeffect-flash
+#  - usedroptable: xeffect-happy_villager
+#  - usedroptable: xeffect-heart
+#  - usedroptable: xeffect-instant_effect
+#  - usedroptable: xeffect-item_slime
+#  - usedroptable: xeffect-item_snowball
+#  - usedroptable: xeffect-landing_honey
+#  - usedroptable: xeffect-landing_lava
+#  - usedroptable: xeffect-landing_obsidian_tear
+#  - usedroptable: xeffect-large_smoke
+#  - usedroptable: xeffect-lava
+#  - usedroptable: xeffect-mycelium
+#  - usedroptable: xeffect-nautilus
+#  - usedroptable: xeffect-poof
+#  - usedroptable: xeffect-portal
+#  - usedroptable: xeffect-rain
+#  - usedroptable: xeffect-reverse_portal
+#  - usedroptable: xeffect-smoke
+#  - usedroptable: xeffect-sneeze
+#  - usedroptable: xeffect-soul
+#  - usedroptable: xeffect-soul_fire_flame
+#  - usedroptable: xeffect-spit
+#  - usedroptable: xeffect-splash
+#  - usedroptable: xeffect-squid_ink
+#  - usedroptable: xeffect-sweep_attack
+#  - usedroptable: xeffect-totem_of_undying
+#  - usedroptable: xeffect-warped_spore
+#  - usedroptable: xeffect-white_ash
+#  - usedroptable: xeffect-witch
 
   
 all_levellable_mobs:
@@ -2556,10 +2618,745 @@ drop-table:
         chance: 0.001 # 0.1% Chance to Drop
         name: '&#DBDBDBUnbreaking &#9C9C9CIII'
         nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:3}],HideFlags:32}"
-  
         
         
         
+        
+  xeffect-ambient_entity_effect:
+    - customCommand:
+        command: 'particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 50
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 0.25
+        
+  xeffect-angry_villager:
+    - customCommand:
+        command: 'particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 100
+        ranged_BWidthX: 0.75
+        ranged_BWidthZ: 0.75
+        ranged_BHeight: 0.25
+        
+  xeffect-ash:
+    - customCommand:
+        command: 'particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 40
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1
+        
+  xeffect-bubble_pop:
+    - customCommand:
+        command: ['particle minecraft:bubble_pop %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 1.5
+        
+  xeffect-campfire_cosy_smoke:
+    - customCommand:
+        command: ['particle minecraft:campfire_cosy_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 350
+        ranged_Speed: 0.05
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 1.25
+        
+  xeffect-campfire_signal_smoke:
+    - customCommand:
+        command: ['particle minecraft:campfire_signal_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 350
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 1.25
+        
+  xeffect-cloud:
+    - customCommand:
+        command: ['particle minecraft:cloud %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.5
+        ranged_BWidthZ: 0.5
+        ranged_BHeight: 1
+        
+  xeffect-composter:
+    - customCommand:
+        command: ['particle minecraft:composter %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.5
+        
+  xeffect-crimson_spore:
+    - customCommand:
+        command: ['particle minecraft:crimson_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 50
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.0
+        
+  xeffect-crit:
+    - customCommand:
+        command: ['particle minecraft:crit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.5
+        ranged_BWidthZ: 0.5
+        ranged_BHeight: 2.0
+        
+  xeffect-damage_indicator:
+    - customCommand:
+        command: ['particle minecraft:damage_indicator %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.0
+        
+  xeffect-dolphin:
+    - customCommand:
+        command: ['particle minecraft:dolphin %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.25
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-dragon_breath:
+    - customCommand:
+        command: ['particle minecraft:dragon_breath %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_lava:
+    - customCommand:
+        command: ['particle minecraft:dripping_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_water:
+    - customCommand:
+        command: ['particle minecraft:dripping_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_honey:
+    - customCommand:
+        command: ['particle minecraft:dripping_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_obsidian_tear:
+    - customCommand:
+        command: ['particle minecraft:dripping_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-effect:
+    - customCommand:
+        command: ['particle minecraft:effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 1
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1
+        
+  xeffect-elder_guardian:
+    - customCommand:
+        command: ['particle minecraft:elder_guardian %x% %y% %z% 0 0 0 0 1 force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true   
+        
+  xeffect-enchant:
+    - customCommand:
+        command: ['particle minecraft:enchant %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 1
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 0.75
+        
+  xeffect-enchanted_hit:
+    - customCommand:
+        command: ['particle minecraft:enchanted_hit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-end_rod:
+    - customCommand:
+        command: ['particle minecraft:end_rod %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.05
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-entity_effect:
+    - customCommand:
+        command: ['particle minecraft:entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.0
+        
+  xeffect-explosion:
+    - customCommand:
+        command: ['particle minecraft:explosion %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 10
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 1.25
+        
+  xeffect-explosion_emitter:
+    - customCommand:
+        command: ['particle minecraft:explosion_emitter %x% %y% %z% 0 0 0 0 1 force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+
+  xeffect-falling_lava:
+    - customCommand:
+        command: ['particle minecraft:falling_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_water:
+    - customCommand:
+        command: ['particle minecraft:falling_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_obsidian_tear:
+    - customCommand:
+        command: ['particle minecraft:falling_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_nectar:
+    - customCommand:
+        command: ['particle minecraft:falling_nectar %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_honey:
+    - customCommand:
+        command: ['particle minecraft:falling_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-firework:
+    - customCommand:
+        command: ['particle minecraft:firework %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-fishing:
+    - customCommand:
+        command: ['particle minecraft:fishing %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-flame:
+    - customCommand:
+        command: ['particle minecraft:flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-flash:
+    - customCommand:
+        command: ['particle minecraft:flash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 100
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 0.5
+        
+  xeffect-happy_villager:
+    - customCommand:
+        command: 'particle minecraft:happy_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 10
+        ranged_BWidthX: 0.75
+        ranged_BWidthZ: 0.75
+        ranged_BHeight: 0.75
+        
+  xeffect-heart:
+    - customCommand:
+        command: ['particle minecraft:heart %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-instant_effect:
+    - customCommand:
+        command: ['particle minecraft:instant_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-item_slime:
+    - customCommand:
+        command: ['particle minecraft:item_slime %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-item_snowball:
+    - customCommand:
+        command: ['particle minecraft:item_snowball %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-landing_honey:
+    - customCommand:
+        command: ['particle minecraft:landing_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-landing_lava:
+    - customCommand:
+        command: ['particle minecraft:landing_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-landing_obsidian_tear:
+    - customCommand:
+        command: ['particle minecraft:landing_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-large_smoke:
+    - customCommand:
+        command: ['particle minecraft:large_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-lava:
+    - customCommand:
+        command: ['particle minecraft:lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-mycelium:
+    - customCommand:
+        command: ['particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 2.0
+        
+  xeffect-nautilus:
+    - customCommand:
+        command: ['particle minecraft:nautilus %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-poof:
+    - customCommand:
+        command: ['particle minecraft:poof %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-portal:
+    - customCommand:
+        command: ['particle minecraft:portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-rain:
+    - customCommand:
+        command: ['particle minecraft:rain %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-reverse_portal:
+    - customCommand:
+        command: ['particle minecraft:reverse_portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-smoke:
+    - customCommand:
+        command: ['particle minecraft:smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-sneeze:
+    - customCommand:
+        command: ['particle minecraft:sneeze %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-soul:
+    - customCommand:
+        command: ['particle minecraft:soul %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-soul_fire_flame:
+    - customCommand:
+        command: ['particle minecraft:soul_fire_flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-spit:
+    - customCommand:
+        command: ['particle minecraft:spit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 100
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-splash:
+    - customCommand:
+        command: ['particle minecraft:splash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-squid_ink:
+    - customCommand:
+        command: ['particle minecraft:squid_ink %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-sweep_attack:
+    - customCommand:
+        command: ['particle minecraft:sweep_attack %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-totem_of_undying:
+    - customCommand:
+        command: ['particle minecraft:totem_of_undying %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-warped_spore:
+    - customCommand:
+        command: ['particle minecraft:warped_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-white_ash:
+    - customCommand:
+        command: ['particle minecraft:white_ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-witch:
+    - customCommand:
+        command: ['particle minecraft:witch %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+
+
         
         
 # +-------------------------------------------------------------------------------------------LM3
