@@ -37,22 +37,28 @@
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 defaults:
-  chance: 1.0
+  chance: 0.2
   amount: 1
   minLevel: -1
   maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
   custommodeldata: -1
-  nomultiplier: true
-  nospawner: true
-  equipped: false
-  override: true
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
   maxdropgroup: 1
-  priority: 1
+  priority: 0
   player-caused: true
   item-flags: ''
   groupid: ''
   overall_chance: 1.0
   nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
 
 
 # +-------------------------------------------------------------------------------------------LM3
