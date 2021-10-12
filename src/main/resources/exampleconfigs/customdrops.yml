@@ -2630,7 +2630,7 @@ drop-table:
         
   xeffect-ambient_entity_effect:
     - customCommand:
-        command: 'particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        command: ['particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2642,7 +2642,7 @@ drop-table:
         
   xeffect-angry_villager:
     - customCommand:
-        command: 'particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        command: ['particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2654,7 +2654,7 @@ drop-table:
         
   xeffect-ash:
     - customCommand:
-        command: 'particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        command: ['particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
