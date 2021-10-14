@@ -41,8 +41,8 @@ defaults:
   amount: 1
   minLevel: -1
   maxLevel: -1
-  min-player-level: -1
-  max-player-level: -1
+#  min-player-level: -1
+#  max-player-level: -1
   player-level-variable: ''
   custommodeldata: -1
   nomultiplier: false
@@ -2630,7 +2630,7 @@ drop-table:
         
   xeffect-ambient_entity_effect:
     - customCommand:
-        command: ['particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2642,7 +2642,7 @@ drop-table:
         
   xeffect-angry_villager:
     - customCommand:
-        command: ['particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2654,7 +2654,7 @@ drop-table:
         
   xeffect-ash:
     - customCommand:
-        command: ['particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2666,7 +2666,7 @@ drop-table:
         
   xeffect-bubble_pop:
     - customCommand:
-        command: ['particle minecraft:bubble_pop %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:bubble_pop %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2678,7 +2678,7 @@ drop-table:
         
   xeffect-campfire_cosy_smoke:
     - customCommand:
-        command: ['particle minecraft:campfire_cosy_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:campfire_cosy_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2690,7 +2690,7 @@ drop-table:
         
   xeffect-campfire_signal_smoke:
     - customCommand:
-        command: ['particle minecraft:campfire_signal_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:campfire_signal_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2702,7 +2702,7 @@ drop-table:
         
   xeffect-cloud:
     - customCommand:
-        command: ['particle minecraft:cloud %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:cloud %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2714,7 +2714,7 @@ drop-table:
         
   xeffect-composter:
     - customCommand:
-        command: ['particle minecraft:composter %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:composter %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2726,7 +2726,7 @@ drop-table:
         
   xeffect-crimson_spore:
     - customCommand:
-        command: ['particle minecraft:crimson_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:crimson_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2738,7 +2738,7 @@ drop-table:
         
   xeffect-crit:
     - customCommand:
-        command: ['particle minecraft:crit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:crit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2750,7 +2750,7 @@ drop-table:
         
   xeffect-damage_indicator:
     - customCommand:
-        command: ['particle minecraft:damage_indicator %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:damage_indicator %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2762,7 +2762,7 @@ drop-table:
         
   xeffect-dolphin:
     - customCommand:
-        command: ['particle minecraft:dolphin %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dolphin %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2774,7 +2774,7 @@ drop-table:
         
   xeffect-dragon_breath:
     - customCommand:
-        command: ['particle minecraft:dragon_breath %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dragon_breath %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2786,7 +2786,7 @@ drop-table:
         
   xeffect-dripping_lava:
     - customCommand:
-        command: ['particle minecraft:dripping_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dripping_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2798,7 +2798,7 @@ drop-table:
         
   xeffect-dripping_water:
     - customCommand:
-        command: ['particle minecraft:dripping_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dripping_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2810,7 +2810,7 @@ drop-table:
         
   xeffect-dripping_honey:
     - customCommand:
-        command: ['particle minecraft:dripping_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dripping_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2822,7 +2822,7 @@ drop-table:
         
   xeffect-dripping_obsidian_tear:
     - customCommand:
-        command: ['particle minecraft:dripping_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:dripping_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2834,7 +2834,7 @@ drop-table:
         
   xeffect-effect:
     - customCommand:
-        command: ['particle minecraft:effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2846,14 +2846,14 @@ drop-table:
         
   xeffect-elder_guardian:
     - customCommand:
-        command: ['particle minecraft:elder_guardian %x% %y% %z% 0 0 0 0 1 force %player%']
+        command: ['execute at %player% run particle minecraft:elder_guardian %x% %y% %z% 0 0 0 0 1 force %player%']
         amount: 1
         chance: 1.0
         player-caused: true   
         
   xeffect-enchant:
     - customCommand:
-        command: ['particle minecraft:enchant %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:enchant %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2865,7 +2865,7 @@ drop-table:
         
   xeffect-enchanted_hit:
     - customCommand:
-        command: ['particle minecraft:enchanted_hit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:enchanted_hit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2877,7 +2877,7 @@ drop-table:
         
   xeffect-end_rod:
     - customCommand:
-        command: ['particle minecraft:end_rod %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:end_rod %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2889,7 +2889,7 @@ drop-table:
         
   xeffect-entity_effect:
     - customCommand:
-        command: ['particle minecraft:entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2901,7 +2901,7 @@ drop-table:
         
   xeffect-explosion:
     - customCommand:
-        command: ['particle minecraft:explosion %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:explosion %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2913,14 +2913,14 @@ drop-table:
         
   xeffect-explosion_emitter:
     - customCommand:
-        command: ['particle minecraft:explosion_emitter %x% %y% %z% 0 0 0 0 1 force %player%']
+        command: ['execute at %player% run particle minecraft:explosion_emitter %x% %y% %z% 0 0 0 0 1 force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
 
   xeffect-falling_lava:
     - customCommand:
-        command: ['particle minecraft:falling_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:falling_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2932,7 +2932,7 @@ drop-table:
         
   xeffect-falling_water:
     - customCommand:
-        command: ['particle minecraft:falling_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:falling_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2944,7 +2944,7 @@ drop-table:
         
   xeffect-falling_obsidian_tear:
     - customCommand:
-        command: ['particle minecraft:falling_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:falling_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2956,7 +2956,7 @@ drop-table:
         
   xeffect-falling_nectar:
     - customCommand:
-        command: ['particle minecraft:falling_nectar %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:falling_nectar %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2968,7 +2968,7 @@ drop-table:
         
   xeffect-falling_honey:
     - customCommand:
-        command: ['particle minecraft:falling_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:falling_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2980,7 +2980,7 @@ drop-table:
         
   xeffect-firework:
     - customCommand:
-        command: ['particle minecraft:firework %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:firework %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -2992,7 +2992,7 @@ drop-table:
         
   xeffect-fishing:
     - customCommand:
-        command: ['particle minecraft:fishing %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:fishing %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3004,7 +3004,7 @@ drop-table:
         
   xeffect-flame:
     - customCommand:
-        command: ['particle minecraft:flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3016,7 +3016,7 @@ drop-table:
         
   xeffect-flash:
     - customCommand:
-        command: ['particle minecraft:flash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:flash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3040,7 +3040,7 @@ drop-table:
         
   xeffect-heart:
     - customCommand:
-        command: ['particle minecraft:heart %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:heart %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3052,7 +3052,7 @@ drop-table:
         
   xeffect-instant_effect:
     - customCommand:
-        command: ['particle minecraft:instant_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:instant_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3064,7 +3064,7 @@ drop-table:
         
   xeffect-item_slime:
     - customCommand:
-        command: ['particle minecraft:item_slime %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:item_slime %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3076,7 +3076,7 @@ drop-table:
         
   xeffect-item_snowball:
     - customCommand:
-        command: ['particle minecraft:item_snowball %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:item_snowball %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3088,7 +3088,7 @@ drop-table:
         
   xeffect-landing_honey:
     - customCommand:
-        command: ['particle minecraft:landing_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:landing_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3100,7 +3100,7 @@ drop-table:
         
   xeffect-landing_lava:
     - customCommand:
-        command: ['particle minecraft:landing_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:landing_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3112,7 +3112,7 @@ drop-table:
         
   xeffect-landing_obsidian_tear:
     - customCommand:
-        command: ['particle minecraft:landing_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:landing_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3124,7 +3124,7 @@ drop-table:
         
   xeffect-large_smoke:
     - customCommand:
-        command: ['particle minecraft:large_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:large_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3136,7 +3136,7 @@ drop-table:
         
   xeffect-lava:
     - customCommand:
-        command: ['particle minecraft:lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3148,7 +3148,7 @@ drop-table:
         
   xeffect-mycelium:
     - customCommand:
-        command: ['particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3160,7 +3160,7 @@ drop-table:
         
   xeffect-nautilus:
     - customCommand:
-        command: ['particle minecraft:nautilus %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:nautilus %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3172,7 +3172,7 @@ drop-table:
         
   xeffect-poof:
     - customCommand:
-        command: ['particle minecraft:poof %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:poof %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3184,7 +3184,7 @@ drop-table:
         
   xeffect-portal:
     - customCommand:
-        command: ['particle minecraft:portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3196,7 +3196,7 @@ drop-table:
         
   xeffect-rain:
     - customCommand:
-        command: ['particle minecraft:rain %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:rain %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3208,7 +3208,7 @@ drop-table:
         
   xeffect-reverse_portal:
     - customCommand:
-        command: ['particle minecraft:reverse_portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:reverse_portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3220,7 +3220,7 @@ drop-table:
         
   xeffect-smoke:
     - customCommand:
-        command: ['particle minecraft:smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3232,7 +3232,7 @@ drop-table:
         
   xeffect-sneeze:
     - customCommand:
-        command: ['particle minecraft:sneeze %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:sneeze %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3244,7 +3244,7 @@ drop-table:
         
   xeffect-soul:
     - customCommand:
-        command: ['particle minecraft:soul %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:soul %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3256,7 +3256,7 @@ drop-table:
         
   xeffect-soul_fire_flame:
     - customCommand:
-        command: ['particle minecraft:soul_fire_flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:soul_fire_flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3268,7 +3268,7 @@ drop-table:
         
   xeffect-spit:
     - customCommand:
-        command: ['particle minecraft:spit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:spit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3280,7 +3280,7 @@ drop-table:
         
   xeffect-splash:
     - customCommand:
-        command: ['particle minecraft:splash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:splash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3292,7 +3292,7 @@ drop-table:
         
   xeffect-squid_ink:
     - customCommand:
-        command: ['particle minecraft:squid_ink %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:squid_ink %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3304,7 +3304,7 @@ drop-table:
         
   xeffect-sweep_attack:
     - customCommand:
-        command: ['particle minecraft:sweep_attack %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:sweep_attack %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3316,7 +3316,7 @@ drop-table:
         
   xeffect-totem_of_undying:
     - customCommand:
-        command: ['particle minecraft:totem_of_undying %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:totem_of_undying %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3328,7 +3328,7 @@ drop-table:
         
   xeffect-warped_spore:
     - customCommand:
-        command: ['particle minecraft:warped_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:warped_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3340,7 +3340,7 @@ drop-table:
         
   xeffect-white_ash:
     - customCommand:
-        command: ['particle minecraft:white_ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:white_ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
@@ -3352,7 +3352,7 @@ drop-table:
         
   xeffect-witch:
     - customCommand:
-        command: ['particle minecraft:witch %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        command: ['execute at %player% run particle minecraft:witch %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
