@@ -41,8 +41,8 @@ defaults:
   amount: 1
   minLevel: -1
   maxLevel: -1
-#  min-player-level: -1
-#  max-player-level: -1
+  min-player-level: -1
+  max-player-level: -1
   player-level-variable: ''
   custommodeldata: -1
   nomultiplier: false
