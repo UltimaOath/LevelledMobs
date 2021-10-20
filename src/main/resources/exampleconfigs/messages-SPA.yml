@@ -5,24 +5,26 @@
 #                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
 #                             The Ultimate RPG Levelled Mobs Solution
 #
+#                       Traducción al Español | Spanish Language Translation
+#
 # --------------------------------------------------------------------------------------------LM3
 # +                                      ++                                                  +LM3
-# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +  Principales Promotores:             ++  ¿Necesita documentación de apoyo?               +LM3
 # +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
-# +      Original Author and Developer   ++                                                  +LM3
-# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +      Autor y Desarrollador           ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  Discord oficial de apoyo:                       +LM3
 # +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
 # +                                      ++                                                  +LM3
-# +    stumper66                         ++  Special Thanks:                                 +LM3
-# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
-# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +    stumper66                         ++  Un agradecimiento especial:                     +LM3
+# +      Desarrollador                   ++    ArcanePlugins developers and testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, patrons, and other supporters!      +LM3
 # +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
 # +                                      ++    PlaceholderAPI, and bStats!                   +LM3
 # +    UltimaOath                        ++                                                  +LM3
-# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
-# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +      Redactor de Documentación       ++  Otros colaboradores:                            +LM3
+# +                                      ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
 # +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
-# +                                      ++    limzikiki                                     +LM3
+# +                                      ++    limzikiki, and Zombie_Striker                 +LM3
 # +                                      ++                                                  +LM3
 # --------------------------------------------------------------------------------------------LM3
 #                               _____
@@ -33,204 +35,230 @@
 #
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 01 - Common Messages                                                           +LM3
+# +   Section 01 - Mensajes Comunes                                                          +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 common:
   prefix: '&b&lLevelledMobs:&7'
   no-permission:
-    - '%prefix% You don''t have access to that.'
+    - '%prefix% Usted no tiene acceso a eso.'
   players-only:
-    - '%prefix% Only players may use that.'
+    - '%prefix% Sólo los jugadores pueden utilizarlo.'
   player-offline:
-    - '%prefix% &r%player%&7 is offline or invalid.'
+    - '%prefix% &r%player%&7 está desconectado o no es válido.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 02 - Default Command Messages                                                  +LM3
+# +   Section 02 - Mensajes de comando por defecto                                           +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 command:
   levelledmobs:
     main-usage:
-      - '%prefix% Available commands:'
-      - '&8 &m->&b /%label% summon &8- &7summon specific levelled mobs'
-      - '&8 &m->&b /%label% rules &8- &7printout of the rules system'
-      - '&8 &m->&b /%label% kill &8- &7mass kill levelled mobs'
-      - '&8 &m->&b /%label% reload &8- &7reload the configuration files'
-      - '&8 &m->&b /%label% info &8- &7view info about the plugin'
-      - '&8 &m->&b /%label% compatibility &8- &7check plugin''s compatibility with the server'
+      - '%prefix% Comandos disponibles:'
+      - '&8 &m->&b /%label% summon &8- &7invoca a una entidad de nivel específico.'
+      - '&8 &m->&b /%label% rules &8- &7gestionar el sistema de reglas'
+      - '&8 &m->&b /%label% kill &8- &7matar a las entidades niveladas'
+      - '&8 &m->&b /%label% reload &8- &7recargar los archivos de configuración'
+      - '&8 &m->&b /%label% info &8- &7ver información del plugin'
+      - '&8 &m->&b /%label% compatibility &8- &7compruebe la compatibilidad con el servidor'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 03 - Summon Command Messages                                                   +LM3
+# +   Section 03 - Mensajes de comando de invocación                                         +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     summon:
       invalid-amount:
-        - '%prefix% Invalid amount ''&b%amount%&7''.'
+        - '%prefix% Cantidad inválida ''&b%amount%&7''.'
       invalid-entity-type:
-        - '%prefix% Invalid entity type ''&b%entityType%&7''.'
+        - '%prefix% Tipo de entidad no válida ''&b%entityType%&7''.'
       invalid-level:
-        - '%prefix% Invalid level ''&b%level%&7''.'
+        - '%prefix% Nivel inválido ''&b%level%&7''.'
       invalid-summon-type:
-        - '%prefix% Invalid summon type ''&b%summonType%&7''.'
+        - '%prefix% Tipo de invocación inválido ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Only players may use summon type ''&bhere''&7, you must use ''&batPlayer&7'' or ''&batLocation&7'' instead.'
+        - '%prefix% Sólo los jugadores pueden usar el ''&bhere&7'', debes usar ''&batPlayer&7'' o ''&batLocation&7'' en su lugar.
       invalid-location:
-        - '%prefix% Invalid location.'
+        - '%prefix% Ubicación inválida.'
       here:
         usage:
-          - '%prefix% Usage: &b/%label% summon <amount> <entity> <level> here'
+          - '%prefix% Uso: &b/%label% summon <amount> <entity> <level> here'
         success:
-          - '%prefix% Spawned &b%amount%&7 of &fLvl.%level% &b%entity%(s)&7 at your location.'
+          - '%prefix% Despertó &b%amount%&7 de &fLvl.%level% &b%entity%(s)&7 en su ubicación.'
       atLocation:
         usage:
-          - '%prefix% Usage: &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> [world]'
+          - '%prefix% Uso: &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> [world]'
         success:
-          - '%prefix% Spawned &b%amount%&7 of &fLvl.%level% &b%entity%(s)&7 at &8(&b%x%&7, &b%y%&7, &b%z%&7 in world ''&b%world%&7''&8)&7.'
+          - '%prefix% Engendró &b%amount%&7 de &fLvl.%level% &b%entity%(s)&7 en &8(&b%x%&7, &b%y%&7, &b%z%&7 en el mundo ''&b%world%&7''&8)&7.'
         usage-console:
-          - '%prefix% Usage (console): &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> <world>'
+          - '%prefix% Uso (console): &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> <world>'
         invalid-world:
           - '%prefix% Invalid world ''&b%world%&7''.'
         invalid-location:
           - '%prefix% Invalid location.'
       atPlayer:
         usage:
-          - '%prefix% Usage: &b/%label% summon <amount> <entityType> <level> atPlayer <player>'
+          - '%prefix% Uso: &b/%label% summon <amount> <entityType> <level> atPlayer <player>'
         success:
-          - '%prefix% Spawned &b%amount%&7 of &fLvl.%level% &b%entity%(s)&7 at &r%targetDisplayname%&7''s location.'
+          - '%prefix% Engendró &b%amount%&7 de &fLvl.%level% &b%entity%(s)&7 en la ubicación de &r%targetDisplayname%&7''s.'
       usage:
-        - '%prefix% Summon command syntax:'
+        - '%prefix% Formato de los comandos de invocación:'
         - '&8 &m->&b /%label% summon <amount> <entity> <level> here'
         - '&8 &m->&b /%label% summon <amount> <entity> <level> atPlayer <player>'
         - '&8 &m->&b /%label% summon <amount> <entity> <level> atLocation <x> <y> <z> [world]'
       amount-limited:
         min:
-          - '%prefix% Summon amount limited to a minimum of &b1&7 mob.'
+          - '%prefix% Cantidad de invocaciones limitada a un mínimo de &b1&7 entidad.'
         max:
-          - '%prefix% Summon amount limited to a maximum of &b%maxAmount%&7 mobs.'
+          - '%prefix% Cantidad de invocaciones limitada a un máximo de &b%maxAmount%&7 entidades.'
       level-limited:
         min:
-          - '%prefix% Level limited to a minimum of &bLvl.%minLevel%&7.'
+          - '%prefix% Nivel limitado a un mínimo de &bLvl.%minLevel%&7.'
         max:
-          - '%prefix% Level limited to a maximum of &bLvl.%maxLevel%&7.'
+          - '%prefix% Nivel limitado a un máximo de &bLvl.%maxLevel%&7.'
       not-levellable:
-        - '%prefix% &b%entity%&7 is not levellable.'
+        - '%prefix% &b%entity%&7 no es nivelable.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 04 - Kill Command Messages                                                     +LM3
+# +   Section 04 - Mensajes de comandos de muerte                                            +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     kill:
       usage:
-        - '%prefix% Usage: &b/%label% kill <all/near>'
+        - '%prefix% Uso: &b/%label% kill <all/near>'
       all:
         invalid-world:
-          - '%prefix% Invalid world ''&b%world%&7''.'
+          - '%prefix% Mundo inválido ''&b%world%&7''.'
         success:
-          - '%prefix% Killed &b%killed%&7 levelled mobs in &b%worlds%&7 world(s) &8(&b%skipped%&7 mobs were skipped&8)&7.'
+          - '%prefix% Has matado a &b%killed%&7 entidades niveladas en &b%worlds%&7 mundo(s) &8(&7se han saltado &b%skipped%&7 entidades&8)&7.'
         usage:
-          - '%prefix% Usage: &b/%label% kill all [world/*]'
+          - '%prefix% Uso: &b/%label% kill all [world/*]'
         usage-console:
-          - '%prefix% Usage (console): /%label% kill all <world/*>'
+          - '%prefix% Uso (console): /%label% kill all <world/*>'
       near:
         invalid-radius:
-          - '%prefix% Invalid radius ''&b%radius%&7''.'
+          - '%prefix% Radio inválido ''&b%radius%&7''.'
         invalid-radius-min:
-          - '%prefix% Specified radius has been adjusted to the minimum radius &8(&b%minRadius%&8)&7.'
+          - '%prefix% El radio especificado se ha ajustado al radio mínimo. &8(&b%minRadius%&8)&7.'
         invalid-radius-max:
-          - '%prefix% Specified radius has been adjusted to the maximum radius &8(&b%maxRadius%&8)&7.'
+          - '%prefix% El radio especificado se ha ajustado al radio máximo. &8(&b%maxRadius%&8)&7.'
         success:
-          - '%prefix% Killed &b%killed%&7 levelled mobs within a radius of &b%radius%&7 block(s) &8(&b%skipped%&7 mobs were skipped&8)&7.'
+          - '%prefix% Has matado a &b%killed%&7 entidades niveladas en un radio de &b%radius%&7 manzana(s) &8(&7se han saltado &b%skipped%&7 entidades&8)&7.'
         usage:
-          - '%prefix% Usage: &b/%label% kill near <radius>'
+          - '%prefix% Uso: &b/%label% kill near <radius>'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 05 - Spawner Command Messages                                                  +LM3
+# +   Section 05 - Mensajes de comando del generador de entidades                            +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     spawner:
       usage:
-        - '%prefix% Usage: &b/%label%&7 spawner &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
+        - '%prefix% Formato de los comandos del generador:'
+        - '&8 &m->&b /%label% spawner create'
+        - '&8 &m->&b /%label% spawner copy'
+        - '&8 &m->&b /%label% spawner info'
+        - '&7&o Muestra de desove'
+        - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
       no-value:
-        - '%prefix% No value was specified for: &b%keyname%&7'
+        - '%prefix% No se ha especificado ningún valor para: &b%keyname%&7'
       invalid-value:
-        - '%prefix% Invalid value for &b%keyname%&7, must be a number'
+        - '%prefix% Valor no válido para &b%keyname%&7, debe ser un número.'
       no-level-specified:
-        - '%prefix% You must specify minLevel and/or maxLevel'
+        - '%prefix% Debe especificar un nivel mínimo y/o máximo.'
       inventory-full:
-        - '%prefix% &4Your inventory is full!'
+        - '%prefix% &4Su inventario está lleno!'
       spawner-give-message:
-        - '%prefix% Gave you a LM spawner, minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+        - '%prefix% Te he dado un cubo de despojo de LevelledMob!'
       spawner-give-message-console:
-        - '%prefix% Gave &r%playername%&7 a LM spawner, minLevel &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+        - '%prefix% Le dio a &r%playername%&7 un cubo generador LevelledMob. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+      info:
+        status-enabled:
+          - '%prefix% La información sobre los reproductores &cestá activada&f.'
+        status-not-enabled:
+          - '%prefix% La información sobre los reproductores &cno está activada&f.'
+        enabled:
+          - '%prefix% La información sobre los reproductores está &aactivada&f. Haz clic con el botón derecho del ratón en cualquier cubo de desove para ver los detalles.!'
+        disabled:
+          - '%prefix% La información sobre el desove &aestá desactivada&f.'
+      copy:
+        vanilla-spawner:
+          - '%prefix% La copia del spawner sólo funciona con cubos de spawner LevelledMobs.'
+        status-enabled:
+          - '%prefix% La copia del generador &cestá activada&f.'
+        status-not-enabled:
+          - '%prefix% La copia del generador &cestá activada&f.'
+        enabled:
+          - '%prefix% La copia del generador &aestá activada&f. Haz clic con el botón derecho en un generador de LevelledMob para hacer una copia.'
+          - 'Tu mano debe estar vacía.'
+        disabled:
+          - '%prefix% Se ha &adesactivado&f la copia de reproductores.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 06 - System Command Messages                                                   +LM3
+# +   Section 06 - Mensajes de comando del sistema                                           +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     reload:
       started:
-        - '%prefix% Reloading configuration files...'
+        - '%prefix% Recarga de archivos de configuración...'
       finished:
-        - '%prefix% Reload complete.'
+        - '%prefix% Recarga completa.'
       usage:
-        - '%prefix% Usage: &b/%label% reload'
+        - '%prefix% Uso: &b/%label% reload'
     info:
       about:
         - ' '
-        - '&b&lLevelledMobs &fv%version%&7 by lokka30 & stumper66'
+        - '&b&lLevelledMobs &fv%version%&7 de lokka30, stumper66 and Oathkeeper'
         - '&7&o%description%'
         - ' '
-        - '&7This version of the plugin supports: &fMinecraft %supportedVersions%'
-        - '&7Code contributors: &f%contributors%'
+        - '&7Esta versión del plugin es compatible: &fMinecraft %supportedVersions%'
+        - '&7Colaboradores del código: &f%contributors%'
         - ' '
       listSeparator: '&7, &f'
       usage:
-        - '%prefix% Usage: &b/%label% info'
+        - '%prefix% Uso: &b/%label% info'
     compatibility:
       notice:
-        - '%prefix% Compatibility checks have been printed to your logs. Please check the console :)'
+        - '%prefix% Las comprobaciones de compatibilidad se han impreso en sus registros. Por favor, compruebe la consola :)'
       usage:
-        - '%prefix% Usage: &b/%label% compatibility'
+        - '%prefix% Uso: &b/%label% compatibility'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 07 - Other Messages                                                            +LM3
+# +   Section 07 - Otros mensajes                                                            +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 other:
   compatibility-notice:
     enabled: true
     messages:
-      - '%prefix% LevelledMobs compatibility notice:'
-      - '&8 &m->&r &b%incompatibilities% &7possible incompatibilities were found. Please run ''&b/levelledmobs compatibility&7'' to check them.'
-      - '&8 &m->&7 This message is sent as you have the permission &blevelledmobs.compatibility-notice&7. You can disable this message in &bmessages.yml&7.'
-      - '&8 &m->&7 Please ensure you have followed all instructions on the plugin''s Wiki page.'
+      - '%prefix% Aviso de compatibilidad:'
+      - '&8 &m->&r &7Se han encontrado &b%incompatibilities% &7posibles incompatibilidades. Por favor, ejecute ''&b/levelledmobs compatibility&7'' para comprobarlas.'
+      - '&8 &m->&7 Este mensaje se le envía porque tiene el siguiente permiso &blevelledmobs.compatibility-notice&7. Puede desactivar este mensaje en &bmessages.yml&7.'
+      - '&8 &m->&7 Asegúrate de haber seguido todas las instrucciones de la página wiki de LevelledMob.'
   update-notice:
     messages:
-      - '&b&nLevelledMobs Update Checker Notice:'
-      - '&7Your &bLevelledMobs&7 version is &boutdated&7! Please update to &bv%latestVersion%&7 as soon as possible. &8(&7You''re running &bv%currentVersion%&8)'
+      - '&b&nLevelledMobs Notificación del comprobador de actualizaciones:'
+      - '&7Su versión de &bLevelledMobs&7 &bestá desfasada&7! Por favor, actualice a &bv%latestVersion%&7 tan pronto como sea posible. &8(&7Actualmente está ejecutando &bv%currentVersion%&8)'
     send-in-console: true
     send-on-join: true
 
-  mob-head-drop-name: '%mob_name%''s head'
+  mob-head-drop-name: 'Cabeza de %mob_name%'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 08 - Advanced Message Settings                                                 +LM3
-# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +   Section 08 - Configuración avanzada de mensajes                                        +LM3
+# +   No modifique más allá de este punto.                                                   +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
-file-version: 5
+file-version: 6
