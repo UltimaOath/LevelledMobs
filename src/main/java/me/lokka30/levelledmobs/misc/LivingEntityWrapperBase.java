@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.misc;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -5,21 +9,49 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * Baseclass for LivingEntityWrapper and LivingEntityPlaceholder to hold various information
+ * about mobs
+ *
+ * @author stumper66
+ * @since 3.1.0
+ */
 public class LivingEntityWrapperBase {
 
-    public LivingEntityWrapperBase(final @NotNull LevelledMobs main, final @NotNull World world, final @NotNull Location location){
-        this.world = world;
-        this.location = location;
+    public LivingEntityWrapperBase(final @NotNull LevelledMobs main){
         this.main = main;
+        this.inUseCount = new AtomicInteger();
     }
 
     Double calculatedDistanceFromSpawn;
-    @NotNull
-    final World world;
-    @NotNull
-    final Location location;
+    World world;
+    Location location;
     @NotNull
     final LevelledMobs main;
+    Integer spawnedTimeOfDay;
+    boolean isPopulated;
+    public AtomicInteger inUseCount;
+
+    public void populateData(final @NotNull World world, final @NotNull Location location){
+        this.world = world;
+        this.location = location;
+        this.isPopulated = true;
+    }
+
+    public void clearEntityData(){
+        this.world = null;
+        this.location = null;
+        this.calculatedDistanceFromSpawn = null;
+        this.spawnedTimeOfDay = null;
+        this.inUseCount.set(0);
+        this.isPopulated = false;
+    }
+
+    public boolean getIsPopulated(){
+        return isPopulated;
+    }
 
     public double getDistanceFromSpawn() {
         if (this.calculatedDistanceFromSpawn == null)
@@ -35,16 +67,25 @@ public class LivingEntityWrapperBase {
 
     @NotNull
     public Location getLocation() {
+        if (this.location == null)
+            throw new NullPointerException("Location was null");
+
         return this.location;
     }
 
     @NotNull
     public World getWorld() {
+        if (this.world == null)
+            throw new NullPointerException("World was null");
+
         return this.world;
     }
 
     @NotNull
     public String getWorldName(){
+        if (this.world == null)
+            throw new NullPointerException("World was null");
+
         return this.world.getName();
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.misc;
 
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,13 +18,14 @@ import java.io.FileInputStream;
  * Used to load various configuration files and migrate if necessary
  *
  * @author lokka30, stumper66
+ * @since 2.4.0
  */
 public final class FileLoader {
 
-    public static final int SETTINGS_FILE_VERSION = 31;    // Last changed: v3.1.0 b474
-    public static final int MESSAGES_FILE_VERSION = 5;     // Last changed: v3.1.0 b474
+    public static final int SETTINGS_FILE_VERSION = 32;    // Last changed: v3.1.5 b503
+    public static final int MESSAGES_FILE_VERSION = 6;     // Last changed: v3.1.2 b485
     public static final int CUSTOMDROPS_FILE_VERSION = 10; // Last changed: v3.1.0 b474
-    public static final int RULES_FILE_VERSION = 2;        // Last changed: v3.1.0 b474
+    public static final int RULES_FILE_VERSION = 2;        // Last changed: v3.2.0 b529
 
     private FileLoader() {
         throw new UnsupportedOperationException();
@@ -48,31 +53,33 @@ public final class FileLoader {
 
         final int fileVersion = ymlHelper.getInt(cfg,"file-version");
         final boolean isCustomDrops = cfgName.equals("customdrops.yml");
-        final boolean isRules = cfgName.equals("rules.yml"); // we are not migrating rules at this time
+        final boolean isRules = cfgName.equals("rules.yml");
 
-        if (!isRules && fileVersion < compatibleVersion) {
+        if (fileVersion < compatibleVersion) {
             final File backedupFile = new File(plugin.getDataFolder(), cfgName + ".v" + fileVersion + ".old");
 
             // copy to old file
             FileUtil.copy(file, backedupFile);
             Utils.logger.info("&fFile Loader: &8(Migration) &b" + cfgName + " backed up to " + backedupFile.getName());
-            // overwrite settings.yml from new version
-            plugin.saveResource(file.getName(), true);
+            // overwrite the file from new version
+            if (!isRules)
+                plugin.saveResource(file.getName(), true);
 
             // copy supported values from old file to new
             Utils.logger.info("&fFile Loader: &8(Migration) &7Migrating &b" + cfgName + "&7 from old version to new version.");
 
             if (isCustomDrops)
                 FileMigrator.copyCustomDrops(backedupFile, file, fileVersion);
-            else
+            else if (!isRules)
                 FileMigrator.copyYmlValues(backedupFile, file, fileVersion);
+            else
+                FileMigrator.migrateRules(backedupFile, file, fileVersion);
 
             // reload cfg from the updated values
             cfg = YamlConfiguration.loadConfiguration(file);
 
-        }
-        else if (!isRules)
-            checkFileVersion(file, compatibleVersion, ymlHelper.getInt(cfg,"file-version"));
+        } else if (!isRules)
+            checkFileVersion(file, compatibleVersion, ymlHelper.getInt(cfg, "file-version"));
 
         return cfg;
     }

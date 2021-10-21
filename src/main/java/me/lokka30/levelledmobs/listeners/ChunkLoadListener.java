@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.listeners;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -16,10 +20,12 @@ import org.bukkit.event.world.ChunkLoadEvent;
  * moving around
  *
  * @author stumper66
+ * @since 2.4.0
  */
 public class ChunkLoadListener implements Listener {
 
     private final LevelledMobs main;
+
     public ChunkLoadListener(final LevelledMobs main) {
         this.main = main;
     }
@@ -34,11 +40,15 @@ public class ChunkLoadListener implements Listener {
 
             // Must be a *living* entity
             if (!(entity instanceof LivingEntity)) continue;
-            final LivingEntityWrapper lmEntity = new LivingEntityWrapper((LivingEntity) entity, main);
+            final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance((LivingEntity) entity, main);
 
-            if (lmEntity.isLevelled()) continue;
+            if (lmEntity.isLevelled()) {
+                lmEntity.free();
+                continue;
+            }
 
-            main.queueManager_mobs.addToQueue(new QueueItem(lmEntity, event));
+            main._mobsQueueManager.addToQueue(new QueueItem(lmEntity, event));
+            lmEntity.free();
         }
     }
 }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+  -->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,7 +10,7 @@
 
     <groupId>me.lokka30</groupId>
     <artifactId>LevelledMobs</artifactId>
-    <version>3.1.0 b475</version>
+    <version>3.2.2 b538</version>
     <packaging>jar</packaging>
 
     <name>LevelledMobs</name>
@@ -41,7 +45,7 @@
                         </relocation>
                         <relocation>
                             <pattern>me.lokka30.microlib</pattern>
-                            <shadedPattern>me.lokka30.levelledmobs.microlib</shadedPattern>
+                            <shadedPattern>${project.groupId}.microlib</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
@@ -109,6 +113,10 @@
             <id>sk89q-repo</id>
             <url>https://maven.enginehub.org/repo/</url>
         </repository>
+        <repository>
+            <id>bs-repo</id>
+            <url>https://ci.pluginwiki.us/plugin/repository/everything/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -121,8 +129,8 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <scope>provided</scope>
             <version>1.5.25</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -139,7 +147,7 @@
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
-            <version>7.0.4</version>
+            <version>7.0.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -157,6 +165,12 @@
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api-plugin</artifactId>
             <version>2.8.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>simplepets.brainsynder</groupId>
+            <artifactId>API</artifactId>
+            <version>5.0-BUILD-89</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

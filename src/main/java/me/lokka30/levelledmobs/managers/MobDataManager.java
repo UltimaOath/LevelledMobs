@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.managers;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -19,6 +23,7 @@ import java.util.Objects;
  * Manages data related to various mob levelling
  *
  * @author lokka30, stumper66
+ * @since 2.6.0
  */
 public class MobDataManager {
 
@@ -39,8 +44,8 @@ public class MobDataManager {
         final String path = lmEntity.getTypeName() + "." + attribute;
 
         return main.attributesCfg.contains(path) ?
-            main.attributesCfg.get(path) :
-            null;
+                main.attributesCfg.get(path) :
+                null;
     }
 
     public final boolean isLevelledDropManaged(final EntityType entityType, @NotNull final Material material) {
@@ -61,38 +66,39 @@ public class MobDataManager {
                 Objects.requireNonNull(lmEntity.getLivingEntity().getAttribute(attribute)).getBaseValue();
         final double additionValue = getAdditionsForLevel(lmEntity, addition, defaultValue);
 
-        if (additionValue == 0.0) return;
-
         final AttributeModifier mod = new AttributeModifier(attribute.name(), additionValue, AttributeModifier.Operation.ADD_NUMBER);
         final AttributeInstance attrib = lmEntity.getLivingEntity().getAttribute(attribute);
 
-        if (attrib != null) {
-            double existingDamage = 0;
-            if (attribute == Attribute.GENERIC_MAX_HEALTH && lmEntity.getLivingEntity().getAttribute(attribute) != null)
-                existingDamage = Objects.requireNonNull(lmEntity.getLivingEntity().getAttribute(attribute)).getValue() - lmEntity.getLivingEntity().getHealth();
+        if (attrib == null) return;
 
-            if (attrib.getModifiers().size() > 0){
-                final List<AttributeModifier> existingMods = new ArrayList<>(attrib.getModifiers().size());
-                existingMods.addAll(attrib.getModifiers());
+        double existingDamage = 0;
+        if (attribute == Attribute.GENERIC_MAX_HEALTH && lmEntity.getLivingEntity().getAttribute(attribute) != null)
+            existingDamage = Objects.requireNonNull(lmEntity.getLivingEntity().getAttribute(attribute)).getValue() - lmEntity.getLivingEntity().getHealth();
 
-                for (final AttributeModifier existingMod : existingMods)
-                    attrib.removeModifier(existingMod);
-            }
+        if (attrib.getModifiers().size() > 0){
+            final List<AttributeModifier> existingMods = new ArrayList<>(attrib.getModifiers().size());
+            existingMods.addAll(attrib.getModifiers());
 
-            if (useStaticValues)
-                attrib.setBaseValue(defaultValue);
-            else
-                attrib.addModifier(mod);
+            for (final AttributeModifier existingMod : existingMods)
+                attrib.removeModifier(existingMod);
+        }
 
-            // MAX_HEALTH specific: set health to max health
-            if (attribute == Attribute.GENERIC_MAX_HEALTH) {
-                double newHealth = attrib.getValue() - existingDamage;
-                if (newHealth < 0.0) newHealth = 0.0;
-                try {
-                    lmEntity.getLivingEntity().setHealth(newHealth);
-                }
-                catch (IllegalArgumentException ignored) {}
-            }
+        if (additionValue == 0.0) return;
+
+        if (useStaticValues)
+            attrib.setBaseValue(defaultValue);
+        else
+            attrib.addModifier(mod);
+
+        // MAX_HEALTH specific: set health to max health
+        if (attribute == Attribute.GENERIC_MAX_HEALTH) {
+            double newHealth = attrib.getValue() - existingDamage;
+            if (newHealth < 0.0) newHealth = 0.0;
+            try {
+                if (lmEntity.getLivingEntity().getHealth() <= 0.0) return;
+                lmEntity.getLivingEntity().setHealth(newHealth);
+            } catch (IllegalArgumentException ignored) { }
+
         }
     }
 
@@ -100,6 +106,8 @@ public class MobDataManager {
         final double maxLevel = main.rulesManager.getRule_MobMaxLevel(lmEntity);
 
         double attributeValue = 0;
+        double attributeMax = 0;
+
         if (lmEntity.getFineTuningAttributes() != null){
             switch (addition){
                 case CUSTOM_XP_DROP:
@@ -123,16 +131,45 @@ public class MobDataManager {
                 case CREEPER_BLAST_DAMAGE:
                     if (lmEntity.getFineTuningAttributes().creeperExplosionRadius != null) attributeValue = lmEntity.getFineTuningAttributes().creeperExplosionRadius;
                     break;
+                case ATTRIBUTE_HORSE_JUMP_STRENGTH:
+                    if (lmEntity.getFineTuningAttributes().horseJumpStrength != null) attributeValue = lmEntity.getFineTuningAttributes().horseJumpStrength;
+                    break;
+                case ATTRIBUTE_ARMOR_BONUS:
+                    attributeMax = 30.0;
+                    if (lmEntity.getFineTuningAttributes().armorBonus != null) attributeValue = lmEntity.getFineTuningAttributes().armorBonus;
+                    break;
+                case ATTRIBUTE_ARMOR_TOUGHNESS:
+                    attributeMax = 50.0;
+                    if (lmEntity.getFineTuningAttributes().armorToughness != null) attributeValue = lmEntity.getFineTuningAttributes().armorToughness;
+                    break;
+                case ATTRIBUTE_ATTACK_KNOCKBACK:
+                    attributeMax = 5.0;
+                    if (lmEntity.getFineTuningAttributes().attackKnockback != null) attributeValue = lmEntity.getFineTuningAttributes().attackKnockback;
+                    break;
+                case ATTRIBUTE_FLYING_SPEED:
+                    if (lmEntity.getFineTuningAttributes().flyingSpeed != null) attributeValue = lmEntity.getFineTuningAttributes().flyingSpeed;
+                    break;
+                case ATTRIBUTE_KNOCKBACK_RESISTANCE:
+                    attributeMax = 1.0;
+                    if (lmEntity.getFineTuningAttributes().knockbackResistance != null) attributeValue = lmEntity.getFineTuningAttributes().knockbackResistance;
+                    break;
+                case ATTRIBUTE_ZOMBIE_SPAWN_REINFORCEMENTS:
+                    attributeMax = 1.0;
+                    if (lmEntity.getFineTuningAttributes().zombieReinforcements != null) attributeValue = lmEntity.getFineTuningAttributes().zombieReinforcements;
+                    break;
+                case ATTRIBUTE_FOLLOW_RANGE:
+                    if (lmEntity.getFineTuningAttributes().followRange != null) attributeValue = lmEntity.getFineTuningAttributes().followRange;
+                    break;
             }
         }
 
         if (maxLevel == 0) return 0.0;
 
-        // use old formula or item drops, xp drops
-        if (defaultValue == 0.0)
-            return attributeValue * (((double) lmEntity.getMobLevel() - 1)/ maxLevel);
-
-        // use revised formula for all attributes
-        return (defaultValue * attributeValue) * ((lmEntity.getMobLevel() - 1) / (maxLevel - 1));
+        // only used for 5 specific attributes
+        if (attributeMax > 0.0)
+            return (lmEntity.getMobLevel() / maxLevel) * (attributeMax * attributeValue);
+        else
+            // normal formula for most attributes
+            return (defaultValue * attributeValue) * ((lmEntity.getMobLevel()) / maxLevel);
     }
 }

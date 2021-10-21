@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.managers;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -12,10 +16,11 @@ import java.util.concurrent.TimeUnit;
  * Queues up mob info so they can be processed in a background thread
  *
  * @author stumper66
+ * @since 3.0.0
  */
-public class QueueManager_Mobs {
+public class MobsQueueManager {
 
-    public QueueManager_Mobs(final LevelledMobs main){
+    public MobsQueueManager(final LevelledMobs main) {
         this.main = main;
         this.queue = new LinkedBlockingQueue<>();
     }
@@ -49,7 +54,10 @@ public class QueueManager_Mobs {
         doThread = false;
     }
 
-    public void addToQueue(final QueueItem item) { this.queue.offer(item); }
+    public void addToQueue(final QueueItem item) {
+        item.lmEntity.inUseCount.getAndIncrement();
+        this.queue.offer(item);
+    }
 
     private void main() throws InterruptedException{
         while (doThread) {
@@ -57,7 +65,11 @@ public class QueueManager_Mobs {
             final QueueItem item = queue.poll(200, TimeUnit.MILLISECONDS);
             if (item == null) continue;
 
+            if (!item.lmEntity.getIsPopulated()) continue;
+            if (!item.lmEntity.getShouldShowLM_Nametag()) continue;
             main.levelManager.entitySpawnListener.preprocessMob(item.lmEntity, item.event);
+
+            item.lmEntity.free();
         }
 
         isRunning = false;

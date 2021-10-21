@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.rules;
 
 import org.jetbrains.annotations.NotNull;
@@ -5,8 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Holds any rules relating to player levelling
+ *
+ * @author stumper66
+ * @since 3.1.0
+ */
 public class PlayerLevellingOptions implements Cloneable {
-    public PlayerLevellingOptions(){
+    public PlayerLevellingOptions() {
         this.levelTiers = new LinkedList<>();
     }
 

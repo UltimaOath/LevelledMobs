@@ -1,10 +1,14 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.customdrops;
 
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.managers.NBTManager;
 import me.lokka30.levelledmobs.misc.CustomUniversalGroups;
-import me.lokka30.levelledmobs.misc.NBT_ApplyResult;
+import me.lokka30.levelledmobs.misc.NBTApplyResult;
 import me.lokka30.levelledmobs.misc.Utils;
 import me.lokka30.levelledmobs.misc.YmlParsingHelper;
 import me.lokka30.levelledmobs.rules.RuleInfo;
@@ -30,6 +34,7 @@ import java.util.*;
  * java classes
  *
  * @author stumper66
+ * @since 3.0.0
  */
 public class CustomDropsParser {
 
@@ -86,6 +91,7 @@ public class CustomDropsParser {
         this.defaults.setDefaultsFromDropItem(drop);
         this.defaults.override = dropInstance.overrideStockDrops;
         this.defaults.overallChance = dropInstance.overallChance;
+        this.defaults.overallPermissions.addAll(dropInstance.overallPermissions);
     }
 
     private void parseCustomDrops(final ConfigurationSection config){
@@ -139,13 +145,19 @@ public class CustomDropsParser {
                     if (mobTypeOrGroup.equalsIgnoreCase("defaults"))
                         continue;
 
+                    boolean isBabyMob = false;
+                    if (mobTypeOrGroup.toLowerCase().startsWith("baby_")){
+                        isBabyMob = true;
+                        mobTypeOrGroup = mobTypeOrGroup.substring(5);
+                    }
+
                     try {
                         entityType = EntityType.valueOf(mobTypeOrGroup.toUpperCase());
                     } catch (Exception e) {
                         Utils.logger.warning("invalid mob type in customdrops.yml: " + mobTypeOrGroup);
                         continue;
                     }
-                    dropInstance = new CustomDropInstance(entityType);
+                    dropInstance = new CustomDropInstance(entityType, isBabyMob);
                 } else {
                     // item groups, we processed them beforehand
                     continue;
@@ -187,10 +199,13 @@ public class CustomDropsParser {
                         else
                             handler.customDropsitems_groups.put(universalGroup.toString(), dropInstance);
                     } else {
-                        if (handler.customDropsitems.containsKey(entityType))
-                            handler.customDropsitems.get(entityType).combineDrop(dropInstance);
+                        final TreeMap<EntityType, CustomDropInstance> dropMap = dropInstance.isBabyMob ?
+                                handler.customDropsitems_Babies : handler.customDropsitems;
+
+                        if (dropMap.containsKey(entityType))
+                            dropMap.get(entityType).combineDrop(dropInstance);
                         else
-                            handler.customDropsitems.put(entityType, dropInstance);
+                            dropMap.put(entityType, dropInstance);
                     }
                 }
             } // next mob or group
@@ -209,10 +224,12 @@ public class CustomDropsParser {
                 }
             }
 
-            Utils.logger.info(String.format("drop instances: %s, custom groups: %s, item groups: %s, items: %s, commands: %s",
-                    handler.customDropsitems.size(), handler.customDropsitems_groups.size(), handler.customItemGroups.size(), dropsCount, commandsCount));
+            final StringBuilder sbMain = new StringBuilder();
+            final int itemsCount = handler.customDropsitems_groups.size() + handler.customDropsitems_Babies.size();
+            sbMain.append(String.format("drop instances: %s, custom groups: %s, item groups: %s, items: %s, commands: %s",
+                    handler.customDropsitems.size(), itemsCount, handler.customItemGroups.size(), dropsCount, commandsCount));
 
-            showCustomDropsDebugInfo();
+            showCustomDropsDebugInfo(sbMain);
         }
     }
 
@@ -260,6 +277,14 @@ public class CustomDropsParser {
 
                     continue;
                 }
+                else if ("overall_permission".equalsIgnoreCase(materialName)){
+                    if (itemEntry.getValue() instanceof String)
+                        dropInstance.overallPermissions.add((String) itemEntry.getValue());
+                    else if (itemEntry.getValue() instanceof ArrayList)
+                        dropInstance.overallPermissions.addAll((ArrayList<String>) itemEntry.getValue());
+
+                    continue;
+                }
 
                 if ("usedroptable".equalsIgnoreCase(materialName)) {
                     if (itemEntry.getValue() == null){
@@ -300,10 +325,16 @@ public class CustomDropsParser {
         } // next item
     }
 
-    private void parseCustomDropsAttributes(@NotNull final CustomDropBase dropBase, @NotNull final ConfigurationSection cs, final CustomDropInstance dropInstance){
+    private void parseCustomDropsAttributes(@NotNull final CustomDropBase dropBase, @NotNull final ConfigurationSection cs, final @NotNull CustomDropInstance dropInstance){
         dropBase.chance = ymlHelper.getDouble(cs, "chance", this.defaults.chance);
+        dropBase.permissions.addAll(this.defaults.permissions);
+        dropBase.permissions.addAll(ymlHelper.getStringSet(cs, "permission"));
         dropBase.minLevel = ymlHelper.getInt(cs,"minlevel", this.defaults.minLevel);
         dropBase.maxLevel = ymlHelper.getInt(cs,"maxlevel", this.defaults.maxLevel);
+
+        dropBase.minPlayerLevel = ymlHelper.getInt(cs, "min-player-level", this.defaults.minPlayerLevel);
+        dropBase.maxPlayerLevel = ymlHelper.getInt(cs, "max-player-level", this.defaults.maxPlayerLevel);
+        dropBase.playerLevelVariable = ymlHelper.getString(cs, "player-level-variable", this.defaults.playerLevelVariable);
         dropBase.playerCausedOnly = ymlHelper.getBoolean(cs,"player-caused", this.defaults.playerCausedOnly);
         dropBase.maxDropGroup = ymlHelper.getInt(cs,"maxdropgroup", this.defaults.maxDropGroup);
         dropBase.groupId = ymlHelper.getString(cs, "groupid", dropBase.groupId);
@@ -315,23 +346,27 @@ public class CustomDropsParser {
                 Utils.logger.warning(String.format("Invalid number or number range for amount on %s, %s", dropInstance.getMobOrGroupName(), ymlHelper.getString(cs,"amount")));
         }
 
-        if (!Utils.isNullOrEmpty(cs.getString("overall_chance"))) {
-            dropInstance.overallChance = cs.getDouble("overall_chance");
+        if (!Utils.isNullOrEmpty(ymlHelper.getString(cs,"overall_chance"))) {
+            dropInstance.overallChance = ymlHelper.getDouble(cs, "overall_chance");
             if (dropInstance.overallChance == 0.0) dropInstance.overallChance = null;
         }
 
-        if (!Utils.isNullOrEmpty(cs.getString("overall_chance"))) {
-            dropInstance.overallChance = cs.getDouble("overall_chance");
-            if (dropInstance.overallChance == 0.0) dropInstance.overallChance = null;
-        }
+        if (cs.get(ymlHelper.getKeyNameFromConfig(cs, "overall_permission")) != null)
+            dropInstance.overallPermissions.addAll(ymlHelper.getStringSet(cs, "overall_permission"));
 
         if (dropBase instanceof CustomCommand) {
-            CustomCommand customCommand = (CustomCommand) dropBase;
-            customCommand.command = ymlHelper.getString(cs,"command");
+            final CustomCommand customCommand = (CustomCommand) dropBase;
+            final List<String> commandsList = cs.getStringList(ymlHelper.getKeyNameFromConfig(cs, "command"));
+            final String singleCommand = ymlHelper.getString(cs,"command");
+            if (!commandsList.isEmpty())
+                customCommand.commands.addAll(commandsList);
+            else if (singleCommand != null)
+                customCommand.commands.add(singleCommand);
+
             customCommand.commandName = ymlHelper.getString(cs,"name");
             parseRangedVariables(customCommand, cs);
 
-            if (Utils.isNullOrEmpty(customCommand.command))
+            if (customCommand.commands.isEmpty())
                 Utils.logger.warning("no command was specified for custom command");
             else
                 dropInstance.customItems.add(dropBase);
@@ -341,7 +376,8 @@ public class CustomDropsParser {
         final CustomDropItem item = (CustomDropItem) dropBase;
 
         checkEquippedChance(item, cs);
-        parseItemFlags(item, ymlHelper.getString(cs,"itemflags"), dropInstance);
+        parseItemFlags(item, cs, dropInstance);
+        item.onlyDropIfEquipped = ymlHelper.getBoolean(cs, "only-drop-if-equipped", this.defaults.onlyDropIfEquipped);
         item.priority = ymlHelper.getInt(cs,"priority", this.defaults.priority);
         item.noMultiplier = ymlHelper.getBoolean(cs,"nomultiplier", this.defaults.noMultiplier);
         item.noSpawner = ymlHelper.getBoolean(cs,"nospawner", this.defaults.noSpawner);
@@ -373,37 +409,12 @@ public class CustomDropsParser {
                 item.excludedMobs.add(exclude.trim());
         }
 
-        final ConfigurationSection enchantments = objectToConfigurationSection2(cs, "enchantments");
-        if (enchantments != null) {
-            final Map<String, Object> enchantMap = enchantments.getValues(false);
-            for (final String enchantName : enchantMap.keySet()) {
-                final Object value = enchantMap.get(enchantName);
-
-                int enchantLevel = 1;
-                if (value != null && Utils.isInteger(value.toString()))
-                    enchantLevel = Integer.parseInt(value.toString());
-
-                final Enchantment en = Enchantment.getByKey(NamespacedKey.minecraft(enchantName.toLowerCase()));
-                if (en != null) {
-                    if (item.getMaterial().equals(Material.ENCHANTED_BOOK)){
-                        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemStack().getItemMeta();
-                        if (meta != null) {
-                            meta.addStoredEnchant(en, enchantLevel, true);
-                            item.getItemStack().setItemMeta(meta);
-                        }
-                    }
-                    else
-                        item.getItemStack().addUnsafeEnchantment(en, enchantLevel);
-                }
-                else
-                    Utils.logger.warning("Invalid enchantment: " + enchantName);
-            }
-        }
+        parseEnchantments(objectToConfigurationSection2(cs, "enchantments"), item);
 
         final String nbtStuff = ymlHelper.getString(cs,"nbt-data");
         if (!Utils.isNullOrEmpty(nbtStuff)){
             if (ExternalCompatibilityManager.hasNBTAPI_Installed()) {
-                final NBT_ApplyResult result = NBTManager.applyNBT_Data_Item(item, nbtStuff);
+                final NBTApplyResult result = NBTManager.applyNBT_Data_Item(item, nbtStuff);
                 if (result.hadException())
                     Utils.logger.warning("custom drop " + item.getMaterial().toString() + " for " + dropInstance.getMobOrGroupName() + " has invalid NBT data: " + result.exceptionMessage);
                 else {
@@ -411,14 +422,40 @@ public class CustomDropsParser {
                     item.nbtData = nbtStuff;
                     this.dropsUtilizeNBTAPI = true;
                 }
-            }
-            else if (!hasMentionedNBTAPI_Missing){
+            } else if (!hasMentionedNBTAPI_Missing) {
                 Utils.logger.warning("NBT Data has been specified in customdrops.yml but required plugin NBTAPI is not installed!");
                 hasMentionedNBTAPI_Missing = true;
             }
         }
 
         applyMetaAttributes(item);
+    }
+
+    private void parseEnchantments(final ConfigurationSection cs, final CustomDropItem item){
+        if (cs == null) return;
+
+        final Map<String, Object> enchantMap = cs.getValues(false);
+        for (final String enchantName : enchantMap.keySet()) {
+            final Object value = enchantMap.get(enchantName);
+
+            int enchantLevel = 1;
+            if (value != null && Utils.isInteger(value.toString()))
+                enchantLevel = Integer.parseInt(value.toString());
+
+            final Enchantment en = Enchantment.getByKey(NamespacedKey.minecraft(enchantName.toLowerCase()));
+            if (en != null) {
+                if (item.getMaterial().equals(Material.ENCHANTED_BOOK)) {
+                    EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemStack().getItemMeta();
+                    if (meta != null) {
+                        meta.addStoredEnchant(en, enchantLevel, true);
+                        item.getItemStack().setItemMeta(meta);
+                    }
+                } else
+                    item.getItemStack().addUnsafeEnchantment(en, enchantLevel);
+            } else
+                Utils.logger.warning("Invalid enchantment: " + enchantName);
+        }
+
     }
 
     private void parseRangedVariables(final CustomCommand cc, @NotNull final ConfigurationSection cs){
@@ -467,21 +504,34 @@ public class CustomDropsParser {
             item.getItemStack().setItemMeta(meta);
     }
 
-    private void parseItemFlags(final CustomDropItem item, final String itemFlags, final CustomDropInstance dropInstance){
-        if (Utils.isNullOrEmpty(itemFlags)) return;
-        List<ItemFlag> flagList = new LinkedList<>();
+    private void parseItemFlags(final CustomDropItem item, final ConfigurationSection cs, final CustomDropInstance dropInstance){
+        if (cs == null) return;
 
-        for (final String flag : itemFlags.replace(',',';').split(";")){
+        List<String> flagList = cs.getStringList(ymlHelper.getKeyNameFromConfig(cs, "item_flags"));
+        String itemFlags = null;
+
+        if (flagList.isEmpty()) {
+            itemFlags = ymlHelper.getString(cs, "itemflags");
+            if (Utils.isNullOrEmpty(itemFlags))
+                itemFlags = ymlHelper.getString(cs, "item_flags");
+        }
+
+        if (flagList.isEmpty() && Utils.isNullOrEmpty(itemFlags)) return;
+        final List<ItemFlag> results = new LinkedList<>();
+        final List<String> flagsToParse = flagList.isEmpty() ?
+                List.of(itemFlags.replace(',',';').split(";")) : flagList;
+
+        for (final String flag : flagsToParse){
             try {
                 ItemFlag newFlag = ItemFlag.valueOf(flag.trim().toUpperCase());
-                flagList.add(newFlag);
+                results.add(newFlag);
             } catch (Exception e) {
                 Utils.logger.warning(String.format("Invalid itemflag: %s, item: %s, mobOrGroup: %s",
                         flag, item.getMaterial().name(), dropInstance.getMobOrGroupName()));
             }
         }
 
-        if (flagList.size() > 0) item.itemFlags = flagList;
+        if (!results.isEmpty()) item.itemFlags = results;
     }
 
     private void checkEquippedChance(final CustomDropItem item, @NotNull final ConfigurationSection cs){
@@ -568,14 +618,43 @@ public class CustomDropsParser {
         return false;
     }
 
-    private void showCustomDropsDebugInfo(){
-        for (final EntityType ent : handler.customDropsitems.keySet()) {
-            final CustomDropInstance dropInstance = handler.customDropsitems.get(ent);
+    private void showCustomDropsDebugInfo(final StringBuilder sbMain){
+        // build string list to alphabeticalize the drops by entity type including babies
+        final SortedMap<String, EntityType> typeNames = new TreeMap<>();
+
+        for (final EntityType ent : handler.customDropsitems.keySet())
+            typeNames.put(ent.toString(), ent);
+
+        for (final EntityType ent : handler.customDropsitems_Babies.keySet())
+            typeNames.put(ent.toString() + "_2", ent);
+
+        for (final String entTypeStr : typeNames.keySet()) {
+            final boolean isBaby = entTypeStr.endsWith("_2");
+            final EntityType ent = EntityType.valueOf(isBaby ? entTypeStr.substring(0, entTypeStr.length() - 2) : entTypeStr);
+            final CustomDropInstance dropInstance = isBaby ?
+                    handler.customDropsitems_Babies.get(ent) : handler.customDropsitems.get(ent);
+
             final String override = dropInstance.overrideStockDrops ? " (override)" : "";
             final String overallChance = dropInstance.overallChance != null ? " (overall_chance: " + dropInstance.overallChance + ")" : "";
-            Utils.logger.info("mob: " + ent.name() + override + overallChance);
+            sbMain.append(System.lineSeparator());
+            sbMain.append("mob: &b");
+            if (isBaby) sbMain.append("(baby) ");
+            sbMain.append(ent.name());
+            sbMain.append("&r");
+            sbMain.append(override);
+            sbMain.append(overallChance);
+            if (!dropInstance.overallPermissions.isEmpty()) {
+                sbMain.append(" (overall perms: ");
+                sbMain.append(dropInstance.overallPermissions);
+                sbMain.append(")");
+            }
+
             for (final CustomDropBase baseItem : dropInstance.customItems) {
-                showCustomDropsDebugInfo2(baseItem);
+                final String result = showCustomDropsDebugInfo2(baseItem);
+                if (!Utils.isNullOrEmpty(result)){
+                    sbMain.append(System.lineSeparator());
+                    sbMain.append(result);
+                }
             }
         }
 
@@ -583,14 +662,24 @@ public class CustomDropsParser {
             final CustomDropInstance dropInstance = handler.customDropsitems_groups.get(group);
             final String override = dropInstance.overrideStockDrops ? " (override)" : "";
             final String overallChance = dropInstance.overallChance != null ? " (overall_chance: " + dropInstance.overallChance + ")" : "";
-            Utils.logger.info("group: " + group + override + overallChance);
+            if (sbMain.length() > 0) sbMain.append(System.lineSeparator());
+            sbMain.append("group: ");
+            sbMain.append(group);
+            sbMain.append(override);
+            sbMain.append(overallChance);
             for (final CustomDropBase baseItem : dropInstance.customItems) {
-                showCustomDropsDebugInfo2(baseItem);
+                final String result = showCustomDropsDebugInfo2(baseItem);
+                if (!Utils.isNullOrEmpty(result)){
+                    sbMain.append(System.lineSeparator());
+                    sbMain.append(result);
+                }
             }
         }
+
+        Utils.logger.info(sbMain.toString());
     }
 
-    private void showCustomDropsDebugInfo2(final CustomDropBase baseItem){
+    private @NotNull String showCustomDropsDebugInfo2(final CustomDropBase baseItem){
         final CustomCommand command = baseItem instanceof CustomCommand ?
                 (CustomCommand) baseItem : null;
         final CustomDropItem item = baseItem instanceof CustomDropItem ?
@@ -598,75 +687,106 @@ public class CustomDropsParser {
 
         final StringBuilder sb = new StringBuilder();
         if (item != null)
-            sb.append(String.format("    %s, amount: %s, chance: %s", item.getMaterial(), item.getAmountAsString(), baseItem.chance));
+            sb.append(String.format("    &b%s&r, amount: &b%s&r, chance: &b%s&r", item.getMaterial(), item.getAmountAsString(), baseItem.chance));
         else
-            sb.append(String.format("    COMMAND, chance: %s", baseItem.chance));
+            sb.append(String.format("    COMMAND, chance: &b%s&r", baseItem.chance));
 
         if (baseItem.minLevel > -1) {
-            sb.append(", minL: ");
+            sb.append(", minL: &b");
             sb.append(baseItem.minLevel);
+            sb.append("&r");
         }
         if (baseItem.maxLevel > -1) {
-            sb.append(", maxL: ");
+            sb.append(", maxL: &b");
             sb.append(baseItem.maxLevel);
+            sb.append("&r");
+        }
+
+        if (baseItem.minPlayerLevel > -1){
+            sb.append(", minPL: &b");
+            sb.append(baseItem.minPlayerLevel);
+            sb.append("&r");
+        }
+        if (baseItem.maxPlayerLevel > -1){
+            sb.append(", maxPL: &b");
+            sb.append(baseItem.maxPlayerLevel);
+            sb.append("&r");
+        }
+
+        if (!baseItem.permissions.isEmpty()){
+            sb.append(", perms: &b");
+            sb.append(baseItem.permissions);
+            sb.append("&r");
         }
 
         if (baseItem.noSpawner) sb.append(", nospn");
 
         if (!Utils.isNullOrEmpty(baseItem.groupId)) {
-            sb.append(", gId: ");
+            sb.append(", gId: &b");
             sb.append(baseItem.groupId);
+            sb.append("&r");
             if (baseItem.maxDropGroup > 0){
-                sb.append(", maxDropGroup: ");
+                sb.append(", maxDropGroup: &b");
                 sb.append(baseItem.maxDropGroup);
+                sb.append("&r");
             }
         }
         if (baseItem.priority > 0) {
-            sb.append(", pri: ");
+            sb.append(", pri: &b");
             sb.append(baseItem.priority);
+            sb.append("&r");
         }
 
         if (command != null){
             if (!Utils.isNullOrEmpty(command.commandName)) {
-                sb.append(", name: ");
+                sb.append(", name: &b");
                 sb.append(command.commandName);
+                sb.append("&r");
             }
 
-            Utils.logger.info(sb.toString());
-            return;
+            return sb.toString();
         }
 
-        if (item == null) return; // this shuts up the IDE for possible null reference
+        if (item == null) return sb.toString(); // this shuts up the IDE for possible null reference
 
         if (item.noMultiplier) sb.append(", nomultp");
         if (item.lore != null && !item.lore.isEmpty()) sb.append(", hasLore");
         if (item.customName != null && !"".equals(item.customName)) sb.append(", hasName");
         if (item.getDamage() != 0 || item.getHasDamageRange()) {
-            sb.append(", dmg: ");
+            sb.append(", dmg: &b");
             sb.append(item.getDamageAsString());
+            sb.append("&r");
         }
         if (!item.excludedMobs.isEmpty()) sb.append(", hasExcludes");
         if (item.equippedSpawnChance > 0.0) {
-            sb.append(", equipChance: ");
+            sb.append(", equipChance: &b");
             sb.append(item.equippedSpawnChance);
+            sb.append("&r");
         }
+        if (item.onlyDropIfEquipped)
+            sb.append(", &bonlyDropIfEquipped&r");
         if (item.itemFlags != null && !item.itemFlags.isEmpty()){
-            sb.append(", itemflags: ");
+            sb.append(", itemflags: &b");
             sb.append(item.itemFlags.size());
+            sb.append("&r");
         }
-
-        Utils.logger.info(sb.toString());
-        sb.setLength(0);
 
         final ItemMeta meta = item.getItemStack().getItemMeta();
+        final StringBuilder sb2 = new StringBuilder();
         if (meta != null) {
             boolean isFirst = true;
             for (final Enchantment enchant : meta.getEnchants().keySet()) {
-                if (sb.length() > 0) sb.append(", ");
-                sb.append(String.format("%s (%s)", enchant.getKey().getKey(), item.getItemStack().getItemMeta().getEnchants().get(enchant)));
+                if (sb2.length() > 0) sb.append(", ");
+                sb2.append(String.format("&b%s&r (%s)", enchant.getKey().getKey(), item.getItemStack().getItemMeta().getEnchants().get(enchant)));
             }
         }
 
-        if (sb.length() > 0) Utils.logger.info("         " + sb);
+        if (sb2.length() > 0) {
+            sb.append(System.lineSeparator());
+            sb.append("         ");
+            sb.append(sb2);
+        }
+
+        return sb.toString();
     }
 }

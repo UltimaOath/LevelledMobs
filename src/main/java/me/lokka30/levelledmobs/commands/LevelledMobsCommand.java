@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.commands;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -9,12 +13,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This class handles the command execution of '/levelledmobs'.
  *
  * @author lokka30
+ * @since 2.4.0
  */
 public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
 
@@ -26,14 +34,16 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
         rulesSubcommand = new RulesSubcommand(main);
     }
 
+    // Retain alphabetical order please.
+    private final CompatibilitySubcommand compatibilitySubcommand = new CompatibilitySubcommand();
+    private final GenerateMobDataSubcommand generateMobDataSubcommand = new GenerateMobDataSubcommand();
     private final InfoSubcommand infoSubcommand = new InfoSubcommand();
     private final KillSubcommand killSubcommand = new KillSubcommand();
     private final ReloadSubcommand reloadSubcommand = new ReloadSubcommand();
-    private final SummonSubcommand summonSubcommand = new SummonSubcommand();
-    private final CompatibilitySubcommand compatibilitySubcommand = new CompatibilitySubcommand();
-    private final GenerateMobDataSubcommand generateMobDataSubcommand = new GenerateMobDataSubcommand();
-    private final SpawnerSubCommand spawnerSubCommand;
     private final RulesSubcommand rulesSubcommand;
+    private final SpawnerSubCommand spawnerSubCommand;
+    private final SummonSubcommand summonSubcommand = new SummonSubcommand();
+    private final DebugSubcommand debugSubcommand = new DebugSubcommand();
 
     public boolean onCommand(@NotNull final CommandSender sender, final Command command, final String label, final String[] args) {
         if (sender.hasPermission("levelledmobs.command")) {
@@ -41,87 +51,85 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
                 sendMainUsage(sender, label);
             } else {
                 switch (args[0].toLowerCase()) {
+                    // Retain alphabetical order please.
+                    case "compatibility":
+                        compatibilitySubcommand.parseSubcommand(main, sender, label, args);
+                        break;
+                    case "debug":
+                        debugSubcommand.parseSubcommand(main, sender, label, args);
+                        break;
+                    case "generatemobdata":
+                        generateMobDataSubcommand.parseSubcommand(main, sender, label, args);
+                        break;
+                    case "info":
+                        infoSubcommand.parseSubcommand(main, sender, label, args);
+                        break;
                     case "kill":
                         killSubcommand.parseSubcommand(main, sender, label, args);
                         break;
                     case "reload":
                         reloadSubcommand.parseSubcommand(main, sender, label, args);
                         break;
-                    case "summon":
-                        summonSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "info":
-                        infoSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "compatibility":
-                        compatibilitySubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "generatemobdata":
-                        generateMobDataSubcommand.parseSubcommand(main, sender, label, args);
+                    case "rules":
+                        rulesSubcommand.parseSubcommand(main, sender, label, args);
                         break;
                     case "spawner":
                         spawnerSubCommand.parseSubcommand(main, sender, label, args);
                         break;
-                    case "rules":
-                        rulesSubcommand.parseSubcommand(main, sender, label, args);
+                    case "summon":
+                        summonSubcommand.parseSubcommand(main, sender, label, args);
                         break;
                     default:
                         sendMainUsage(sender, label);
+                        break;
                 }
-			}
-		} else {
+            }
+        } else {
             main.configUtils.sendNoPermissionMsg(sender);
         }
-		return true;
-	}
+        return true;
+    }
 
-	private void sendMainUsage(@NotNull final CommandSender sender, final String label) {
+    private void sendMainUsage(@NotNull final CommandSender sender, final String label) {
         List<String> mainUsage = main.messagesCfg.getStringList("command.levelledmobs.main-usage");
-
         mainUsage = Utils.replaceAllInList(mainUsage, "%prefix%", main.configUtils.getPrefix());
         mainUsage = Utils.replaceAllInList(mainUsage, "%label%", label);
         mainUsage = Utils.colorizeAllInList(mainUsage);
-
         mainUsage.forEach(sender::sendMessage);
     }
 
-	@Override
-	public List<String> onTabComplete(final CommandSender sender, final Command cmd, final String alias, @NotNull final String[] args) {
-		if (args.length == 1) {
-			List<String> suggestions = new LinkedList<>();
+    // Retain alphabetical order please.
+    private final List<String> commandsToCheck = Arrays.asList("debug", "summon", "kill", "reload", "info", "compatibility", "spawner", "rules");
 
-			if (sender.hasPermission("levelledmobs.command.summon"))
-				suggestions.add("summon");
-            if (sender.hasPermission("levelledmobs.command.kill"))
-                suggestions.add("kill");
-            if (sender.hasPermission("levelledmobs.command.reload"))
-                suggestions.add("reload");
-            if (sender.hasPermission("levelledmobs.command.info"))
-                suggestions.add("info");
-            if (sender.hasPermission("levelledmobs.command.compatibility"))
-                suggestions.add("compatibility");
-            if (sender.hasPermission("levelledmobs.command.compatibility.spawner"))
-                suggestions.add("spawner");
-            if (sender.hasPermission("levelledmobs.command.rules"))
-                suggestions.add("rules");
+    @Override
+    public List<String> onTabComplete(final CommandSender sender, final Command cmd, final String alias, @NotNull final String @NotNull [] args) {
+        if (args.length == 1) {
+            List<String> suggestions = new LinkedList<>();
+
+            commandsToCheck.forEach(command -> {
+                if (sender.hasPermission("levelledmobs.command." + command)) {
+                    suggestions.add(command);
+                }
+            });
 
             return suggestions;
         } else {
-			switch (args[0].toLowerCase()) {
-                case "summon":
-                    return summonSubcommand.parseTabCompletions(main, sender, args);
-                case "kill":
-                    return killSubcommand.parseTabCompletions(main, sender, args);
+            switch (args[0].toLowerCase()) {
+                // Retain alphabetical order please.
                 case "generatemobdata":
                     return generateMobDataSubcommand.parseTabCompletions(main, sender, args);
-                case "spawner":
-                    return spawnerSubCommand.parseTabCompletions(main, sender, args);
+                case "kill":
+                    return killSubcommand.parseTabCompletions(main, sender, args);
                 case "rules":
                     return rulesSubcommand.parseTabCompletions(main, sender, args);
-                // missing subcommands don't have tab completions.
+                case "spawner":
+                    return spawnerSubCommand.parseTabCompletions(main, sender, args);
+                case "summon":
+                    return summonSubcommand.parseTabCompletions(main, sender, args);
+                // the missing subcommands don't have tab completions, don't bother including them.
                 default:
-                    return null;
+                    return Collections.emptyList();
             }
-		}
-	}
+        }
+    }
 }

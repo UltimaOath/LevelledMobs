@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.rules;
 
 import org.bukkit.entity.EntityType;
@@ -10,6 +14,7 @@ import java.util.List;
  * Holds any custom multipliers values parsed from rules.yml
  *
  * @author stumper66
+ * @since 3.0.0
  */
 public class FineTuningAttributes implements Cloneable {
     public EntityType applicableEntity;
@@ -20,6 +25,14 @@ public class FineTuningAttributes implements Cloneable {
     public Double movementSpeed;
     public Double rangedAttackDamage;
     public Integer itemDrop;
+    public Double armorBonus;
+    public Double armorToughness;
+    public Double attackKnockback;
+    public Double flyingSpeed;
+    public Double knockbackResistance;
+    public Double horseJumpStrength;
+    public Double zombieReinforcements;
+    public Double followRange;
     public Integer xpDrop;
 
     public void mergeAttributes(final @Nullable FineTuningAttributes attributes){

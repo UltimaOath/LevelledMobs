@@ -1,5 +1,56 @@
 # Changelog
 
+⚠ Not all versions have been recorded in this changelog. Please check the Updates tab on our SpigotMC page for a full
+list of changelogs.
+
+***
+
+## v3.1.4 b502
+
+* Hotfix update. We accidentally left a line of code used for debugging in, which spammed people's consoles. Thanks to
+  @Bexchp for informing me - I've removed it now.
+* If you haven't read the changelog for `v3.1.3 b501`, you are able to read it by
+  visiting [this](https://www.spigotmc.org/resources/levelledmobs.74304/update?update=419488) link.
+
+***
+
+## v3.1.3 b501
+
+All of the following changes by @stumper66:
+
+* fixed the rule condition stop-processing not applying the applicable rule before stopping processing
+* added EcoBosses compatibility, thanks to Auxilor for providing the code
+* Improved settings.yml comments
+* fixed issue when using LM spawners referencing a drop table, they would only drop items if the item was equipped
+* fixed command /LM spawner info not showing CustomDropId
+* added ability to run multiple commands within a single customCommand
+* fixed entity-override-names not working with level tiers
+* fixed issue when a wolf or other tamable animals gets tamed it gets levelled
+* fixed issue when using player levelling and the player has 0 experience that it will cause mobs to get random levels
+* changed use-player-max-level in player levelling to default of false
+* fixed potential IllegalArgumentException when using player levelling and a player teleports to a different world
+* fixed dangerous caves compatibility
+* a mob being processed by LM can now have more than one external plugin defined (used by level-plugin rule in
+  rules.yml)
+* player-levelling will not be triggered by users in spectator mode
+
+***
+
+## v3.1.1 b481
+
+* @stumper66 fixed a few issues with rules using certain presets
+* @stumper66 reduced the filesize by removing embedded rules_normal.yml
+* @stumper66 fixed potential issue with using mob specific multipliers in presets
+* @stumper66 fixed health indicator issue not populating colored tiers when used in a preset
+* @stumper66 fixed custom x or z coordinate when used in spawn distance levelling. It also now shows up in the rules
+  command
+* @stumper66 fixed null reference exception when using OhTheDungeonsYoullGo plugin (not our fault)
+* @stumper66 fixed exception when starting the server when using version 1.16.1
+* @stumper66 fixed entity-name-override not accepting simple strings in rules.yml
+* @stumper66 fixed custom commands not respecting level constraints
+* @lokka30 fixed NBT apply spam (thanks to `___MrCrazy___` on Discord for reporting this issue)
+* @lokka30 added debug type `NBT_APPLY_SUCCESS`
+
 ***
 
 ## v3.0.4 b444

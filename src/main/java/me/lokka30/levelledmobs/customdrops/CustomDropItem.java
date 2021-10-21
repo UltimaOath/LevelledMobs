@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.customdrops;
 
 import me.lokka30.levelledmobs.misc.Utils;
@@ -7,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,11 +20,13 @@ import java.util.UUID;
  * custom drop item
  *
  * @author stumper66
+ * @since 2.5.0
  */
 public class CustomDropItem extends CustomDropBase {
     public int customModelDataId;
     public double equippedSpawnChance;
     public boolean noMultiplier;
+    public boolean onlyDropIfEquipped;
     public String customName;
     public String mobHeadTexture;
     public String nbtData;
@@ -44,6 +51,7 @@ public class CustomDropItem extends CustomDropBase {
         this.maxDropGroup = defaults.maxDropGroup;
         this.equippedSpawnChance = defaults.equippedSpawnChance;
         this.noMultiplier = defaults.noMultiplier;
+        this.onlyDropIfEquipped = defaults.onlyDropIfEquipped;
     }
 
     public CustomDropItem cloneItem() {

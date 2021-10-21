@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.listeners;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -14,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
  * be updated accordingly
  *
  * @author konsolas, lokka30
+ * @since 2.4.0
  */
 public class EntityRegainHealthListener implements Listener {
 
@@ -28,12 +33,13 @@ public class EntityRegainHealthListener implements Listener {
     public void onEntityRegainHealth(@NotNull final EntityRegainHealthEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
 
-        final LivingEntityWrapper lmEntity = new LivingEntityWrapper((LivingEntity) event.getEntity(), main);
-
         // Make sure the mob is levelled
-        if (!lmEntity.isLevelled()) return;
+        if (!main.levelManager.isLevelled((LivingEntity) event.getEntity())) return;
+
+        final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance((LivingEntity) event.getEntity(), main);
 
         main.levelManager.updateNametag_WithDelay(lmEntity);
+        lmEntity.free();
     }
 
 }

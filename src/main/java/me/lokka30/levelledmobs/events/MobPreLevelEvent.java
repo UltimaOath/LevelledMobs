@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.events;
 
 import me.lokka30.levelledmobs.misc.AdditionalLevelInformation;
@@ -19,6 +23,7 @@ import java.util.HashSet;
  * -MobPreLevelEvent.
  *
  * @author lokka30
+ * @since 2.5.0
  */
 public class MobPreLevelEvent extends Event implements Cancellable {
 
@@ -62,6 +67,7 @@ public class MobPreLevelEvent extends Event implements Cancellable {
     private int level;
     private final LevelCause levelCause;
     private final HashSet<AdditionalLevelInformation> additionalInformation;
+    private boolean showLM_Nametag;
 
     public MobPreLevelEvent(@NotNull final LivingEntity entity, final int level, @NotNull final LevelCause levelCause, final @NotNull HashSet<AdditionalLevelInformation> additionalInformation) {
         super(!Bukkit.isPrimaryThread());
@@ -69,6 +75,7 @@ public class MobPreLevelEvent extends Event implements Cancellable {
         this.level = level;
         this.levelCause = levelCause;
         this.additionalInformation = additionalInformation;
+        this.showLM_Nametag = true;
     }
 
     public LivingEntity getEntity() {
@@ -89,5 +96,13 @@ public class MobPreLevelEvent extends Event implements Cancellable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setShowLM_Nametag(final boolean doRemove){
+        this.showLM_Nametag = doRemove;
+    }
+
+    public boolean getShowLM_Nametag(){
+        return this.showLM_Nametag;
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.commands.subcommands;
 
 import me.lokka30.levelledmobs.LevelledMobs;
@@ -25,10 +29,11 @@ import java.util.*;
  * This subcommand is considered dangerous as it spawns in all types of 'living entities' on the first loaded world at coordinates (0, 512, 0). It also freezes the server for a moment.
  *
  * @author lokka30
+ * @since 2.4.0
  */
 public class GenerateMobDataSubcommand implements Subcommand {
 
-    private final static String PASSWORD = "ThisMightDestroyMyWorldIUnderstand"; // This is the password I also use for all my accounts. You won't use it.. right?
+    // Password for this command: ThisMightDestroyMyWorldIUnderstand
 
     private int attempts = 3;
     private boolean acknowledged = false;
@@ -52,7 +57,8 @@ public class GenerateMobDataSubcommand implements Subcommand {
             return;
         }
 
-        if (!args[1].equals(PASSWORD)) {
+        // This is the password I also use for all my accounts. You won't use it.. right?
+        if (!args[1].equals("ThisMightDestroyMyWorldIUnderstand")) {
             sender.sendMessage(MessageUtils.colorizeAll(main.configUtils.getPrefix() + " Invalid password '&b%password%&7'! You have &b" + attempts + "&7 more attempt(s) before this command is locked until next restart.").replace("%password%", args[1]));
             attempts--;
             return;
@@ -82,7 +88,7 @@ public class GenerateMobDataSubcommand implements Subcommand {
         if (args.length == 2 && sender instanceof ConsoleCommandSender)
             return Collections.singletonList("(password?)");
 
-        return null;
+        return Collections.emptyList();
     }
 
     YamlConfiguration dropsConfig;

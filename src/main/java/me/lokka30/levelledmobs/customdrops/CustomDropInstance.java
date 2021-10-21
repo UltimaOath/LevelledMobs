@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.customdrops;
 
 import me.lokka30.levelledmobs.misc.CustomUniversalGroups;
@@ -13,26 +17,41 @@ import java.util.List;
  * This is where the override for a mob / group is set
  *
  * @author stumper66
+ * @since 2.4.0
  */
 public class CustomDropInstance {
     public CustomDropInstance(final EntityType associatedMob){
         this.associatedMob = associatedMob;
         this.entityGroup = null;
         this.customItems = new LinkedList<>();
+        this.overallPermissions = new LinkedList<>();
+        this.isBabyMob = false;
+    }
+
+    public CustomDropInstance(final EntityType associatedMob, final boolean isBabyMob){
+        this.associatedMob = associatedMob;
+        this.entityGroup = null;
+        this.customItems = new LinkedList<>();
+        this.overallPermissions = new LinkedList<>();
+        this.isBabyMob = isBabyMob;
     }
 
     public CustomDropInstance(final CustomUniversalGroups entityGroup){
         this.associatedMob = null;
         this.entityGroup = entityGroup;
         this.customItems = new LinkedList<>();
+        this.overallPermissions = new LinkedList<>();
+        isBabyMob = false;
     }
 
     final public EntityType associatedMob;
     final public CustomUniversalGroups entityGroup;
     final public List<CustomDropBase> customItems;
     public Double overallChance;
+    final public List<String> overallPermissions;
     public boolean overrideStockDrops;
     public boolean utilizesGroupIds;
+    final public boolean isBabyMob;
 
     public boolean getIsGroup() {
         return this.entityGroup != null;
@@ -67,8 +86,7 @@ public class CustomDropInstance {
             return this.overrideStockDrops ?
                     this.entityGroup + " - override" :
                     this.entityGroup.toString();
-        }
-        else
+        } else
             return "CustomDropInstance";
     }
 }

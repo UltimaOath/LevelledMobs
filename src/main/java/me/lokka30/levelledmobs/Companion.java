@@ -1,15 +1,22 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs;
 
 import me.lokka30.levelledmobs.commands.LevelledMobsCommand;
-import me.lokka30.levelledmobs.compatibility.MC1_16_Compat;
-import me.lokka30.levelledmobs.compatibility.MC1_17_Compat;
+import me.lokka30.levelledmobs.compatibility.Compat1_16;
+import me.lokka30.levelledmobs.compatibility.Compat1_17;
 import me.lokka30.levelledmobs.customdrops.CustomDropsHandler;
 import me.lokka30.levelledmobs.listeners.*;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.managers.LevelManager;
-import me.lokka30.levelledmobs.managers.PAPIManager;
-import me.lokka30.levelledmobs.managers.WorldGuardManager;
-import me.lokka30.levelledmobs.misc.*;
+import me.lokka30.levelledmobs.managers.PlaceholderApiIntegration;
+import me.lokka30.levelledmobs.managers.WorldGuardIntegration;
+import me.lokka30.levelledmobs.misc.FileLoader;
+import me.lokka30.levelledmobs.misc.FileMigrator;
+import me.lokka30.levelledmobs.misc.Utils;
+import me.lokka30.levelledmobs.misc.VersionInfo;
 import me.lokka30.levelledmobs.rules.MetricsInfo;
 import me.lokka30.microlib.UpdateChecker;
 import me.lokka30.microlib.VersionUtils;
@@ -32,6 +39,7 @@ import java.util.stream.Stream;
  * This class contains methods used by the main class.
  *
  * @author lokka30, stumper66
+ * @since 2.4.0
  */
 public class Companion {
 
@@ -42,21 +50,26 @@ public class Companion {
         this.updateResult = new LinkedList<>();
         buildUniversalGroups();
         this.metricsInfo = new MetricsInfo(main);
+        this.spawner_CopyIds = new LinkedList<>();
+        this.spawner_InfoIds = new LinkedList<>();
     }
 
     public HashSet<EntityType> groups_HostileMobs;
     public HashSet<EntityType> groups_AquaticMobs;
     public HashSet<EntityType> groups_PassiveMobs;
     public HashSet<EntityType> groups_NetherMobs;
-    final private PluginManager pluginManager = Bukkit.getPluginManager();
     public List<String> updateResult;
+    final public List<UUID> spawner_CopyIds;
+    final public List<UUID> spawner_InfoIds;
+    public boolean playerInteractListenerIsRegistered;
+    final private PluginManager pluginManager = Bukkit.getPluginManager();
     final private MetricsInfo metricsInfo;
 
     void checkWorldGuard() {
-        // Hook into WorldGuard, register LM's flags.
+        // Hook into WorldGuard
         // This cannot be moved to onEnable (stated in WorldGuard's documentation). It MUST be ran in onLoad.
         if (ExternalCompatibilityManager.hasWorldGuardInstalled()) {
-            main.worldGuardManager = new WorldGuardManager();
+            main.worldGuardIntegration = new WorldGuardIntegration();
         }
     }
 
@@ -70,7 +83,7 @@ public class Companion {
         // Check the MC version of the server.
         if (!VersionUtils.isOneFourteen()) {
             incompatibilities.add("Your server version &8(&b" + Bukkit.getVersion() + "&8)&7 is unsupported by &bLevelledMobs v" + main.getDescription().getVersion() + "&7!" +
-                    "Compatible MC versions: &b" + String.join(", ", Utils.getSupportedServerVersions()) + "&7.");
+                    "Compatible MC versions: &b" + String.join("&7,&b ", Utils.getSupportedServerVersions()) + "&7.");
         }
 
         if (!ExternalCompatibilityManager.hasProtocolLibInstalled()) {
@@ -142,8 +155,11 @@ public class Companion {
 
         }
 
+        final List<String> debugsEnabled = main.settingsCfg.getStringList(main.helperSettings.getKeyNameFromConfig(main.settingsCfg, "debug-misc"));
+        if (!debugsEnabled.isEmpty())
+            Utils.logger.info("misc debugs enabled: &b" + debugsEnabled);
+
         main.configUtils.load();
-        main.playerLevellingDistance = main.helperSettings.getDouble(main.settingsCfg, "player-levelling-mob-distance-squared", 150);
         main.playerLevellingMinRelevelTime = main.helperSettings.getInt(main.settingsCfg, "player-levelling-relevel-min-time", 5000);
 
         return true;
@@ -171,14 +187,14 @@ public class Companion {
         Utils.logger.info("&fListeners: &7Registering event listeners...");
 
         main.levelManager = new LevelManager(main);
-        main.queueManager_mobs.start();
-        main.queueManager_nametags.start();
+        main._mobsQueueManager.start();
+        main.nametagQueueManager_.start();
         main.levelManager.entitySpawnListener = new EntitySpawnListener(main); // we're saving this reference so the summon command has access to it
         main.levelManager.entitySpawnListener.processMobSpawns = main.helperSettings.getBoolean(main.settingsCfg, "level-mobs-upon-spawn", true);
         main.entityDamageDebugListener = new EntityDamageDebugListener(main);
         main.blockPlaceListener = new BlockPlaceListener(main);
 
-        if (main.helperSettings.getBoolean(main.settingsCfg,"debug-entity-damage")) {
+        if (main.helperSettings.getBoolean(main.settingsCfg, "debug-entity-damage")) {
             // we'll load and unload this listener based on the above setting when reloading
             main.configUtils.debugEntityDamageWasEnabled = true;
             pluginManager.registerEvents(main.entityDamageDebugListener, main);
@@ -197,10 +213,11 @@ public class Companion {
         pluginManager.registerEvents(new CombustListener(main), main);
         pluginManager.registerEvents(main.blockPlaceListener, main);
         main.chunkLoadListener = new ChunkLoadListener(main);
+        main.playerInteractEventListener = new PlayerInteractEventListener(main);
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            main.papiManager = new PAPIManager(main);
-            main.papiManager.register();
+            main.placeholderApiIntegration = new PlaceholderApiIntegration(main);
+            main.placeholderApiIntegration.register();
         }
 
         if (main.helperSettings.getBoolean(main.settingsCfg,"ensure-mobs-are-levelled-on-chunk-load", true))
@@ -223,8 +240,7 @@ public class Companion {
             main.levelManager.attributeMaxHealthMax = Bukkit.getServer().spigot().getConfig().getDouble("settings.attribute.maxHealth.max", 2048.0);
             main.levelManager.attributeMovementSpeedMax = Bukkit.getServer().spigot().getConfig().getDouble("settings.attribute.movementSpeed.max", 2048.0);
             main.levelManager.attributeAttackDamageMax = Bukkit.getServer().spigot().getConfig().getDouble("settings.attribute.attackDamage.max", 2048.0);
-        }
-        catch (NoSuchMethodError ignored) {
+        } catch (NoSuchMethodError ignored) {
             main.levelManager.attributeMaxHealthMax = Integer.MAX_VALUE;
             main.levelManager.attributeMovementSpeedMax = Integer.MAX_VALUE;
             main.levelManager.attributeAttackDamageMax = Integer.MAX_VALUE;
@@ -244,6 +260,8 @@ public class Companion {
         metrics.addCustomChart(new SimplePie("check_mobs_on_chunk_load", metricsInfo::checkMobsOnChunkLoad));
         metrics.addCustomChart(new SimplePie("custom-entity-names", metricsInfo::customEntityNamesCount));
         metrics.addCustomChart(new SimplePie("utilizes-nbtdata", metricsInfo::usesNbtData));
+        metrics.addCustomChart(new SimplePie("utilizes_player_levelling", metricsInfo::usesPlayerLevelling));
+        metrics.addCustomChart(new SimplePie("nametag_visibility", metricsInfo::nametagVisibility));
         metrics.addCustomChart(new SimpleBarChart("enabled-compatibility", metricsInfo::enabledCompats));
     }
 
@@ -265,15 +283,14 @@ public class Companion {
 
                     isOutOfDate = (thisVersion.compareTo(spigotVersion) < 0);
                     isNewerVersion = (thisVersion.compareTo(spigotVersion) > 0);
-                }
-                catch (InvalidObjectException e){
+                } catch (InvalidObjectException e) {
                     Utils.logger.warning("Got exception creating version objects: " + e.getMessage());
 
                     isOutOfDate = !currentVersion.equals(latestVersion);
                     isNewerVersion = currentVersion.contains("indev");
                 }
 
-                if (isNewerVersion){
+                if (isNewerVersion) {
                     updateResult = Collections.singletonList(
                             "&7Your &bLevelledMobs&7 version is &ba pre-release&7. Latest release version is &bv%latestVersion%&7. &8(&7You're running &bv%currentVersion%&8)");
 
@@ -282,8 +299,7 @@ public class Companion {
                     updateResult = Utils.colorizeAllInList(updateResult);
 
                     updateResult.forEach(Utils.logger::warning);
-                }
-                else if (isOutOfDate) {
+                } else if (isOutOfDate) {
 
                     // for some reason config#getStringList doesn't allow defaults??
                     if (main.messagesCfg.contains("other.update-notice.messages")) {
@@ -320,8 +336,8 @@ public class Companion {
 
     void shutDownAsyncTasks() {
         Utils.logger.info("&fTasks: &7Shutting down other async tasks...");
-        main.queueManager_mobs.stop();
-        main.queueManager_nametags.stop();
+        main._mobsQueueManager.stop();
+        main.nametagQueueManager_.stop();
         Bukkit.getScheduler().cancelTasks(main);
     }
 
@@ -338,7 +354,7 @@ public class Companion {
         ).collect(Collectors.toCollection(HashSet::new));
 
         if (VersionUtils.isOneSeventeen() || VersionUtils.isOneSixteen())
-            groups_HostileMobs.addAll(MC1_16_Compat.getHostileMobs());
+            groups_HostileMobs.addAll(Compat1_16.getHostileMobs());
 
         // include interfaces: Animals, WaterMob
         groups_PassiveMobs = Stream.of(
@@ -347,10 +363,10 @@ public class Companion {
         ).collect(Collectors.toCollection(HashSet::new));
 
         if (VersionUtils.isOneSeventeen())
-            groups_PassiveMobs.addAll(MC1_17_Compat.getPassiveMobs());
+            groups_PassiveMobs.addAll(Compat1_17.getPassiveMobs());
 
         if (VersionUtils.isOneSeventeen() || VersionUtils.isOneSixteen())
-            groups_HostileMobs.addAll(MC1_16_Compat.getPassiveMobs());
+            groups_HostileMobs.addAll(Compat1_16.getPassiveMobs());
 
         // include interfaces: WaterMob
         groups_AquaticMobs = Stream.of(

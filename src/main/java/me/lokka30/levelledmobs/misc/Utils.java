@@ -1,6 +1,11 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.misc;
 
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.rules.MinAndMax;
 import me.lokka30.levelledmobs.rules.RulesManager;
 import me.lokka30.microlib.MessageUtils;
 import me.lokka30.microlib.MicroLogger;
@@ -15,6 +20,7 @@ import java.util.*;
  * Holds common utilities
  *
  * @author lokka30, stumper66
+ * @since 2.5.0
  */
 public final class Utils {
 
@@ -157,6 +163,8 @@ public final class Utils {
      * @param msg       Message to help de-bugging
      */
     public static void debugLog(@NotNull final LevelledMobs instance, @NotNull final DebugType debugType, @NotNull final String msg) {
+        if (instance.settingsCfg == null) return;
+
         if (instance.helperSettings.getStringSet(instance.settingsCfg, "debug-misc").contains(debugType.toString()))
             logger.info("&8[&bDebug: " + debugType + "&8]&7 " + msg);
     }
@@ -231,6 +239,27 @@ public final class Utils {
         return list.isBlacklist() || list.allowedList.contains(checkName) ||
                 lmEntity.isBabyMob() && list.allowedList.contains("baby_");
     }
+
+    public static boolean isIntegerInModalList(@NotNull final CachedModalList<MinAndMax> list, final int checkNum) {
+        if (list.allowAll) return true;
+        if (list.excludeAll) return false;
+        if (list.isEmpty()) return true;
+
+        for (final MinAndMax exclude : list.excludedList){
+            if (checkNum >= exclude.min && checkNum <= exclude.max)
+                return false;
+        }
+
+        if (list.isBlacklist()) return true;
+
+        for (final MinAndMax include : list.allowedList){
+            if (checkNum >= include.min && checkNum <= include.max)
+                return true;
+        }
+
+        return false;
+    }
+
 
     public static boolean isBiomeInModalList(@NotNull final CachedModalList<Biome> list, final Biome biome, final RulesManager rulesManager) {
         if (list.allowAll) return true;

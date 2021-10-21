@@ -1,14 +1,22 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.commands.subcommands;
 
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.misc.CachedModalList;
 import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.QueueItem;
 import me.lokka30.levelledmobs.misc.Utils;
 import me.lokka30.levelledmobs.rules.RuleInfo;
 import me.lokka30.microlib.MessageUtils;
-import net.md_5.bungee.api.chat.*;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -17,20 +25,25 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 /**
  * Shows the current rules as parsed from the various config files
  *
  * @author stumper66
+ * @since 3.0.0
  */
 public class RulesSubcommand implements Subcommand {
 
@@ -102,11 +115,40 @@ public class RulesSubcommand implements Subcommand {
             showHyperlink(sender, "Click to open the wiki","https://github.com/lokka30/LevelledMobs/wiki");
         else if ("reset".equalsIgnoreCase(args[1]))
             resetRules(sender, label, args);
+        else if ("force_all".equalsIgnoreCase(args[1]))
+            forceRelevel(sender, label, args);
         else
             sender.sendMessage(MessageUtils.colorizeAll("&b&lLevelledMobs: &7Invalid command"));
     }
 
-    private void resetRules(final CommandSender sender, final String label, @NotNull final String[] args){
+    private void forceRelevel(final CommandSender sender, final String label, @NotNull final String[] args){
+        int worldCount = 0;
+        int entityCount = 0;
+
+        for (final World world : Bukkit.getWorlds()) {
+            worldCount++;
+            for (final Entity entity : world.getEntities()) {
+                if (!(entity instanceof LivingEntity)) continue;
+
+                synchronized (entity.getPersistentDataContainer()){
+                    if (entity.getPersistentDataContainer().has(main.namespaced_keys.wasSummoned, PersistentDataType.INTEGER))
+                        continue; // was summon using lm summon command.  don't relevel it
+                }
+
+                entityCount++;
+                final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance((LivingEntity) entity, main);
+                lmEntity.reEvaluateLevel = true;
+                main._mobsQueueManager.addToQueue(new QueueItem(lmEntity, null));
+                lmEntity.free();
+            }
+        }
+
+        sender.sendMessage(MessageUtils.colorizeAll(String.format(
+                "%s Checked &b%s&7 mobs in &b%s&7 world(s)",
+                label, entityCount, worldCount)));
+    }
+
+    private void resetRules(final CommandSender sender, final String label, @NotNull final String @NotNull [] args){
         final String prefix = main.configUtils.getPrefix();
 
         if (args.length < 3 || args.length > 4){
@@ -148,23 +190,23 @@ public class RulesSubcommand implements Subcommand {
         resetRules(sender, difficulty);
     }
 
-    private void resetRules(final CommandSender sender, final ResetDifficulty difficulty){
+    private void resetRules(final @NotNull CommandSender sender, final @NotNull ResetDifficulty difficulty){
         final String prefix = main.configUtils.getPrefix();
         sender.sendMessage(prefix + " Resetting rules to " + difficulty);
 
         String filename;
 
         switch (difficulty){
-            case EASY: filename = "rules_easy.yml";
+            case EASY: filename = "predefined/rules_easy.yml";
                 break;
-            case HARD: filename = "rules_hard.yml";
+            case HARD: filename = "predefined/rules_hard.yml";
                 break;
-            default: filename = "rules_normal.yml";
+            default: filename = "rules.yml";
                 break;
         }
 
 
-        try (InputStream stream = main.getResource("predefined/" + filename)) {
+        try (InputStream stream = main.getResource(filename)) {
             if (stream == null){
                 Utils.logger.error(prefix + " Input stream was null");
                 return;
@@ -200,12 +242,11 @@ public class RulesSubcommand implements Subcommand {
             component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(url)));
             final Player p = (Player) sender;
             p.spigot().sendMessage(component);
-        }
-        else
+        } else
             sender.sendMessage(url);
     }
 
-    private void showRule(final CommandSender sender, @NotNull final String[] args){
+    private void showRule(final CommandSender sender, @NotNull final String @NotNull [] args){
         if (args.length < 3){
             sender.sendMessage("Must specify a rule name.");
             return;
@@ -259,7 +300,7 @@ public class RulesSubcommand implements Subcommand {
     private void getMobBeingLookedAt(@NotNull final Player player, final boolean showOnConsole, final boolean findNearbyEntities){
         LivingEntity livingEntity = null;
         final Location eye = player.getEyeLocation();
-        SortedMap<Double, LivingEntity> entities = new TreeMap<>();
+        final SortedMap<Double, LivingEntity> entities = new TreeMap<>();
 
         for(final Entity entity : player.getNearbyEntities(10, 10, 10)){
             if (!(entity instanceof LivingEntity)) continue;
@@ -270,7 +311,7 @@ public class RulesSubcommand implements Subcommand {
                 entities.put(distance, le);
             } else {
                 final Vector toEntity = le.getEyeLocation().toVector().subtract(eye.toVector());
-                double dot = toEntity.normalize().dot(eye.getDirection());
+                final double dot = toEntity.normalize().dot(eye.getDirection());
                 if (dot >= 0.975D) {
                     livingEntity = le;
                     break;
@@ -287,7 +328,7 @@ public class RulesSubcommand implements Subcommand {
                 livingEntity = entities.get(entities.firstKey());
 
             createParticleEffect(livingEntity.getLocation());
-            final LivingEntityWrapper lmEntity = new LivingEntityWrapper(livingEntity, main);
+            final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(livingEntity, main);
 
             String entityName = lmEntity.getTypeName();
             if (ExternalCompatibilityManager.hasMythicMobsInstalled() && ExternalCompatibilityManager.isMythicMob(lmEntity))
@@ -315,7 +356,9 @@ public class RulesSubcommand implements Subcommand {
                 }
             };
 
+            lmEntity.inUseCount.getAndIncrement();
             runnable.runTaskLater(main, 25);
+            lmEntity.free();
         }
     }
 
@@ -359,10 +402,10 @@ public class RulesSubcommand implements Subcommand {
                 if (value.toString().equalsIgnoreCase("{}")) continue;
                 if (value.toString().equalsIgnoreCase("[]")) continue;
                 if (value.toString().equalsIgnoreCase("0") &&
-                    f.getName().equals("rulePriority")) continue;
+                        f.getName().equals("rulePriority")) continue;
                 if (value.toString().equalsIgnoreCase("0.0")) continue;
                 if (value.toString().equalsIgnoreCase("false") &&
-                    !f.getName().equals("ruleIsEnabled")) continue;
+                        !f.getName().equals("ruleIsEnabled")) continue;
                 if (value.toString().equalsIgnoreCase("NONE")) continue;
                 if (value instanceof CachedModalList<?>) {
                     CachedModalList<?> cml = (CachedModalList<?>) value;
@@ -445,21 +488,20 @@ public class RulesSubcommand implements Subcommand {
     }
 
     @Override
-    public List<String> parseTabCompletions(final LevelledMobs main, final CommandSender sender, @NotNull final String[] args) {
+    public List<String> parseTabCompletions(final LevelledMobs main, final @NotNull CommandSender sender, @NotNull final String[] args) {
         if (!sender.hasPermission("levelledmobs.command.rules"))
-            return null;
+            return Collections.emptyList();
 
         final List<String> suggestions = new LinkedList<>();
 
         if (args.length == 2)
-            return Arrays.asList("help_discord", "help_wiki", "reset", "show_all", "show_effective", "show_rule");
+            return Arrays.asList("force_all", "help_discord", "help_wiki", "reset", "show_all", "show_effective", "show_rule");
         else if (args.length >= 3) {
-            if ("reset".equalsIgnoreCase(args[1]) && args.length == 3){
+            if ("reset".equalsIgnoreCase(args[1]) && args.length == 3) {
                 suggestions.add("easy");
                 suggestions.add("normal");
                 suggestions.add("hard");
-            }
-            else if ("show_all".equalsIgnoreCase(args[1])){
+            } else if ("show_all".equalsIgnoreCase(args[1])) {
                 boolean showOnConsole = false;
                 for (int i = 2; i < args.length; i++) {
                     final String arg = args[i].toLowerCase();
@@ -470,8 +512,7 @@ public class RulesSubcommand implements Subcommand {
                     }
                 }
                 if (!showOnConsole) suggestions.add("/console");
-            }
-            else if ("show_rule".equalsIgnoreCase(args[1]) || "show_effective".equalsIgnoreCase(args[1])) {
+            } else if ("show_rule".equalsIgnoreCase(args[1]) || "show_effective".equalsIgnoreCase(args[1])) {
                 final boolean isShowRule = "show_rule".equalsIgnoreCase(args[1]);
                 final boolean isEffective = "show_effective".equalsIgnoreCase(args[1]);
                 boolean showOnConsole = false;
@@ -500,7 +541,7 @@ public class RulesSubcommand implements Subcommand {
             }
         }
 
-        if (suggestions.isEmpty()) suggestions.add("");
+        if (suggestions.isEmpty()) return Collections.emptyList();
         return suggestions;
     }
 }

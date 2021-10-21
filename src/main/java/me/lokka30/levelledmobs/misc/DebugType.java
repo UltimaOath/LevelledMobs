@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.misc;
 
 /**
  * Holds the enums used for showing debug data
  *
  * @author lokka30, stumper66
+ * @since 2.5.0
  */
 public enum DebugType {
     /**
@@ -78,6 +83,11 @@ public enum DebugType {
     CUSTOM_COMMANDS,
 
     /**
+     * When applying NBT to a mob
+     */
+    NBT_APPLY_SUCCESS,
+
+    /**
      * Logged when LM is processing a mob
      * from a creature spawner
      **/
@@ -111,5 +121,13 @@ public enum DebugType {
 
     DENIED_RULE_STOP_PROCESSING,
 
-    PLAYER_LEVELLING
+    PLAYER_LEVELLING,
+
+    DENIED_RULE_MYTHIC_MOBS_INTERNAL_NAME,
+
+    DENIED_RULE_SPAWNER_NAME,
+
+    DENIED_RULE_WORLD_TIME_TICK,
+
+    DENIED_RULE_PERMISSION
 }

@@ -1,6 +1,11 @@
+/*
+ * Copyright (c) 2020-2021  lokka30. Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the LICENSE.md file.
+ */
+
 package me.lokka30.levelledmobs.commands.subcommands;
 
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.misc.RequestedLevel;
 import me.lokka30.levelledmobs.misc.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -9,6 +14,8 @@ import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -17,11 +24,12 @@ import java.util.*;
  * or levelled mobs in your proximity
  *
  * @author stumper66
+ * @since 2.0
  */
 public class KillSubcommand implements Subcommand {
 
     @Override
-    public void parseSubcommand(final LevelledMobs main, final CommandSender sender, final String label, final String[] args) {
+    public void parseSubcommand(final LevelledMobs main, final @NotNull CommandSender sender, final String label, final String[] args) {
         if (!sender.hasPermission("levelledmobs.command.kill")) {
             main.configUtils.sendNoPermissionMsg(sender);
             return;
@@ -32,7 +40,14 @@ public class KillSubcommand implements Subcommand {
             return;
         }
 
+        int checkArgs = args.length;
         boolean useNoDrops = false;
+        final RequestedLevel rl = getLevelFromCommand(sender, args);
+        if (rl != null){
+            if (rl.hadInvalidArguments) return;
+            checkArgs -= 2;
+        }
+
         for (final String arg : args) {
             if ("/nodrops".equalsIgnoreCase(arg)) {
                 useNoDrops = true;
@@ -47,10 +62,10 @@ public class KillSubcommand implements Subcommand {
                     return;
                 }
 
-                if (args.length == 2) {
+                if (checkArgs == 2) {
                     if (sender instanceof Player) {
                         final Player player = (Player) sender;
-                        parseKillAll(sender, Collections.singletonList(player.getWorld()), main, useNoDrops);
+                        parseKillAll(sender, Collections.singletonList(player.getWorld()), main, useNoDrops, rl);
                     } else {
                         List<String> messages = main.messagesCfg.getStringList("command.levelledmobs.kill.all.usage-console");
                         messages = Utils.replaceAllInList(messages, "%prefix%", main.configUtils.getPrefix());
@@ -58,14 +73,14 @@ public class KillSubcommand implements Subcommand {
                         messages = Utils.colorizeAllInList(messages);
                         messages.forEach(sender::sendMessage);
                     }
-                } else if (args.length == 3 || args.length == 4) {
+                } else if (checkArgs == 3 || checkArgs == 4) {
                     if (args[2].equals("*")) {
-                        parseKillAll(sender, Bukkit.getWorlds(), main, useNoDrops);
+                        parseKillAll(sender, Bukkit.getWorlds(), main, useNoDrops, rl);
                         return;
                     }
 
                     if ("/nodrops".equalsIgnoreCase(args[2]))
-                        parseKillAll(sender, Bukkit.getWorlds(), main, true);
+                        parseKillAll(sender, Bukkit.getWorlds(), main, true, rl);
                     else {
                         World world = Bukkit.getWorld(args[2]);
                         if (world == null) {
@@ -76,7 +91,7 @@ public class KillSubcommand implements Subcommand {
                             messages.forEach(sender::sendMessage);
                             return;
                         }
-                        parseKillAll(sender, Collections.singletonList(world), main, useNoDrops);
+                        parseKillAll(sender, Collections.singletonList(world), main, useNoDrops, rl);
                     }
                 } else {
                     List<String> messages = main.messagesCfg.getStringList("command.levelledmobs.kill.all.usage");
@@ -93,7 +108,7 @@ public class KillSubcommand implements Subcommand {
                     return;
                 }
 
-                if (args.length == 3 || args.length == 4) {
+                if (checkArgs == 3 || checkArgs == 4) {
                     if (!(sender instanceof BlockCommandSender) && !(sender instanceof Player)) {
                         List<String> messages = main.messagesCfg.getStringList("common.players-only");
                         messages = Utils.replaceAllInList(messages, "%prefix%", main.configUtils.getPrefix());
@@ -142,15 +157,14 @@ public class KillSubcommand implements Subcommand {
                     if (sender instanceof BlockCommandSender) {
                         final Block block = ((BlockCommandSender) sender).getBlock();
                         mobsToKill = block.getWorld().getNearbyEntities(block.getLocation(), radius, radius, radius);
-                    }
-                    else
+                    } else
                         mobsToKill = ((Player) sender).getNearbyEntities(radius, radius, radius);
 
                     for (final Entity entity : mobsToKill) {
                         if (entity instanceof LivingEntity) {
                             final LivingEntity livingEntity = (LivingEntity) entity;
                             if (main.levelInterface.isLevelled(livingEntity)) {
-                                if (skipKillingEntity(main, livingEntity)) {
+                                if (skipKillingEntity(main, livingEntity, rl)) {
                                     skipped++;
                                 } else {
                                     livingEntity.setMetadata("noCommands", new FixedMetadataValue(main, 1));
@@ -186,19 +200,49 @@ public class KillSubcommand implements Subcommand {
         }
     }
 
-    @Override
-    public List<String> parseTabCompletions(final LevelledMobs main, final CommandSender sender, final String[] args) {
-        if (!sender.hasPermission("levelledmobs.command.kill"))
+    @Nullable
+    private RequestedLevel getLevelFromCommand(final @NotNull CommandSender sender, final String[] args){
+        int rangeSpecifiedFlag = -1;
+
+        for (int i = 0; i < args.length; i++) {
+            if ("/levels".equalsIgnoreCase(args[i])){
+                rangeSpecifiedFlag = i + 1;
+            }
+        }
+
+        if (rangeSpecifiedFlag <= 0)
             return null;
 
+        final RequestedLevel rl = new RequestedLevel();
+        if (args.length <= rangeSpecifiedFlag){
+            sender.sendMessage("No value was specified for /levels");
+            rl.hadInvalidArguments = true;
+            return rl;
+        }
+
+        final String value = args[rangeSpecifiedFlag];
+        if (!rl.setLevelFromString(value)){
+            sender.sendMessage("Invalid number or range specified for /levels");
+            rl.hadInvalidArguments = true;
+        }
+
+        return rl;
+    }
+
+    @Override
+    public List<String> parseTabCompletions(final LevelledMobs main, final @NotNull CommandSender sender, final String[] args) {
+        if (!sender.hasPermission("levelledmobs.command.kill"))
+            return Collections.emptyList();
+
         boolean containsNoDrops = false;
+        boolean containsLevels = false;
 
         StringBuilder sb = new StringBuilder();
         for (String arg : args) {
-            if ("/nodrops".equalsIgnoreCase(arg)) {
+            if ("/nodrops".equalsIgnoreCase(arg))
                 containsNoDrops = true;
-                break;
-            }
+            else if ("/levels".equalsIgnoreCase(arg))
+                containsLevels = true;
         }
 
         if (args.length == 2) {
@@ -210,6 +254,7 @@ public class KillSubcommand implements Subcommand {
                 List<String> worlds = new LinkedList<>();
 
                 if (!containsNoDrops) worlds.add("/nodrops");
+                if (!containsLevels) worlds.add("/levels");
                 if (args.length == 3 ) {
                     for (World world : Bukkit.getWorlds()) {
                         worlds.add("*");
@@ -221,20 +266,25 @@ public class KillSubcommand implements Subcommand {
                 return worlds;
             }
         }
-        if (args[1].equalsIgnoreCase("near") && args.length == 3) {
+        if (args[1].equalsIgnoreCase("near")) {
             if (sender.hasPermission("levelledmobs.command.kill.near")) {
-                return Utils.oneToNine;
+                if (args.length == 4 && "/levels".equalsIgnoreCase(args[3]))
+                    return List.of("/levels");
+                else if (args.length == 3)
+                    return Utils.oneToNine;
             }
         }
 
+        final List<String> result = new ArrayList<>();
         if (!containsNoDrops)
-            return Collections.singletonList("/nodrops");
+            result.add("/nodrops");
+        if (!containsLevels)
+            result.add("/levels");
 
-        // Nothing to suggest.
-        return Collections.singletonList("");
+        return result;
     }
 
-    private void sendUsageMsg(final CommandSender sender, final String label, final LevelledMobs instance) {
+    private void sendUsageMsg(final @NotNull CommandSender sender, final String label, final @NotNull LevelledMobs instance) {
         List<String> messages = instance.messagesCfg.getStringList("command.levelledmobs.kill.usage");
         messages = Utils.replaceAllInList(messages, "%prefix%", instance.configUtils.getPrefix());
         messages = Utils.replaceAllInList(messages, "%label%", label);
@@ -242,7 +292,7 @@ public class KillSubcommand implements Subcommand {
         messages.forEach(sender::sendMessage);
     }
 
-    private void parseKillAll(final CommandSender sender, final List<World> worlds, final LevelledMobs main, final boolean useNoDrops) {
+    private void parseKillAll(final CommandSender sender, final @NotNull List<World> worlds, final LevelledMobs main, final boolean useNoDrops, final RequestedLevel rl) {
         int killed = 0;
         int skipped = 0;
 
@@ -252,7 +302,7 @@ public class KillSubcommand implements Subcommand {
                 final LivingEntity livingEntity = (LivingEntity) entity;
                 if (!main.levelInterface.isLevelled(livingEntity)) continue;
 
-                if (skipKillingEntity(main, livingEntity)) {
+                if (skipKillingEntity(main, livingEntity, rl)) {
                     skipped++;
                     continue;
                 }
@@ -277,9 +327,15 @@ public class KillSubcommand implements Subcommand {
         messages.forEach(sender::sendMessage);
     }
 
-    private boolean skipKillingEntity(final LevelledMobs main, final LivingEntity livingEntity) {
+    private boolean skipKillingEntity(final LevelledMobs main, final @NotNull LivingEntity livingEntity, final RequestedLevel rl) {
         if (livingEntity.getCustomName() != null && main.helperSettings.getBoolean(main.settingsCfg,"kill-skip-conditions.nametagged"))
             return true;
+
+        if (rl != null){
+            final int mobLevel = main.levelInterface.getLevelOfMob(livingEntity);
+            if (mobLevel < rl.getLevelMin() || mobLevel > rl.getLevelMax())
+                return true;
+        }
 
         // Tamed
         if (livingEntity instanceof Tameable && ((Tameable) livingEntity).isTamed() && main.helperSettings.getBoolean(main.settingsCfg,"kill-skip-conditions.tamed"))
