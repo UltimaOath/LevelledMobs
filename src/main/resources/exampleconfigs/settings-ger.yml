@@ -1,0 +1,143 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+#                      Übersetzung ins Deutsche | German Language Translation
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Hauptentwickler:                    ++  Benötigen Sie unterstützende unterlagen?        +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Autor und Entwickler            ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  Offizieller Unterstützungs-Discord              +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Ein besonderes Dankeschön:                      +LM3
+# +      Entwickler                      ++    ArcanePlugins developers and testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, patrons, and other supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Verfasser der Dokumentation     ++  Andere Mitwirkende:                             +LM3
+# +                                      ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki, and Zombie_Striker                 +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                               _____     _   _   _ 
+#                              |   __|___| |_| |_|_|___ ___ ___
+#                              |__   | -_|  _|  _| |   | . |_ -|
+#                              |_____|___|_| |_| |_|_|_|_  |___|
+#                                                      |___|
+#
+# --------------------------------------------------------------------------------------------LM3
+
+# ||  ERWEITERTE FUNKTION | INVESTIGATE
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellungen geben viele der Ereignisse hinter den
+# ||  Kulissen des LevelledMobs-Betriebs in der Konsole aus.
+debug-entity-damage: false
+debug-misc: [ ]
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellung steuert die sich wiederholenden asynchronen Aufgaben
+# ||  zur Aktualisierung von Namensschildern und Niveaus. Dies steuert den Zeitpunkt
+# ||  und die Entfernung von Spielern, wenn die Prüfung durchgeführt wird. Dies kann
+# ||  ressourcenintensiv sein, wenn Sie Aktualisierungen zu häufig oder aus zu großer Entfernung durchführen.
+async-task-update-period: 6
+async-task-max-blocks-from-player: 100
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellung steuert den Ratenbegrenzer des Beschwörungsbefehls.
+customize-summon-command-limit: 10
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellung steuert den Ratenbegrenzer für benutzerdefinierte Befehle.
+customcommand-amount-limit: 100
+
+# ||  ERWEITERTE FUNKTION | IRREVERSIBLE
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellung wendet eine **IRREVERSIBLE** Änderung auf
+# ||  gelevelte Entitäten auf Ihrem Server an.
+use-customname-for-mob-nametags: false
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Sollten Pakete mit Namensschildern ignoriert werden, wenn die Person gestorben ist?
+assert-entity-validity-with-nametag-packets: true
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Dies steuert die Verzögerung bei der Verarbeitung von Entitäten (in Ticks im Spiel),
+# ||  nachdem eine Entität zum Leveln markiert wurde. Hinweis: Es gibt eine Verzögerung
+# ||  von 1 Tick im Spiel zusätzlich zu dieser Einstellung.
+mob-process-delay: 0
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Sicherstellen, dass die Einheiten beim Laden von Chunks nivelliert werden?
+ensure-mobs-are-levelled-on-chunk-load: true
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Sollten die Entitätsattribute auf statischen Basiswerten basieren?
+attributes-use-preset-base-values: false
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Level-Entitäten beim Spawnen?
+level-mobs-upon-spawn: true
+
+# ||  ERWEITERTE FUNKTION
+# ||  Wie weit darf der Beschwörungsbefehl Entitäten maximal von
+# ||  den Spielern entfernt spawnen?
+summon-command-spawn-distance-from-player: 5
+
+# ||  Nach Aktualisierungen suchen
+# ||  Dieser Update Checker ist gut: Er friert den Server beim Start nicht
+# ||  ein, da er asynchron läuft. Er wird bei jedem Start des Servers nur
+# ||  einmal ausgeführt.
+use-update-checker: true
+
+# ||  Legt fest, wann LevelledMobs das Töten einer Entität bei Verwendung
+# ||  des Tötungsbefehls überspringt.
+kill-skip-conditions:
+  nametagged: true
+  tamed: true
+  leashed: true
+  convertingZombieVillager: true
+
+# ||  Sollten Entitätsköpfe mit dem Drop-Multiplikator von LevelledMobs
+# ||  multipliziert werden? Eine beträchtliche Anzahl von Servern hat Köpfe
+# ||  in ihren Wirtschaften, daher ist dieser Wert standardmäßig auf false
+# ||  gesetzt, um diese Wirtschaften nicht zu schädigen.
+mobs-multiply-head-drops: false
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Diese Einstellung bezieht sich auf das Spielerleveling.
+player-levelling-relevel-min-time: 5000
+
+# ||  ERWEITERTE FUNKTION
+# ||  Modifizieren Sie nicht, es sei denn, Sie werden von
+# ||  einem LevelledMobs-Entwickler dazu aufgefordert.
+# ||  Editieren Sie nicht über diesen Punkt hinaus, da dies Ihre
+# ||  LevelledMobs-Konfigurationsdateien beschädigen könnte.
+file-version: 32

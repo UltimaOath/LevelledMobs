@@ -1,0 +1,131 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+#                       Traducción al Español | Spanish Language Translation
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Principales Promotores:             ++  ¿Necesita documentación de apoyo?               +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Autor y Desarrollador           ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  Discord oficial de apoyo:                       +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Un agradecimiento especial:                     +LM3
+# +      Desarrollador                   ++    ArcanePlugins developers and testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, patrons, and other supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Redactor de Documentación       ++  Otros colaboradores:                            +LM3
+# +                                      ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki, and Zombie_Striker                 +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                               _____     _   _   _ 
+#                              |   __|___| |_| |_|_|___ ___ ___
+#                              |__   | -_|  _|  _| |   | . |_ -|
+#                              |_____|___|_| |_| |_|_|_|_  |___|
+#                                                      |___|
+#
+# --------------------------------------------------------------------------------------------LM3
+
+# ||  FUNCIÓN AVANZADA | INVESTIGAR
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Estos ajustes imprimirán en la consola muchos de los eventos
+# ||  entre bastidores sobre el funcionamiento de LevelledMobs.
+debug-entity-damage: false
+debug-misc: [ ]
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Este ajuste controla la repetición de las tareas asíncronas
+# ||  de actualización de etiquetas de nombre y de nivelación. Controla
+# ||  el tiempo y la distancia de los jugadores cuando se realiza la
+# ||  comprobación. Esto puede consumir muchos recursos si se realizan
+# ||  actualizaciones con demasiada frecuencia o desde muy lejos.
+async-task-update-period: 6
+async-task-max-blocks-from-player: 100
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Personalizar el límite de la orden de invocación
+customize-summon-command-limit: 10
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Este ajuste controla el limitador de velocidad de los comandos personalizados.
+customcommand-amount-limit: 100
+
+# ||  FUNCIÓN AVANZADA | IRREVERSIBLE
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Este ajuste aplica un cambio **IRREVERSIBLE** a las entidades niveladas de tu servidor.
+use-customname-for-mob-nametags: false
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  ¿Deben ignorarse los paquetes con nombre si la entidad ha muerto?
+assert-entity-validity-with-nametag-packets: true
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Controla el retraso en el procesamiento de la entidad (en ticks del juego)
+# ||  después de que una entidad sea marcada para ser nivelada. Nota: hay un retraso
+# ||  de 1 tic en el juego además de este ajuste.
+mob-process-delay: 0
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  ¿Asegurar que las entidades están niveladas en la carga de trozos?
+ensure-mobs-are-levelled-on-chunk-load: true
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  ¿Deben los atributos de las entidades basarse en valores base estáticos?
+attributes-use-preset-base-values: false
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  ¿Entidades de nivel en el spawn?
+level-mobs-upon-spawn: true
+
+# ||  FUNCIÓN AVANZADA
+# ||  ¿Cuál es la distancia máxima a la que el comando de invocación generará
+# ||  entidades lejos de los jugadores?
+summon-command-spawn-distance-from-player: 5
+
+# ||  Comprobación de actualización
+# ||  Este comprobador de actualizaciones es bueno: no congela el servidor al
+# ||  iniciarse, ya que se ejecuta de forma asíncrona. Sólo se ejecuta una vez
+# ||  cada vez que se inicia el servidor.
+use-update-checker: true
+
+# ||  Determina cuándo los LevelledMobs omitirán matar a una entidad al
+# ||  usar el comando de matar.
+kill-skip-conditions:
+  nametagged: true
+  tamed: true
+  leashed: true
+  convertingZombieVillager: true
+
+# ||  ¿Las cabezas de entidad deberían multiplicarse por el multiplicador
+# ||  de caída de LevelledMobs? Una cantidad considerable de servidores tienen
+# ||  cabezas en sus economías, por lo que se establece en falso por defecto
+# ||  para no dañar esas economías. 
+mobs-multiply-head-drops: false
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  Este ajuste se refiere al nivel de los jugadores.
+player-levelling-relevel-min-time: 5000
+
+# ||  FUNCIÓN AVANZADA
+# ||  No ajustar sin la aprobación del promotor.
+# ||  No edites más allá de este punto, ya que al hacerlo podrías corromper
+# ||  tus archivos de configuración de LevelledMobs.
+file-version: 32
