@@ -80,7 +80,7 @@ command:
       invalid-summon-type:
         - '%prefix% Tipo de invocación inválido ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Sólo los jugadores pueden usar el ''&bhere&7'', debes usar ''&batPlayer&7'' o ''&batLocation&7'' en su lugar.
+        - '%prefix% Sólo los jugadores pueden usar el ''&bhere&7'', debes usar ''&batPlayer&7'' o ''&batLocation&7'' en su lugar.'
       invalid-location:
         - '%prefix% Ubicación inválida.'
       here:
@@ -96,9 +96,9 @@ command:
         usage-console:
           - '%prefix% Uso (console): &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> <world>'
         invalid-world:
-          - '%prefix% Invalid world ''&b%world%&7''.'
+          - '%prefix% Mundo inválido ''&b%world%&7''.'
         invalid-location:
-          - '%prefix% Invalid location.'
+          - '%prefix% Ubicación inválida.'
       atPlayer:
         usage:
           - '%prefix% Uso: &b/%label% summon <amount> <entityType> <level> atPlayer <player>'
@@ -216,7 +216,7 @@ command:
     info:
       about:
         - ' '
-        - '&b&lLevelledMobs &fv%version%&7 de lokka30, stumper66 and Oathkeeper'
+        - '&b&lLevelledMobs &fv%version%&7 de lokka30, stumper66 y Oathkeeper'
         - '&7&o%description%'
         - ' '
         - '&7Esta versión del plugin es compatible: &fMinecraft %supportedVersions%'
