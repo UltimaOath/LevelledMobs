@@ -80,14 +80,14 @@ command:
       invalid-summon-type:
         - '%prefix% Ungültiger Beschwörungstyp ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Nur Spieler können das ''&bhere&7'' verwenden, Sie müssen stattdessen ''&batPlayer&7'' oder ''&batLocation&7'' verwenden'
+        - '%prefix% Nur Spieler können das ''&bhere&7'' verwenden, Sie müssen stattdessen ''&batPlayer&7'' oder ''&batLocation&7'' verwenden.'
       invalid-location:
         - '%prefix% Ungültiger Standort.'
       here:
         usage:
           - '%prefix% Verwendung: &b/%label% summon <amount> <entity> <level> here'
         success:
-          - '%prefix% Gebrütet &b%amount%&7 of &fLvl.%level% &b%entity%(s)&7 an ihrem standort.'
+          - '%prefix% Gebrütet &b%amount%&7 von &fLvl.%level% &b%entity%(s)&7 an ihrem standort.'
       atLocation:
         usage:
           - '%prefix% Verwendung: &b/%label% summon <amount> <entity> <level> atLocation <x> <y> <z> [world]'
@@ -165,7 +165,7 @@ command:
         - '&8 &m->&b /%label% spawner copy'
         - '&8 &m->&b /%label% spawner info'
         - '&7&o Probe Spawner'
-        - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
+        - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Nivellierter Entitätswürfel" &b/customDropsId&7 Id1'
       no-value:
         - '%prefix% Es wurde kein Wert für angegeben: &b%keyname%&7'
       invalid-value:
@@ -216,7 +216,7 @@ command:
     info:
       about:
         - ' '
-        - '&b&lLevelledMobs &fv%version%&7 von lokka30, stumper66 and Oathkeeper'
+        - '&b&lLevelledMobs &fv%version%&7 von lokka30, stumper66 und Oathkeeper'
         - '&7&o%description%'
         - ' '
         - '&7Diese Version des Plugins unterstützt: &fMinecraft %supportedVersions%'
