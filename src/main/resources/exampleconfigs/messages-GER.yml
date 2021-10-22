@@ -80,7 +80,7 @@ command:
       invalid-summon-type:
         - '%prefix% Ungültiger Beschwörungstyp ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Nur Spieler können das ''&bhere&7'' verwenden, Sie müssen stattdessen ''&batPlayer&7'' oder ''&batLocation&7'' verwenden
+        - '%prefix% Nur Spieler können das ''&bhere&7'' verwenden, Sie müssen stattdessen ''&batPlayer&7'' oder ''&batLocation&7'' verwenden'
       invalid-location:
         - '%prefix% Ungültiger Standort.'
       here:
