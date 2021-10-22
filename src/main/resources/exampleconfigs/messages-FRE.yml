@@ -74,13 +74,13 @@ command:
       invalid-amount:
         - '%prefix% Montant invalide ''&b%amount%&7''.'
       invalid-entity-type:
-        - '%prefix% Type d'entité non valide ''&b%entityType%&7''.'
+        - '%prefix% Type d''entité non valide ''&b%entityType%&7''.'
       invalid-level:
         - '%prefix% Niveau non valide ''&b%level%&7''.'
       invalid-summon-type:
-        - '%prefix% Type d'invocation non valide ''&b%summonType%&7''.'
+        - '%prefix% Type d''invocation non valide ''&b%summonType%&7''.'
       invalid-summon-type-console:
-        - '%prefix% Seuls les joueurs peuvent utiliser le ''&bhere&7'', vous devez utiliser ''&batPlayer&7'' ou ''&batLocation&7'' à la place.
+        - '%prefix% Seuls les joueurs peuvent utiliser le ''&bhere&7'', vous devez utiliser ''&batPlayer&7'' ou ''&batLocation&7'' à la place.'
       invalid-location:
         - '%prefix% Emplacement non valide.'
       here:
@@ -189,11 +189,11 @@ command:
           - '%prefix% Les informations sur les frayeurs &cont été désactivées&f.'
       copy:
         vanilla-spawner:
-          - '%prefix% La copie du cube de frayeur ne fonctionne qu'avec le cube de frayeur LevelledMob.'
+          - '%prefix% La copie du cube de frayeur ne fonctionne qu''avec le cube de frayeur LevelledMob.'
         status-enabled:
           - '%prefix% La copie de frayeur &aest activée&f.'
         status-not-enabled:
-          - '%prefix% La copie de frayeur &cn'est pas activée&f.'
+          - '%prefix% La copie de frayeur &cn''est pas activée&f.'
         enabled:
           - '%prefix% La copie de frayeur &aest activée&f. Faites un clic droit sur un spawner LevelledMob pour en faire une copie.'
           - 'Votre main doit être vide.'
@@ -216,7 +216,7 @@ command:
     info:
       about:
         - ' '
-        - '&b&lLevelledMobs &fv%version%&7 par lokka30, stumper66 and Oathkeeper'
+        - '&b&lLevelledMobs &fv%version%&7 par lokka30, stumper66 et Oathkeeper'
         - '&7&o%description%'
         - ' '
         - '&7Cette version du plugin prend en charge: &fMinecraft %supportedVersions%'
