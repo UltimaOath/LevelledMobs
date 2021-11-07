@@ -1,0 +1,3374 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Original Author and Developer   ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Special Thanks:                                 +LM3
+# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
+# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki                                     +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.2
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 1.0
+  nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+#  - usedroptable: disc
+#  - usedroptable: enchanted_book-aqua_affinity-1
+#  - usedroptable: enchanted_book-bane_of_arthropods-1_5
+#  - usedroptable: enchanted_book-blast_protection-1_4
+#  - usedroptable: enchanted_book-channeling-1
+#  - usedroptable: enchanted_book-curse_of_binding-1
+#  - usedroptable: enchanted_book-curse_of_vanishing-1
+#  - usedroptable: enchanted_book-depth_strider-1_3
+#  - usedroptable: enchanted_book-efficiency-1_5
+#  - usedroptable: enchanted_book-feather_falling-1_4
+#  - usedroptable: enchanted_book-fire_aspect-1_2
+#  - usedroptable: enchanted_book-fire_protection-1_4
+#  - usedroptable: enchanted_book-flame-1
+#  - usedroptable: enchanted_book-fortune-1_3
+#  - usedroptable: enchanted_book-frost_walker-1_2
+#  - usedroptable: enchanted_book-impaling-1_5
+#  - usedroptable: enchanted_book-infinity-1
+#  - usedroptable: enchanted_book-knockback-1_2
+#  - usedroptable: enchanted_book-looting-1_3
+#  - usedroptable: enchanted_book-loyalty-1_3
+#  - usedroptable: enchanted_book-luck_of_the_sea-1_3
+#  - usedroptable: enchanted_book-lure-1_3
+#  - usedroptable: enchanted_book-mending-1
+#  - usedroptable: enchanted_book-multishot-1
+#  - usedroptable: enchanted_book-piercing-1_4
+#  - usedroptable: enchanted_book-power-1_5
+#  - usedroptable: enchanted_book-projectile_protection-1_4
+#  - usedroptable: enchanted_book-protection-1_4
+#  - usedroptable: enchanted_book-punch-1_2
+#  - usedroptable: enchanted_book-quick_charge-1_3
+#  - usedroptable: enchanted_book-respiration-1_3
+#  - usedroptable: enchanted_book-riptide-1_3
+#  - usedroptable: enchanted_book-sharpness-1_5
+#  - usedroptable: enchanted_book-silk_touch-1
+#  - usedroptable: enchanted_book-smite-1_5
+#  - usedroptable: enchanted_book-soul_speed-1_3
+#  - usedroptable: enchanted_book-sweeping_edge-1_3
+#  - usedroptable: enchanted_book-thorns-1_3
+#  - usedroptable: enchanted_book-unbreaking-1_3
+#  - usedroptable: xeffect-ambient_entity_effect
+#  - usedroptable: xeffect-angry_villager
+#  - usedroptable: xeffect-ash
+#  - usedroptable: xeffect-bubble_pop
+#  - usedroptable: xeffect-campfire_cosy_smoke
+#  - usedroptable: xeffect-campfire_signal_smoke
+#  - usedroptable: xeffect-cloud
+#  - usedroptable: xeffect-composter
+#  - usedroptable: xeffect-crimson_spore
+#  - usedroptable: xeffect-crit
+#  - usedroptable: xeffect-damage_indicator
+#  - usedroptable: xeffect-dolphin
+#  - usedroptable: xeffect-dragon_breath
+#  - usedroptable: xeffect-dripping_lava
+#  - usedroptable: xeffect-dripping_water
+#  - usedroptable: xeffect-dripping_honey
+#  - usedroptable: xeffect-dripping_obsidian_tear
+#  - usedroptable: xeffect-effect
+#  - usedroptable: xeffect-elder_guardian
+#  - usedroptable: xeffect-enchant
+#  - usedroptable: xeffect-enchanted_hit
+#  - usedroptable: xeffect-end_rod
+#  - usedroptable: xeffect-entity_effect
+#  - usedroptable: xeffect-explosion
+#  - usedroptable: xeffect-explosion_emitter
+#  - usedroptable: xeffect-falling_lava
+#  - usedroptable: xeffect-falling_water
+#  - usedroptable: xeffect-falling_obsidian_tear
+#  - usedroptable: xeffect-falling_nectar
+#  - usedroptable: xeffect-falling_honey
+#  - usedroptable: xeffect-firework
+#  - usedroptable: xeffect-fishing
+#  - usedroptable: xeffect-flame
+#  - usedroptable: xeffect-flash
+#  - usedroptable: xeffect-happy_villager
+#  - usedroptable: xeffect-heart
+#  - usedroptable: xeffect-instant_effect
+#  - usedroptable: xeffect-item_slime
+#  - usedroptable: xeffect-item_snowball
+#  - usedroptable: xeffect-landing_honey
+#  - usedroptable: xeffect-landing_lava
+#  - usedroptable: xeffect-landing_obsidian_tear
+#  - usedroptable: xeffect-large_smoke
+#  - usedroptable: xeffect-lava
+#  - usedroptable: xeffect-mycelium
+#  - usedroptable: xeffect-nautilus
+#  - usedroptable: xeffect-poof
+#  - usedroptable: xeffect-portal
+#  - usedroptable: xeffect-rain
+#  - usedroptable: xeffect-reverse_portal
+#  - usedroptable: xeffect-smoke
+#  - usedroptable: xeffect-sneeze
+#  - usedroptable: xeffect-soul
+#  - usedroptable: xeffect-soul_fire_flame
+#  - usedroptable: xeffect-spit
+#  - usedroptable: xeffect-splash
+#  - usedroptable: xeffect-squid_ink
+#  - usedroptable: xeffect-sweep_attack
+#  - usedroptable: xeffect-totem_of_undying
+#  - usedroptable: xeffect-warped_spore
+#  - usedroptable: xeffect-white_ash
+#  - usedroptable: xeffect-witch
+
+  
+all_levellable_mobs:
+#  - usedroptable: tipped_damage_arrows
+#  - usedroptable: tipped_levitation_arrows
+#  - usedroptable: tipped_poison_arrows
+#  - usedroptable: tipped_wither_arrows
+#  - usedroptable: tipped_slowness_arrows
+#  - usedroptable: potions_regeneration_single
+#  - usedroptable: potions_regeneration_splash
+#  - usedroptable: potions_regeneration_lingering
+#  - usedroptable: potions_swiftness_single
+#  - usedroptable: potions_swiftness_splash
+#  - usedroptable: potions_swiftness_lingering
+
+
+all_hostile_mobs:
+#  - usedroptable: simple_tier_c
+#  - usedroptable: simple_tier_b
+#  - usedroptable: simple_tier_a
+#  - usedroptable: simple_tier_s
+#  - usedroptable: leather_helmet_damage_tiers
+#  - usedroptable: leather_chestplate_damage_tiers
+#  - usedroptable: leather_leggings_damage_tiers
+#  - usedroptable: leather_boots_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
+#  - usedroptable: iron_helmet_damage_tiers
+#  - usedroptable: iron_chestplate_damage_tiers
+#  - usedroptable: iron_leggings_damage_tiers
+#  - usedroptable: iron_boots_damage_tiers
+#  - usedroptable: iron_sword_damage_tiers
+#  - usedroptable: iron_axe_damage_tiers
+#  - usedroptable: diamond_helmet_damage_tiers
+#  - usedroptable: diamond_chestplate_damage_tiers
+#  - usedroptable: diamond_leggings_damage_tiers
+#  - usedroptable: diamond_boots_damage_tiers
+#  - usedroptable: diamond_sword_damage_tiers
+#  - usedroptable: diamond_axe_damage_tiers
+#  - usedroptable: netherite_helmet_damage_tiers
+#  - usedroptable: netherite_chestplate_damage_tiers
+#  - usedroptable: netherite_leggings_damage_tiers
+#  - usedroptable: netherite_boots_damage_tiers
+#  - usedroptable: netherite_sword_damage_tiers
+#  - usedroptable: netherite_axe_damage_tiers
+#  - usedroptable: ranged_damage_tiers
+
+
+
+all_passive_mobs:
+  -
+
+all_overworld_mobs:
+  -
+
+all_nether_mobs:
+  -
+
+all_flying_mobs:
+  -
+
+all_ground_mobs:
+  -
+
+all_aquatic_mobs:
+  -
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 03 - EntityType Drops                                                          +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+#AXOLOTL:
+#  -
+
+BAT:
+  -
+
+BEE:
+  -
+
+BLAZE:
+  -
+
+CAT:
+  -
+
+CAVE_SPIDER:
+  -
+
+CHICKEN:
+  -
+
+COD:
+  -
+
+COW:
+  -
+
+CREEPER:
+  -
+
+DOLPHIN:
+  -
+
+DONKEY:
+  -
+
+DROWNED:
+  -
+
+ELDER_GUARDIAN:
+  -
+
+ENDER_DRAGON:
+  -
+
+ENDERMAN:
+  -
+
+ENDERMITE:
+  -
+
+EVOKER:
+  -
+
+FOX:
+  -
+
+GHAST:
+  -
+
+#GLOW_SQUID:
+#  -
+
+#GOAT:
+#  -
+
+GUARDIAN:
+  -
+
+HOGLIN:
+  -
+
+HORSE:
+  -
+
+HUSK:
+  -
+
+ILLUSIONER:
+  -
+
+IRON_GOLEM:
+  -
+
+LLAMA:
+  -
+
+MAGMA_CUBE:
+  -
+
+MULE:
+  -
+
+MUSHROOM_COW:
+  -
+
+OCELOT:
+  -
+
+PANDA:
+  -
+
+PARROT:
+  -
+
+PHANTOM:
+  -
+
+PIG:
+  -
+
+PIGLIN:
+  -
+
+PIGLIN_BRUTE:
+  -
+
+PILLAGER:
+  -
+
+POLAR_BEAR:
+  -
+
+PUFFERFISH:
+  -
+
+RABBIT:
+  -
+
+RAVAGER:
+  -
+
+SALMON:
+  -
+
+SHEEP:
+  -
+
+SHULKER:
+  -
+
+SILVERFISH:
+  -
+
+SKELETON:
+  -
+
+SKELETON_HORSE:
+  -
+
+SLIME:
+  -
+
+SNOWMAN:
+  -
+
+SPIDER:
+  -
+
+SQUID:
+  -
+
+STRAY:
+  -
+
+STRIDER:
+  -
+
+TRADER_LLAMA:
+  -
+
+TROPICAL_FISH:
+  -
+
+TURTLE:
+  -
+
+VEX:
+  -
+
+VILLAGER:
+  -
+
+VINDICATOR:
+  -
+
+WANDERING_TRADER:
+  -
+
+WITCH:
+  -
+
+WITHER:
+  -
+
+WITHER_SKELETON:
+  -
+
+WOLF:
+  -
+
+ZOGLIN:
+  -
+
+ZOMBIE:
+  -
+
+ZOMBIE_HORSE:
+  -
+
+ZOMBIE_VILLAGER:
+  -
+
+ZOMBIFIED_PIGLIN:
+  -
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+  disc:
+    - music_disc_13:
+        maxdropgroup: 1
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_cat:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_blocks:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_chirp:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_far:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_mall:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_mellohi:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_stal:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_strad:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_ward:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_11:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_wait:
+        groupid: disc
+        chance: 0.001 # 0.1% Chance
+    - music_disc_pigstep:
+        groupid: disc
+        chance: 0.00001 # 0.001% Chance
+        
+                
+  simple_tier_c:
+    - LEATHER_HELMET:
+        groupid: tier_c_armor
+        maxdropgroup: 3
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.25 # 25% Chance to Drop
+    - LEATHER_CHESTPLATE:
+        groupid: tier_c_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - LEATHER_LEGGINGS:
+        groupid: tier_c_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - LEATHER_BOOTS:
+        groupid: tier_c_armor
+        equipped: 0.25 # 25% Chance to Equip
+        chance: 0.125 # 12.5% Chance to Drop
+# Brown/Gold Wooden Shield Design
+    - SHIELD:
+        equipped: 0.10 # 10% Chance to Equip
+        chance: 0.05 # 5% Chance to Drop
+        nbt-data: "{BlockEntityTag:{Base:4,Patterns:[{Color:15,Pattern:'bo'},{Color:13,Pattern:'gra'},{Color:12,Pattern:'gru'},{Color:5,Pattern:'drs'},{Color:5,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
+    - WOODEN_SWORD:
+        groupid: tier_c_weapons
+        maxdropgroup: 1
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - WOODEN_AXE:
+        groupid: tier_c_weapons
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        
+        
+  simple_tier_b:
+    - IRON_HELMET:
+        groupid: tier_b_armor
+        maxdropgroup: 3
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.25 # 25% Chance to Drop
+    - IRON_CHESTPLATE:
+        groupid: tier_b_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - IRON_LEGGINGS:
+        groupid: tier_b_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - IRON_BOOTS:
+        groupid: tier_b_armor
+        equipped: 0.25 # 25% Chance to Equip
+        chance: 0.125 # 12.5% Chance to Drop
+# Silver/Gray Iron Shield Design
+    - SHIELD:
+        equipped: 0.10 # 10% Chance to Equip
+        chance: 0.05 # 5% Chance to Drop
+        nbt-data: "{BlockEntityTag:{Base:3,Patterns:[{Color:15,Pattern:'bo'},{Color:8,Pattern:'gra'},{Color:7,Pattern:'gru'},{Color:0,Pattern:'drs'},{Color:0,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
+    - IRON_SWORD:
+        groupid: tier_b_weapons
+        maxdropgroup: 1
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - IRON_AXE:
+        groupid: tier_b_weapons
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        
+        
+  simple_tier_a:
+    - DIAMOND_HELMET:
+        groupid: tier_a_armor
+        maxdropgroup: 2
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.25 # 25% Chance to Drop
+    - DIAMOND_CHESTPLATE:
+        groupid: tier_a_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - DIAMOND_LEGGINGS:
+        groupid: tier_a_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - DIAMOND_BOOTS:
+        groupid: tier_a_armor
+        equipped: 0.25 # 25% Chance to Equip
+        chance: 0.125 # 12.5% Chance to Drop
+# Blue/Black Diamond Shield Design
+    - SHIELD:
+        equipped: 0.1 # 10% Chance to Equip
+        chance: 0.05 # 5% Chance to Drop
+        nbt-data: "{BlockEntityTag:{Base:2,Patterns:[{Color:15,Pattern:'bo'},{Color:11,Pattern:'gra'},{Color:11,Pattern:'gru'},{Color:3,Pattern:'drs'},{Color:3,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
+    - DIAMOND_SWORD:
+        groupid: tier_a_weapons
+        maxdropgroup: 1
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - DIAMOND_AXE:
+        groupid: tier_a_weapons
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        
+        
+  simple_tier_s:
+    - NETHERITE_HELMET:
+        groupid: tier_s_armor
+        maxdropgroup: 2
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.25 # 25% Chance to Drop
+    - NETHERITE_CHESTPLATE:
+        groupid: tier_s_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - NETHERITE_LEGGINGS:
+        groupid: tier_s_armor
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - NETHERITE_BOOTS:
+        groupid: tier_s_armor
+        equipped: 0.25 # 25% Chance to Equip
+        chance: 0.125 # 12.5% Chance to Drop
+# Black/Gray Netherite Shield Design
+    - SHIELD:
+        equipped: 0.1 # 10% Chance to Equip
+        chance: 0.05 # 5% Chance to Drop
+        nbt-data: "{BlockEntityTag:{Base:9,Patterns:[{Color:15,Pattern:'bo'},{Color:7,Pattern:'gra'},{Color:15,Pattern:'gru'},{Color:8,Pattern:'drs'},{Color:8,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
+    - NETHERITE_SWORD:
+        groupid: tier_s_weapons
+        maxdropgroup: 1
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+    - NETHERITE_AXE:
+        groupid: tier_s_weapons
+        equipped: 0.2 # 20% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        
+        
+        
+        
+        
+        
+  netherite_helmet_damage_tiers:
+# Netherite Helmet [0 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Helmet'
+# Netherite Helmet [1-100 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 1-100
+# Netherite Helmet [101-200 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 100-200
+# Netherite Helmet [201-300 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 200-300
+# Netherite Helmet [301-400 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 300-400
+        
+        
+  diamond_helmet_damage_tiers:
+# Diamond Helmet [0 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Helmet'
+# Diamond Helmet [1-85 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Helmet'
+        damage: 1-85
+# Diamond Helmet [86-170 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 85-170
+# Diamond Helmet [171-255 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 170-255
+# Diamond Helmet [256-340 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 255-340
+        
+        
+  iron_helmet_damage_tiers:
+# Iron Helmet [0 Damage]
+    - IRON_HELMET:
+        groupid: iron_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Helmet'
+# Iron Helmet [1-85 Damage]
+    - IRON_HELMET:
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Helmet'
+        damage: 1-40
+# Iron Helmet [86-170 Damage]
+    - IRON_HELMET:
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 40-80
+# Iron Helmet [171-255 Damage]
+    - IRON_HELMET:
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 80-120
+# Iron Helmet [256-340 Damage]
+    - IRON_HELMET:
+        groupid: iron_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Helmet'
+        damage: 120-160
+        
+        
+  leather_helmet_damage_tiers:
+# Leather Helmet [0 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Helmet'
+# Leather Helmet [1-15 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Helmet'
+        damage: 1-15
+# Leather Helmet [15-30 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 15-30
+# Leather Helmet [30-45 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 30-45
+# Leather Helmet [40-50 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 40-50
+        
+        
+        
+        
+        
+  netherite_chestplate_damage_tiers:
+# Netherite Chestplate [0 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Chestplate'
+# Netherite Chestplate [1-100 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 1-100
+# Netherite Chestplate [100-250 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 100-250
+# Netherite Chestplate [250-400 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 250-400
+# Netherite Chestplate [400-550 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 400-550
+        
+        
+  diamond_chestplate_damage_tiers:
+# Diamond Chestplate [0 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Chestplate'
+# Diamond Chestplate [1-150 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 1-150
+# Diamond Chestplate [150-300 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 150-300
+# Diamond Chestplate [300-450 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 300-450
+# Diamond Chestplate [400-500 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 400-500
+        
+        
+  iron_chestplate_damage_tiers:
+# Iron Chestplate [0 Damage]
+    - IRON_CHESTPLATE:
+        groupid: iron_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Chestplate'
+# Iron Chestplate [1-50 Damage]
+    - IRON_CHESTPLATE:
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Chestplate'
+        damage: 1-50
+# Iron Chestplate [50-100 Damage]
+    - IRON_CHESTPLATE:
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 50-100
+# Iron Chestplate [100-150 Damage]
+    - IRON_CHESTPLATE:
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 100-150
+# Iron Chestplate [150-200 Damage]
+    - IRON_CHESTPLATE:
+        groupid: iron_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Chestplate'
+        damage: 150-200
+        
+        
+  leather_chestplate_damage_tiers:
+# Leather Chestplate [0 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Chestplate'
+# Leather Chestplate [1-15 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Chestplate'
+        damage: 1-25
+# Leather Chestplate [15-30 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 25-40
+# Leather Chestplate [30-45 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 40-55
+# Leather Chestplate [40-50 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 55-70
+        
+        
+        
+        
+        
+  netherite_leggings_damage_tiers:
+# Netherite Leggings [0 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Leggings'
+# Netherite Leggings [1-100 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 1-100
+# Netherite Leggings [100-250 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 100-250
+# Netherite Leggings [250-400 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 250-400
+# Netherite Leggings [400-550 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 400-550
+        
+        
+  diamond_leggings_damage_tiers:
+# Diamond Leggings [0 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Leggings'
+# Diamond Leggings [1-150 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Leggings'
+        damage: 1-100
+# Diamond Leggings [150-300 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 100-200
+# Diamond Leggings [300-450 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 200-300
+# Diamond Leggings [400-500 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 300-450
+        
+        
+  iron_leggings_damage_tiers:
+# Iron Leggings [0 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Leggings'
+# Iron Leggings [1-50 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Leggings'
+        damage: 1-50
+# Iron Leggings [50-100 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 50-100
+# Iron Leggings [100-150 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 100-150
+# Iron Leggings [150-200 Damage]
+    - IRON_LEGGINGS:
+        groupid: iron_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Leggings'
+        damage: 150-200
+        
+        
+  leather_leggings_damage_tiers:
+# Leather Leggings [0 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Leggings'
+# Leather Leggings [1-25 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Leggings'
+        damage: 1-25
+# Leather Leggings [25-40 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 25-40
+# Leather Leggings [40-55 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 40-55
+# Leather Leggings [55-70 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 55-70
+        
+        
+        
+        
+        
+        
+  netherite_boots_damage_tiers:
+# Netherite Boots [0 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Boots'
+# Netherite Boots [1-150 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 1-150
+# Netherite Boots [150-300 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 150-300
+# Netherite Boots [300-400 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 300-400
+# Netherite Boots [400-475 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 400-475
+        
+        
+  diamond_boots_damage_tiers:
+# Diamond Boots [0 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Boots'
+# Diamond Boots [1-100 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Boots'
+        damage: 1-100
+# Diamond Boots [100-200 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 100-200
+# Diamond Boots [200-300 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 200-300
+# Diamond Boots [300-400 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 300-400
+        
+        
+  iron_boots_damage_tiers:
+# Iron Boots [0 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Boots'
+# Iron Boots [1-50 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Boots'
+        damage: 1-50
+# Iron Boots [25-75 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 25-75
+# Iron Boots [75-125 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 75-125
+# Iron Boots [125-175 Damage]
+    - IRON_BOOTS:
+        groupid: iron_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Boots'
+        damage: 125-175
+        
+        
+  leather_boots_damage_tiers:
+# Leather Boots [0 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Boots'
+# Leather Boots [1-20 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Boots'
+        damage: 1-20
+# Leather Boots [20-40 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 20-40
+# Leather Boots [40-50 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 40-50
+# Leather Boots [50-60 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 50-60
+        
+        
+        
+        
+        
+  wooden_sword_damage_tiers:
+# Wooden Sword [0 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Sword'
+# Wooden Sword [1-20 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Sword'
+        damage: 1-20
+# Wooden Sword [20-35 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 20-35
+# Wooden Sword [35-45 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 35-45
+# Wooden Sword [45-55 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 45-55
+        
+        
+  wooden_axe_damage_tiers:
+# Wooden Axe [0 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Axe'
+# Wooden Axe [1-20 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Axe'
+        damage: 1-20
+# Wooden Axe [20-35 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 20-35
+# Wooden Axe [35-45 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 35-45
+# Wooden Axe [45-55 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 45-55
+        
+        
+  iron_sword_damage_tiers:
+# Iron Sword [0 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Sword'
+# Iron Sword [1-100 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Sword'
+        damage: 1-100
+# Iron Sword [100-150 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 100-150
+# Iron Sword [150-200 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 150-200
+# Iron Sword [200-250 Damage]
+    - IRON_SWORD:
+        groupid: iron_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Sword'
+        damage: 200-250
+        
+        
+  iron_axe_damage_tiers:
+# Iron Axe [0 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#808080Iron Axe'
+# Iron Axe [1-100 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#808080Iron Axe'
+        damage: 1-100
+# Iron Axe [100-150 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 100-150
+# Iron Axe [150-200 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 150-200
+# Iron Axe [200-250 Damage]
+    - IRON_AXE:
+        groupid: iron_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#808080Iron Axe'
+        damage: 200-250
+        
+        
+  diamond_sword_damage_tiers:
+# Diamond Sword [0 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Sword'
+# Diamond Sword [1-300 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1-300
+# Diamond Sword [300-750 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 300-750
+# Diamond Sword [750-1200 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 900-1200
+# Diamond Sword [1200-1500 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1200-1500
+        
+        
+  diamond_axe_damage_tiers:
+# Diamond Axe [0 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Axe'
+# Diamond Axe [1-300 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1-300
+# Diamond Axe [300-600 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 300-750
+# Diamond Axe [750-1200 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 750-1200
+# Diamond Axe [1200-1500 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1200-1500
+        
+        
+  netherite_sword_damage_tiers:
+# Netherite Sword [0 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Sword'
+# Netherite Sword [1-500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Sword'
+        damage: 1-500
+# Netherite Sword [500-1000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 500-1000
+# Netherite Sword [1000-1500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1000-1500
+# Netherite Sword [1500-2000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1500-2000
+        
+        
+  netherite_axe_damage_tiers:
+# Netherite Axe [0 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Axe'
+# Netherite Axe [1-500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Axe'
+        damage: 1-500
+# Netherite Axe [500-1000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 500-1000
+# Netherite Axe [1000-1500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1000-1500
+# Netherite Axe [1500-2000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1500-2000
+        
+        
+        
+        
+        
+        
+
+        
+  ranged_damage_tiers:
+    - CROSSBOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ACrossbow'
+    - BOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ALongbow'
+    - TRIDENT:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.05 # 5% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6283ACTrident'
+    - ARROW:
+        amount: 1-5
+        chance: 0.25 # 25% Chance to Drop
+        equipped: 0.0 # 0% Chance to Equip
+        
+        
+        
+        
+        
+        
+  potions_regeneration_single:
+# Regeneration Single-Use Potion LVL 1 10s +1
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Single-Use Potion LVL 2 10s +2
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Single-Use Potion LVL 3 20s +2
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Single-Use Potion LVL 4 20s +3
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Single-Use Potion LVL 5 30s +3
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Single-Use Potion LVL 6 30s +4
+    - POTION:
+        groupid: potions_regeneration_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
+        
+        
+  potions_regeneration_splash:
+# Regeneration Splash Potion LVL 1 10s +1
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Splash Potion LVL 2 10s +2
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Splash Potion LVL 3 20s +2
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Splash Potion LVL 4 20s +3
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Splash Potion LVL 5 30s +3
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Splash Potion LVL 6 30s +4
+    - SPLASH_POTION:
+        groupid: potions_regeneration_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
+        
+        
+  potions_regeneration_lingering:
+# Regeneration Lingering Potion LVL 1 10s +1
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Lingering Potion LVL 2 10s +2
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#8EF469★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:200,Amplifier:1}]}"
+# Regeneration Lingering Potion LVL 3 20s +2
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:2}]}"
+# Regeneration Lingering Potion LVL 4 20s +3
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#8EF469★★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:400,Amplifier:3}]}"
+# Regeneration Lingering Potion LVL 5 30s +3
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★☆ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:3}]}"
+# Regeneration Lingering Potion LVL 6 30s +4
+    - LINGERING_POTION:
+        groupid: potions_regeneration_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#8EF469★★★ &8| &#8EF469&oRegeneration&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:9368681,HideFlags:35,CustomPotionEffects:[{Id:10,Duration:600,Amplifier:4}]}"
+        
+        
+  potions_swiftness_single:
+# Swiftness Single-Use Potion LVL 1 10s +1
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Single-Use Potion LVL 2 10s +2
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Single-Use Potion LVL 3 20s +2
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+# Swiftness Single-Use Potion LVL 4 20s +3
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+# Swiftness Single-Use Potion LVL 5 30s +3
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Single-Use Potion LVL 6 30s +4
+    - POTION:
+        groupid: potions_swiftness_single
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
+  potions_swiftness_splash:
+# Swiftness Splash Potion LVL 1 10s +1
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Splash Potion LVL 2 10s +2
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Splash Potion LVL 3 20s +2
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:2}]}"
+# Swiftness Splash Potion LVL 4 20s +3
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:400,Amplifier:3}]}"
+# Swiftness Splash Potion LVL 5 30s +3
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Splash Potion LVL 6 30s +4
+    - SPLASH_POTION:
+        groupid: potions_swiftness_splash
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Splash Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
+  potions_swiftness_lingering:
+# Swiftness Lingering Potion LVL 1 10s +1
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:1}]}"
+# Swiftness Lingering Potion LVL 2 10s +2
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.01 # 1% Chance
+        name: '&#698EF4★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:200,Amplifier:2}]}"
+# Swiftness Lingering Potion LVL 3 15s +2
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:2}]}"
+# Swiftness Lingering Potion LVL 4 15s +3
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.001 # 0.1% Chance
+        name: '&#698EF4★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:300,Amplifier:3}]}"
+# Swiftness Lingering Potion LVL 5 30s +3
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★☆ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:3}]}"
+# Swiftness Lingering Potion LVL 6 30s +4
+    - LINGERING_POTION:
+        groupid: potions_swiftness_lingering
+        chance: 0.0001 # 0.01% Chance
+        name: '&#698EF4★★★ &8| &#698EF4&oSwiftness&r&f Lingering Potion'
+        nbt-data: "{CustomPotionColor:6917876,HideFlags:35,CustomPotionEffects:[{Id:1,Duration:600,Amplifier:4}]}"
+        
+        
+        
+        
+        
+        
+  tipped_damage_arrows:
+# Damage Tipped Arrow LVL 1 +0
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.05 # 5% Chance
+        name: '&#951703☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:0,Ambient:1}]}"
+# Damage Tipped Arrow LVL 2 +1
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.025 # 2.5% Chance
+        name: '&#951703★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:1,Ambient:1}]}"
+# Damage Tipped Arrow LVL 3 +2
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.01 # 1% Chance
+        name: '&#951703★☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:2,Ambient:1}]}"
+# Damage Tipped Arrow LVL 4 +3
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.001 # 0.1% Chance
+        name: '&#951703★★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:3,Ambient:1}]}"
+# Damage Tipped Arrow LVL 5 +4
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.0001 # 0.01% Chance
+        name: '&#951703★★☆ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:4,Ambient:1}]}"
+# Damage Tipped Arrow LVL 6 +5
+    - TIPPED_ARROW:
+        groupid: tipped_damage_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#951703★★★ &8| &#DF1019&oDamage&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:9770755,HideFlags:35,CustomPotionEffects:[{Id:7,Duration:10,Amplifier:5,Ambient:1}]}"
+        
+        
+  tipped_poison_arrows:
+# Poison Tipped Arrow LVL 1 5s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.05 # 5% Chance
+        name: '&#750062☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:100,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 2 7.5s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.025 # 2.5% Chance
+        name: '&#750062★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:150,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 3 10s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.01 # 1% Chance
+        name: '&#750062★☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:200,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 4 12.5s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.001 # 0.1% Chance
+        name: '&#750062★★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:250,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 5 15s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.0001 # 0.01% Chance
+        name: '&#750062★★☆ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:300,Amplifier:1,Ambient:1}]}"
+# Poison Tipped Arrow LVL 6 30s
+    - TIPPED_ARROW:
+        groupid: tipped_poison_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#750062★★★ &8| &#FF7AE9&oPoison&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:7667810,HideFlags:35,CustomPotionEffects:[{Id:19,Duration:600,Amplifier:1,Ambient:1}]}"
+        
+        
+  tipped_wither_arrows:
+# Wither Tipped Arrow LVL 1 5s +1
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.05 # 5% Chance
+        name: '&#56626C☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:100,Amplifier:1,Ambient:1}]}"
+# Wither Tipped Arrow LVL 2 10s +1
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.025 # 2.5% Chance
+        name: '&#56626C★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:1,Ambient:1}]}"
+# Wither Tipped Arrow LVL 3 10s +2
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.01 # 1% Chance
+        name: '&#56626C★☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:2,Ambient:1}]}"
+# Wither Tipped Arrow LVL 4 10s +3
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.001 # 0.1% Chance
+        name: '&#56626C★★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:3,Ambient:1}]}"
+# Wither Tipped Arrow LVL 5 10s +4
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.0001 # 0.01% Chance
+        name: '&#56626C★★☆ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:3,Ambient:1}]}"
+# Wither Tipped Arrow LVL 6 10s +5
+    - TIPPED_ARROW:
+        groupid: tipped_wither_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#56626C★★★ &8| &#2D3C48&oWither&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5661292,HideFlags:35,CustomPotionEffects:[{Id:20,Duration:200,Amplifier:4,Ambient:1}]}"
+        
+        
+  tipped_levitation_arrows:
+# Levitation Tipped Arrow LVL 1 2.5s +0
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.05 # 5% Chance
+        name: '&#56C7F2☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:0,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 2 2.5s +1
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.025 # 2.5% Chance
+        name: '&#56C7F2★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:50,Amplifier:1,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 3 5s +1
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.01 # 1% Chance
+        name: '&#56C7F2★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:1,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 4 5s +2
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.001 # 0.1% Chance
+        name: '&#56C7F2★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:100,Amplifier:2,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 5 10s +2
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.0001 # 0.01% Chance
+        name: '&#56C7F2★★☆ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:200,Amplifier:2,Ambient:1}]}"
+# Levitation Tipped Arrow LVL 6 15s +2
+    - TIPPED_ARROW:
+#        groupid: tipped_levitation_arrows
+#        chance: 0.00001 # 0.001% Chance
+        name: '&#56C7F2★★★ &8| &#B9FAF8&oLevitation&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:5687282,HideFlags:35,CustomPotionEffects:[{Id:25,Duration:300,Amplifier:2,Ambient:1}]}"
+        
+        
+  tipped_slowness_arrows:
+# Slowness Tipped Arrow LVL 1 5s +1
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.05 # 5% Chance
+        name: '&#0543EE☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:100,Amplifier:1,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 2 5s +2
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.025 # 2.5% Chance
+        name: '&#0543EE★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:100,Amplifier:2,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 3 10s +2
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.01 # 1% Chance
+        name: '&#0543EE★☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:200,Amplifier:2,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 4 10s +3
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.001 # 0.1% Chance
+        name: '&#0543EE★★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:200,Amplifier:3,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 5 15s +4
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.0001 # 0.01% Chance
+        name: '&#0543EE★★☆ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:300,Amplifier:4,Ambient:1}]}"
+# Slowness Tipped Arrow LVL 6 30s +4
+    - TIPPED_ARROW:
+        groupid: tipped_slowness_arrows
+        chance: 0.00001 # 0.001% Chance
+        name: '&#0543EE★★★ &8| &#698EF4&oSlowness&r&7 Tipped Arrow'
+        nbt-data: "{CustomPotionColor:345070,HideFlags:35,CustomPotionEffects:[{Id:2,Duration:600,Amplifier:4,Ambient:1}]}"
+        
+        
+        
+        
+        
+        
+  enchanted_book-aqua_affinity-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBAqua Affinity'
+        nbt-data: "{StoredEnchantments:[{id:aqua_affinity,lvl:1}],HideFlags:32}"
+  enchanted_book-bane_of_arthropods-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:5}],HideFlags:32}"
+  enchanted_book-blast_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-channeling-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBChanneling'
+        nbt-data: "{StoredEnchantments:[{id:channeling,lvl:1}],HideFlags:32}"
+  enchanted_book-curse_of_binding-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBCurse of Binding'
+        nbt-data: "{StoredEnchantments:[{id:binding_curse,lvl:1}],HideFlags:32}"
+  enchanted_book-curse_of_vanishing-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBCurse of Vanishing'
+        nbt-data: "{StoredEnchantments:[{id:vanishing_curse,lvl:1}],HideFlags:32}"
+  enchanted_book-depth_strider-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:3}],HideFlags:32}"
+  enchanted_book-efficiency-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:5}],HideFlags:32}"
+  enchanted_book-feather_falling-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:4}],HideFlags:32}"
+  enchanted_book-fire_aspect-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_aspect-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Aspect &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fire_aspect,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_aspect-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Aspect &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fire_aspect,lvl:2}],HideFlags:32}"
+  enchanted_book-fire_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-flame-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFlame'
+        nbt-data: "{StoredEnchantments:[{id:flame,lvl:1}],HideFlags:32}"
+  enchanted_book-fortune-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:3}],HideFlags:32}"
+  enchanted_book-frost_walker-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-frost_walker-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFrost Walker &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:frost_walker,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-frost_walker-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFrost Walker &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:frost_walker,lvl:2}],HideFlags:32}"
+  enchanted_book-impaling-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:5}],HideFlags:32}"
+  enchanted_book-infinity-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBInfinity'
+        nbt-data: "{StoredEnchantments:[{id:infinity,lvl:1}],HideFlags:32}"
+  enchanted_book-knockback-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-knockback-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBKnockback &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:knockback,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-knockback-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBKnockback &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:knockback,lvl:2}],HideFlags:32}"
+  enchanted_book-looting-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:3}],HideFlags:32}"
+  enchanted_book-loyalty-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:3}],HideFlags:32}"
+  enchanted_book-luck_of_the_sea-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:3}],HideFlags:32}"
+  enchanted_book-lure-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:3}],HideFlags:32}"
+  enchanted_book-mending-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBMending'
+        nbt-data: "{StoredEnchantments:[{id:mending,lvl:1}],HideFlags:32}"
+  enchanted_book-multishot-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBMultishot'
+        nbt-data: "{StoredEnchantments:[{id:multishot,lvl:1}],HideFlags:32}"
+  enchanted_book-piercing-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:4}],HideFlags:32}"
+  enchanted_book-power-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:5}],HideFlags:32}"
+  enchanted_book-projectile_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:4}],HideFlags:32}"
+  enchanted_book-punch-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-punch-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPunch &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:punch,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-punch-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPunch &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:punch,lvl:2}],HideFlags:32}"
+  enchanted_book-quick_charge-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:3}],HideFlags:32}"
+  enchanted_book-respiration-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:3}],HideFlags:32}"
+  enchanted_book-riptide-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:3}],HideFlags:32}"
+  enchanted_book-sharpness-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:5}],HideFlags:32}"
+  enchanted_book-silk_touch-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSilk Touch &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:silk_touch,lvl:1}],HideFlags:32}"
+  enchanted_book-smite-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:5}],HideFlags:32}"
+  enchanted_book-soul_speed-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:3}],HideFlags:32}"
+  enchanted_book-sweeping_edge-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:3}],HideFlags:32}"
+  enchanted_book-thorns-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:3}],HideFlags:32}"
+  enchanted_book-unbreaking-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:3}],HideFlags:32}"
+        
+        
+        
+        
+  xeffect-ambient_entity_effect:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 50
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 0.25
+        
+  xeffect-angry_villager:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 100
+        ranged_BWidthX: 0.75
+        ranged_BWidthZ: 0.75
+        ranged_BHeight: 0.25
+        
+  xeffect-ash:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 40
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1
+        
+  xeffect-bubble_pop:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:bubble_pop %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 1.5
+        
+  xeffect-campfire_cosy_smoke:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:campfire_cosy_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 350
+        ranged_Speed: 0.05
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 1.25
+        
+  xeffect-campfire_signal_smoke:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:campfire_signal_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 350
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0
+        ranged_BWidthZ: 0
+        ranged_BHeight: 1.25
+        
+  xeffect-cloud:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:cloud %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.5
+        ranged_BWidthZ: 0.5
+        ranged_BHeight: 1
+        
+  xeffect-composter:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:composter %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.5
+        
+  xeffect-crimson_spore:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:crimson_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 50
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.0
+        
+  xeffect-crit:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:crit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.5
+        ranged_BWidthZ: 0.5
+        ranged_BHeight: 2.0
+        
+  xeffect-damage_indicator:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:damage_indicator %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.0
+        
+  xeffect-dolphin:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dolphin %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.25
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-dragon_breath:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dragon_breath %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_lava:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dripping_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_water:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dripping_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_honey:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dripping_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-dripping_obsidian_tear:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:dripping_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 100
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-effect:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 1
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1
+        
+  xeffect-elder_guardian:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:elder_guardian %x% %y% %z% 0 0 0 0 1 force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true   
+        
+  xeffect-enchant:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:enchant %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 1
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 0.75
+        
+  xeffect-enchanted_hit:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:enchanted_hit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.25
+        
+  xeffect-end_rod:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:end_rod %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.05
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-entity_effect:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.25
+        ranged_BWidthZ: 0.25
+        ranged_BHeight: 1.0
+        
+  xeffect-explosion:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:explosion %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 10
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.15
+        ranged_BWidthZ: 0.15
+        ranged_BHeight: 1.25
+        
+  xeffect-explosion_emitter:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:explosion_emitter %x% %y% %z% 0 0 0 0 1 force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+
+  xeffect-falling_lava:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:falling_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_water:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:falling_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_obsidian_tear:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:falling_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_nectar:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:falling_nectar %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-falling_honey:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:falling_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-firework:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:firework %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-fishing:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:fishing %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-flame:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-flash:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:flash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 100
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 0.5
+        
+  xeffect-happy_villager:
+    - customCommand:
+        command: 'particle minecraft:happy_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 10
+        ranged_BWidthX: 0.75
+        ranged_BWidthZ: 0.75
+        ranged_BHeight: 0.75
+        
+  xeffect-heart:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:heart %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-instant_effect:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:instant_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-item_slime:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:item_slime %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-item_snowball:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:item_snowball %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-landing_honey:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:landing_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-landing_lava:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:landing_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-landing_obsidian_tear:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:landing_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-large_smoke:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:large_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-lava:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-mycelium:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 2.0
+        
+  xeffect-nautilus:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:nautilus %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-poof:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:poof %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-portal:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-rain:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:rain %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-reverse_portal:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:reverse_portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 1.0
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-smoke:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.001
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-sneeze:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:sneeze %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-soul:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:soul %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-soul_fire_flame:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:soul_fire_flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-spit:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:spit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 100
+        ranged_Speed: 0.1
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-splash:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:splash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-squid_ink:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:squid_ink %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 250
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-sweep_attack:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:sweep_attack %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 50
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-totem_of_undying:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:totem_of_undying %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-warped_spore:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:warped_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 2500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.25
+        
+  xeffect-white_ash:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:white_ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 5000
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+        
+  xeffect-witch:
+    - customCommand:
+        command: ['execute at %player% run particle minecraft:witch %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
+        amount: 1
+        chance: 1.0
+        player-caused: true
+        ranged_Count: 1500
+        ranged_Speed: 0.01
+        ranged_BWidthX: 0.35
+        ranged_BWidthZ: 0.35
+        ranged_BHeight: 1.5
+
+
+        
+        
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10

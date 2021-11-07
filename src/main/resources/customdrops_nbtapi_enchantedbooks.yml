@@ -1,0 +1,704 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Original Author and Developer   ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Special Thanks:                                 +LM3
+# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
+# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki                                     +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.2
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 1.0
+  nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+#  - usedroptable: enchanted_book-aqua_affinity-1
+#  - usedroptable: enchanted_book-bane_of_arthropods-1_5
+#  - usedroptable: enchanted_book-blast_protection-1_4
+#  - usedroptable: enchanted_book-channeling-1
+#  - usedroptable: enchanted_book-curse_of_binding-1
+#  - usedroptable: enchanted_book-curse_of_vanishing-1
+#  - usedroptable: enchanted_book-depth_strider-1_3
+#  - usedroptable: enchanted_book-efficiency-1_5
+#  - usedroptable: enchanted_book-feather_falling-1_4
+#  - usedroptable: enchanted_book-fire_aspect-1_2
+#  - usedroptable: enchanted_book-fire_protection-1_4
+#  - usedroptable: enchanted_book-flame-1
+#  - usedroptable: enchanted_book-fortune-1_3
+#  - usedroptable: enchanted_book-frost_walker-1_2
+#  - usedroptable: enchanted_book-impaling-1_5
+#  - usedroptable: enchanted_book-infinity-1
+#  - usedroptable: enchanted_book-knockback-1_2
+#  - usedroptable: enchanted_book-looting-1_3
+#  - usedroptable: enchanted_book-loyalty-1_3
+#  - usedroptable: enchanted_book-luck_of_the_sea-1_3
+#  - usedroptable: enchanted_book-lure-1_3
+#  - usedroptable: enchanted_book-mending-1
+#  - usedroptable: enchanted_book-multishot-1
+#  - usedroptable: enchanted_book-piercing-1_4
+#  - usedroptable: enchanted_book-power-1_5
+#  - usedroptable: enchanted_book-projectile_protection-1_4
+#  - usedroptable: enchanted_book-protection-1_4
+#  - usedroptable: enchanted_book-punch-1_2
+#  - usedroptable: enchanted_book-quick_charge-1_3
+#  - usedroptable: enchanted_book-respiration-1_3
+#  - usedroptable: enchanted_book-riptide-1_3
+#  - usedroptable: enchanted_book-sharpness-1_5
+#  - usedroptable: enchanted_book-silk_touch-1
+#  - usedroptable: enchanted_book-smite-1_5
+#  - usedroptable: enchanted_book-soul_speed-1_3
+#  - usedroptable: enchanted_book-sweeping_edge-1_3
+#  - usedroptable: enchanted_book-thorns-1_3
+#  - usedroptable: enchanted_book-unbreaking-1_3
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+  enchanted_book-aqua_affinity-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBAqua Affinity'
+        nbt-data: "{StoredEnchantments:[{id:aqua_affinity,lvl:1}],HideFlags:32}"
+  enchanted_book-bane_of_arthropods-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-bane_of_arthropods-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBane of Arthropods &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:bane_of_arthropods,lvl:5}],HideFlags:32}"
+  enchanted_book-blast_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-blast_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBBlast Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:blast_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-channeling-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBChanneling'
+        nbt-data: "{StoredEnchantments:[{id:channeling,lvl:1}],HideFlags:32}"
+  enchanted_book-curse_of_binding-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBCurse of Binding'
+        nbt-data: "{StoredEnchantments:[{id:binding_curse,lvl:1}],HideFlags:32}"
+  enchanted_book-curse_of_vanishing-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBCurse of Vanishing'
+        nbt-data: "{StoredEnchantments:[{id:vanishing_curse,lvl:1}],HideFlags:32}"
+  enchanted_book-depth_strider-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-depth_strider-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBDepth Strider &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:depth_strider,lvl:3}],HideFlags:32}"
+  enchanted_book-efficiency-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-efficiency-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBEfficiency &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:efficiency,lvl:5}],HideFlags:32}"
+  enchanted_book-feather_falling-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-feather_falling-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFeather Falling &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:feather_falling,lvl:4}],HideFlags:32}"
+  enchanted_book-fire_aspect-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_aspect-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Aspect &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fire_aspect,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_aspect-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Aspect &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fire_aspect,lvl:2}],HideFlags:32}"
+  enchanted_book-fire_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fire_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFire Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:fire_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-flame-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFlame'
+        nbt-data: "{StoredEnchantments:[{id:flame,lvl:1}],HideFlags:32}"
+  enchanted_book-fortune-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-fortune-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFortune &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:fortune,lvl:3}],HideFlags:32}"
+  enchanted_book-frost_walker-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-frost_walker-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFrost Walker &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:frost_walker,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-frost_walker-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBFrost Walker &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:frost_walker,lvl:2}],HideFlags:32}"
+  enchanted_book-impaling-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-impaling-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBImpaling &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:impaling,lvl:5}],HideFlags:32}"
+  enchanted_book-infinity-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBInfinity'
+        nbt-data: "{StoredEnchantments:[{id:infinity,lvl:1}],HideFlags:32}"
+  enchanted_book-knockback-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-knockback-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBKnockback &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:knockback,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-knockback-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBKnockback &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:knockback,lvl:2}],HideFlags:32}"
+  enchanted_book-looting-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-looting-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLooting &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:looting,lvl:3}],HideFlags:32}"
+  enchanted_book-loyalty-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-loyalty-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLoyalty &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:loyalty,lvl:3}],HideFlags:32}"
+  enchanted_book-luck_of_the_sea-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-luck_of_the_sea-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLuck of the Sea &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:luck_of_the_sea,lvl:3}],HideFlags:32}"
+  enchanted_book-lure-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-lure-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBLure &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:lure,lvl:3}],HideFlags:32}"
+  enchanted_book-mending-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBMending'
+        nbt-data: "{StoredEnchantments:[{id:mending,lvl:1}],HideFlags:32}"
+  enchanted_book-multishot-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBMultishot'
+        nbt-data: "{StoredEnchantments:[{id:multishot,lvl:1}],HideFlags:32}"
+  enchanted_book-piercing-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-piercing-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPiercing &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:piercing,lvl:4}],HideFlags:32}"
+  enchanted_book-power-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-power-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPower &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:power,lvl:5}],HideFlags:32}"
+  enchanted_book-projectile_protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-projectile_protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProjectile Protection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:projectile_protection,lvl:4}],HideFlags:32}"
+  enchanted_book-protection-1_4:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-protection-1_4
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBProtection &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:protection,lvl:4}],HideFlags:32}"
+  enchanted_book-punch-1_2:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-punch-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPunch &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:punch,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-punch-1_2
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBPunch &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:punch,lvl:2}],HideFlags:32}"
+  enchanted_book-quick_charge-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-quick_charge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBQuick Charge &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:quick_charge,lvl:3}],HideFlags:32}"
+  enchanted_book-respiration-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-respiration-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRespiration &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:respiration,lvl:3}],HideFlags:32}"
+  enchanted_book-riptide-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-riptide-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBRiptide &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:riptide,lvl:3}],HideFlags:32}"
+  enchanted_book-sharpness-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sharpness-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSharpness &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:sharpness,lvl:5}],HideFlags:32}"
+  enchanted_book-silk_touch-1:
+    - ENCHANTED_BOOK:
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSilk Touch &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:silk_touch,lvl:1}],HideFlags:32}"
+  enchanted_book-smite-1_5:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:3}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CIV'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:4}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-smite-1_5
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSmite &#9C9C9CV'
+        nbt-data: "{StoredEnchantments:[{id:smite,lvl:5}],HideFlags:32}"
+  enchanted_book-soul_speed-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-soul_speed-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSoul Speed &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:soul_speed,lvl:3}],HideFlags:32}"
+  enchanted_book-sweeping_edge-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-sweeping_edge-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBSweeping Edge &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:sweeping_edge,lvl:3}],HideFlags:32}"
+  enchanted_book-thorns-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-thorns-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBThorns &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:thorns,lvl:3}],HideFlags:32}"
+  enchanted_book-unbreaking-1_3:
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CI'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:1}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CII'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:2}],HideFlags:32}"
+    - ENCHANTED_BOOK:
+        groupid: enchanted_book-unbreaking-1_3
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#DBDBDBUnbreaking &#9C9C9CIII'
+        nbt-data: "{StoredEnchantments:[{id:unbreaking,lvl:3}],HideFlags:32}"
+
+
+        
+        
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10

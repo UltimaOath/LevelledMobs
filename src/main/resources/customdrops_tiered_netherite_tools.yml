@@ -1,0 +1,337 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Original Author and Developer   ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Special Thanks:                                 +LM3
+# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
+# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki                                     +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.2
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 1.0
+  nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+#  - usedroptable: netherite_helmet_damage_tiers
+#  - usedroptable: netherite_chestplate_damage_tiers
+#  - usedroptable: netherite_leggings_damage_tiers
+#  - usedroptable: netherite_boots_damage_tiers
+#  - usedroptable: netherite_sword_damage_tiers
+#  - usedroptable: netherite_axe_damage_tiers
+#  - usedroptable: ranged_damage_tiers
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+  netherite_helmet_damage_tiers:
+# Netherite Helmet [0 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Helmet'
+# Netherite Helmet [1-100 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 1-100
+# Netherite Helmet [101-200 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 100-200
+# Netherite Helmet [201-300 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 200-300
+# Netherite Helmet [301-400 Damage]
+    - NETHERITE_HELMET:
+        groupid: netherite_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Helmet'
+        damage: 300-400
+        
+  netherite_chestplate_damage_tiers:
+# Netherite Chestplate [0 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Chestplate'
+# Netherite Chestplate [1-100 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 1-100
+# Netherite Chestplate [100-250 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 100-250
+# Netherite Chestplate [250-400 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 250-400
+# Netherite Chestplate [400-550 Damage]
+    - NETHERITE_CHESTPLATE:
+        groupid: netherite_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Chestplate'
+        damage: 400-550
+        
+  netherite_leggings_damage_tiers:
+# Netherite Leggings [0 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Leggings'
+# Netherite Leggings [1-100 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 1-100
+# Netherite Leggings [100-250 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 100-250
+# Netherite Leggings [250-400 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 250-400
+# Netherite Leggings [400-550 Damage]
+    - NETHERITE_LEGGINGS:
+        groupid: netherite_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Leggings'
+        damage: 400-550
+        
+  netherite_boots_damage_tiers:
+# Netherite Boots [0 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Boots'
+# Netherite Boots [1-150 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 1-150
+# Netherite Boots [150-300 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 150-300
+# Netherite Boots [300-400 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 300-400
+# Netherite Boots [400-475 Damage]
+    - NETHERITE_BOOTS:
+        groupid: netherite_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Boots'
+        damage: 400-475
+        
+  netherite_sword_damage_tiers:
+# Netherite Sword [0 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Sword'
+# Netherite Sword [1-500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Sword'
+        damage: 1-500
+# Netherite Sword [500-1000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 500-1000
+# Netherite Sword [1000-1500 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1000-1500
+# Netherite Sword [1500-2000 Damage]
+    - NETHERITE_SWORD:
+        groupid: netherite_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Sword'
+        damage: 1500-2000
+        
+  netherite_axe_damage_tiers:
+# Netherite Axe [0 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#7A888FNetherite Axe'
+# Netherite Axe [1-500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#7A888FNetherite Axe'
+        damage: 1-500
+# Netherite Axe [500-1000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 500-1000
+# Netherite Axe [1000-1500 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1000-1500
+# Netherite Axe [1500-2000 Damage]
+    - NETHERITE_AXE:
+        groupid: netherite_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#7A888FNetherite Axe'
+        damage: 1500-2000
+        
+  ranged_damage_tiers:
+    - CROSSBOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ACrossbow'
+    - BOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ALongbow'
+    - TRIDENT:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.05 # 5% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6283ACTrident'
+    - ARROW:
+        amount: 1-5
+        chance: 0.25 # 25% Chance to Drop
+        equipped: 0.0 # 0% Chance to Equip
+
+
+        
+        
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10

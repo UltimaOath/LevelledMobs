@@ -1,0 +1,337 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Original Author and Developer   ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Special Thanks:                                 +LM3
+# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
+# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki                                     +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.2
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 1.0
+  nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+#  - usedroptable: diamond_helmet_damage_tiers
+#  - usedroptable: diamond_chestplate_damage_tiers
+#  - usedroptable: diamond_leggings_damage_tiers
+#  - usedroptable: diamond_boots_damage_tiers
+#  - usedroptable: diamond_sword_damage_tiers
+#  - usedroptable: diamond_axe_damage_tiers
+#  - usedroptable: ranged_damage_tiers
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+  diamond_helmet_damage_tiers:
+# Diamond Helmet [0 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Helmet'
+# Diamond Helmet [1-85 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Helmet'
+        damage: 1-85
+# Diamond Helmet [86-170 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 85-170
+# Diamond Helmet [171-255 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 170-255
+# Diamond Helmet [256-340 Damage]
+    - DIAMOND_HELMET:
+        groupid: diamond_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Helmet'
+        damage: 255-340
+        
+  diamond_chestplate_damage_tiers:
+# Diamond Chestplate [0 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Chestplate'
+# Diamond Chestplate [1-150 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 1-150
+# Diamond Chestplate [150-300 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 150-300
+# Diamond Chestplate [300-450 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 300-450
+# Diamond Chestplate [400-500 Damage]
+    - DIAMOND_CHESTPLATE:
+        groupid: diamond_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Chestplate'
+        damage: 400-500
+        
+  diamond_leggings_damage_tiers:
+# Diamond Leggings [0 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Leggings'
+# Diamond Leggings [1-150 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Leggings'
+        damage: 1-100
+# Diamond Leggings [150-300 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 100-200
+# Diamond Leggings [300-450 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 200-300
+# Diamond Leggings [400-500 Damage]
+    - DIAMOND_LEGGINGS:
+        groupid: diamond_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Leggings'
+        damage: 300-450
+        
+  diamond_boots_damage_tiers:
+# Diamond Boots [0 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#1F82FFDiamond Boots'
+# Diamond Boots [1-100 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#1F82FFDiamond Boots'
+        damage: 1-100
+# Diamond Boots [100-200 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 100-200
+# Diamond Boots [200-300 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 200-300
+# Diamond Boots [300-400 Damage]
+    - DIAMOND_BOOTS:
+        groupid: diamond_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#1F82FFDiamond Boots'
+        damage: 300-400
+        
+  diamond_sword_damage_tiers:
+# Diamond Sword [0 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Sword'
+# Diamond Sword [1-300 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1-300
+# Diamond Sword [300-750 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 300-750
+# Diamond Sword [750-1200 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 900-1200
+# Diamond Sword [1200-1500 Damage]
+    - DIAMOND_SWORD:
+        groupid: diamond_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Sword'
+        damage: 1200-1500
+        
+  diamond_axe_damage_tiers:
+# Diamond Axe [0 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#6AB5A6Diamond Axe'
+# Diamond Axe [1-300 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1-300
+# Diamond Axe [300-600 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 300-750
+# Diamond Axe [750-1200 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 750-1200
+# Diamond Axe [1200-1500 Damage]
+    - DIAMOND_AXE:
+        groupid: diamond_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#6AB5A6Diamond Axe'
+        damage: 1200-1500
+        
+  ranged_damage_tiers:
+    - CROSSBOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ACrossbow'
+    - BOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ALongbow'
+    - TRIDENT:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.05 # 5% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6283ACTrident'
+    - ARROW:
+        amount: 1-5
+        chance: 0.25 # 25% Chance to Drop
+        equipped: 0.0 # 0% Chance to Equip
+
+
+        
+        
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10

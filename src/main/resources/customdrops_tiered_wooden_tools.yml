@@ -1,0 +1,337 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Original Author and Developer   ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
+# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
+# +                                      ++                                                  +LM3
+# +    stumper66                         ++  Special Thanks:                                 +LM3
+# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
+# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
+# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
+# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
+# +    UltimaOath                        ++                                                  +LM3
+# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
+# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
+# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
+# +                                      ++    limzikiki                                     +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.2
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 1.0
+  only-drop-if-equipped: true
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 1.0
+  nbt-data: ''
+  overall_permission: ['']
+  permission: ['']
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+#  - usedroptable: leather_helmet_damage_tiers
+#  - usedroptable: leather_chestplate_damage_tiers
+#  - usedroptable: leather_leggings_damage_tiers
+#  - usedroptable: leather_boots_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
+#  - usedroptable: wooden_sword_damage_tiers
+#  - usedroptable: ranged_damage_tiers
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+  leather_helmet_damage_tiers:
+# Leather Helmet [0 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Helmet'
+# Leather Helmet [1-15 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Helmet'
+        damage: 1-15
+# Leather Helmet [15-30 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 15-30
+# Leather Helmet [30-45 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 30-45
+# Leather Helmet [40-50 Damage]
+    - LEATHER_HELMET:
+        groupid: leather_helmet_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Helmet'
+        damage: 40-50
+        
+  leather_chestplate_damage_tiers:
+# Leather Chestplate [0 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Chestplate'
+# Leather Chestplate [1-15 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Chestplate'
+        damage: 1-25
+# Leather Chestplate [15-30 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 25-40
+# Leather Chestplate [30-45 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 40-55
+# Leather Chestplate [40-50 Damage]
+    - LEATHER_CHESTPLATE:
+        groupid: leather_chestplate_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Chestplate'
+        damage: 55-70
+        
+  leather_leggings_damage_tiers:
+# Leather Leggings [0 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Leggings'
+# Leather Leggings [1-25 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Leggings'
+        damage: 1-25
+# Leather Leggings [25-40 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 25-40
+# Leather Leggings [40-55 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 40-55
+# Leather Leggings [55-70 Damage]
+    - LEATHER_LEGGINGS:
+        groupid: leather_leggings_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Leggings'
+        damage: 55-70
+        
+  leather_boots_damage_tiers:
+# Leather Boots [0 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#765E46Leather Boots'
+# Leather Boots [1-20 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#765E46Leather Boots'
+        damage: 1-20
+# Leather Boots [20-40 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 20-40
+# Leather Boots [40-50 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 40-50
+# Leather Boots [50-60 Damage]
+    - LEATHER_BOOTS:
+        groupid: leather_boots_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#765E46Leather Boots'
+        damage: 50-60
+        
+  wooden_sword_damage_tiers:
+# Wooden Sword [0 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Sword'
+# Wooden Sword [1-20 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Sword'
+        damage: 1-20
+# Wooden Sword [20-35 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 20-35
+# Wooden Sword [35-45 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 35-45
+# Wooden Sword [45-55 Damage]
+    - WOODEN_SWORD:
+        groupid: wooden_sword_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Sword'
+        damage: 45-55
+        
+  wooden_axe_damage_tiers:
+# Wooden Axe [0 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        overall_chance: 1.0
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.0001 # 0.01% Chance
+        name: '&#AD6F46Wooden Axe'
+# Wooden Axe [1-20 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.001 # 0.1% Chance
+        name: '&#AD6F46Wooden Axe'
+        damage: 1-20
+# Wooden Axe [20-35 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 20-35
+# Wooden Axe [35-45 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.1 # 10% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 35-45
+# Wooden Axe [45-55 Damage]
+    - WOODEN_AXE:
+        groupid: wooden_axe_damage_tiers
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#AD6F46Wooden Axe'
+        damage: 45-55
+
+  ranged_damage_tiers:
+    - CROSSBOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ACrossbow'
+    - BOW:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.5 # 50% Chance to Equip
+        chance: 0.2 # 20% Chance to Drop
+        name: '&#BD8B6ALongbow'
+    - TRIDENT:
+        groupid: ranged_damage_tiers_weapon
+        equipped: 0.05 # 5% Chance to Equip
+        chance: 0.01 # 1% Chance to Drop
+        name: '&#6283ACTrident'
+    - ARROW:
+        amount: 1-5
+        chance: 0.25 # 25% Chance to Drop
+        equipped: 0.0 # 0% Chance to Equip
+
+
+        
+        
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10
