@@ -7,14 +7,20 @@ package me.lokka30.levelledmobs.misc;
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.rules.MinAndMax;
 import me.lokka30.levelledmobs.rules.RulesManager;
-import me.lokka30.microlib.MessageUtils;
-import me.lokka30.microlib.MicroLogger;
+import me.lokka30.microlib.messaging.MessageUtils;
+import me.lokka30.microlib.messaging.MicroLogger;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Holds common utilities
@@ -38,7 +44,7 @@ public final class Utils {
      */
     @NotNull
     public static List<String> getSupportedServerVersions() {
-        return Arrays.asList("1.16", "1.17");
+        return List.of("1.16", "1.17", "1.18");
     }
 
     @NotNull
@@ -72,11 +78,11 @@ public final class Utils {
     public static String replaceEx(@NotNull final String message, @NotNull final String replaceWhat, @NotNull final String replaceTo) {
         int count, position0, position1;
         count = position0 = 0;
-        String upperString = message.toUpperCase();
-        String upperPattern = replaceWhat.toUpperCase();
-        int inc = (message.length() / replaceWhat.length()) *
+        final String upperString = message.toUpperCase();
+        final String upperPattern = replaceWhat.toUpperCase();
+        final int inc = (message.length() / replaceWhat.length()) *
                 (replaceTo.length() - replaceWhat.length());
-        char[] chars = new char[message.length() + Math.max(0, inc)];
+        final char[] chars = new char[message.length() + Math.max(0, inc)];
         while ((position1 = upperString.indexOf(upperPattern, position0)) != -1) {
             for (int i = position0; i < position1; ++i)
                 chars[count++] = message.charAt(i);
@@ -103,7 +109,7 @@ public final class Utils {
         try {
             Integer.parseInt(str);
             return true;
-        } catch (NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             return false;
         }
     }
@@ -115,7 +121,7 @@ public final class Utils {
         try {
             Double.parseDouble(str);
             return true;
-        } catch (NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             return false;
         }
     }
@@ -124,20 +130,12 @@ public final class Utils {
         return (str == null || str.isEmpty());
     }
 
-    public static int getDefaultIfNull(@NotNull final YamlConfiguration cfg, @NotNull final String path, final int def) {
-        return cfg.contains(path) ? cfg.getInt(path) : def;
-    }
-
-    public static int getDefaultIfNull(@NotNull final TreeMap<String, Integer> map, @NotNull final String item, final int def) {
-        return map.getOrDefault(item, def);
-    }
-
     @NotNull
-    public static final List<String> oneToNine = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+    public static final List<String> oneToNine = List.of("1", "2", "3", "4", "5", "6", "7", "8", "9");
 
     @NotNull
     public static List<String> replaceAllInList(@NotNull final List<String> oldList, @NotNull final String replaceWhat, @NotNull final String replaceTo) {
-        final List<String> newList = new ArrayList<>();
+        final List<String> newList = new ArrayList<>(oldList.size());
         for (final String string : oldList) {
             newList.add(string.replace(replaceWhat, replaceTo));
         }
@@ -165,19 +163,8 @@ public final class Utils {
     public static void debugLog(@NotNull final LevelledMobs instance, @NotNull final DebugType debugType, @NotNull final String msg) {
         if (instance.settingsCfg == null) return;
 
-        if (instance.helperSettings.getStringSet(instance.settingsCfg, "debug-misc").contains(debugType.toString()))
+        if (instance.companion.debugsEnabled.contains(debugType))
             logger.info("&8[&bDebug: " + debugType + "&8]&7 " + msg);
-    }
-
-    /**
-     * If object1 is null, return object2
-     *
-     * @param object1 a nullable object
-     * @param object2 a non-nullable object
-     * @return object2 if object1 is null, otherwise, object1
-     */
-    public static Object getNonNull(@Nullable Object object1, @NotNull Object object2) {
-        return object1 == null ? object2 : object1;
     }
 
     /**
@@ -194,7 +181,7 @@ public final class Utils {
     @NotNull
     public static String capitalize(@NotNull final String str) {
         final StringBuilder builder = new StringBuilder();
-        final String[] words = str.toLowerCase(Locale.ROOT).split(" "); // each word separated from str
+        final String[] words = str.toLowerCase().split(" "); // each word separated from str
         for (int i = 0; i < words.length; i++) {
             final String word = words[i];
             if (word.isEmpty()) continue;
@@ -280,5 +267,45 @@ public final class Utils {
         }
 
         return list.isBlacklist() || list.allowedList.contains(biome);
+    }
+
+    public static boolean isDamageCauseInModalList(@NotNull final CachedModalList<EntityDamageEvent.DamageCause> list, final EntityDamageEvent.DamageCause cause) {
+        if (list.allowAll) return true;
+        if (list.excludeAll) return false;
+        if (list.isEmpty()) return true;
+
+        // note: no group support
+
+        if (list.excludedList.contains(cause)) return false;
+
+        return list.isBlacklist() || list.allowedList.contains(cause);
+    }
+
+    public static long getMillisecondsFromInstant(final Instant instant){
+        return Duration.between(instant, Instant.now()).toMillis();
+    }
+
+    @NotNull
+    public static PlayerNetherOrWorldSpawnResult getPortalOrWorldSpawn(final @NotNull LevelledMobs main, final @NotNull Player player){
+        Location location = null;
+        boolean isNetherPortalCoord = false;
+        boolean isWorldPortalCoord = false;
+
+        if (player.getWorld().getEnvironment() == World.Environment.NETHER){
+            location = main.companion.getPlayerNetherPortalLocation(player);
+            isNetherPortalCoord = true;
+        }
+        else if (player.getWorld().getEnvironment() == World.Environment.NORMAL){
+            location = main.companion.getPlayerWorldPortalLocation(player);
+            isWorldPortalCoord = true;
+        }
+
+        if (location == null) {
+            location = player.getWorld().getSpawnLocation();
+            isNetherPortalCoord = false;
+            isWorldPortalCoord = false;
+        }
+
+        return new PlayerNetherOrWorldSpawnResult(location, isNetherPortalCoord, isWorldPortalCoord);
     }
 }

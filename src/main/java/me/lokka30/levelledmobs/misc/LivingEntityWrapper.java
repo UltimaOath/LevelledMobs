@@ -12,14 +12,31 @@ import me.lokka30.levelledmobs.rules.FineTuningAttributes;
 import me.lokka30.levelledmobs.rules.LevelledMobSpawnReason;
 import me.lokka30.levelledmobs.rules.RuleInfo;
 import org.bukkit.World;
-import org.bukkit.entity.*;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Ageable;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Boss;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Flying;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
+import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -36,9 +53,9 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         this.applicableGroups = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         this.applicableRules = new LinkedList<>();
         this.mobExternalTypes = new LinkedList<>();
-        this.spawnReason = LevelledMobSpawnReason.DEFAULT;
         this.deathCause = EntityDamageEvent.DamageCause.CUSTOM;
         this.cacheLock = new ReentrantLock(true);
+        this.pdcLock = new ReentrantLock(true);
     }
 
     @Deprecated(since = "3.2.0")
@@ -51,44 +68,54 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         this.applicableGroups = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         this.applicableRules = new LinkedList<>();
         this.mobExternalTypes = new LinkedList<>();
-        this.spawnReason = LevelledMobSpawnReason.DEFAULT;
         this.deathCause = EntityDamageEvent.DamageCause.CUSTOM;
         this.cacheLock = new ReentrantLock(true);
+        this.pdcLock = new ReentrantLock(true);
 
         setLivingEntity(livingEntity);
     }
 
+    // privates:
     private LivingEntity livingEntity;
     @NotNull
     private Set<String> applicableGroups;
     private boolean hasCache;
     private boolean isBuildingCache;
+    private boolean groupsAreBuilt;
     private Integer mobLevel;
-    private final static Object lockObj = new Object();
+    private int nametagCooldownTime;
+    private String sourceSpawnerName;
+    private String sourceSpawnEggName;
     @NotNull
-    private List<RuleInfo> applicableRules;
+    private final List<RuleInfo> applicableRules;
     private List<String> spawnedWGRegions;
     @NotNull
     private final List<ExternalCompatibilityManager.ExternalCompatibility> mobExternalTypes;
     private FineTuningAttributes fineTuningAttributes;
     private LevelledMobSpawnReason spawnReason;
-    public EntityDamageEvent.DamageCause deathCause;
-    public boolean reEvaluateLevel;
-    public Player playerForPermissionsCheck;
-    private boolean groupsAreBuilt;
-    private int nametagCooldownTime;
     private Player playerForLevelling;
-    public Set<Player> playersNeedingNametagCooldownUpdate;
     private Map<String, Boolean> prevChanceRuleResults;
     private final ReentrantLock cacheLock;
+    private final ReentrantLock pdcLock;
     private final static Object playerLock = new Object();
     private final static Object cachedLM_Wrappers_Lock = new Object();
-    private String sourceSpawnerName;
     private final static Stack<LivingEntityWrapper> cache = new Stack<>();
+    private final static int lockMaxRetryTimes = 3;
+    // publics:
+    public boolean reEvaluateLevel;
+    public boolean wasPreviouslyLevelled;
+    public boolean isRulesForceAll;
+    public Boolean playerLevellingAllowDecrease;
+    public Set<Player> playersNeedingNametagCooldownUpdate;
+    public EntityDamageEvent.DamageCause deathCause;
+    public List<String> nbtData;
+    public String pendingPlayerIdToSet;
+    public Player playerForPermissionsCheck;
+    public CommandSender summonedSender;
 
     @NotNull
     public static LivingEntityWrapper getInstance(final LivingEntity livingEntity, final @NotNull LevelledMobs main){
-        LivingEntityWrapper lew;
+        final LivingEntityWrapper lew;
 
         synchronized (cachedLM_Wrappers_Lock) {
             if (cache.empty())
@@ -115,7 +142,7 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         }
     }
 
-    public void setLivingEntity(final @NotNull LivingEntity livingEntity){
+    private void setLivingEntity(final @NotNull LivingEntity livingEntity){
         this.livingEntity = livingEntity;
         super.populateData(livingEntity.getWorld(), livingEntity.getLocation());
     }
@@ -125,7 +152,7 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         this.applicableGroups.clear();
         this.applicableRules.clear();
         this.mobExternalTypes.clear();
-        this.spawnReason = LevelledMobSpawnReason.DEFAULT;
+        this.spawnReason = null;
         this.deathCause = EntityDamageEvent.DamageCause.CUSTOM;
         this.isBuildingCache = false;
         this.hasCache = false;
@@ -133,13 +160,20 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         this.spawnedWGRegions = null;
         this.fineTuningAttributes = null;
         this.reEvaluateLevel = false;
+        this.isRulesForceAll = false;
+        this.wasPreviouslyLevelled = false;
         this.groupsAreBuilt = false;
         this.playerForLevelling = null;
         this.prevChanceRuleResults = null;
         this.sourceSpawnerName = null;
+        this.sourceSpawnEggName = null;
         this.playerForPermissionsCheck = null;
         this.playersNeedingNametagCooldownUpdate = null;
         this.nametagCooldownTime = 0;
+        this.nbtData = null;
+        this.summonedSender = null;
+        this.playerLevellingAllowDecrease = null;
+        this.pendingPlayerIdToSet = null;
 
         super.clearEntityData();
     }
@@ -148,7 +182,7 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         if (isBuildingCache || this.hasCache) return;
 
         try{
-            if (!this.cacheLock.tryLock(1000, TimeUnit.MILLISECONDS)) {
+            if (!this.cacheLock.tryLock(500, TimeUnit.MILLISECONDS)) {
                 Utils.logger.warning("lock timed out building cache");
                 return;
             }
@@ -159,22 +193,54 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
                     main.levelInterface.getLevelOfMob(livingEntity) : null;
 
             this.spawnedWGRegions = ExternalCompatibilityManager.getWGRegionsAtLocation(this);
-            this.nametagCooldownTime = main.rulesManager.getRule_nametagVisibleTime(this);
 
             this.hasCache = true;
             // the lines below must remain after hasCache = true to prevent stack overflow
             cachePrevChanceResults();
             final ApplicableRulesResult applicableRulesResult = main.rulesManager.getApplicableRules(this);
-            this.applicableRules = applicableRulesResult.allApplicableRules;
+            this.applicableRules.clear();
+            this.applicableRules.addAll(applicableRulesResult.allApplicableRules);
             checkChanceRules(applicableRulesResult);
             this.fineTuningAttributes = main.rulesManager.getFineTuningAttributes(this);
+            this.nametagCooldownTime = main.rulesManager.getRule_nametagVisibleTime(this);
             this.isBuildingCache = false;
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             Utils.logger.warning("exception in buildCache: " + e.getMessage());
         } finally {
             if (cacheLock.isHeldByCurrentThread())
                 cacheLock.unlock();
         }
+    }
+
+    private boolean getPDCLock(){
+        try{
+            // try up to 3 times to get a lock
+            int retryCount = 0;
+            while (true) {
+                if (this.pdcLock.tryLock(15, TimeUnit.MILLISECONDS))
+                    return true;
+
+                final StackTraceElement callingFunction = Thread.currentThread().getStackTrace()[1];
+                retryCount++;
+                if (retryCount > lockMaxRetryTimes){
+                    Utils.debugLog(main, DebugType.THREAD_LOCKS, String.format("getPDCLock could not lock thread - %s:%s",
+                            callingFunction.getFileName(), callingFunction.getLineNumber()));
+                    return false;
+                }
+
+                Utils.debugLog(main, DebugType.THREAD_LOCKS, String.format("getPDCLock retry %s - %s:%s",
+                        retryCount, callingFunction.getFileName(), callingFunction.getLineNumber()));
+            }
+        }
+        catch (final InterruptedException e){
+            Utils.logger.warning("getPDCLock InterruptedException: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private void releasePDCLock(){
+        if (pdcLock.isHeldByCurrentThread())
+            pdcLock.unlock();
     }
 
     public void invalidateCache(){
@@ -200,11 +266,27 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
             sbDenied.append(ruleInfo.getRuleName());
         }
 
-        synchronized (this.livingEntity.getPersistentDataContainer()){
-            if (sbAllowed.length() > 0)
-                this.livingEntity.getPersistentDataContainer().set(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING, sbAllowed.toString());
-            if (sbDenied.length() > 0)
-                this.livingEntity.getPersistentDataContainer().set(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING, sbDenied.toString());
+        if (!getPDCLock()) return;
+
+        try {
+            for (int i = 0; i < 2; i++) {
+                try {
+                    if (sbAllowed.length() > 0)
+                        this.livingEntity.getPersistentDataContainer().set(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING, sbAllowed.toString());
+                    if (sbDenied.length() > 0)
+                        this.livingEntity.getPersistentDataContainer().set(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING, sbDenied.toString());
+                    break;
+                } catch (final java.util.ConcurrentModificationException ignored) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (final InterruptedException ignored2) {
+                        break;
+                    }
+                }
+            }
+        }
+        finally {
+            releasePDCLock();
         }
     }
 
@@ -214,12 +296,17 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         String rulesPassed = null;
         String rulesDenied = null;
 
-        synchronized (this.livingEntity.getPersistentDataContainer()){
-            if (this.livingEntity.getPersistentDataContainer().has(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING)){
-                rulesPassed = this.livingEntity.getPersistentDataContainer().get(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING);
+        if (getPDCLock()) {
+            try {
+                if (this.livingEntity.getPersistentDataContainer().has(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING)) {
+                    rulesPassed = this.livingEntity.getPersistentDataContainer().get(main.namespaced_keys.chanceRule_Allowed, PersistentDataType.STRING);
+                }
+                if (this.livingEntity.getPersistentDataContainer().has(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING)) {
+                    rulesDenied = this.livingEntity.getPersistentDataContainer().get(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING);
+                }
             }
-            if (this.livingEntity.getPersistentDataContainer().has(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING)){
-                rulesDenied = this.livingEntity.getPersistentDataContainer().get(main.namespaced_keys.chanceRule_Denied, PersistentDataType.STRING);
+            finally {
+                releasePDCLock();
             }
         }
 
@@ -309,7 +396,7 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
         return main.levelInterface.isLevelled(this.livingEntity);
     }
 
-    public EntityType getEntityType(){
+    public @NotNull EntityType getEntityType(){
         return this.livingEntity.getType();
     }
 
@@ -321,11 +408,11 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
     public boolean isBabyMob() {
         if (livingEntity instanceof Zombie) {
             // for backwards compatibility
-            Zombie zombie = (Zombie) livingEntity;
+            final Zombie zombie = (Zombie) livingEntity;
             try {
                 zombie.isAdult();
                 return !zombie.isAdult();
-            } catch (NoSuchMethodError err) {
+            } catch (final NoSuchMethodError err) {
                 //noinspection deprecation
                 return zombie.isBaby();
             }
@@ -338,53 +425,91 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
 
     @NotNull
     public LevelledMobSpawnReason getSpawnReason() {
-        synchronized (this.livingEntity.getPersistentDataContainer()) {
+        if (this.spawnReason != null) return this.spawnReason;
+
+        if (!getPDCLock()) return LevelledMobSpawnReason.DEFAULT;
+
+        try {
             if (livingEntity.getPersistentDataContainer().has(main.namespaced_keys.spawnReasonKey, PersistentDataType.STRING)) {
-                return LevelledMobSpawnReason.valueOf(
+                this.spawnReason = LevelledMobSpawnReason.valueOf(
                         livingEntity.getPersistentDataContainer().get(main.namespaced_keys.spawnReasonKey, PersistentDataType.STRING)
                 );
             }
         }
+        finally {
+            releasePDCLock();
+        }
 
-        return this.spawnReason;
+        return this.spawnReason != null ?
+                this.spawnReason : LevelledMobSpawnReason.DEFAULT;
     }
 
     public void setSpawnReason(final LevelledMobSpawnReason spawnReason) {
-        synchronized (this.livingEntity.getPersistentDataContainer()) {
+        this.spawnReason = spawnReason;
+
+        if (!getPDCLock()) return;
+
+        try {
             if (!livingEntity.getPersistentDataContainer().has(main.namespaced_keys.spawnReasonKey, PersistentDataType.STRING)) {
                 livingEntity.getPersistentDataContainer().set(main.namespaced_keys.spawnReasonKey, PersistentDataType.STRING, spawnReason.toString());
             }
         }
-
-        this.spawnReason = spawnReason;
+        finally {
+            releasePDCLock();
+        }
     }
 
     public void setSourceSpawnerName(final String name) {
         this.sourceSpawnerName = name;
-        synchronized (this.livingEntity.getPersistentDataContainer()){
+
+        if (!getPDCLock()) return;
+        try {
             if (name == null && getPDC().has(main.namespaced_keys.sourceSpawnerName, PersistentDataType.STRING))
                 getPDC().remove(main.namespaced_keys.sourceSpawnerName);
             else if (name != null)
                 getPDC().set(main.namespaced_keys.sourceSpawnerName, PersistentDataType.STRING, name);
         }
+        finally {
+            releasePDCLock();
+        }
     }
 
     @Nullable
     public String getSourceSpawnerName(){
-        String spawnerName = this.sourceSpawnerName;
+        if (this.sourceSpawnerName != null) return this.sourceSpawnerName;
 
-        if (this.sourceSpawnerName == null){
-            synchronized (livingEntity.getPersistentDataContainer()){
+        if (getPDCLock()) {
+            try {
                 if (getPDC().has(main.namespaced_keys.sourceSpawnerName, PersistentDataType.STRING))
-                    spawnerName = getPDC().get(main.namespaced_keys.sourceSpawnerName, PersistentDataType.STRING);
-            }
-            if (spawnerName == null){
-                this.sourceSpawnerName = "(none)";
-                spawnerName = this.sourceSpawnerName;
+                    this.sourceSpawnerName = getPDC().get(main.namespaced_keys.sourceSpawnerName, PersistentDataType.STRING);
+            } finally {
+                releasePDCLock();
             }
         }
 
-        return spawnerName;
+        if (this.sourceSpawnerName == null)
+            this.sourceSpawnerName = "(none)";
+
+        return this.sourceSpawnerName;
+    }
+
+    @Nullable
+    public String getSourceSpawnEggName(){
+        if (this.sourceSpawnEggName != null) return this.sourceSpawnEggName;
+
+        if (getPDCLock()) {
+            try {
+                if (getPDC().has(main.namespaced_keys.spawnerEggName, PersistentDataType.STRING))
+                    this.sourceSpawnEggName = getPDC().get(main.namespaced_keys.spawnerEggName, PersistentDataType.STRING);
+            } finally {
+                releasePDCLock();
+            }
+        }
+
+        if (this.sourceSpawnEggName == null)
+            this.sourceSpawnEggName = "(none)";
+
+        return this.sourceSpawnEggName;
     }
 
     @NotNull
@@ -424,16 +549,14 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
 
     @Nullable
     public String getOverridenEntityName(){
-        synchronized (this.livingEntity.getPersistentDataContainer()) {
+        if (!getPDCLock()) return null;
+
+        try {
             return livingEntity.getPersistentDataContainer().get(main.namespaced_keys.overridenEntityNameKey, PersistentDataType.STRING);
         }
-    }
-
-    @Nullable
-    public List<String> getSpawnedWGRegions(){
-        if (!hasCache) buildCache();
-
-        return this.spawnedWGRegions;
+        finally {
+            releasePDCLock();
+        }
     }
 
     @NotNull
@@ -444,32 +567,61 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
     }
 
     public void setOverridenEntityName(final String name){
-        synchronized (this.getLivingEntity().getPersistentDataContainer()) {
+        if (!getPDCLock()) return;
+        try {
             livingEntity.getPersistentDataContainer().set(main.namespaced_keys.overridenEntityNameKey, PersistentDataType.STRING, name);
+        }
+        finally {
+            releasePDCLock();
         }
     }
 
     public void setShouldShowLM_Nametag(final boolean doShow){
-        synchronized (this.livingEntity.getPersistentDataContainer()) {
+        if (!getPDCLock()) return;
+
+        try {
             if (doShow && getPDC().has(main.namespaced_keys.denyLM_Nametag, PersistentDataType.INTEGER))
                 getPDC().remove(main.namespaced_keys.denyLM_Nametag);
             else if (!doShow && !getPDC().has(main.namespaced_keys.denyLM_Nametag, PersistentDataType.INTEGER))
                 getPDC().set(main.namespaced_keys.denyLM_Nametag, PersistentDataType.INTEGER, 1);
         }
-    }
-
-    public boolean getShouldShowLM_Nametag(){
-        synchronized (this.livingEntity.getPersistentDataContainer()) {
-            return !getPDC().has(main.namespaced_keys.denyLM_Nametag, PersistentDataType.INTEGER);
+        finally {
+            releasePDCLock();
         }
     }
 
-    public void setSpawnedTimeOfDay(final int ticks){
-        synchronized (livingEntity.getPersistentDataContainer()) {
-            if (getPDC().has(main.namespaced_keys.spawnedTimeOfDay, PersistentDataType.INTEGER))
-                return;
+    public boolean getShouldShowLM_Nametag(){
+        if (!getPDCLock()) return true;
 
-            getPDC().set(main.namespaced_keys.spawnedTimeOfDay, PersistentDataType.INTEGER, ticks);
+        try {
+            return !getPDC().has(main.namespaced_keys.denyLM_Nametag, PersistentDataType.INTEGER);
+        }
+        finally {
+            releasePDCLock();
+        }
+    }
+
+    public void setSpawnedTimeOfDay(final int ticks) {
+        if (!getPDCLock()) return;
+
+        try {
+            for (int i = 0; i < 2; i++) {
+                try {
+                    if (getPDC().has(main.namespaced_keys.spawnedTimeOfDay, PersistentDataType.INTEGER))
+                        return;
+
+                    getPDC().set(main.namespaced_keys.spawnedTimeOfDay, PersistentDataType.INTEGER, ticks);
+                } catch (final java.util.ConcurrentModificationException ignored) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (final InterruptedException ignored2) {
+                        break;
+                    }
+                }
+            }
+        }
+        finally {
+            releasePDCLock();
         }
 
         this.spawnedTimeOfDay = ticks;
@@ -496,10 +648,10 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
     private Set<String> buildApplicableGroupsForMob(){
         final Set<String> groups = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
-        for (final String groupName : main.customMobGroups.keySet()){
-            final Set<String> mobNames = main.customMobGroups.get(groupName);
+        for (final Map.Entry<String, Set<String>> mobGroup : main.customMobGroups.entrySet()){
+            final Set<String> mobNames = mobGroup.getValue();
             if (mobNames.contains(this.getTypeName()))
-                groups.add(groupName);
+                groups.add(mobGroup.getKey());
         }
 
         groups.add(CustomUniversalGroups.ALL_MOBS.toString());
@@ -516,18 +668,18 @@ public class LivingEntityWrapper extends LivingEntityWrapperBase implements Livi
             groups.add(CustomUniversalGroups.ALL_AQUATIC_MOBS.toString());
         }
 
-        if (livingEntity.getWorld().getEnvironment().equals(World.Environment.NORMAL)){
+        if (livingEntity.getWorld().getEnvironment() == World.Environment.NORMAL){
             groups.add(CustomUniversalGroups.ALL_OVERWORLD_MOBS.toString());
-        } else if (livingEntity.getWorld().getEnvironment().equals(World.Environment.NETHER)){
+        } else if (livingEntity.getWorld().getEnvironment() == World.Environment.NETHER){
             groups.add(CustomUniversalGroups.ALL_NETHER_MOBS.toString());
         }
 
-        if (livingEntity instanceof Flying || eType.equals(EntityType.PARROT) || eType.equals(EntityType.BAT)){
+        if (livingEntity instanceof Flying || eType == EntityType.PARROT || eType == EntityType.BAT){
             groups.add(CustomUniversalGroups.ALL_FLYING_MOBS.toString());
         }
 
         // why bats aren't part of Flying interface is beyond me
-        if (!(livingEntity instanceof Flying) && !(livingEntity instanceof WaterMob) && !(livingEntity instanceof Boss) && !(eType.equals(EntityType.BAT))){
+        if (!(livingEntity instanceof Flying) && !(livingEntity instanceof WaterMob) && !(livingEntity instanceof Boss) && eType != EntityType.BAT){
             groups.add(CustomUniversalGroups.ALL_GROUND_MOBS.toString());
         }
 

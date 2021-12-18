@@ -10,13 +10,16 @@ import org.bukkit.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +31,7 @@ import java.util.regex.Pattern;
  */
 public class FileMigrator {
 
-    private static int getFieldDepth(@NotNull String line) {
+    private static int getFieldDepth(@NotNull final String line) {
         int whiteSpace = 0;
 
         for (int i = 0; i < line.length(); i++) {
@@ -39,27 +42,27 @@ public class FileMigrator {
     }
 
     private static class FieldInfo {
-        public String simpleValue;
-        public List<String> valueList;
-        public final int depth;
-        public boolean hasValue;
+        String simpleValue;
+        List<String> valueList;
+        final int depth;
+        boolean hasValue;
 
-        public FieldInfo(final String value, int depth) {
+        FieldInfo(final String value, final int depth) {
             this.simpleValue = value;
             this.depth = depth;
         }
 
-        public FieldInfo(final String value, final int depth, final boolean isListValue) {
+        FieldInfo(final String value, final int depth, final boolean isListValue) {
             if (isListValue) addListValue(value);
             else this.simpleValue = value;
             this.depth = depth;
         }
 
-        public boolean isList(){
+        boolean isList(){
             return valueList != null;
         }
 
-        public void addListValue(final String value){
+        void addListValue(final String value){
             if (valueList == null) valueList = new LinkedList<>();
             valueList.add(value);
         }
@@ -80,15 +83,15 @@ public class FileMigrator {
     }
 
     private static class KeySectionInfo{
-        public KeySectionInfo(){
+        KeySectionInfo(){
             this.lines = new LinkedList<>();
         }
 
-        public int lineNumber;
-        @Nonnull
-        final public List<String> lines;
-        public int sectionNumber;
-        public int sectionStartingLine;
+        int lineNumber;
+        @NotNull
+        final List<String> lines;
+        int sectionNumber;
+        int sectionStartingLine;
     }
 
     private static String getKeyFromList(final @NotNull List<String> list, final String currentKey){
@@ -112,9 +115,7 @@ public class FileMigrator {
         final int worldListExcludedLine = worldListAllowedLine + 1;
 
         final YamlConfiguration settings = YamlConfiguration.loadConfiguration(fileSettings);
-        final YamlConfiguration rules = YamlConfiguration.loadConfiguration(fileRules);
         try {
-            final List<String> settingsLines = Files.readAllLines(fileSettings.toPath(), StandardCharsets.UTF_8);
             final List<String> rulesLines = Files.readAllLines(fileRules.toPath(), StandardCharsets.UTF_8);
 
             final String worldMode = settings.getString("allowed-worlds-list.mode");
@@ -135,7 +136,7 @@ public class FileMigrator {
 
             Files.write(fileRules.toPath(), rulesLines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
             Utils.logger.info("&fFile Loader: &8(Migration) &7Migrated &bworld allowed list&7 successfully.");
-            final List<String> msg = Arrays.asList("\n&c[WARNING] LevelledMobs3 Settings have Reset!",
+            final List<String> msg = List.of("\n&c[WARNING] LevelledMobs3 Settings have Reset!",
                     "\n&c[WARNING] Your original LM configuration files have been saved!",
                     "\n&c[WARNING]&r Due to significant changes, most settings WILL NOT MIGRATE from LM2.X to LM3.X.",
                     "\n&c[WARNING]&r You must edit rules.yml to further customize LM!",
@@ -144,7 +145,7 @@ public class FileMigrator {
             final String msg2 = Utils.colorizeAllInList(msg).toString();
             Utils.logger.warning(msg2.substring(1, msg2.length() - 2));
             main.migratedFromPre30 = true;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
@@ -165,9 +166,9 @@ public class FileMigrator {
         return sb.toString();
     }
 
-    protected static void copyCustomDrops(@NotNull final File from, @NotNull final File to, final int fileVersion){
-        TreeMap<String, KeySectionInfo> keySections_Old;
-        TreeMap<String, KeySectionInfo> keySections_New;
+    static void copyCustomDrops(@NotNull final File from, @NotNull final File to, final int fileVersion){
+        final Map<String, KeySectionInfo> keySections_Old;
+        Map<String, KeySectionInfo> keySections_New;
 
         try {
             final List<String> oldConfigLines = Files.readAllLines(from.toPath(), StandardCharsets.UTF_8);
@@ -176,10 +177,11 @@ public class FileMigrator {
             keySections_Old = buildKeySections(oldConfigLines);
             keySections_New = buildKeySections(newConfigLines);
 
-            for (final String key : keySections_Old.keySet()){
+            for (final Map.Entry<String, KeySectionInfo> keys : keySections_Old.entrySet()){
+                final String key = keys.getKey();
                 if (key.toLowerCase().startsWith("file-version")) continue;
 
-                final KeySectionInfo oldSection = keySections_Old.get(key);
+                final KeySectionInfo oldSection = keys.getValue();
                 if (keySections_New.containsKey(key)){
                     // overwrite new section if different
                     final KeySectionInfo newSection = keySections_New.get(key);
@@ -205,8 +207,7 @@ public class FileMigrator {
                     }
 
                     if (oldSection.sectionNumber > 0) {
-                        for (final String temp : keySections_New.keySet()){
-                            final KeySectionInfo tempSection = keySections_New.get(temp);
+                        for (final KeySectionInfo tempSection : keySections_New.values()){
                             if (tempSection.sectionNumber == oldSection.sectionNumber && tempSection.sectionStartingLine > 0){
                                 insertAt = tempSection.sectionStartingLine;
                             }
@@ -228,7 +229,7 @@ public class FileMigrator {
             // build an index so we can modify the collection as we enumerate thru it
             Files.write(to.toPath(), newConfigLines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
             Utils.logger.info("&fFile Loader: &8(Migration) &7Migrated &b" + to.getName() + "&7 successfully.");
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Utils.logger.error("&fFile Loader: &8(Migration) &7Failed to migrate &b" + to.getName() + "&7! Stack trace:");
             e.printStackTrace();
         }
@@ -245,9 +246,9 @@ public class FileMigrator {
     }
 
     @NotNull
-    private static TreeMap<String, KeySectionInfo> buildKeySections(@NotNull final List<String> contents){
+    private static Map<String, KeySectionInfo> buildKeySections(@NotNull final List<String> contents){
 
-        final TreeMap<String, KeySectionInfo> sections = new TreeMap<>();
+        final Map<String, KeySectionInfo> sections = new TreeMap<>();
         KeySectionInfo keySection = null;
         String keyName = null;
         int sectionNumber = 0;
@@ -313,7 +314,7 @@ public class FileMigrator {
         return 0;
     }
 
-    protected static void migrateRules(File from, @NotNull File to, int oldVersion) {
+    static void migrateRules(@NotNull final File to) {
         try {
             final List<String> newConfigLines = Files.readAllLines(to.toPath(), StandardCharsets.UTF_8);
             boolean hasVisibleTime = false;
@@ -328,7 +329,7 @@ public class FileMigrator {
                 final String line = newConfigLines.get(i);
                 if (line.trim().startsWith("#")) continue;
 
-                int startOfText = line.toLowerCase().indexOf("creature-nametag-always-visible:");
+                final int startOfText = line.toLowerCase().indexOf("creature-nametag-always-visible:");
                 if (startOfText > 0){
                     String newline = line.substring(0, startOfText) + "nametag-visibility-method: ['TARGETED', 'ATTACKED', 'TRACKING']";
                     newConfigLines.set(i, newline);
@@ -346,12 +347,12 @@ public class FileMigrator {
 
             Files.write(to.toPath(), newConfigLines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
         }
-        catch (IOException e){
+        catch (final IOException e){
             e.printStackTrace();
         }
     }
 
-    protected static void copyYmlValues(File from, @NotNull File to, int oldVersion) {
+    static void copyYmlValues(final File from, @NotNull final File to, final int oldVersion) {
 
         final String regexPattern = "^[^':]*:.*";
         final boolean isSettings = to.getName().equalsIgnoreCase("settings.yml");
@@ -361,7 +362,7 @@ public class FileMigrator {
         final List<String> processedKeys = new LinkedList<>();
 
         // version 20 = 1.34 - last version before 2.0
-        final List<String> version20KeysToKeep = Arrays.asList(
+        final List<String> version20KeysToKeep = List.of(
                 "level-passive",
                 "fine-tuning.min-level",
                 "fine-tuning.max-level",
@@ -374,7 +375,7 @@ public class FileMigrator {
                 "use-update-checker");
 
         // version 2.1.0 - these fields should be reset to default
-        final List<String> version24Resets = Arrays.asList(
+        final List<String> version24Resets = List.of(
                 "fine-tuning.additions.movement-speed",
                 "fine-tuning.additions.attack-damage",
                 "world-level-override.min-level.example_world_123",
@@ -383,13 +384,13 @@ public class FileMigrator {
         );
 
         // version 2.2.0 - these fields should be reset to default
-        final List<String> version26Resets = Arrays.asList(
+        final List<String> version26Resets = List.of(
                 "world-level-override.min-level.example_world_123",
                 "world-level-override.max-level.example_world_123",
                 "world-level-override.max-level.example_world_456"
         );
 
-        final List<String> messagesExempt_v5 = Arrays.asList(
+        final List<String> messagesExempt_v5 = List.of(
                 "command.levelledmobs.spawner.usage",
                 "command.levelledmobs.spawner.spawner-give-message"
         );
@@ -401,7 +402,7 @@ public class FileMigrator {
             final List<String> oldConfigLines = Files.readAllLines(from.toPath(), StandardCharsets.UTF_8);
             final List<String> newConfigLines = Files.readAllLines(to.toPath(), StandardCharsets.UTF_8);
 
-            final SortedMap<String, FileMigrator.FieldInfo> oldConfigMap = getMapFromConfig(oldConfigLines);
+            final SortedMap<String, FieldInfo> oldConfigMap = getMapFromConfig(oldConfigLines);
             final SortedMap<String, FileMigrator.FieldInfo> newConfigMap = getMapFromConfig(newConfigLines);
             final List<String> currentKey = new LinkedList<>();
             int keysMatched = 0;
@@ -415,8 +416,8 @@ public class FileMigrator {
                     if (line.trim().startsWith("#") || line.trim().isEmpty()) continue;
 
                     if (line.matches(regexPattern)) {
-                        int firstColon = line.indexOf(":");
-                        boolean hasValues = line.length() > firstColon + 1;
+                        final int firstColon = line.indexOf(':');
+                        final boolean hasValues = line.length() > firstColon + 1;
                         String key = line.substring(0, firstColon).replace("\t", "").trim();
                         final String keyOnly = key;
                         String oldKey = key;
@@ -444,7 +445,7 @@ public class FileMigrator {
                                 // arrays go here:
                                 if (fiOld.isList()) {
                                     // add any values present in old list that might not be present in new
-                                    for (String oldValue : fiOld.valueList) {
+                                    for (final String oldValue : fiOld.valueList) {
                                         if (!fiNew.isList() || !fiNew.valueList.contains(oldValue)) {
                                             final String newline = padding + "- " + oldValue; // + "\r\n" + line;
                                             newConfigLines.add(currentLine + 1, newline);
@@ -455,7 +456,8 @@ public class FileMigrator {
                                 } else {
                                     // non-array values go here.  Loop thru and find any subkeys under here
                                     final int numOfPeriods = countPeriods(key);
-                                    for (final String enumeratedKey : oldConfigMap.keySet()) {
+                                    for (final Map.Entry<String, FieldInfo> entry : oldConfigMap.entrySet()) {
+                                        final String enumeratedKey = entry.getKey();
                                         if (isSettings && oldVersion > 20 && oldVersion <= 24 && version24Resets.contains(enumeratedKey))
                                             continue;
                                         if (isSettings && oldVersion > 24 && oldVersion <= 26 && version26Resets.contains(enumeratedKey))
@@ -463,9 +465,8 @@ public class FileMigrator {
 
                                         final int numOfPeriods_Enumerated = countPeriods(enumeratedKey);
                                         if (enumeratedKey.startsWith(key) && numOfPeriods_Enumerated == numOfPeriods + 1 && !newConfigMap.containsKey(enumeratedKey)) {
-                                            final FileMigrator.FieldInfo fi = oldConfigMap.get(enumeratedKey);
+                                            final FileMigrator.FieldInfo fi = entry.getValue();
                                             if (!fi.isList() && fi.simpleValue != null) {
-                                                final String newPadding = getPadding(depth * 2);
                                                 final String newline = padding + getEndingKey(enumeratedKey) + ": " + fi.simpleValue;
                                                 newConfigLines.add(currentLine + 1, newline);
                                                 if (showMessages)
@@ -508,7 +509,8 @@ public class FileMigrator {
                             final String parentKey = getParentKey(key);
                             if (fi.hasValue && parentKey != null && !processedKeys.contains(parentKey)){
                                 // here's where we add values from the old config not present in the new
-                                for (String oldValue : oldConfigMap.keySet()){
+                                for (final Map.Entry<String, FieldInfo> entry : oldConfigMap.entrySet()){
+                                    final String oldValue = entry.getKey();
                                     if (!oldValue.startsWith(parentKey)) continue;
                                     if (newConfigMap.containsKey(oldValue)) continue;
                                     if (!isEntitySameSubkey(parentKey, oldValue)) continue;
@@ -516,7 +518,7 @@ public class FileMigrator {
                                     if (isSettings && oldVersion > 24 && oldVersion <= 26 && version26Resets.contains(oldValue)) continue;
                                     if (isMessages && oldVersion <= 5 && messagesExempt_v5.contains(key)) continue;
 
-                                    FileMigrator.FieldInfo fiOld = oldConfigMap.get(oldValue);
+                                    final FileMigrator.FieldInfo fiOld = entry.getValue();
                                     if (fiOld.isList()) continue;
                                     final String padding = getPadding(depth * 2);
                                     final String newline = padding + getEndingKey(oldValue) + ": " + fiOld.simpleValue;
@@ -536,12 +538,6 @@ public class FileMigrator {
                                 }
                             } else
                                 valuesMatched++;
-                        }
-                        else {
-                            // keys present in the new config but not the old one fall here
-                            if (isSettings && oldVersion < 32 && keyOnly.equalsIgnoreCase("async-task-update-period")){
-
-                            }
                         }
                     } else if (line.trim().startsWith("-")) {
                         final String key = getKeyFromList(currentKey, null);
@@ -563,7 +559,7 @@ public class FileMigrator {
                 int startAt = 0;
 
                 for (int i = 0; i < newConfigLines.size(); i++){
-                    String line = newConfigLines.get(i).trim();
+                    final String line = newConfigLines.get(i).trim();
 
                     if (line.toLowerCase().startsWith("file-version")){
                         startAt = i + 1;
@@ -589,7 +585,7 @@ public class FileMigrator {
             Files.write(to.toPath(), newConfigLines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
             Utils.logger.info("&fFile Loader: &8(Migration) &7Migrated &b" + to.getName() + "&7 successfully.");
             Utils.logger.info(String.format("&fFile Loader: &8(Migration) &7Keys matched: &b%s&7, values matched: &b%s&7, values updated: &b%s&7.", keysMatched, valuesMatched, valuesUpdated));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Utils.logger.error("&fFile Loader: &8(Migration) &7Failed to migrate &b" + to.getName() + "&7! Stack trace:");
             e.printStackTrace();
         }
@@ -611,29 +607,29 @@ public class FileMigrator {
     }
 
     private static boolean isEntitySameSubkey(@NotNull final String key1, @NotNull final String key2){
-        final int lastPeriod = key2.lastIndexOf(".");
+        final int lastPeriod = key2.lastIndexOf('.');
         final String checkKey = lastPeriod > 0 ? key2.substring(0, lastPeriod) : key2;
 
         return (key1.equalsIgnoreCase(checkKey));
     }
 
     @NotNull
-    private static String getEndingKey(@NotNull String input){
-        final int lastPeriod = input.lastIndexOf(".");
+    private static String getEndingKey(@NotNull final String input){
+        final int lastPeriod = input.lastIndexOf('.');
         if (lastPeriod < 0) return input;
 
         return input.substring(lastPeriod + 1);
     }
 
     @Nullable
-    private static String getParentKey(@NotNull String input){
-        final int lastPeriod = input.lastIndexOf(".");
+    private static String getParentKey(@NotNull final String input){
+        final int lastPeriod = input.lastIndexOf('.');
         if (lastPeriod < 0) return null;
 
         return input.substring(0, lastPeriod);
     }
 
-    private static int getFirstNonCommentLine(@NotNull List<String> input){
+    private static int getFirstNonCommentLine(@NotNull final List<String> input){
         for (int lineNum = 0; lineNum < input.size(); lineNum++) {
             final String line = input.get(lineNum).replace("\t", "").trim();
             if (line.startsWith("#") || line.isEmpty()) continue;
@@ -643,15 +639,13 @@ public class FileMigrator {
         return -1;
     }
 
-    @Nonnull
-    private static SortedMap<String, FileMigrator.FieldInfo> getMapFromConfig(@NotNull List<String> input) {
+    @NotNull
+    private static SortedMap<String, FileMigrator.FieldInfo> getMapFromConfig(@NotNull final List<String> input) {
         final SortedMap<String, FileMigrator.FieldInfo> configMap = new TreeMap<>();
         final List<String> currentKey = new LinkedList<>();
         final String regexPattern = "^[^':]*:.*";
 
-        int lineNum = -1;
         for (String line : input) {
-            lineNum++;
 
             final int depth = getFieldDepth(line);
             line = line.replace("\t", "").trim();
@@ -659,15 +653,15 @@ public class FileMigrator {
 
             //if (line.contains(":")) {
             if (line.matches(regexPattern)) {
-                int firstColon = line.indexOf(":");
-                boolean hasValues = line.length() > firstColon + 1;
+                final int firstColon = line.indexOf(':');
+                final boolean hasValues = line.length() > firstColon + 1;
                 String key = line.substring(0, firstColon).replace("\t", "").trim();
                 final String origKey = key;
 
                 if (origKey.startsWith("-")) {
                     if (currentKey.size() > depth)
                         while (currentKey.size() > depth) currentKey.remove(currentKey.size() - 1);
-                    String temp = origKey.substring(1).trim();
+                    final String temp = origKey.substring(1).trim();
                     String tempKey;
                     for (int i = 0; i < 100; i++) {
                         tempKey = String.format("%s[%s]", temp, i);
@@ -702,7 +696,7 @@ public class FileMigrator {
                 final String key = getKeyFromList(currentKey, null);
                 final String value = line.trim().substring(1).trim();
                 if (configMap.containsKey(key)) {
-                    FileMigrator.FieldInfo fi = configMap.get(key);
+                    final FileMigrator.FieldInfo fi = configMap.get(key);
                     fi.addListValue(value);
                 } else
                     configMap.put(key, new FileMigrator.FieldInfo(value, depth, true));

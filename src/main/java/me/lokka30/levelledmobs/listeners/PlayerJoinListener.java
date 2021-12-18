@@ -6,10 +6,13 @@ package me.lokka30.levelledmobs.listeners;
 
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
-import me.lokka30.levelledmobs.misc.NametagTimerChecker;
+import me.lokka30.levelledmobs.misc.PlayerQueueItem;
 import me.lokka30.levelledmobs.misc.Utils;
-import me.lokka30.microlib.MessageUtils;
+import me.lokka30.microlib.messaging.MessageUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -20,12 +23,12 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.WeakHashMap;
 
 /**
  * Listens for when a player joins, leaves or changes worlds so that
@@ -44,9 +47,9 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(@NotNull final PlayerJoinEvent event) {
-        synchronized (NametagTimerChecker.nametagTimer_Lock){
-            main.nametagTimerChecker.nametagCooldownQueue.put(event.getPlayer(), new WeakHashMap<>());
-        }
+        main.companion.addRecentlyJoinedPlayer(event.getPlayer());
+        checkForNetherPortalCoords(event.getPlayer());
+        main.nametagTimerChecker.addPlayerToQueue(new PlayerQueueItem(event.getPlayer(), true));
         parseCompatibilityChecker(event.getPlayer());
         parseUpdateChecker(event.getPlayer());
 
@@ -57,6 +60,33 @@ public class PlayerJoinListener implements Listener {
         }
     }
 
+    private void checkForNetherPortalCoords(final @NotNull Player player){
+        final NamespacedKey[] keys = { main.namespaced_keys.playerNetherCoords, main.namespaced_keys.playerNetherCoords_IntoWorld };
+        try{
+            for (int i = 0; i < keys.length; i++) {
+                final NamespacedKey useKey = keys[i];
+                if (!player.getPersistentDataContainer().has(useKey, PersistentDataType.STRING))
+                    continue;
+
+                final String netherCoords = player.getPersistentDataContainer().get(useKey, PersistentDataType.STRING);
+                if (netherCoords == null) continue;
+                final String[] coords = netherCoords.split(",");
+                if (coords.length != 4) continue;
+                final World world = Bukkit.getWorld(coords[0]);
+                if (world == null) continue;
+                final Location location = new Location(world, Integer.parseInt(coords[1]), Integer.parseInt(coords[2]), Integer.parseInt(coords[3]));
+
+                if (i == 0)
+                    main.companion.setPlayerNetherPortalLocation(player, location);
+                else
+                    main.companion.setPlayerWorldPortalLocation(player, location);
+            }
+        }
+        catch (Exception e){
+            Utils.logger.warning("Unable to get player nether portal coords from " + player.getName() + ", " + e.getMessage());
+        }
+    }
+
     @EventHandler(priority = EventPriority.MONITOR)
     private void onPlayerQuitEvent(final PlayerQuitEvent event){
         if (main.placeholderApiIntegration != null)
@@ -64,9 +94,8 @@ public class PlayerJoinListener implements Listener {
 
         main.companion.spawner_CopyIds.remove(event.getPlayer().getUniqueId());
         main.companion.spawner_InfoIds.remove(event.getPlayer().getUniqueId());
-        synchronized (NametagTimerChecker.nametagTimer_Lock) {
-            main.nametagTimerChecker.nametagCooldownQueue.remove(event.getPlayer());
-        }
+        main.nametagTimerChecker.addPlayerToQueue(new PlayerQueueItem(event.getPlayer(), false));
+
         if (main.placeholderApiIntegration != null)
             main.placeholderApiIntegration.removePlayer(event.getPlayer());
     }
@@ -76,9 +105,13 @@ public class PlayerJoinListener implements Listener {
         updateNametagsInWorldAsync(event.getPlayer(), event.getPlayer().getWorld().getEntities());
     }
 
+    @SuppressWarnings("ConstantConditions")
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onTeleport(@NotNull final PlayerTeleportEvent event) {
-        if (event.getTo() != null && event.getTo().getWorld() != null)
+        // on spigot API .getTo is nullable but not Paper
+        // only update tags if teleported to a different world
+        if (event.getTo() != null && event.getTo().getWorld() != null && event.getFrom().getWorld() != null
+                && event.getFrom().getWorld() != event.getTo().getWorld())
             updateNametagsInWorldAsync(event.getPlayer(), event.getTo().getWorld().getEntities());
     }
 
@@ -116,7 +149,7 @@ public class PlayerJoinListener implements Listener {
         }
     }
 
-    void parseCompatibilityChecker(@NotNull final Player player) {
+    private void parseCompatibilityChecker(@NotNull final Player player) {
         // Player must have permission
         if (!player.hasPermission("levelledmobs.compatibility-notice")) return;
 
@@ -128,12 +161,12 @@ public class PlayerJoinListener implements Listener {
 
         List<String> messages = main.messagesCfg.getStringList("other.compatibility-notice.messages");
         messages = Utils.replaceAllInList(messages, "%prefix%", main.configUtils.getPrefix());
-        messages = Utils.replaceAllInList(messages, "%incompatibilities%", main.incompatibilitiesAmount + "");
+        messages = Utils.replaceAllInList(messages, "%incompatibilities%", String.valueOf(main.incompatibilitiesAmount));
         messages = Utils.colorizeAllInList(messages);
         messages.forEach(player::sendMessage);
     }
 
-    void parseUpdateChecker(final Player player) {
+    private void parseUpdateChecker(final Player player) {
         if (main.messagesCfg.getBoolean("other.update-notice.send-on-join", true) && player.hasPermission("levelledmobs.receive-update-notifications"))
             main.companion.updateResult.forEach(player::sendMessage);
     }

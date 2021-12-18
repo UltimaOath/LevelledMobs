@@ -5,7 +5,15 @@
 package me.lokka30.levelledmobs.commands;
 
 import me.lokka30.levelledmobs.LevelledMobs;
-import me.lokka30.levelledmobs.commands.subcommands.*;
+import me.lokka30.levelledmobs.commands.subcommands.CompatibilitySubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.DebugSubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.InfoSubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.KillSubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.ReloadSubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.RulesSubcommand;
+import me.lokka30.levelledmobs.commands.subcommands.SpawnerEggCommand;
+import me.lokka30.levelledmobs.commands.subcommands.SpawnerSubCommand;
+import me.lokka30.levelledmobs.commands.subcommands.SummonSubcommand;
 import me.lokka30.levelledmobs.misc.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,22 +38,29 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
 
     public LevelledMobsCommand(final LevelledMobs main) {
         this.main = main;
+        compatibilitySubcommand = new CompatibilitySubcommand(main);
+        debugSubcommand = new DebugSubcommand(main);
+        infoSubcommand = new InfoSubcommand(main);
+        killSubcommand = new KillSubcommand(main);
         spawnerSubCommand = new SpawnerSubCommand(main);
+        reloadSubcommand = new ReloadSubcommand();
         rulesSubcommand = new RulesSubcommand(main);
+        spawnerEggCommand = new SpawnerEggCommand(main);
+        summonSubcommand = new SummonSubcommand(main);
     }
 
     // Retain alphabetical order please.
-    private final CompatibilitySubcommand compatibilitySubcommand = new CompatibilitySubcommand();
-    private final GenerateMobDataSubcommand generateMobDataSubcommand = new GenerateMobDataSubcommand();
-    private final InfoSubcommand infoSubcommand = new InfoSubcommand();
-    private final KillSubcommand killSubcommand = new KillSubcommand();
-    private final ReloadSubcommand reloadSubcommand = new ReloadSubcommand();
+    private final CompatibilitySubcommand compatibilitySubcommand;
+    private final DebugSubcommand debugSubcommand;
+    private final InfoSubcommand infoSubcommand;
+    private final KillSubcommand killSubcommand;
+    private final ReloadSubcommand reloadSubcommand;
     private final RulesSubcommand rulesSubcommand;
-    private final SpawnerSubCommand spawnerSubCommand;
-    private final SummonSubcommand summonSubcommand = new SummonSubcommand();
-    private final DebugSubcommand debugSubcommand = new DebugSubcommand();
+    private final SpawnerEggCommand spawnerEggCommand;
+    public final SpawnerSubCommand spawnerSubCommand;
+    private final SummonSubcommand summonSubcommand;
 
-    public boolean onCommand(@NotNull final CommandSender sender, final Command command, final String label, final String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, final @NotNull Command command, final @NotNull String label, final String[] args) {
         if (sender.hasPermission("levelledmobs.command")) {
             if (args.length == 0) {
                 sendMainUsage(sender, label);
@@ -57,9 +72,6 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
                         break;
                     case "debug":
                         debugSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "generatemobdata":
-                        generateMobDataSubcommand.parseSubcommand(main, sender, label, args);
                         break;
                     case "info":
                         infoSubcommand.parseSubcommand(main, sender, label, args);
@@ -78,6 +90,9 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
                         break;
                     case "summon":
                         summonSubcommand.parseSubcommand(main, sender, label, args);
+                        break;
+                    case "egg":
+                        spawnerEggCommand.parseSubcommand(main, sender, label, args);
                         break;
                     default:
                         sendMainUsage(sender, label);
@@ -99,12 +114,12 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
     }
 
     // Retain alphabetical order please.
-    private final List<String> commandsToCheck = Arrays.asList("debug", "summon", "kill", "reload", "info", "compatibility", "spawner", "rules");
+    private final List<String> commandsToCheck = Arrays.asList("debug", "egg", "summon", "kill", "reload", "info", "compatibility", "spawner", "rules");
 
     @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command cmd, final String alias, @NotNull final String @NotNull [] args) {
+    public List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command cmd, final @NotNull String alias, @NotNull final String @NotNull [] args) {
         if (args.length == 1) {
-            List<String> suggestions = new LinkedList<>();
+            final List<String> suggestions = new LinkedList<>();
 
             commandsToCheck.forEach(command -> {
                 if (sender.hasPermission("levelledmobs.command." + command)) {
@@ -116,8 +131,6 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
         } else {
             switch (args[0].toLowerCase()) {
                 // Retain alphabetical order please.
-                case "generatemobdata":
-                    return generateMobDataSubcommand.parseTabCompletions(main, sender, args);
                 case "kill":
                     return killSubcommand.parseTabCompletions(main, sender, args);
                 case "rules":
@@ -126,6 +139,8 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
                     return spawnerSubCommand.parseTabCompletions(main, sender, args);
                 case "summon":
                     return summonSubcommand.parseTabCompletions(main, sender, args);
+                case "egg":
+                    return spawnerEggCommand.parseTabCompletions(main, sender, args);
                 // the missing subcommands don't have tab completions, don't bother including them.
                 default:
                     return Collections.emptyList();

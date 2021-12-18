@@ -4,25 +4,44 @@
 
 package me.lokka30.levelledmobs;
 
+import me.lokka30.levelledmobs.commands.LevelledMobsCommand;
 import me.lokka30.levelledmobs.customdrops.CustomDropsHandler;
 import me.lokka30.levelledmobs.listeners.BlockPlaceListener;
 import me.lokka30.levelledmobs.listeners.ChunkLoadListener;
 import me.lokka30.levelledmobs.listeners.EntityDamageDebugListener;
 import me.lokka30.levelledmobs.listeners.PlayerInteractEventListener;
-import me.lokka30.levelledmobs.managers.*;
-import me.lokka30.levelledmobs.misc.*;
+import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
+import me.lokka30.levelledmobs.managers.LevelManager;
+import me.lokka30.levelledmobs.managers.MobDataManager;
+import me.lokka30.levelledmobs.managers.MobHeadManager;
+import me.lokka30.levelledmobs.managers.MobsQueueManager;
+import me.lokka30.levelledmobs.managers.NametagQueueManager;
+import me.lokka30.levelledmobs.managers.PlaceholderApiIntegration;
+import me.lokka30.levelledmobs.misc.ConfigUtils;
+import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.Namespaced_Keys;
+import me.lokka30.levelledmobs.misc.NametagTimerChecker;
+import me.lokka30.levelledmobs.misc.Utils;
+import me.lokka30.levelledmobs.misc.YmlParsingHelper;
 import me.lokka30.levelledmobs.rules.RulesManager;
 import me.lokka30.levelledmobs.rules.RulesParsingManager;
-import me.lokka30.microlib.QuickTimer;
+import me.lokka30.microlib.maths.QuickTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.WeakHashMap;
 
 /**
  * This is the main class of the plugin. Bukkit will call onLoad and onEnable on startup, and onDisable on shutdown.
@@ -30,17 +49,16 @@ import java.util.*;
  * @author lokka30, stumper66
  * @since 1.0
  */
-public class LevelledMobs extends JavaPlugin {
+public final class LevelledMobs extends JavaPlugin {
 
     // Manager classes
     public LevelInterface levelInterface;
     public LevelManager levelManager;
     public final MobDataManager mobDataManager = new MobDataManager(this);
-    public WorldGuardIntegration worldGuardIntegration;
     public CustomDropsHandler customDropsHandler;
-    public ChunkLoadListener chunkLoadListener;
-    public BlockPlaceListener blockPlaceListener;
-    public PlayerInteractEventListener playerInteractEventListener;
+    ChunkLoadListener chunkLoadListener;
+    BlockPlaceListener blockPlaceListener;
+    PlayerInteractEventListener playerInteractEventListener;
     public Namespaced_Keys namespaced_keys;
     public final Companion companion = new Companion(this);
     public final MobHeadManager mobHeadManager = new MobHeadManager(this);
@@ -50,6 +68,7 @@ public class LevelledMobs extends JavaPlugin {
     public final NametagQueueManager nametagQueueManager_ = new NametagQueueManager(this);
     public final NametagTimerChecker nametagTimerChecker = new NametagTimerChecker(this);
     public final Object attributeSyncObject = new Object();
+    public LevelledMobsCommand levelledMobsCommand;
     public Random random;
     public PlaceholderApiIntegration placeholderApiIntegration;
     public boolean migratedFromPre30;
@@ -66,24 +85,15 @@ public class LevelledMobs extends JavaPlugin {
 
     // Misc
     public Map<String, Set<String>> customMobGroups;
-    public EntityDamageDebugListener entityDamageDebugListener;
+    EntityDamageDebugListener entityDamageDebugListener;
     public int incompatibilitiesAmount;
     private long loadTime;
     public WeakHashMap<LivingEntity, Instant> playerLevellingEntities;
     public Stack<LivingEntityWrapper> cacheCheck;
 
     @Override
-    public void onLoad() {
-        Utils.logger.info("&f~ Initiating start-up procedure ~");
-        final QuickTimer timer = new QuickTimer(); // Record how long it takes for the plugin to load.
-
-        companion.checkWorldGuard(); // Do not move this from onLoad. It will not work otherwise.
-
-        loadTime = timer.getTimer(); // combine the load time with enable time.
-    }
-
-    @Override
     public void onEnable() {
+        Utils.logger.info("&f~ Initiating start-up procedure ~");
         final QuickTimer timer = new QuickTimer();
 
         this.namespaced_keys = new Namespaced_Keys(this);
@@ -100,7 +110,6 @@ public class LevelledMobs extends JavaPlugin {
         }
         companion.registerListeners();
         companion.registerCommands();
-        companion.loadSpigotConfig();
 
         Utils.logger.info("&fStart-up: &7Running misc procedures...");
         if (ExternalCompatibilityManager.hasProtocolLibInstalled()) {
@@ -114,7 +123,7 @@ public class LevelledMobs extends JavaPlugin {
         Utils.logger.info("&f~ Start-up complete, took &b" + loadTime + "ms&f ~");
     }
 
-    public void reloadLM(final CommandSender sender){
+    public void reloadLM(final @NotNull CommandSender sender){
         migratedFromPre30 = false;
         List<String> reloadStartedMsg = messagesCfg.getStringList("command.levelledmobs.reload.started");
         reloadStartedMsg = Utils.replaceAllInList(reloadStartedMsg, "%prefix%", configUtils.getPrefix());

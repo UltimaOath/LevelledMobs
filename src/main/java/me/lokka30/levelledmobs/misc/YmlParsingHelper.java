@@ -9,6 +9,8 @@ import org.bukkit.configuration.MemoryConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -50,7 +52,7 @@ public class YmlParsingHelper {
         if (cs == null) return defaultValue;
         final String useName = getKeyNameFromConfig(cs, name);
 
-        return cs.getString(name, defaultValue);
+        return cs.getString(useName, defaultValue);
     }
 
     @NotNull
@@ -85,15 +87,12 @@ public class YmlParsingHelper {
             return defaultValue;
     }
 
-    public double getDouble(final ConfigurationSection cs, @NotNull final String name){
-        return getDouble(cs, name, 0);
-    }
-
-    public double getDouble(final ConfigurationSection cs, @NotNull final String name, final double defaultValue){
-        if (cs == null) return defaultValue;
+    @SuppressWarnings("unused")
+    private double getDouble(final ConfigurationSection cs, @NotNull final String name){
+        if (cs == null) return 0;
         final String useName = getKeyNameFromConfig(cs, name);
 
-        return cs.getDouble(useName, defaultValue);
+        return cs.getDouble(useName, 0);
     }
 
     @Nullable
@@ -107,8 +106,49 @@ public class YmlParsingHelper {
             return defaultValue;
     }
 
+    public float getFloat(final ConfigurationSection cs, @NotNull final String name){
+        return getFloat(cs, name, 0.0F);
+    }
+
+    public float getFloat(final ConfigurationSection cs, @NotNull final String name, final float defaultValue){
+        if (cs == null) return defaultValue;
+        final String useName = getKeyNameFromConfig(cs, name);
+
+        return (float) cs.getDouble(useName, defaultValue);
+    }
+
+    @Nullable
+    public Float getFloat2(final ConfigurationSection cs, @NotNull final String name, final Float defaultValue){
+        if (cs == null) return defaultValue;
+        final String useName = getKeyNameFromConfig(cs, name);
+
+        if (cs.get(useName) != null)
+            return (float) cs.getDouble(useName);
+        else
+            return defaultValue;
+    }
+
     @NotNull
-    public String getKeyNameFromConfig(final ConfigurationSection cs, final String key){
+    public static List<String> getListFromConfigItem(@NotNull final ConfigurationSection cs, final String key){
+        String foundKeyName = null;
+        for (final String enumeratedKey : cs.getKeys(false)){
+            if (key.equalsIgnoreCase(enumeratedKey)){
+                foundKeyName = enumeratedKey;
+                break;
+            }
+        }
+
+        if (foundKeyName == null) return new LinkedList<>();
+
+        final List<String> result = cs.getStringList(foundKeyName);
+        if (result.isEmpty() && cs.getString(foundKeyName) != null && !"".equals(cs.getString(foundKeyName)))
+            result.add(cs.getString(foundKeyName));
+
+        return result;
+    }
+
+    @NotNull
+    public String getKeyNameFromConfig(final @NotNull ConfigurationSection cs, final @NotNull String key){
         if (!key.contains(".")){
             for (final String enumeratedKey : cs.getKeys(false)) {
                 if (key.equalsIgnoreCase(enumeratedKey))
@@ -164,6 +204,7 @@ public class YmlParsingHelper {
             return (ConfigurationSection) object;
         } else if (object instanceof Map) {
             final MemoryConfiguration result = new MemoryConfiguration();
+            //noinspection unchecked
             result.addDefaults((Map<String, Object>) object);
             return result.getDefaultSection();
         } else {

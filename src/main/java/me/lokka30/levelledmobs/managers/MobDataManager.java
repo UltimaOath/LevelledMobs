@@ -6,15 +6,17 @@ package me.lokka30.levelledmobs.managers;
 
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.misc.Addition;
+import me.lokka30.levelledmobs.misc.DebugType;
 import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.Utils;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +36,7 @@ public class MobDataManager {
     }
 
     @Nullable
-    public Object getAttributeDefaultValue(@NotNull final LivingEntityWrapper lmEntity, final Attribute attribute) {
+    private Object getAttributeDefaultValue(@NotNull final LivingEntityWrapper lmEntity, final Attribute attribute) {
         if (lmEntity.isMobTamed()){
             // if the tamed variant in the cfg then use it, otherwise check for untamed path
             final String tamedPath = "TAMED_" + lmEntity.getTypeName() + "." + attribute;
@@ -48,7 +50,7 @@ public class MobDataManager {
                 null;
     }
 
-    public final boolean isLevelledDropManaged(final EntityType entityType, @NotNull final Material material) {
+    final boolean isLevelledDropManaged(final EntityType entityType, @NotNull final Material material) {
         // Head drops
         if (material.toString().endsWith("_HEAD") || material.toString().endsWith("_SKULL")) {
             if (!main.helperSettings.getBoolean(main.settingsCfg, "mobs-multiply-head-drops"))
@@ -59,7 +61,7 @@ public class MobDataManager {
         return main.dropsCfg.getStringList(entityType.toString()).contains(material.toString());
     }
 
-    public void setAdditionsForLevel(@NotNull final LivingEntityWrapper lmEntity, final Attribute attribute, final Addition addition) {
+    void setAdditionsForLevel(@NotNull final LivingEntityWrapper lmEntity, final @NotNull Attribute attribute, final Addition addition) {
         final boolean useStaticValues = main.helperSettings.getBoolean(main.settingsCfg, "attributes-use-preset-base-values");
         final double defaultValue = useStaticValues ?
                 (double) Objects.requireNonNull(getAttributeDefaultValue(lmEntity, attribute)) :
@@ -85,10 +87,16 @@ public class MobDataManager {
 
         if (additionValue == 0.0) return;
 
-        if (useStaticValues)
+        if (useStaticValues) {
+            Utils.debugLog(main, DebugType.ATTRIBUTE_MULTIPLIERS, String.format("%s (%s): attrib: %s, base: %s, new base value: %s",
+                    lmEntity.getNameIfBaby(), lmEntity.getMobLevel(), attribute.name(), Utils.round(attrib.getBaseValue(), 3), Utils.round(defaultValue, 3)));
             attrib.setBaseValue(defaultValue);
-        else
+        }
+        else {
+            Utils.debugLog(main, DebugType.ATTRIBUTE_MULTIPLIERS, String.format("%s (%s): attrib: %s, base: %s, addtion: %s",
+                    lmEntity.getNameIfBaby(), lmEntity.getMobLevel(), attribute.name(), Utils.round(attrib.getBaseValue(), 3), Utils.round(additionValue, 3)));
             attrib.addModifier(mod);
+        }
 
         // MAX_HEALTH specific: set health to max health
         if (attribute == Attribute.GENERIC_MAX_HEALTH) {
@@ -97,12 +105,11 @@ public class MobDataManager {
             try {
                 if (lmEntity.getLivingEntity().getHealth() <= 0.0) return;
                 lmEntity.getLivingEntity().setHealth(newHealth);
-            } catch (IllegalArgumentException ignored) { }
-
+            } catch (final IllegalArgumentException ignored) { }
         }
     }
 
-    public final double getAdditionsForLevel(final LivingEntityWrapper lmEntity, final Addition addition, double defaultValue) {
+    public final double getAdditionsForLevel(final LivingEntityWrapper lmEntity, final Addition addition, final double defaultValue) {
         final double maxLevel = main.rulesManager.getRule_MobMaxLevel(lmEntity);
 
         double attributeValue = 0;

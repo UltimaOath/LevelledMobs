@@ -9,12 +9,26 @@ import com.mojang.authlib.properties.Property;
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.customdrops.CustomDropItem;
 import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.PaperUtils;
+import me.lokka30.levelledmobs.misc.SpigotUtils;
 import me.lokka30.levelledmobs.misc.Utils;
-import me.lokka30.microlib.MessageUtils;
+import me.lokka30.microlib.messaging.MessageUtils;
+import me.lokka30.microlib.other.VersionUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Cat;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fox;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Llama;
+import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Panda;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -23,7 +37,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 
 /**
  * Holds the code used for dropping mob heads and applying textures
@@ -43,6 +61,7 @@ public class MobHeadManager {
     public void loadTextures(@NotNull final YamlConfiguration textureData){
         mobMap = new LinkedHashMap<>();
 
+        //noinspection unchecked
         final List<LinkedHashMap<String, Object>> lst = (List<LinkedHashMap<String, Object>>) textureData.getList("Mobs");
         if (lst == null) return;
 
@@ -55,15 +74,15 @@ public class MobHeadManager {
             mob.id = (String) item.get("ID");
             mob.textureCode = (String) item.get("Texture");
 
-            EntityType entityType;
+            final EntityType entityType;
             try{
                 entityType = EntityType.valueOf(mob.name.toUpperCase());
-            } catch (Exception e){
+            } catch (final Exception e){
                 //Utils.logger.warning("Invalid mob in textures.yml: " + mob.name);
                 continue;
             }
 
-            Map<String, MobDataInfo> infos = this.mobMap.computeIfAbsent(
+            final Map<String, MobDataInfo> infos = this.mobMap.computeIfAbsent(
                     entityType, k -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
             infos.put(mob.variant == null ? "" : mob.variant, mob);
         }
@@ -71,8 +90,8 @@ public class MobHeadManager {
 
     public ItemStack getMobHeadFromPlayerHead(final ItemStack playerHead, final LivingEntityWrapper lmEntity, @NotNull final CustomDropItem dropItem){
 
-        String textureCode;
-        UUID id;
+        final String textureCode;
+        final UUID id;
         MobDataInfo mobData = null;
 
         if (dropItem.customPlayerHeadId == null) {
@@ -80,10 +99,9 @@ public class MobHeadManager {
             if (vanillaMaterial != Material.AIR) {
                 final ItemStack newItem = new ItemStack(vanillaMaterial, playerHead.getAmount());
                 final ItemMeta meta = playerHead.getItemMeta();
-                if (meta != null) {
-                    ItemMeta newMeta = meta.clone();
-                    newItem.setItemMeta(meta);
-                }
+                if (meta != null)
+                    newItem.setItemMeta(meta.clone());
+
                 return newItem;
             }
 
@@ -95,14 +113,14 @@ public class MobHeadManager {
             final Map<String, MobDataInfo> mobDatas = this.mobMap.get(lmEntity.getEntityType());
 
             if (mobDatas.size() > 1){
-                MobDataInfo foundMob = getMobVariant(mobDatas, lmEntity);
+                final MobDataInfo foundMob = getMobVariant(mobDatas, lmEntity);
                 if (foundMob != null) mobData = foundMob;
             }
 
             if (mobData == null){
                 // grab first one
-                for (final String variant : mobDatas.keySet()){
-                    mobData = mobDatas.get(variant);
+                for (final MobDataInfo mobDataInfo : mobDatas.values()){
+                    mobData = mobDataInfo;
                     break;
                 }
             }
@@ -113,7 +131,7 @@ public class MobHeadManager {
 
             try {
                 id = UUID.fromString(mobData.id);
-            } catch (IllegalArgumentException e) {
+            } catch (final IllegalArgumentException e) {
                 Utils.logger.warning("mob: " + lmEntity.getTypeName() + ", exception getting UUID for mob head. " + e.getMessage());
                 return playerHead;
             }
@@ -126,15 +144,15 @@ public class MobHeadManager {
         if (textureCode != null)
             profile.getProperties().put("textures", new Property("textures", textureCode));
 
-        SkullMeta meta = (SkullMeta) playerHead.getItemMeta();
+        final SkullMeta meta = (SkullMeta) playerHead.getItemMeta();
         if (meta == null) return playerHead;
 
-        Field profileField;
+        final Field profileField;
         try {
             profileField = meta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(meta, profile);
-        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e1) {
+        } catch (final NoSuchFieldException | IllegalArgumentException | IllegalAccessException e1) {
             Utils.logger.warning("Unable to set meta data in profile class for mob " + lmEntity.getTypeName());
         }
 
@@ -144,17 +162,13 @@ public class MobHeadManager {
             String killerName = "";
             final Player killerPlayer = lmEntity.getLivingEntity().getKiller();
             if (killerPlayer != null)
-                killerName = killerPlayer.getDisplayName();
-            final boolean useCustomNameForNametags = main.helperSettings.getBoolean(main.settingsCfg, "use-customname-for-mob-nametags");
-            final String overridenName = main.rulesManager.getRule_EntityOverriddenName(lmEntity, useCustomNameForNametags);
-            final String mobName = overridenName == null ?
-                    Utils.capitalize(lmEntity.getTypeName().replace("_", " ")) :
-                    overridenName;
-            useName = main.levelManager.replaceStringPlaceholders(dropItem.customName, lmEntity, mobName);
+                killerName = VersionUtils.isRunningPaper() ?
+                        PaperUtils.getPlayerDisplayName(killerPlayer) : SpigotUtils.getPlayerDisplayName(killerPlayer);
 
+            useName = main.levelManager.replaceStringPlaceholders(dropItem.customName, lmEntity);
             useName = MessageUtils.colorizeAll(useName);
 
-            String displayName = lmEntity.getLivingEntity().getCustomName() == null ?
+            final String displayName = lmEntity.getLivingEntity().getCustomName() == null ?
                     useName : lmEntity.getLivingEntity().getCustomName();
 
             useName = useName.replace("%displayname%", displayName);
@@ -163,7 +177,11 @@ public class MobHeadManager {
         } else
             useName = "Mob Head";
 
-        meta.setDisplayName(useName);
+        if (VersionUtils.isRunningPaper())
+            PaperUtils.updateItemDisplayName(meta, useName);
+        else
+            SpigotUtils.updateItemDisplayName(meta, useName);
+
         playerHead.setItemMeta(meta);
 
         return playerHead;
@@ -200,54 +218,54 @@ public class MobHeadManager {
         }
 
         // uncharged creepers already got processed
-        if (et.equals(EntityType.CREEPER))
+        if (et == EntityType.CREEPER)
             return mobDatas.get("Charged");
 
-        if (et.equals(EntityType.CAT)){
+        if (et == EntityType.CAT){
             final Cat cat = (Cat) livingEntity;
             return mobDatas.get(cat.getCatType().name());
         }
 
-        if (et.equals(EntityType.FOX)){
-            if (((Fox) livingEntity).getFoxType().equals(Fox.Type.RED))
+        if (et == EntityType.FOX){
+            if (((Fox) livingEntity).getFoxType() == Fox.Type.RED)
                 return mobDatas.get("Normal");
             else
                 return mobDatas.get("Snow");
         }
 
-        if (et.equals(EntityType.HORSE)){
+        if (et == EntityType.HORSE){
             final Horse horse = (Horse) livingEntity;
             return mobDatas.get(horse.getColor().name());
         }
 
-        if (et.equals(EntityType.LLAMA)){
+        if (et == EntityType.LLAMA){
             final Llama llama = (Llama) livingEntity;
             return mobDatas.get(llama.getColor().name());
         }
 
-        if (et.equals(EntityType.MUSHROOM_COW)){
+        if (et == EntityType.MUSHROOM_COW){
             final MushroomCow mushroomCow = (MushroomCow) livingEntity;
             return mobDatas.get(
-                    mushroomCow.getVariant().equals(MushroomCow.Variant.RED) ?
+                    mushroomCow.getVariant() == MushroomCow.Variant.RED ?
                             "" : "Brown"
             );
         }
 
-        if (et.equals(EntityType.PANDA))
+        if (et == EntityType.PANDA)
             return mobDatas.get(((Panda) livingEntity).getMainGene().name());
 
-        if (et.equals(EntityType.RABBIT))
+        if (et == EntityType.RABBIT)
             return mobDatas.get(((Rabbit) livingEntity).getRabbitType().name());
 
-        if (et.equals(EntityType.VILLAGER)){
+        if (et == EntityType.VILLAGER){
             final Villager.Profession profession = ((Villager) livingEntity).getProfession();
-            if (profession.equals(Villager.Profession.NONE) || profession.equals(Villager.Profession.NITWIT))
+            if (profession == Villager.Profession.NONE || profession == Villager.Profession.NITWIT)
                 return mobDatas.get("");
             else
                 return mobDatas.get(profession.name());
         }
 
-        if (et.equals(EntityType.WOLF)){
+        if (et == EntityType.WOLF){
             return mobDatas.get(
                     lmEntity.isMobTamed() ?
                             "Tamed" : "Wild"
@@ -259,10 +277,10 @@ public class MobHeadManager {
     }
 
     private static class MobDataInfo{
-        public String name;
-        public String variant;
-        public String displayName;
-        public String id;
-        public String textureCode;
+        String name;
+        String variant;
+        String displayName;
+        String id;
+        String textureCode;
     }
 }

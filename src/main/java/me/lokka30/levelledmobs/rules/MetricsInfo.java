@@ -11,7 +11,10 @@ import me.lokka30.levelledmobs.rules.strategies.SpawnDistanceStrategy;
 import me.lokka30.levelledmobs.rules.strategies.YDistanceStrategy;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -56,16 +59,6 @@ public class MetricsInfo {
                         main.rulesParsingManager.defaultRule.nametag.toLowerCase().contains("%health-indicator%");
 
         return convertBooleanToString(usesHealthIndicator);
-    }
-
-    @NotNull
-    public String getUsesPlayerLevelling(){
-        final boolean result =
-                (main.rulesParsingManager.defaultRule.playerLevellingOptions != null &&
-                        main.rulesParsingManager.defaultRule.playerLevellingOptions.enabled != null &&
-                        main.rulesParsingManager.defaultRule.playerLevellingOptions.enabled);
-
-        return convertBooleanToString(result);
     }
 
     @NotNull
@@ -194,8 +187,8 @@ public class MetricsInfo {
         final Map<String, Integer> results = new TreeMap<>();
 
         for (final ExternalCompatibilityManager.ExternalCompatibility compat : ExternalCompatibilityManager.ExternalCompatibility.values()) {
-            if (compat.equals(ExternalCompatibilityManager.ExternalCompatibility.NOT_APPLICABLE) ||
-                    compat.equals(ExternalCompatibilityManager.ExternalCompatibility.PLACEHOLDER_API))
+            if (compat == ExternalCompatibilityManager.ExternalCompatibility.NOT_APPLICABLE ||
+                    compat == ExternalCompatibilityManager.ExternalCompatibility.PLACEHOLDER_API)
                 continue;
 
             results.put(compat.toString(), 0);
@@ -205,9 +198,10 @@ public class MetricsInfo {
             if (!ruleInfo.ruleIsEnabled) continue;
 
             if (ruleInfo.enabledExtCompats != null){
-                for (final ExternalCompatibilityManager.ExternalCompatibility compat : ruleInfo.enabledExtCompats.keySet()){
-                    if (compat.equals(ExternalCompatibilityManager.ExternalCompatibility.NOT_APPLICABLE)) continue;
-                    final Boolean enabled = ruleInfo.enabledExtCompats.get(compat);
+                for (final Map.Entry<ExternalCompatibilityManager.ExternalCompatibility, Boolean> extCompat : ruleInfo.enabledExtCompats.entrySet()){
+                    final ExternalCompatibilityManager.ExternalCompatibility compat = extCompat.getKey();
+                    if (compat == ExternalCompatibilityManager.ExternalCompatibility.NOT_APPLICABLE) continue;
+                    final Boolean enabled = extCompat.getValue();
                     if (enabled != null && enabled)
                         results.put(compat.toString(), 1);
                 }

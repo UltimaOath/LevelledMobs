@@ -17,8 +17,6 @@ import java.util.List;
  * @since 3.0.0
  */
 public class FineTuningAttributes implements Cloneable {
-    public EntityType applicableEntity;
-
     public Double attackDamage;
     public Double creeperExplosionRadius;
     public Double maxHealth;
@@ -35,7 +33,7 @@ public class FineTuningAttributes implements Cloneable {
     public Double followRange;
     public Integer xpDrop;
 
-    public void mergeAttributes(final @Nullable FineTuningAttributes attributes){
+    void mergeAttributes(final @Nullable FineTuningAttributes attributes){
         if (attributes == null) return;
 
         if (attributes.maxHealth != null) this.maxHealth = attributes.maxHealth;
@@ -73,7 +71,7 @@ public class FineTuningAttributes implements Cloneable {
         FineTuningAttributes copy = null;
         try {
             copy = (FineTuningAttributes) super.clone();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

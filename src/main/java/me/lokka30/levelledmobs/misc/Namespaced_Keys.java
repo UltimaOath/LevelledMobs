@@ -24,7 +24,11 @@ public class Namespaced_Keys {
         sourceSpawnerName = new NamespacedKey(main, "sourceSpawnerName");
         spawnedTimeOfDay = new NamespacedKey(main, "spawnedTimeOfDay");
         wasSummoned = new NamespacedKey(main, "wasSummoned");
+        playerNetherCoords = new NamespacedKey(main, "playerNetherCoords");
+        playerNetherCoords_IntoWorld = new NamespacedKey(main, "playerNetherCoords_IntoWorld");
 
+        spawnerEgg = new NamespacedKey(main, "spawnerEgg");
+        spawnerEggName = new NamespacedKey(main, "spawnerEggName");
         keySpawner = new NamespacedKey(main, "spawner");
         keySpawner_MinLevel = new NamespacedKey(main, "minlevel");
         keySpawner_MaxLevel = new NamespacedKey(main, "maxlevel");
@@ -56,7 +60,11 @@ public class Namespaced_Keys {
     public final NamespacedKey sourceSpawnerName;
     public final NamespacedKey spawnedTimeOfDay;
     public final NamespacedKey wasSummoned;
+    public final NamespacedKey playerNetherCoords;
+    public final NamespacedKey playerNetherCoords_IntoWorld;
 
+    final public NamespacedKey spawnerEgg;
+    final public NamespacedKey spawnerEggName;
     final public NamespacedKey keySpawner;
     final public NamespacedKey keySpawner_MinLevel;
     final public NamespacedKey keySpawner_MaxLevel;
