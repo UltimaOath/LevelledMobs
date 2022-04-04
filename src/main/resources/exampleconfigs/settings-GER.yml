@@ -135,9 +135,26 @@ mobs-multiply-head-drops: false
 # ||  Diese Einstellung bezieht sich auf das Spielerleveling.
 player-levelling-relevel-min-time: 5000
 
+# ||  Wenn die Anzahl der Spielerkills innerhalb eines bestimmten 
+# ||  Zeitraums die Anzahl der gelevelten Entitäten in einem Chunk
+# ||  übersteigt, sollten wir eine Nachricht senden, um sie zu informieren?
+exceed-kill-in-chunk-message: true
+
+# ||  Diese Einstellung legt fest, wie weit eine Entität entfernt sein
+# ||  darf, damit sie unter `%levelledmobs_mob-target%` registriert werden kann.
+nametag-placeholder-maxblocks: 30
+
+# ||  Wenn Ihre Serversoftware (z.B. Paper) die
+# ||  'Adventure'-Bibliothek enthält, dann wird LevelledMobs
+# ||  diese verwenden, sofern diese Einstellung aktiviert ist.
+# ||  CraftBukkit- und Spigot-Server haben diese Bibliothek seit
+# ||  diesem Update nicht mehr; es wird empfohlen, 
+# ||  diese Einstellung aktiviert zu lassen.
+use-adventure: true
+
 # ||  ERWEITERTE FUNKTION
 # ||  Modifizieren Sie nicht, es sei denn, Sie werden von
 # ||  einem LevelledMobs-Entwickler dazu aufgefordert.
 # ||  Editieren Sie nicht über diesen Punkt hinaus, da dies Ihre
 # ||  LevelledMobs-Konfigurationsdateien beschädigen könnte.
-file-version: 32
+file-version: 33
