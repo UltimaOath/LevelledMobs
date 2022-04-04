@@ -124,8 +124,24 @@ mobs-multiply-head-drops: false
 # ||  Este ajuste se refiere al nivel de los jugadores.
 player-levelling-relevel-min-time: 5000
 
+# ||  Cuando el recuento de muertes de jugadores supera la cantidad
+# ||  de entidades niveladas en un trozo dentro de un periodo
+# ||  determinado, ¿debemos enviar un mensaje para informarles?
+exceed-kill-in-chunk-message: true
+
+# ||  Este ajuste determina a qué distancia puede estar una
+# ||  entidad para que se registre en `%levelledmobs_mob-target%`.
+nametag-placeholder-maxblocks: 30
+
+# ||  Si el software de tu servidor (por ejemplo, Paper), tiene la
+# ||  librería 'Adventure' en él, entonces LevelledMobs la utilizará,
+# ||  siempre y cuando este ajuste esté habilitado. Los servidores
+# ||  CraftBukkit y Spigot no tienen esta biblioteca a partir de
+# ||  esta actualización; se recomienda mantenerla activada.
+use-adventure: true
+
 # ||  FUNCIÓN AVANZADA
 # ||  No ajustar sin la aprobación del promotor.
 # ||  No edites más allá de este punto, ya que al hacerlo podrías corromper
 # ||  tus archivos de configuración de LevelledMobs.
-file-version: 32
+file-version: 33
