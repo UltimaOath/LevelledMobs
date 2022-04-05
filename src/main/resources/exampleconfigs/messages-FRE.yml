@@ -44,8 +44,12 @@ common:
     - '%prefix% Vous n''y avez pas accès.'
   players-only:
     - '%prefix% Seuls les joueurs peuvent l''utiliser.'
+  no-player:
+    - '%prefix% La commande ne peut être exécutée que par un joueur.'
   player-offline:
     - '%prefix% &r%player%&7 est hors ligne ou invalide.'
+  invalid-command:
+    - '%prefix% Commande non valide.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
@@ -168,6 +172,8 @@ command:
         - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
       no-value:
         - '%prefix% Aucune valeur n''est spécifiée pour: &b%keyname%&7'
+      no-player:
+        - '%prefix% La commande ne peut être lancée que par un joueur, sauf si /giveplayer est spécifié.'
       invalid-value:
         - '%prefix% Valeur non valide pour &b%keyname%&7, doit être un nombre.'
       no-level-specified:
@@ -178,6 +184,12 @@ command:
         - '%prefix% Je vous ai donné un cube de frayeur LevelledMob.'
       spawner-give-message-console:
         - '%prefix% J''ai donné à &r%playername%&7 un cube de frayeur LevelledMob. &8|&7 minLevel &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+      permission-denied:
+        - '%prefix% Vous n''avez pas la permission de mettre à jour ou de convertir un cube d''entité en un cube d''entité LevelledMobs.'
+      spawner-converted:
+        - '%prefix% Conversion d''un cube d''entité vanille en un entitycube LevelledMobs avec le nom "%spawnername%".'
+      spawner-updated:
+        - '%prefix% Mise à jour du cube d''entité LevelledMobs à partir de l''œuf d''entité. Nom du spawner : "%spawnername%".'
       info:
         status-enabled:
           - '%prefix% L''information sur le frayeur &aest activée&f.'
@@ -203,7 +215,83 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 06 - Messages de commande du système                                           +LM3
+# +   Section 06 - Messages de commande de l'entité Egg                                      +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    spawn_egg:
+      usage:
+        - '%prefix% entity egg syntaxe de la commande:'
+        - '&8 &m->&b /%label% egg /minlevel <level> /maxlevel <level> /entity <entity type>'
+        - '&7&o Exemple d''oeuf d''incubation'.
+        - '&7/%label% egg &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Mon oeuf de ponte LM personnalisé" &b/customDropsId&7 Id1''
+      no-paper:
+        - '%prefix% Cette fonctionnalité n''est disponible que sur les serveurs exécutant Paper ou des bifurcations de Paper.'
+      no-value:
+        - '%prefix% Aucune valeur n''a été spécifiée pour: &b%keyname%&7'
+      no-player:
+        - '%prefix% La commande ne peut être exécutée que par un joueur, sauf si /giveplayer est spécifié'.
+      no-player-specified:
+        - '%prefix% Aucun joueur n''a été spécifié'.
+      invalid-value:
+        - '%prefix% Invalid value for &b%keyname%&7, must be a number'' (%prefix% Valeur invalide pour &b%keyname%&7, doit être un nombre)
+      no-level-specified:
+        - '%prefix% Vous devez spécifier le niveau minimum, le niveau maximum et l''entité'.
+      inventory-full:
+        - '%prefix% &4Votre inventaire est plein!'
+      give-message:
+        - '%prefix% Vous avez reçu un œuf de ponte LM'.
+      give-message-console:
+        - '%prefix% Gave &r%playername%&7 a LM spawn egg. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7, entity: &b%entitytype%&7'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 07 - Messages de commande des règles                                           +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    règles :
+      incomplete-command:
+        - '%prefix% Commande incomplète'.
+      console-rules:
+        - '%prefix% Les règles ont été imprimées sur la console'.
+      discord-invite:
+        - '%prefix% Cliquez pour obtenir une invitation sur Discord'.
+      wiki-link:
+        - '%prefix% Cliquez pour ouvrir le wiki'.
+      rules-reprocessed:
+        - '%prefix% Règles retraitées pour &b%entitycount%&7 entités dans &b%worldcount%&7monde(s)'
+      reset:
+        - '%prefix% L''exécution de cette commande réinitialisera vos règles à l''une des 4 valeurs par défaut.'
+        - 'Vous devez choisir si vous voulez une difficulté basic/average/advanced/extreme.'
+        - 'Une sauvegarde sera effectuée et vos rules.yml seront réinitialisées par défaut.'
+      resetting:
+        - '%prefix% Réinitialisation des règles à %difficulté%.'
+      reset-syntax:
+        - '%prefix% Pour réinitialiser vos règles au niveau de difficulté %difficulty%, tapez la commande suivante:'
+        - '%label% règles réinitialisées à la difficulté %difficulté% confirmez.'
+      reset-complete:
+        - '%prefix% rules.yml a été mis à jour avec succès.'
+      invalid-difficulty:
+        - '%prefix% Difficulté invalide: %difficulty%'
+      rule-name-missing:
+        - '%prefix% Doit spécifier un nom de règle.'
+      rule-name-invalid:
+        - '%prefix% Aucune règle n''a été trouvée avec le nom %rulename%.'
+      showing-rules:
+        - 'Showing all values for rule: &b%rulename%&r (Afficher toutes les valeurs pour la règle: &b%rulename%&r)'
+      no-entities-visible:
+        - '%prefix% Doit regarder une entité proche.'
+      no-entities-near:
+        - '%prefix% Aucune entité n''a été trouvée dans un rayon de 10 blocs.'
+      effective-rules:
+        - '%prefix% Showing effective rules for: %entitytype% (lvl %level% %mobname%) in %world%, %location%'
+      no-effective-rules:
+        - '%prefix% Aucune règle effective n''a été trouvée.'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 08 - Messages de commande du système                                           +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     reload:
@@ -234,7 +322,7 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 07 - Autres messages                                                           +LM3
+# +   Section 09 - Autres messages                                                           +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 other:
@@ -253,12 +341,26 @@ other:
     send-on-join: true
 
   mob-head-drop-name: 'Tete de %mob_name%'
+  no-drop-in-chunk: '%prefix% &7Votre nombre d''entités à niveau tué a atteint le maximum pour ce morceau. Vous ne recevrez plus de gouttes de niveau de ces entités. Veuillez revenir après un certain temps.'
+  create-debug:
+    - '&b&nCréation d''un fichier de débogage'
+    - '&7Vous ne devez exécuter cette commande que si un développeur de LevelledMobs vous l''a demandé. Elle est utilisée pour aider les utilisateurs qui rencontrent des problèmes avec le plugin.'
+    - ''
+    - '&7Cette commande va générer un fichier contenant les données suivantes:'
+    - '&8 &m->&b Pluginliste'
+    - '&8 &m->&b Type de serveur'
+    - '&8 &m->&b Nombre actuel et maximum de joueurs en ligne'
+    - '&8 &m->&b Le dernier fichier .log&7 &8(/logs/latest.log)'
+    - ''
+    - '&7Les développeurs de LevelledMobs ne redistribueront ni ne conserveront les données au-delà de l''objectif de résolution du problème que vous pourriez rencontrer. Vous pouvez également vérifier le contenu avant d''envoyer le fichier.'
+    - '&7Pour procéder à la création du fichier, veuillez exécuter:'
+    - '&b/lm debug create confirm&7'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 08 - Paramètres avancés des messages                                           +LM3
+# +   Section 10 - Paramètres avancés des messages                                           +LM3
 # +   Ne pas modifier au-delà de ce point!                                                   +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
-file-version: 6
+file-version: 8
