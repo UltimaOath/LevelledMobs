@@ -222,24 +222,24 @@ command:
       usage:
         - '%prefix% entity egg syntaxe de la commande:'
         - '&8 &m->&b /%label% egg /minlevel <level> /maxlevel <level> /entity <entity type>'
-        - '&7&o Exemple d''oeuf d''incubation'.
-        - '&7/%label% egg &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Mon oeuf de ponte LM personnalisé" &b/customDropsId&7 Id1''
+        - '&7&o Exemple d''oeuf d''incubation'
+        - '&7/%label% egg &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Mon oeuf de ponte LM personnalisé" &b/customDropsId&7 Id1'
       no-paper:
         - '%prefix% Cette fonctionnalité n''est disponible que sur les serveurs exécutant Paper ou des bifurcations de Paper.'
       no-value:
         - '%prefix% Aucune valeur n''a été spécifiée pour: &b%keyname%&7'
       no-player:
-        - '%prefix% La commande ne peut être exécutée que par un joueur, sauf si /giveplayer est spécifié'.
+        - '%prefix% La commande ne peut être exécutée que par un joueur, sauf si /giveplayer est spécifié'
       no-player-specified:
-        - '%prefix% Aucun joueur n''a été spécifié'.
+        - '%prefix% Aucun joueur n''a été spécifié'
       invalid-value:
-        - '%prefix% Invalid value for &b%keyname%&7, must be a number'' (%prefix% Valeur invalide pour &b%keyname%&7, doit être un nombre)
+        - '%prefix% Invalid value for &b%keyname%&7, must be a number (%prefix% Valeur invalide pour &b%keyname%&7, doit être un nombre)'
       no-level-specified:
-        - '%prefix% Vous devez spécifier le niveau minimum, le niveau maximum et l''entité'.
+        - '%prefix% Vous devez spécifier le niveau minimum, le niveau maximum et l''entité'
       inventory-full:
         - '%prefix% &4Votre inventaire est plein!'
       give-message:
-        - '%prefix% Vous avez reçu un œuf de ponte LM'.
+        - '%prefix% Vous avez reçu un œuf de ponte LM'
       give-message-console:
         - '%prefix% Gave &r%playername%&7 a LM spawn egg. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7, entity: &b%entitytype%&7'
 
@@ -251,13 +251,13 @@ command:
 # +-------------------------------------------------------------------------------------------LM3
     règles :
       incomplete-command:
-        - '%prefix% Commande incomplète'.
+        - '%prefix% Commande incomplète'
       console-rules:
-        - '%prefix% Les règles ont été imprimées sur la console'.
+        - '%prefix% Les règles ont été imprimées sur la console'
       discord-invite:
-        - '%prefix% Cliquez pour obtenir une invitation sur Discord'.
+        - '%prefix% Cliquez pour obtenir une invitation sur Discord'
       wiki-link:
-        - '%prefix% Cliquez pour ouvrir le wiki'.
+        - '%prefix% Cliquez pour ouvrir le wiki'
       rules-reprocessed:
         - '%prefix% Règles retraitées pour &b%entitycount%&7 entités dans &b%worldcount%&7monde(s)'
       reset:
