@@ -44,8 +44,12 @@ common:
     - '%prefix% Dazu haben Sie keinen Zugang.'
   players-only:
     - '%prefix% Nur Spieler dürfen das benutzen.'
+  no-player:
+    - '%prefix% Der Befehl kann nur von einem Spieler ausgeführt werden.'
   player-offline:
     - '%prefix% &r%player%&7 ist nicht erreichbar oder ungültig.'
+  invalid-command:
+    - '%prefix% Ungültiger Befehl.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
@@ -168,6 +172,8 @@ command:
         - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Nivellierter Entitätswürfel" &b/customDropsId&7 Id1'
       no-value:
         - '%prefix% Es wurde kein Wert für angegeben: &b%keyname%&7'
+      no-player:
+        - '%prefix% Der Befehl kann nur von einem Spieler ausgeführt werden, es sei denn, /giveplayer ist angegeben.'
       invalid-value:
         - '%prefix% Ungültiger Wert für &b%keyname%&7, muss eine Zahl sein.'
       no-level-specified:
@@ -178,6 +184,12 @@ command:
         - '%prefix% Hat dir einen LevelledMob-Spawner-Würfel gegeben!'
       spawner-give-message-console:
         - '%prefix% Hat &r%playername%&7 einen LevelledMob-Spawner-Würfel gegeben. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+      permission-denied:
+        - '%prefix% Sie haben nicht die Berechtigung, einen Entitätswürfel in einen LevelledMobs-Entitätswürfel zu aktualisieren oder umzuwandeln.'
+      spawner-converted:
+        - '%prefix% Vanille-Entitätswürfel in einen LevelledMobs-Entitätswürfel mit dem Namen "%spawnername%" umgewandelt.'
+      spawner-updated:
+        - '%prefix% Updated LM spawner from spawn egg. Spawner name: "%spawnername%"'
       info:
         status-enabled:
           - '%prefix% Entitätswürfelinformationen &asind aktiviert&f.'
@@ -203,7 +215,83 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 06 - Systembefehl-Meldungen                                                    +LM3
+# +   Section 06 - Entity Egg Befehlsnachrichten                                             +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    spawn_egg:
+      usage:
+        - '%prefix% entity egg Befehlssyntax:'
+        - '&8 &m->&b /%label% egg /minlevel <level> /maxlevel <level> /entity <entity type>'
+        - '&7&o Beispiel-Spawn-Ei'
+        - '&7/%label% egg &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "Mein angepasstes LM-Spawn-Ei" &b/customDropsId&7 Id1'
+      no-paper:
+        - '%prefix% Diese Funktion ist nur auf Servern mit Paper oder Forks von Paper verfügbar.'
+      no-value:
+        - '%prefix% Es wurde kein Wert angegeben für: &b%keyname%&7'
+      no-player:
+        - '%prefix% Der Befehl kann nur von einem Spieler ausgeführt werden, es sei denn, /giveplayer ist angegeben.'
+      no-player-specified:
+        - '%prefix% Es wurde kein Spieler angegeben.'
+      invalid-value:
+        - '%prefix% Ungültiger Wert für &b%keyname%&7, muss eine Zahl sein.'
+      no-level-specified:
+        - '%prefix% Sie müssen minLevel, maxLevel und Entität angeben.'
+      inventory-full:
+        - '%prefix% &4Dein Inventar ist voll!'
+      give-message:
+        - '%prefix% Du hast ein LM-Spawn-Ei erhalten.'
+      give-message-console:
+        - '%prefix% Hat &r%Spielername%&7 ein LM-Spawn-Ei gegeben. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7, entity: &b%entitytype%&7'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 07 - Regeln Befehlsnachrichten                                                 +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    rules:
+      incomplete-command:
+        - '%prefix% Unvollständiger Befehl'
+      console-rules:
+        - '%prefix% Regeln wurden auf der Konsole ausgegeben'
+      discord-invite:
+        - '%prefix% Klick für Discord-Einladung'
+      wiki-link:
+        - '%prefix% Klicken Sie, um das Wiki zu öffnen'
+      rules-reprocessed:
+        - '%prefix% Regeln Wiederverarbeitet für &b%entitycount%&7 Entitäten in &b%worldcount%&7 Welt(en)'
+      reset:
+        - '%prefix% Wenn Sie diesen Befehl ausführen, werden Ihre Regeln auf eine von 4 Voreinstellungen zurückgesetzt.'
+        - 'Sie müssen auswählen, ob Sie einen basic/average/advanced/extreme Schwierigkeitsgrad wünschen.'
+        - 'Es wird ein Backup erstellt und die rules.yml auf die Standardwerte zurückgesetzt.'
+      resetting:
+        - '%prefix% Zurücksetzen der Regeln auf %difficulty%'
+      reset-syntax:
+        - '%prefix% Um Ihre Regeln auf den Schwierigkeitsgrad %difficulty% zurückzusetzen, geben Sie den folgenden Befehl ein:'
+        - '%label% Regeln zurücksetzen %Schwierigkeit% bestätigen'
+      reset-complete:
+        - '%prefix% rules.yml erfolgreich aktualisiert'
+      invalid-difficulty:
+        - '%prefix% Ungültige Schwierigkeit: %difficulty%'
+      rule-name-missing:
+        - '%prefix% Muss einen Regelnamen angeben.'
+      rule-name-invalid:
+        - '%prefix% Es wurde keine Regel mit dem Namen %rulename% gefunden'
+      show-rules:
+        - 'Zeigt alle Werte für Regel: &b%rulename%&r'
+      no-entities-visible:
+        - '%prefix% Muss auf eine Entität in der Nähe schauen'
+      no-entities-near:
+        - '%prefix% Innerhalb eines Radius von 10 Blocks wurden keine Entitäten gefunden'
+      effective-rules:
+        - '%prefix% Zeigt wirksame Regeln für: %entitytype% (lvl %level% %mobname%) in %world%, %location%'
+      no-effective-rules:
+        - '%prefix% Es wurden keine wirksamen Regeln gefunden'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 08 - Systembefehl-Meldungen                                                    +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     reload:
@@ -234,7 +322,7 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 07 - Andere Meldungen                                                          +LM3
+# +   Section 09 - Andere Meldungen                                                          +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 other:
@@ -253,12 +341,26 @@ other:
     send-on-join: true
 
   mob-head-drop-name: '%mob_name%''s kopf'
+  no-drop-in-chunk: '%prefix% &7Die Anzahl der von Ihnen getöteten Entitäten hat das Maximum für diesen Chunk erreicht. Du wirst keine gelevelten Drops mehr von diesen Entitäten erhalten. Bitte komm nach einer Weile zurück.'
+  create-debug:
+    - '&b&nErstellen einer Debugging-Datei'
+    - '&7Sie sollten diesen Befehl nur ausführen, wenn Sie von einem LevelledMobs-Entwickler dazu aufgefordert wurden. Er wird verwendet, um Benutzern zu helfen, die Probleme mit dem Plugin haben.'
+    - ''
+    - '&7Mit diesem Befehl wird eine Datei mit den folgenden Daten erstellt:'
+    - '&8 &m->&b Pluginliste'
+    - '&8 &m->&b Servertyp'
+    - '&8 &m->&b Aktuelle und maximale Anzahl der Online-Spieler'
+    - '&8 &m->&b Die Datei latest.log&7 &8(/logs/latest.log)'
+    - ''
+    - '&7Die Entwickler von LevelledMobs werden die Daten nicht weitergeben oder aufbewahren, es sei denn, es geht darum, ein Problem zu lösen, das Sie möglicherweise haben. Sie können auch den Inhalt überprüfen, bevor Sie die Datei senden.'
+    - '&7Um mit der Erstellung der Datei fortzufahren, führen Sie bitte aus:'
+    - '&b/lm debug create confirm&7'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 08 - Erweiterte Nachrichteneinstellungen                                       +LM3
+# +   Section 10 - Erweiterte Nachrichteneinstellungen                                       +LM3
 # +   Keine Änderungen über diesen Punkt hinaus vornehmen!                                   +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
-file-version: 6
+file-version: 8
