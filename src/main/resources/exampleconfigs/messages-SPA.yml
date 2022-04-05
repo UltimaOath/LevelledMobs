@@ -237,7 +237,7 @@ command:
       no-level-specified:
         - '%prefix% Debes especificar minNivel, maxNivel y entidad.'
       inventory-full:
-        - '%prefijo% &4¡Tu inventario está lleno!
+        - '%prefijo% &4¡Tu inventario está lleno!'
       give-message:
         - '%prefix% Te ha dado un huevo de desove LM.'
       give-message-console:
