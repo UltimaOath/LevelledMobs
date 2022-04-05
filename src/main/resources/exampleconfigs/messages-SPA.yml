@@ -44,8 +44,12 @@ common:
     - '%prefix% Usted no tiene acceso a eso.'
   players-only:
     - '%prefix% Sólo los jugadores pueden utilizarlo.'
+  no-player:
+    - '%prefix% El comando sólo puede ser ejecutado por un jugador.'
   player-offline:
     - '%prefix% &r%player%&7 está desconectado o no es válido.'
+  invalid-command:
+    - '%prefix% Comando inválido.'
 
 
 # +-------------------------------------------------------------------------------------------LM3
@@ -168,6 +172,8 @@ command:
         - '&7/%label% spawner create &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawner" &b/customDropsId&7 Id1'
       no-value:
         - '%prefix% No se ha especificado ningún valor para: &b%keyname%&7'
+      no-player:
+        - '%prefix% El comando sólo puede ser ejecutado por un jugador, a menos que se especifique /giveplayer.'
       invalid-value:
         - '%prefix% Valor no válido para &b%keyname%&7, debe ser un número.'
       no-level-specified:
@@ -178,6 +184,12 @@ command:
         - '%prefix% Te he dado un cubo de despojo de LevelledMob!'
       spawner-give-message-console:
         - '%prefix% Le dio a &r%playername%&7 un cubo generador LevelledMob. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7'
+      permission-denied:
+        - '%prefix% No tiene permiso para actualizar o convertir un cubo de entidad en un cubo de entidad LevelledMobs.'
+      spawner-converted:
+        - '%prefix% Convertido el cubo de entidad vainilla en un cubo de entidad LevelledMobs con el nombre "%spawnername%".'
+      spawner-updated:
+        - '%prefix% Actualizado el cubo de entidad LevelledMobs de la entidad huevo. Nombre del spawner: "%spawnername%".'
       info:
         status-enabled:
           - '%prefix% La información sobre los reproductores &cestá activada&f.'
@@ -203,7 +215,83 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 06 - Mensajes de comando del sistema                                           +LM3
+# +   Section 06 - Mensajes de comando de la entidad Egg                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    spawn_egg:
+      usage:
+        - '%prefix% entidad huevo sintaxis del comando:'
+        - '&8 &m->&b /%label% egg /minlevel <level> /maxlevel <level> /entity <entity type>'
+        - '&7&o Muestra de huevo de desove'
+        - '&7/%label% egg &b/minlevel&7 1 &b/maxlevel&7 10 &b/name&7 "My customized LM spawn egg" &b/customDropsId&7 Id1'
+      no-paper:
+        - '%prefix% Esta función sólo está disponible en los servidores que ejecutan Paper o bifurcaciones de Paper.'
+      no-value:
+        - '%prefix% No se especificó ningún valor para: &b%keyname%&7.'
+      no-player:
+        - '%prefix% El comando sólo puede ser ejecutado por un jugador a menos que se especifique /giveplayer.'
+      no-player-specified:
+        - '%prefijo% No se ha especificado ningún jugador.'
+      invalid-value:
+        - '%prefix% Valor inválido para &b%keyname%&7, debe ser un número.'
+      no-level-specified:
+        - '%prefix% Debes especificar minNivel, maxNivel y entidad.'
+      inventory-full:
+        - '%prefijo% &4¡Tu inventario está lleno!
+      give-message:
+        - '%prefix% Te ha dado un huevo de desove LM.'
+      give-message-console:
+        - '%prefix% Te ha dado un huevo de aparición LM. &8|&7 minLevel: &b%minlevel%&7, maxLevel: &b%maxlevel%&7, entity: &b%entitytype%&7'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 07 - Mensajes de comandos de reglas                                            +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+    rules:
+      incomplete-command:
+        - '%prefix% Comando incompleto'
+      console-rules:
+        - '%prefix% Las reglas han sido impresas en la consola'
+      discord-invite:
+        - '%prefix% Clic para invitación de discordia'
+      wiki-link:
+        - '%prefix% Haz clic para abrir la wiki'
+      rules-reprocessed:
+        - '%prefix% Reglas reprocesadas para &b%entitycount%&7 turbas en &b%worldcount%&7 mundo(s)'
+      reset:
+        - '%prefix% Ejecutar este comando restablecerá tus reglas a uno de los 4 valores predeterminados.'
+        - 'Debes seleccionar si quieres dificultad basic/average/advanced/extreme.'
+        - 'Se hará una copia de seguridad y tu rules.yml se restablecerá a los valores por defecto.'
+      resetting:
+        - '%prefix% Restableciendo las reglas a %dificultad%'
+      reset-syntax:
+        - '%prefix% Para restablecer sus reglas a la dificultad %difficulty%, escriba el siguiente comando:'
+        - '%label% rules reset %difficulty% confirm'
+      reset-complete:
+        - '%prefix% rules.yml actualizado con éxito'
+      invalid-difficulty:
+        - '%prefix% Dificultad inválida: %difficulty%'
+      rule-name-missing:
+        - '%prefix% Debe especificar un nombre de regla.'
+      rule-name-invalid:
+        - '%prefix% No se encontró ninguna regla con el nombre %rulename%'
+      showing-rules:
+        - 'Mostrando todos los valores de la regla: &b%rulename%&r'
+      no-entities-visible:
+        - '%prefix% Debe estar mirando una entidad cercana'
+      no-entities-near:
+        - '%prefix% No se han encontrado entidades en un radio de 10 manzanas'
+      effective-rules:
+        - '%prefix% Mostrando reglas efectivas para: %entitytype% (lvl %level% %mobname%) in %world%, %location%'
+      no-effective-rules:
+        - '%prefix% No se han encontrado reglas efectivas'
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 08 - Mensajes de comando del sistema                                           +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
     reload:
@@ -234,7 +322,7 @@ command:
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 07 - Otros mensajes                                                            +LM3
+# +   Section 09 - Otros mensajes                                                            +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 other:
@@ -253,12 +341,26 @@ other:
     send-on-join: true
 
   mob-head-drop-name: 'Cabeza de %mob_name%'
+  no-drop-in-chunk: '%prefix% &7Tu cuenta de muertes de entidades niveladas ha alcanzado el máximo para este trozo. No recibirás más gotas de nivelación de estas entidades. Por favor, vuelve después de un tiempo.'
+  create-debug:
+    - '&b&nCreación de un archivo de depuración'
+    - '&7Sólo debes ejecutar este comando si un desarrollador de LevelledMobs te lo ha pedido. Se utiliza para ayudar a los usuarios que tienen problemas con el plugin.'
+    - ''
+    - '&7Este comando generará un archivo con los siguientes datos:'
+    - '&8 &m->&b Lista de plugins'
+    - '&8 &m->&b Tipo de servidor'
+    - '&8 &m->&b Número actual y máximo de jugadores en línea'
+    - '&8 &m->&b El archivo latest.log&7 &8(/logs/latest.log)'
+    - ''
+    - '&7Los desarrolladores de LevelledMobs no redistribuirán ni retendrán los datos más allá del propósito de resolver cualquier problema que puedas estar experimentando. También puedes verificar el contenido antes de enviar el archivo.'
+    - '&7Para proceder a la creación del archivo, ejecute:'
+    - '&b/lm debug create confirm&7'
 
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
-# +   Section 08 - Configuración avanzada de mensajes                                        +LM3
+# +   Section 10 - Configuración avanzada de mensajes                                        +LM3
 # +   No modifique más allá de este punto.                                                   +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
-file-version: 6
+file-version: 8
