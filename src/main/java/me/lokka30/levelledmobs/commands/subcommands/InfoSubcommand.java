@@ -4,15 +4,12 @@
 
 package me.lokka30.levelledmobs.commands.subcommands;
 
-import me.lokka30.levelledmobs.LevelledMobs;
-import me.lokka30.levelledmobs.commands.MessagesBase;
-import me.lokka30.levelledmobs.misc.Utils;
-import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.commands.MessagesBase;
+import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Shows LevelledMobs information such as the version number
@@ -21,12 +18,14 @@ import java.util.Objects;
  * @since v2.0.0
  */
 public class InfoSubcommand extends MessagesBase implements Subcommand {
-    public InfoSubcommand(final LevelledMobs main){
+
+    public InfoSubcommand(final LevelledMobs main) {
         super(main);
     }
 
     @Override
-    public void parseSubcommand(final LevelledMobs main, @NotNull final CommandSender sender, final String label, final String[] args) {
+    public void parseSubcommand(final LevelledMobs main, @NotNull final CommandSender sender,
+        final String label, final String[] args) {
         commandSender = sender;
         messageLabel = label;
 
@@ -36,25 +35,31 @@ public class InfoSubcommand extends MessagesBase implements Subcommand {
         }
 
         if (args.length == 1) {
-            final String version = main.getDescription().getVersion();
-            final String description = main.getDescription().getDescription();
-            assert description != null;
-            final List<String> supportedVersions = Utils.getSupportedServerVersions();
-            final List<String> codeContributors = List.of("stumper66", "Eyrian", "iCodinqs", "deiphiz", "CoolBoy", "Esophose",
-                    "7smile7", "UltimaOath", "konsolas", "Shevchik", "Hugo5551", "limzikiki", "bStats Project", "SpigotMC Project", "ProfliX");
-            final String listSeparator = Objects.requireNonNull(main.messagesCfg.getString("command.levelledmobs.info.listSeparator"), "messages.yml: command.levelledmobs.info.listSeparator is undefined");
+            final String listSeparator = main.messagesCfg.getString("command.levelledmobs.info.listSeparator", "&7, &f");
 
             showMessage("command.levelledmobs.info.about",
-                    new String[]{ "%version%", "%description%", "%supportedVersions%", "%contributors%"},
-                    new String[]{ version, description, String.join(listSeparator, supportedVersions), String.join(listSeparator, codeContributors) }
+                new String[]{
+                    "%version%",
+                    "%description%",
+                    "%supportedVersions%",
+                    "%maintainers%",
+                    "%contributors%"},
+                new String[]{
+                    main.getDescription().getVersion(),
+                    main.getDescription().getDescription(),
+                    "1.16 - 1.19",
+                    String.join(listSeparator, main.getDescription().getAuthors()),
+                    "See &8&nhttps://github.com/lokka30/LevelledMobs/wiki/Credits"
+                }
             );
-        }
-        else
+        } else {
             showMessage("command.levelledmobs.info.usage");
+        }
     }
 
     @Override
-    public List<String> parseTabCompletions(final LevelledMobs main, final CommandSender sender, final String[] args) {
+    public List<String> parseTabCompletions(final LevelledMobs main, final CommandSender sender,
+        final String[] args) {
         // This subcommand has no tab completions.
         return Collections.emptyList();
     }

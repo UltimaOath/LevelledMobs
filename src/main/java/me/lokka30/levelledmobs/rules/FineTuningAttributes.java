@@ -4,11 +4,11 @@
 
 package me.lokka30.levelledmobs.rules;
 
-import org.bukkit.entity.EntityType;
-import org.jetbrains.annotations.Nullable;
-
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Holds any custom multipliers values parsed from rules.yml
@@ -17,6 +17,7 @@ import java.util.List;
  * @since 3.0.0
  */
 public class FineTuningAttributes implements Cloneable {
+
     public Double attackDamage;
     public Double creeperExplosionRadius;
     public Double maxHealth;
@@ -32,39 +33,98 @@ public class FineTuningAttributes implements Cloneable {
     public Double zombieReinforcements;
     public Double followRange;
     public Integer xpDrop;
+    public boolean doNotMerge;
 
-    void mergeAttributes(final @Nullable FineTuningAttributes attributes){
-        if (attributes == null) return;
+    void mergeAttributes(final @Nullable FineTuningAttributes attributes) {
+        if (attributes == null) {
+            return;
+        }
 
-        if (attributes.maxHealth != null) this.maxHealth = attributes.maxHealth;
-        if (attributes.attackDamage != null) this.attackDamage = attributes.attackDamage;
-        if (attributes.itemDrop != null) this.itemDrop = attributes.itemDrop;
-        if (attributes.xpDrop != null) this.xpDrop = attributes.xpDrop;
-        if (attributes.movementSpeed != null) this.movementSpeed = attributes.movementSpeed;
-        if (attributes.rangedAttackDamage != null) this.rangedAttackDamage = attributes.rangedAttackDamage;
-        if (attributes.creeperExplosionRadius != null) this.creeperExplosionRadius = attributes.creeperExplosionRadius;
+        try {
+            for (final Field f : attributes.getClass().getDeclaredFields()) {
+                if (!Modifier.isPublic(f.getModifiers())) {
+                    continue;
+                }
+                if (f.get(attributes) == null) {
+                    continue;
+                }
+                final Object presetValue = f.get(attributes);
+
+                if (presetValue instanceof Integer && ((Integer) presetValue == 0)) {
+                    continue;
+                }
+                if (presetValue instanceof Double && ((Double) presetValue == 0.0)) {
+                    continue;
+                }
+
+                this.getClass().getDeclaredField(f.getName()).set(this, presetValue);
+            }
+        } catch (final IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String toString(){
+    public String toString() {
         final StringBuilder sb = new StringBuilder();
         final List<String> list = new LinkedList<>();
-        if (maxHealth != null) list.add("maxHlth: " + maxHealth);
-        if (attackDamage != null) list.add("attkDamage: " + attackDamage);
-        if (itemDrop != null) list.add("itemDrp: " + itemDrop);
-        if (xpDrop != null) list.add("xpDrp: " + xpDrop);
-        if (movementSpeed != null) list.add("moveSpd: " + movementSpeed);
-        if (rangedAttackDamage != null) list.add("rangdAtkDmg: " + rangedAttackDamage);
-        if (creeperExplosionRadius != null) list.add("creeperDmg: " + creeperExplosionRadius);
+        if (maxHealth != null) {
+            list.add("maxHlth: " + maxHealth);
+        }
+        if (attackDamage != null) {
+            list.add("attkDmg: " + attackDamage);
+        }
+        if (itemDrop != null) {
+            list.add("itemDrp: " + itemDrop);
+        }
+        if (xpDrop != null) {
+            list.add("xpDrp: " + xpDrop);
+        }
+        if (movementSpeed != null) {
+            list.add("moveSpd: " + movementSpeed);
+        }
+        if (rangedAttackDamage != null) {
+            list.add("rangdAtkDmg: " + rangedAttackDamage);
+        }
+        if (creeperExplosionRadius != null) {
+            list.add("creeperDmg: " + creeperExplosionRadius);
+        }
+        if (armorBonus != null) {
+            list.add("armrBns: " + armorBonus);
+        }
+        if (armorToughness != null) {
+            list.add("armrTuf: " + armorToughness);
+        }
+        if (attackKnockback != null) {
+            list.add("attkKnbk: " + attackKnockback);
+        }
+        if (flyingSpeed != null) {
+            list.add("flySpd: " + flyingSpeed);
+        }
+        if (knockbackResistance != null) {
+            list.add("knbkRst: " + knockbackResistance);
+        }
+        if (horseJumpStrength != null) {
+            list.add("horseJump: " + horseJumpStrength);
+        }
+        if (zombieReinforcements != null) {
+            list.add("zmbRnfrce: " + zombieReinforcements);
+        }
+        if (followRange != null) {
+            list.add("flwRng: " + followRange);
+        }
 
-        for (final String item : list){
-            if (sb.length() > 0) sb.append(", ");
+        for (final String item : list) {
+            if (sb.length() > 0) {
+                sb.append(", ");
+            }
             sb.append(item);
         }
 
-        if (sb.length() == 0)
+        if (sb.length() == 0) {
             return "No items";
-        else
+        } else {
             return sb.toString();
+        }
     }
 
     public FineTuningAttributes cloneItem() {

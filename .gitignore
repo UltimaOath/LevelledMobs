@@ -1,20 +1,17 @@
-# Non-redistributables
-#   Why? We respect other developer's work.
-/libs
-
-# IntelliJ IDE
-#   Why? Different developers use different IDE settings.
-/target/
-/.idea
-.idea
+# JetBrains IntelliJ
+target/
 .idea/
-LevelledMobs.iml
+#LevelledMobs.iml
+*.iml
 
-# Eclipse IDE
-#   Why? Different developers use different IDE settings.
+# Eclipse
 .classpath
 .project
 /.settings
 /.idea/
 .idea/jarRepositories.xml
 .idea/discord.xml
+
+# macOS
+._.git
+.DS_Store
