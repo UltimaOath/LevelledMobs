@@ -38,28 +38,31 @@
 # +-------------------------------------------------------------------------------------------LM3
 defaults:
   chance: 0.2
+  use-chunk-kill-max: true
   amount: 1
   minLevel: -1
   maxLevel: -1
-  min-player-level: -1
-  max-player-level: -1
-  player-level-variable: ''
   custommodeldata: -1
   nomultiplier: false
   nospawner: false
   equipped: 1.0
-  only-drop-if-equipped: true
+  equip-offhand: true
   override: false
   maxdropgroup: 1
   priority: 0
   player-caused: true
   item-flags: ''
   groupid: ''
-  overall_chance: 1.0
+  overall_chance: 0.0
   nbt-data: ''
-  overall_permission: ['']
-  permission: ['']
-
+  only-drop-if-equipped: false
+  # the following defaults are for custom commands only:
+  run-on-spawn: false
+  run-on-death: true
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+  
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
