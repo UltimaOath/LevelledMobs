@@ -298,7 +298,6 @@ drop-table:
     - customCommand:
         command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%-%ranged_randomx%)% %math_(%y%+%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
         groupid: random-direction-respawn
-        overall_chance: 1.0
         chance: 0.25
         amount: 1
 
@@ -326,7 +325,6 @@ drop-table:
     - customCommand:
         command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%+%ranged_randomx%)% %math_(%y%-%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
         groupid: random-direction-respawn
-        overall_chance: 1.0
         chance: 0.25
         amount: 1
 
@@ -354,7 +352,6 @@ drop-table:
     - customCommand:
         command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%+%ranged_randomx%)% %math_(%y%+%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
         groupid: random-direction-respawn
-        overall_chance: 1.0
         chance: 0.25
         amount: 1
 
