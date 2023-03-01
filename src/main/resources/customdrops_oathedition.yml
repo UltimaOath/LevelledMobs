@@ -3366,6 +3366,120 @@ drop-table:
         ranged_BHeight: 1.5
 
 
+# This drop table will have a chance to summon a new entity in one of four random directions when activated at a slightly reduced level than the parent; with included particle effects.
+# This drop table requires the PlaceholderAPI expansion 'Math' to function properly.
+  shatter-spawn:
+      # Notes: A random direction is selected so that the entity's newly spawned location isn't always the same place. There are randomizaton ranged_ config options which help add more true randomness.
+      # - - Random Direction
+    - customCommand:
+        command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%-%ranged_randomx%)% %math_(%y%-%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
+        groupid: random-direction-respawn
+        maxdropgroup: 1
+        overall_chance: 1.0
+        chance: 0.25
+        amount: 1
+
+        run-on-death: true
+        player-caused: true
+
+        ranged_randomlvl: 1-2
+        ranged_randomx: 0-3
+        ranged_randomy: 0-3
+        ranged_height: 1-2
+        
+        ranged_Count-ash: 5000
+        ranged_Speed-ash: 100
+        ranged_BWidthX-ash: 0.25
+        ranged_BWidthZ-ash: 0.25
+        ranged_BHeight-ash: 1
+        
+        ranged_Count-mycelium: 5000
+        ranged_Speed-mycelium: 0.5
+        ranged_BWidthX-mycelium: 0.35
+        ranged_BWidthZ-mycelium: 0.35
+        ranged_BHeight-mycelium: 1.25
+
+      # - + Random Direction
+    - customCommand:
+        command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%-%ranged_randomx%)% %math_(%y%+%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
+        groupid: random-direction-respawn
+        chance: 0.25
+        amount: 1
+
+        run-on-death: true
+        player-caused: true
+
+        ranged_randomlvl: 1-2
+        ranged_randomx: 0-3
+        ranged_randomy: 0-3
+        ranged_height: 1-2
+        
+        ranged_Count-ash: 5000
+        ranged_Speed-ash: 100
+        ranged_BWidthX-ash: 0.25
+        ranged_BWidthZ-ash: 0.25
+        ranged_BHeight-ash: 1
+        
+        ranged_Count-mycelium: 5000
+        ranged_Speed-mycelium: 0.5
+        ranged_BWidthX-mycelium: 0.35
+        ranged_BWidthZ-mycelium: 0.35
+        ranged_BHeight-mycelium: 1.25
+
+      # + - Random Direction
+    - customCommand:
+        command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%+%ranged_randomx%)% %math_(%y%-%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
+        groupid: random-direction-respawn
+        chance: 0.25
+        amount: 1
+
+        run-on-death: true
+        player-caused: true
+
+        ranged_randomlvl: 1-2
+        ranged_randomx: 0-3
+        ranged_randomy: 0-3
+        ranged_height: 1-2
+        
+        ranged_Count-ash: 5000
+        ranged_Speed-ash: 100
+        ranged_BWidthX-ash: 0.25
+        ranged_BWidthZ-ash: 0.25
+        ranged_BHeight-ash: 1
+        
+        ranged_Count-mycelium: 5000
+        ranged_Speed-mycelium: 0.5
+        ranged_BWidthX-mycelium: 0.35
+        ranged_BWidthZ-mycelium: 0.35
+        ranged_BHeight-mycelium: 1.25
+      
+      # + + Random Direction
+    - customCommand:
+        command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%+%ranged_randomx%)% %math_(%y%+%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
+        groupid: random-direction-respawn
+        chance: 0.25
+        amount: 1
+
+        run-on-death: true
+        player-caused: true
+
+        ranged_randomlvl: 1-2
+        ranged_randomx: 0-3
+        ranged_randomy: 0-3
+        ranged_height: 1-2
+        
+        ranged_Count-ash: 5000
+        ranged_Speed-ash: 100
+        ranged_BWidthX-ash: 0.25
+        ranged_BWidthZ-ash: 0.25
+        ranged_BHeight-ash: 1
+        
+        ranged_Count-mycelium: 5000
+        ranged_Speed-mycelium: 0.5
+        ranged_BWidthX-mycelium: 0.35
+        ranged_BWidthZ-mycelium: 0.35
+        ranged_BHeight-mycelium: 1.25
+
         
         
 # +-------------------------------------------------------------------------------------------LM3
