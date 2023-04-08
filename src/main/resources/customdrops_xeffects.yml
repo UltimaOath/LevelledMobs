@@ -70,68 +70,68 @@ defaults:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 all_mobs:
-#  - usedroptable: xeffect-ambient_entity_effect
-#  - usedroptable: xeffect-angry_villager
-#  - usedroptable: xeffect-ash
-#  - usedroptable: xeffect-bubble_pop
-#  - usedroptable: xeffect-campfire_cosy_smoke
-#  - usedroptable: xeffect-campfire_signal_smoke
-#  - usedroptable: xeffect-cloud
-#  - usedroptable: xeffect-composter
-#  - usedroptable: xeffect-crimson_spore
-#  - usedroptable: xeffect-crit
-#  - usedroptable: xeffect-damage_indicator
-#  - usedroptable: xeffect-dolphin
-#  - usedroptable: xeffect-dragon_breath
-#  - usedroptable: xeffect-dripping_lava
-#  - usedroptable: xeffect-dripping_water
-#  - usedroptable: xeffect-dripping_honey
-#  - usedroptable: xeffect-dripping_obsidian_tear
-#  - usedroptable: xeffect-effect
-#  - usedroptable: xeffect-elder_guardian
-#  - usedroptable: xeffect-enchant
-#  - usedroptable: xeffect-enchanted_hit
-#  - usedroptable: xeffect-end_rod
-#  - usedroptable: xeffect-entity_effect
-#  - usedroptable: xeffect-explosion
-#  - usedroptable: xeffect-explosion_emitter
-#  - usedroptable: xeffect-falling_lava
-#  - usedroptable: xeffect-falling_water
-#  - usedroptable: xeffect-falling_obsidian_tear
-#  - usedroptable: xeffect-falling_nectar
-#  - usedroptable: xeffect-falling_honey
-#  - usedroptable: xeffect-firework
-#  - usedroptable: xeffect-fishing
-#  - usedroptable: xeffect-flame
-#  - usedroptable: xeffect-flash
-#  - usedroptable: xeffect-happy_villager
-#  - usedroptable: xeffect-heart
-#  - usedroptable: xeffect-instant_effect
-#  - usedroptable: xeffect-item_slime
-#  - usedroptable: xeffect-item_snowball
-#  - usedroptable: xeffect-landing_honey
-#  - usedroptable: xeffect-landing_lava
-#  - usedroptable: xeffect-landing_obsidian_tear
-#  - usedroptable: xeffect-large_smoke
-#  - usedroptable: xeffect-lava
-#  - usedroptable: xeffect-mycelium
-#  - usedroptable: xeffect-nautilus
-#  - usedroptable: xeffect-poof
-#  - usedroptable: xeffect-portal
-#  - usedroptable: xeffect-rain
-#  - usedroptable: xeffect-reverse_portal
-#  - usedroptable: xeffect-smoke
-#  - usedroptable: xeffect-sneeze
-#  - usedroptable: xeffect-soul
-#  - usedroptable: xeffect-soul_fire_flame
-#  - usedroptable: xeffect-spit
-#  - usedroptable: xeffect-splash
-#  - usedroptable: xeffect-squid_ink
-#  - usedroptable: xeffect-sweep_attack
-#  - usedroptable: xeffect-totem_of_undying
-#  - usedroptable: xeffect-warped_spore
-#  - usedroptable: xeffect-white_ash
-#  - usedroptable: xeffect-witch
+#  - usedroptable: xeffect-particles-ambient_entity_effect
+#  - usedroptable: xeffect-particles-angry_villager
+#  - usedroptable: xeffect-particles-ash
+#  - usedroptable: xeffect-particles-bubble_pop
+#  - usedroptable: xeffect-particles-campfire_cosy_smoke
+#  - usedroptable: xeffect-particles-campfire_signal_smoke
+#  - usedroptable: xeffect-particles-cloud
+#  - usedroptable: xeffect-particles-composter
+#  - usedroptable: xeffect-particles-crimson_spore
+#  - usedroptable: xeffect-particles-crit
+#  - usedroptable: xeffect-particles-damage_indicator
+#  - usedroptable: xeffect-particles-dolphin
+#  - usedroptable: xeffect-particles-dragon_breath
+#  - usedroptable: xeffect-particles-dripping_lava
+#  - usedroptable: xeffect-particles-dripping_water
+#  - usedroptable: xeffect-particles-dripping_honey
+#  - usedroptable: xeffect-particles-dripping_obsidian_tear
+#  - usedroptable: xeffect-particles-effect
+#  - usedroptable: xeffect-particles-elder_guardian
+#  - usedroptable: xeffect-particles-enchant
+#  - usedroptable: xeffect-particles-enchanted_hit
+#  - usedroptable: xeffect-particles-end_rod
+#  - usedroptable: xeffect-particles-entity_effect
+#  - usedroptable: xeffect-particles-explosion
+#  - usedroptable: xeffect-particles-explosion_emitter
+#  - usedroptable: xeffect-particles-falling_lava
+#  - usedroptable: xeffect-particles-falling_water
+#  - usedroptable: xeffect-particles-falling_obsidian_tear
+#  - usedroptable: xeffect-particles-falling_nectar
+#  - usedroptable: xeffect-particles-falling_honey
+#  - usedroptable: xeffect-particles-firework
+#  - usedroptable: xeffect-particles-fishing
+#  - usedroptable: xeffect-particles-flame
+#  - usedroptable: xeffect-particles-flash
+#  - usedroptable: xeffect-particles-happy_villager
+#  - usedroptable: xeffect-particles-heart
+#  - usedroptable: xeffect-particles-instant_effect
+#  - usedroptable: xeffect-particles-item_slime
+#  - usedroptable: xeffect-particles-item_snowball
+#  - usedroptable: xeffect-particles-landing_honey
+#  - usedroptable: xeffect-particles-landing_lava
+#  - usedroptable: xeffect-particles-landing_obsidian_tear
+#  - usedroptable: xeffect-particles-large_smoke
+#  - usedroptable: xeffect-particles-lava
+#  - usedroptable: xeffect-particles-mycelium
+#  - usedroptable: xeffect-particles-nautilus
+#  - usedroptable: xeffect-particles-poof
+#  - usedroptable: xeffect-particles-portal
+#  - usedroptable: xeffect-particles-rain
+#  - usedroptable: xeffect-particles-reverse_portal
+#  - usedroptable: xeffect-particles-smoke
+#  - usedroptable: xeffect-particles-sneeze
+#  - usedroptable: xeffect-particles-soul
+#  - usedroptable: xeffect-particles-soul_fire_flame
+#  - usedroptable: xeffect-particles-spit
+#  - usedroptable: xeffect-particles-splash
+#  - usedroptable: xeffect-particles-squid_ink
+#  - usedroptable: xeffect-particles-sweep_attack
+#  - usedroptable: xeffect-particles-totem_of_undying
+#  - usedroptable: xeffect-particles-warped_spore
+#  - usedroptable: xeffect-particles-white_ash
+#  - usedroptable: xeffect-particles-witch
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
@@ -139,7 +139,7 @@ all_mobs:
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
 drop-table:
-  xeffect-ambient_entity_effect:
+  xeffect-particles-ambient_entity_effect:
     - customCommand:
         command: ['execute at %player% run particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -151,7 +151,7 @@ drop-table:
         ranged_BWidthZ: 0
         ranged_BHeight: 0.25
         
-  xeffect-angry_villager:
+  xeffect-particles-angry_villager:
     - customCommand:
         command: ['execute at %player% run particle minecraft:angry_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -163,7 +163,7 @@ drop-table:
         ranged_BWidthZ: 0.75
         ranged_BHeight: 0.25
         
-  xeffect-ash:
+  xeffect-particles-ash:
     - customCommand:
         command: ['execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -175,7 +175,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1
         
-  xeffect-bubble_pop:
+  xeffect-particles-bubble_pop:
     - customCommand:
         command: ['execute at %player% run particle minecraft:bubble_pop %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -187,7 +187,7 @@ drop-table:
         ranged_BWidthZ: 0.15
         ranged_BHeight: 1.5
         
-  xeffect-campfire_cosy_smoke:
+  xeffect-particles-campfire_cosy_smoke:
     - customCommand:
         command: ['execute at %player% run particle minecraft:campfire_cosy_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -199,7 +199,7 @@ drop-table:
         ranged_BWidthZ: 0
         ranged_BHeight: 1.25
         
-  xeffect-campfire_signal_smoke:
+  xeffect-particles-campfire_signal_smoke:
     - customCommand:
         command: ['execute at %player% run particle minecraft:campfire_signal_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -211,7 +211,7 @@ drop-table:
         ranged_BWidthZ: 0
         ranged_BHeight: 1.25
         
-  xeffect-cloud:
+  xeffect-particles-cloud:
     - customCommand:
         command: ['execute at %player% run particle minecraft:cloud %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -223,7 +223,7 @@ drop-table:
         ranged_BWidthZ: 0.5
         ranged_BHeight: 1
         
-  xeffect-composter:
+  xeffect-particles-composter:
     - customCommand:
         command: ['execute at %player% run particle minecraft:composter %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -235,7 +235,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.5
         
-  xeffect-crimson_spore:
+  xeffect-particles-crimson_spore:
     - customCommand:
         command: ['execute at %player% run particle minecraft:crimson_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -247,7 +247,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.0
         
-  xeffect-crit:
+  xeffect-particles-crit:
     - customCommand:
         command: ['execute at %player% run particle minecraft:crit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -259,7 +259,7 @@ drop-table:
         ranged_BWidthZ: 0.5
         ranged_BHeight: 2.0
         
-  xeffect-damage_indicator:
+  xeffect-particles-damage_indicator:
     - customCommand:
         command: ['execute at %player% run particle minecraft:damage_indicator %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -271,7 +271,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.0
         
-  xeffect-dolphin:
+  xeffect-particles-dolphin:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dolphin %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -283,7 +283,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.25
         
-  xeffect-dragon_breath:
+  xeffect-particles-dragon_breath:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dragon_breath %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -295,7 +295,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.25
         
-  xeffect-dripping_lava:
+  xeffect-particles-dripping_lava:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dripping_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -307,7 +307,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-dripping_water:
+  xeffect-particles-dripping_water:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dripping_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -319,7 +319,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-dripping_honey:
+  xeffect-particles-dripping_honey:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dripping_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -331,7 +331,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-dripping_obsidian_tear:
+  xeffect-particles-dripping_obsidian_tear:
     - customCommand:
         command: ['execute at %player% run particle minecraft:dripping_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -343,7 +343,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-effect:
+  xeffect-particles-effect:
     - customCommand:
         command: ['execute at %player% run particle minecraft:effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -355,14 +355,14 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1
         
-  xeffect-elder_guardian:
+  xeffect-particles-elder_guardian:
     - customCommand:
         command: ['execute at %player% run particle minecraft:elder_guardian %x% %y% %z% 0 0 0 0 1 force %player%']
         amount: 1
         chance: 1.0
         player-caused: true   
         
-  xeffect-enchant:
+  xeffect-particles-enchant:
     - customCommand:
         command: ['execute at %player% run particle minecraft:enchant %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -374,7 +374,7 @@ drop-table:
         ranged_BWidthZ: 0.15
         ranged_BHeight: 0.75
         
-  xeffect-enchanted_hit:
+  xeffect-particles-enchanted_hit:
     - customCommand:
         command: ['execute at %player% run particle minecraft:enchanted_hit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -386,7 +386,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.25
         
-  xeffect-end_rod:
+  xeffect-particles-end_rod:
     - customCommand:
         command: ['execute at %player% run particle minecraft:end_rod %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -398,7 +398,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-entity_effect:
+  xeffect-particles-entity_effect:
     - customCommand:
         command: ['execute at %player% run particle minecraft:entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -410,7 +410,7 @@ drop-table:
         ranged_BWidthZ: 0.25
         ranged_BHeight: 1.0
         
-  xeffect-explosion:
+  xeffect-particles-explosion:
     - customCommand:
         command: ['execute at %player% run particle minecraft:explosion %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -422,14 +422,14 @@ drop-table:
         ranged_BWidthZ: 0.15
         ranged_BHeight: 1.25
         
-  xeffect-explosion_emitter:
+  xeffect-particles-explosion_emitter:
     - customCommand:
         command: ['execute at %player% run particle minecraft:explosion_emitter %x% %y% %z% 0 0 0 0 1 force %player%']
         amount: 1
         chance: 1.0
         player-caused: true
 
-  xeffect-falling_lava:
+  xeffect-particles-falling_lava:
     - customCommand:
         command: ['execute at %player% run particle minecraft:falling_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -441,7 +441,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-falling_water:
+  xeffect-particles-falling_water:
     - customCommand:
         command: ['execute at %player% run particle minecraft:falling_water %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -453,7 +453,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-falling_obsidian_tear:
+  xeffect-particles-falling_obsidian_tear:
     - customCommand:
         command: ['execute at %player% run particle minecraft:falling_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -465,7 +465,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-falling_nectar:
+  xeffect-particles-falling_nectar:
     - customCommand:
         command: ['execute at %player% run particle minecraft:falling_nectar %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -477,7 +477,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-falling_honey:
+  xeffect-particles-falling_honey:
     - customCommand:
         command: ['execute at %player% run particle minecraft:falling_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -489,7 +489,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-firework:
+  xeffect-particles-firework:
     - customCommand:
         command: ['execute at %player% run particle minecraft:firework %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -501,7 +501,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-fishing:
+  xeffect-particles-fishing:
     - customCommand:
         command: ['execute at %player% run particle minecraft:fishing %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -513,7 +513,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-flame:
+  xeffect-particles-flame:
     - customCommand:
         command: ['execute at %player% run particle minecraft:flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -525,7 +525,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-flash:
+  xeffect-particles-flash:
     - customCommand:
         command: ['execute at %player% run particle minecraft:flash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -537,7 +537,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 0.5
         
-  xeffect-happy_villager:
+  xeffect-particles-happy_villager:
     - customCommand:
         command: 'particle minecraft:happy_villager %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%'
         amount: 1
@@ -549,7 +549,7 @@ drop-table:
         ranged_BWidthZ: 0.75
         ranged_BHeight: 0.75
         
-  xeffect-heart:
+  xeffect-particles-heart:
     - customCommand:
         command: ['execute at %player% run particle minecraft:heart %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -561,7 +561,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-instant_effect:
+  xeffect-particles-instant_effect:
     - customCommand:
         command: ['execute at %player% run particle minecraft:instant_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -573,7 +573,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-item_slime:
+  xeffect-particles-item_slime:
     - customCommand:
         command: ['execute at %player% run particle minecraft:item_slime %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -585,7 +585,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.5
         
-  xeffect-item_snowball:
+  xeffect-particles-item_snowball:
     - customCommand:
         command: ['execute at %player% run particle minecraft:item_snowball %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -597,7 +597,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.5
         
-  xeffect-landing_honey:
+  xeffect-particles-landing_honey:
     - customCommand:
         command: ['execute at %player% run particle minecraft:landing_honey %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -609,7 +609,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-landing_lava:
+  xeffect-particles-landing_lava:
     - customCommand:
         command: ['execute at %player% run particle minecraft:landing_lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -621,7 +621,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-landing_obsidian_tear:
+  xeffect-particles-landing_obsidian_tear:
     - customCommand:
         command: ['execute at %player% run particle minecraft:landing_obsidian_tear %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -633,7 +633,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-large_smoke:
+  xeffect-particles-large_smoke:
     - customCommand:
         command: ['execute at %player% run particle minecraft:large_smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -645,7 +645,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-lava:
+  xeffect-particles-lava:
     - customCommand:
         command: ['execute at %player% run particle minecraft:lava %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -657,7 +657,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-mycelium:
+  xeffect-particles-mycelium:
     - customCommand:
         command: ['execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -669,7 +669,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 2.0
         
-  xeffect-nautilus:
+  xeffect-particles-nautilus:
     - customCommand:
         command: ['execute at %player% run particle minecraft:nautilus %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -681,7 +681,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-poof:
+  xeffect-particles-poof:
     - customCommand:
         command: ['execute at %player% run particle minecraft:poof %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -693,7 +693,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-portal:
+  xeffect-particles-portal:
     - customCommand:
         command: ['execute at %player% run particle minecraft:portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -705,7 +705,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-rain:
+  xeffect-particles-rain:
     - customCommand:
         command: ['execute at %player% run particle minecraft:rain %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -717,7 +717,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-reverse_portal:
+  xeffect-particles-reverse_portal:
     - customCommand:
         command: ['execute at %player% run particle minecraft:reverse_portal %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -729,7 +729,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-smoke:
+  xeffect-particles-smoke:
     - customCommand:
         command: ['execute at %player% run particle minecraft:smoke %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -741,7 +741,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-sneeze:
+  xeffect-particles-sneeze:
     - customCommand:
         command: ['execute at %player% run particle minecraft:sneeze %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -753,7 +753,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-soul:
+  xeffect-particles-soul:
     - customCommand:
         command: ['execute at %player% run particle minecraft:soul %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -765,7 +765,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-soul_fire_flame:
+  xeffect-particles-soul_fire_flame:
     - customCommand:
         command: ['execute at %player% run particle minecraft:soul_fire_flame %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -777,7 +777,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-spit:
+  xeffect-particles-spit:
     - customCommand:
         command: ['execute at %player% run particle minecraft:spit %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -789,7 +789,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-splash:
+  xeffect-particles-splash:
     - customCommand:
         command: ['execute at %player% run particle minecraft:splash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -801,7 +801,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-squid_ink:
+  xeffect-particles-squid_ink:
     - customCommand:
         command: ['execute at %player% run particle minecraft:squid_ink %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -813,7 +813,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-sweep_attack:
+  xeffect-particles-sweep_attack:
     - customCommand:
         command: ['execute at %player% run particle minecraft:sweep_attack %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -825,7 +825,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-totem_of_undying:
+  xeffect-particles-totem_of_undying:
     - customCommand:
         command: ['execute at %player% run particle minecraft:totem_of_undying %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -837,7 +837,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-warped_spore:
+  xeffect-particles-warped_spore:
     - customCommand:
         command: ['execute at %player% run particle minecraft:warped_spore %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -849,7 +849,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.25
         
-  xeffect-white_ash:
+  xeffect-particles-white_ash:
     - customCommand:
         command: ['execute at %player% run particle minecraft:white_ash %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
@@ -861,7 +861,7 @@ drop-table:
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.5
         
-  xeffect-witch:
+  xeffect-particles-witch:
     - customCommand:
         command: ['execute at %player% run particle minecraft:witch %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
         amount: 1
