@@ -1,0 +1,1894 @@
+#                    _                   _ _          _ __  __       _
+#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                             The Ultimate RPG Levelled Mobs Solution
+#
+# --------------------------------------------------------------------------------------------LM3
+# +                                      ++                                                  +LM3
+# +  Main Developers                     ++  Documentation (on our Wiki)                     +LM3
+# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
+# +      Author and developer            ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  Support/Discussion (on our Discord)             +LM3
+# +                                      ++    Join our Discord for free, quality support.   +LM3
+# +    PenalBuffalo (aka. stumper66)     ++    If you are unable to, PM @lokka30 on SpigotMC +LM3
+# +      LevelledMobs 3 maintainer       ++    https://discord.gg/RQ8M4A5                    +LM3
+# +      https://ko-fi.com/penalbuffalo  ++                                                  +LM3
+# +                                      ++  Welcome to LevelledMobs 3! Please read the      +LM3
+# +    UltimaOath (aka. Oathkeeper)      ++  relevant documentation prior to attempting any  +LM3
+# +      Docs and configs since v2       ++  changes to this file.                           +LM3
+# +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
+# +                                      ++                                                  +LM3
+# --------------------------------------------------------------------------------------------LM3
+#                        _____         _             ____
+#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
+#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
+#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
+#                                                                 |_|
+#
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 01 - Defaults                                                                  +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+defaults:
+  chance: 0.05
+  use-chunk-kill-max: true
+  amount: 1
+  minLevel: -1
+  maxLevel: -1
+  custommodeldata: -1
+  nomultiplier: false
+  nospawner: false
+  equipped: 0.0
+  equip-offhand: false
+  override: false
+  maxdropgroup: 1
+  priority: 0
+  player-caused: true
+  item-flags: ''
+  groupid: ''
+  overall_chance: 0.0
+  nbt-data: ''
+  only-drop-if-equipped: false
+  # the following defaults are for custom commands only:
+  run-on-spawn: false
+  run-on-death: true
+  min-player-level: -1
+  max-player-level: -1
+  player-level-variable: ''
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 02 - Universal Group Drops                                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+all_mobs:
+  -
+
+all_levellable_mobs:
+#  - usedroptable: xeffect-aoe-positive-absorption
+#  - usedroptable: xeffect-aoe-positive-conduit_power
+#  - usedroptable: xeffect-aoe-positive-dolphins_grace
+#  - usedroptable: xeffect-aoe-positive-fire_resistance
+#  - usedroptable: xeffect-aoe-positive-haste
+#  - usedroptable: xeffect-aoe-positive-health_boost
+#  - usedroptable: xeffect-aoe-positive-hero_of_the_village
+#  - usedroptable: xeffect-aoe-positive-instant_health
+#  - usedroptable: xeffect-aoe-positive-invisibility
+#  - usedroptable: xeffect-aoe-positive-jump_boost
+#  - usedroptable: xeffect-aoe-positive-luck
+#  - usedroptable: xeffect-aoe-positive-night_vision
+#  - usedroptable: xeffect-aoe-positive-regeneration
+#  - usedroptable: xeffect-aoe-positive-resistance
+#  - usedroptable: xeffect-aoe-positive-saturation
+#  - usedroptable: xeffect-aoe-positive-slow_falling
+#  - usedroptable: xeffect-aoe-positive-speed
+#  - usedroptable: xeffect-aoe-positive-strength
+#  - usedroptable: xeffect-aoe-positive-water_breathing
+
+#  - usedroptable: xeffect-aoe-negative-unluck
+#  - usedroptable: xeffect-aoe-negative-bad_omen
+#  - usedroptable: xeffect-aoe-negative-blindness
+#  - usedroptable: xeffect-aoe-negative-darkness
+#  - usedroptable: xeffect-aoe-negative-glowing
+#  - usedroptable: xeffect-aoe-negative-hunger
+#  - usedroptable: xeffect-aoe-negative-instant_damage
+#  - usedroptable: xeffect-aoe-negative-levitation
+#  - usedroptable: xeffect-aoe-negative-mining_fatigue
+#  - usedroptable: xeffect-aoe-negative-nausea
+#  - usedroptable: xeffect-aoe-negative-poison
+#  - usedroptable: xeffect-aoe-negative-slowness
+#  - usedroptable: xeffect-aoe-negative-weakness
+#  - usedroptable: xeffect-aoe-negative-wither
+
+all_hostile_mobs:
+  -
+
+all_passive_mobs:
+  -
+
+all_overworld_mobs:
+  -
+
+all_nether_mobs:
+  -
+
+all_flying_mobs:
+  -
+
+all_ground_mobs:
+  -
+
+all_aquatic_mobs:
+  -
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 03 - EntityType Drops                                                          +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+
+#AXOLOTL:
+#  -
+
+BAT:
+  -
+
+BEE:
+  -
+
+BLAZE:
+  -
+
+CAT:
+  -
+
+CAVE_SPIDER:
+  -
+
+CHICKEN:
+  -
+
+COD:
+  -
+
+COW:
+  -
+
+CREEPER:
+  -
+
+DOLPHIN:
+  -
+
+DONKEY:
+  -
+
+DROWNED:
+  -
+
+ELDER_GUARDIAN:
+  -
+
+ENDER_DRAGON:
+  -
+
+ENDERMAN:
+  - 
+
+ENDERMITE:
+  -
+
+EVOKER:
+  -
+
+FOX:
+  -
+
+GHAST:
+  -
+
+#GLOW_SQUID:
+#  -
+
+#GOAT:
+#  -
+
+GUARDIAN:
+  -
+
+HOGLIN:
+  -
+
+HORSE:
+  -
+
+HUSK:
+  -
+
+ILLUSIONER:
+  -
+
+IRON_GOLEM:
+  -
+
+LLAMA:
+  -
+
+MAGMA_CUBE:
+  -
+
+MULE:
+  -
+
+MUSHROOM_COW:
+  -
+
+OCELOT:
+  -
+
+PANDA:
+  -
+
+PARROT:
+  -
+
+PHANTOM:
+  -
+
+PIG:
+  -
+
+PIGLIN:
+  -
+
+PIGLIN_BRUTE:
+  -
+
+PILLAGER:
+  -
+
+POLAR_BEAR:
+  -
+
+PUFFERFISH:
+  -
+
+RABBIT:
+  -
+
+RAVAGER:
+  -
+
+SALMON:
+  -
+
+SHEEP:
+  -
+
+SHULKER:
+  -
+
+SILVERFISH:
+  -
+
+SKELETON:
+  -
+
+SKELETON_HORSE:
+  -
+
+SLIME:
+  -
+
+SNOWMAN:
+  -
+
+SPIDER:
+  -
+
+SQUID:
+  -
+
+STRAY:
+  -
+
+STRIDER:
+  -
+
+TRADER_LLAMA:
+  -
+
+TROPICAL_FISH:
+  -
+
+TURTLE:
+  -
+
+VEX:
+  -
+
+VILLAGER:
+  -
+
+VINDICATOR:
+  -
+
+WANDERING_TRADER:
+  -
+
+WITCH:
+  -
+
+WITHER:
+  -
+
+WITHER_SKELETON:
+  -
+
+WOLF:
+  -
+
+ZOGLIN:
+  -
+
+ZOMBIE:
+  -
+
+ZOMBIE_HORSE:
+  -
+
+ZOMBIE_VILLAGER:
+  -
+
+ZOMBIFIED_PIGLIN:
+  -
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 04 - Drop Tables                                                               +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+drop-table:
+#   
+#   Note from UltimaOath:
+#   
+#   Each of the drop tables below are broken into three separate commands, each representing a
+#   different strength, radius, and delay applied so that the first command is the strongest and
+#   the shortest distance from the entity. The second command after a delay creates a cloud of
+#   medium strength effect with medium radius, while the third after a further delay creates a
+#   cloud of low strength with high radius.
+#   
+#   The first drop table includes comments detailing the configurable options .
+#   
+
+  xeffect-aoe-positive-absorption:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Absorption Cloud - Ring 1 of 3"}''}']
+        # First color here #2552A5 (Primary Color for Absorption)
+        ranged_dustR: 0.145  # Represents the R in the RGB of Minecraft particle colors.
+        ranged_dustG: 0.322  # Represents the G in the RGB of Minecraft particle colors.
+        ranged_dustB: 0.647  # Represents the B in the RGB of Minecraft particle colors.
+        ranged_dustSize: 0.95  # Represents the size of the particle, from 0.0 to 1.0 .
+        
+        ranged_aoe_radius: 1.0  # Represents the radius of the area of effect particle cloud.
+        ranged_aoe_duration: 150  # Represents the duration of the area of effect particle cloud, measured in ticks. (20 ticks = 1 second)
+        ranged_aoe_effectID: 22  # Represents the Minecraft ID of the Effect
+        ranged_aoe_effectDuration: 50  # Represents the duration of the effect being applied to the affected entity measured in ticks. (20 ticks = 1 second)
+        ranged_aoe_strength: 2  # Represents the intended strength of the Effect (A value of 2 represents Strength 3; this populates the Amplifier: variable of the Minecraft command)
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:20}],CustomName:''{"text":"AOE Absorption Cloud - Ring 2 of 3"}''}']
+        # Second color here #A6C9CF (Secondary Color for Absorption)
+        ranged_dustR: 0.651
+        ranged_dustG: 0.788
+        ranged_dustB: 0.812
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 22
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50  # Represents a delay applied to the execution of this command measured in ticks. (20 ticks = 1 second)
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:20}],CustomName:''{"text":"AOE Absorption Cloud - Ring 3 of 3"}''}']
+        # Third color here #2552A5 (Primary Color for Absorption)
+        ranged_dustR: 0.145
+        ranged_dustG: 0.322
+        ranged_dustB: 0.647
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 22
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-conduit_power:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Conduit Power Cloud - Ring 1 of 3"}''}']
+        # First color here #1DC2D1 (Primary Color for Conduit Power)
+        ranged_dustR: 0.114
+        ranged_dustG: 0.761
+        ranged_dustB: 0.820
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 29
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Conduit Power Cloud - Ring 2 of 3"}''}']
+        # Second color here #98bac6 (Secondary Color for Conduit Power)
+        ranged_dustR: 0.596
+        ranged_dustG: 0.729
+        ranged_dustB: 0.776
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 29
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Conduit Power Cloud - Ring 3 of 3"}''}']
+        # Third color here #1DC2D1 (Primary Color for Conduit Power)
+        ranged_dustR: 0.114
+        ranged_dustG: 0.761
+        ranged_dustB: 0.820
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 29
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-dolphins_grace:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Dolphins Grace Cloud - Ring 1 of 3"}''}']
+        # First color here #C0A44D (Primary Color for Dolphin's Grace)
+        ranged_dustR: 0.753
+        ranged_dustG: 0.643
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 30
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Dolphins Grace Cloud - Ring 2 of 3"}''}']
+        # Second color here #4ebfd1 (Secondary Color for Dolphin's Grace)
+        ranged_dustR: 0.306
+        ranged_dustG: 0.749
+        ranged_dustB: 0.820
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 30
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Dolphins Grace Cloud - Ring 3 of 3"}''}']
+        # Third color here #C0A44D (Primary Color for Dolphin's Grace)
+        ranged_dustR: 0.753
+        ranged_dustG: 0.643
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 30
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-positive-fire_resistance:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Fire Resistance Cloud - Ring 1 of 3"}''}']
+        # First color here #E89D3B (Primary Color for Fire Resistance)
+        ranged_dustR: 0.910
+        ranged_dustG: 0.616
+        ranged_dustB: 0.231
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 12
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Fire Resistance Cloud - Ring 2 of 3"}''}']
+        # Second color here #eb1f15 (Secondary Color for Fire Resistance)
+        ranged_dustR: 0.922
+        ranged_dustG: 0.122
+        ranged_dustB: 0.082
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 12
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Fire Resistance Cloud - Ring 3 of 3"}''}']
+        # Third color here #E89D3B (Primary Color for Fire Resistance)
+        ranged_dustR: 0.910
+        ranged_dustG: 0.616
+        ranged_dustB: 0.231
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 12
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-positive-haste:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Haste Cloud - Ring 1 of 3"}''}']
+        # First color here #D9C043 (Primary Color for Haste)
+        ranged_dustR: 0.851
+        ranged_dustG: 0.753
+        ranged_dustB: 0.263
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 3
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Haste Cloud - Ring 2 of 3"}''}']
+        # Second color here #b8d5c4 (Secondary Color for Haste)
+        ranged_dustR: 0.722
+        ranged_dustG: 0.835
+        ranged_dustB: 0.769
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 3
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Haste Cloud - Ring 3 of 3"}''}']
+        # Third color here #D9C043 (Primary Color for Haste)
+        ranged_dustR: 0.851
+        ranged_dustG: 0.753
+        ranged_dustB: 0.263
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 3
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-health_boost:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Health Boost Cloud - Ring 1 of 3"}''}']
+        # First color here #F87D23 (Primary Color for Health Boost)
+        ranged_dustR: 0.973
+        ranged_dustG: 0.490
+        ranged_dustB: 0.137
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 21
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Health Boost Cloud - Ring 2 of 3"}''}']
+        # Second color here #5bc4d7 (Secondary Color for Health Boost)
+        ranged_dustR: 0.357
+        ranged_dustG: 0.769
+        ranged_dustB: 0.843
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 21
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Health Boost Cloud - Ring 3 of 3"}''}']
+        # Third color here #F87D23 (Primary Color for Health Boost)
+        ranged_dustR: 0.973
+        ranged_dustG: 0.490
+        ranged_dustB: 0.137
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 21
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-hero_of_the_village:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hero of the Village Cloud - Ring 1 of 3"}''}']
+        # First color here #44FF44 (Primary Color for Hero of the Village)
+        ranged_dustR: 0.267
+        ranged_dustG: 1.000
+        ranged_dustB: 0.267
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 32
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hero of the Village Cloud - Ring 2 of 3"}''}']
+        # Second color here #e3d8d9 (Secondary Color for Hero of the Village)
+        ranged_dustR: 0.890
+        ranged_dustG: 0.847
+        ranged_dustB: 0.851
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 32
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hero of the Village Cloud - Ring 3 of 3"}''}']
+        # Third color here #44FF44 (Primary Color for Hero of the Village)
+        ranged_dustR: 0.267
+        ranged_dustG: 1.000
+        ranged_dustB: 0.267
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 32
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-instant_health:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Health Cloud - Ring 1 of 3"}''}']
+        # First color here #FC2524 (Primary Color for Instant Health)
+        ranged_dustR: 0.988
+        ranged_dustG: 0.145
+        ranged_dustB: 0.141
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 6
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Health Cloud - Ring 2 of 3"}''}']
+        # Second color here #e9d9d9 (Secondary Color for Instant Health)
+        ranged_dustR: 0.914
+        ranged_dustG: 0.851
+        ranged_dustB: 0.851
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 6
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Health Cloud - Ring 3 of 3"}''}']
+        # Third color here #FC2524 (Primary Color for Instant Health)
+        ranged_dustR: 0.988
+        ranged_dustG: 0.145
+        ranged_dustB: 0.141
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 6
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-invisibility:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Invisibility Cloud - Ring 1 of 3"}''}']
+        # First color here #818595 (Primary Color for Invisibility)
+        ranged_dustR: 0.506
+        ranged_dustG: 0.522
+        ranged_dustB: 0.584
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 14
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Invisibility Cloud - Ring 2 of 3"}''}']
+        # Second color here #89c3d5 (Secondary Color for Invisibility)
+        ranged_dustR: 0.537
+        ranged_dustG: 0.765
+        ranged_dustB: 0.835
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 14
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Invisibility Cloud - Ring 3 of 3"}''}']
+        # Third color here #818595 (Primary Color for Invisibility)
+        ranged_dustR: 0.506
+        ranged_dustG: 0.522
+        ranged_dustB: 0.584
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 14
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-positive-jump_boost:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Jump Boost Cloud - Ring 1 of 3"}''}']
+        # First color here #23FC4D (Primary Color for Jump Boost)
+        ranged_dustR: 0.137
+        ranged_dustG: 0.988
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 8
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Jump Boost Cloud - Ring 2 of 3"}''}']
+        # Second color here #9ea1cd (Secondary Color for Jump Boost)
+        ranged_dustR: 0.620
+        ranged_dustG: 0.631
+        ranged_dustB: 0.804
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 8
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Jump Boost Cloud - Ring 3 of 3"}''}']
+        # Third color here #23FC4D (Primary Color for Jump Boost)
+        ranged_dustR: 0.137
+        ranged_dustG: 0.988
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 8
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-luck:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Luck Cloud - Ring 1 of 3"}''}']
+        # First color here #349C00 (Primary Color for Luck)
+        ranged_dustR: 0.204
+        ranged_dustG: 0.612
+        ranged_dustB: 0.000
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 26
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Luck Cloud - Ring 2 of 3"}''}']
+        # Second color here #c6e1cb (Secondary Color for Luck)
+        ranged_dustR: 0.776
+        ranged_dustG: 0.882
+        ranged_dustB: 0.796
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 26
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Luck Cloud - Ring 3 of 3"}''}']
+        # Third color here #349C00 (Primary Color for Luck)
+        ranged_dustR: 0.204
+        ranged_dustG: 0.612
+        ranged_dustB: 0.000
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 26
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-night_vision:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Night Vision Cloud - Ring 1 of 3"}''}']
+        # First color here #2020A4 (Primary Color for Night Vision)
+        ranged_dustR: 0.125
+        ranged_dustG: 0.125
+        ranged_dustB: 0.643
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 16
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Night Vision Cloud - Ring 2 of 3"}''}']
+        # Second color here #e7dfdd (Secondary Color for Night Vision)
+        ranged_dustR: 0.906
+        ranged_dustG: 0.875
+        ranged_dustB: 0.867
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 16
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Night Vision Cloud - Ring 3 of 3"}''}']
+        # Third color here #2020A4 (Primary Color for Night Vision)
+        ranged_dustR: 0.125
+        ranged_dustG: 0.125
+        ranged_dustB: 0.643
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 16
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-positive-regeneration:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Regeneration Cloud - Ring 1 of 3"}''}']
+        # First color here #D15EAE (Primary Color for Regeneration)
+        ranged_dustR: 0.820
+        ranged_dustG: 0.369
+        ranged_dustB: 0.682
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 10
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Regeneration Cloud - Ring 2 of 3"}''}']
+        # Second color here #e6e6d1 (Secondary Color for Regeneration)
+        ranged_dustR: 0.902
+        ranged_dustG: 0.902
+        ranged_dustB: 0.820
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 10
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Regeneration Cloud - Ring 3 of 3"}''}']
+        # Third color here #D15EAE (Primary Color for Regeneration)
+        ranged_dustR: 0.820
+        ranged_dustG: 0.369
+        ranged_dustB: 0.682
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 10
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-resistance:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Resistance Cloud - Ring 1 of 3"}''}']
+        # First color here #99453A (Primary Color for Resistance)
+        ranged_dustR: 0.600
+        ranged_dustG: 0.271
+        ranged_dustB: 0.227
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 11
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Resistance Cloud - Ring 2 of 3"}''}']
+        # Second color here #d0d1d0 (Secondary Color for Resistance)
+        ranged_dustR: 0.816
+        ranged_dustG: 0.820
+        ranged_dustB: 0.816
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 11
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Resistance Cloud - Ring 3 of 3"}''}']
+        # Third color here #99453A (Primary Color for Resistance)
+        ranged_dustR: 0.600
+        ranged_dustG: 0.271
+        ranged_dustB: 0.227
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 11
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-saturation:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Saturation Cloud - Ring 1 of 3"}''}']
+        # First color here #F82421 (Primary Color for Saturation)
+        ranged_dustR: 0.973
+        ranged_dustG: 0.141
+        ranged_dustB: 0.129
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 23
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Saturation Cloud - Ring 2 of 3"}''}']
+        # Second color here #d6e1d6 (Secondary Color for Saturation)
+        ranged_dustR: 0.839
+        ranged_dustG: 0.882
+        ranged_dustB: 0.839
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 23
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Saturation Cloud - Ring 3 of 3"}''}']
+        # Third color here #F82421 (Primary Color for Saturation)
+        ranged_dustR: 0.973
+        ranged_dustG: 0.141
+        ranged_dustB: 0.129
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 23
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-slow_falling:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slow Falling Cloud - Ring 1 of 3"}''}']
+        # First color here #FCF4D5 (Primary Color for Slow Falling)
+        ranged_dustR: 0.988
+        ranged_dustG: 0.957
+        ranged_dustB: 0.835
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 28
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slow Falling Cloud - Ring 2 of 3"}''}']
+        # Second color here #a6c2ca (Secondary Color for Slow Falling)
+        ranged_dustR: 0.651
+        ranged_dustG: 0.761
+        ranged_dustB: 0.792
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 28
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slow Falling Cloud - Ring 3 of 3"}''}']
+        # Third color here #FCF4D5 (Primary Color for Slow Falling)
+        ranged_dustR: 0.988
+        ranged_dustG: 0.957
+        ranged_dustB: 0.835
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 28
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-speed:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Speed Cloud - Ring 1 of 3"}''}']
+        # First color here #7EB2CA (Primary Color for Speed)
+        ranged_dustR: 0.494
+        ranged_dustG: 0.698
+        ranged_dustB: 0.792
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 1
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Speed Cloud - Ring 2 of 3"}''}']
+        # Second color here #e4d0cf (Secondary Color for Speed)
+        ranged_dustR: 0.894
+        ranged_dustG: 0.816
+        ranged_dustB: 0.812
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 1
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Speed Cloud - Ring 3 of 3"}''}']
+        # Third color here #7EB2CA (Primary Color for Speed)
+        ranged_dustR: 0.494
+        ranged_dustG: 0.698
+        ranged_dustB: 0.792
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 1
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-strength:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Strength Cloud - Ring 1 of 3"}''}']
+        # First color here #962524 (Primary Color for Strength)
+        ranged_dustR: 0.588
+        ranged_dustG: 0.145
+        ranged_dustB: 0.141
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 5
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Strength Cloud - Ring 2 of 3"}''}']
+        # Second color here #38b5d2 (Secondary Color for Strength)
+        ranged_dustR: 0.220
+        ranged_dustG: 0.710
+        ranged_dustB: 0.824
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 5
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Strength Cloud - Ring 3 of 3"}''}']
+        # Third color here #962524 (Primary Color for Strength)
+        ranged_dustR: 0.588
+        ranged_dustG: 0.145
+        ranged_dustB: 0.141
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 5
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-positive-water_breathing:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Water Breathing Cloud - Ring 1 of 3"}''}']
+        # First color here #2F549C (Primary Color for Water Breathing)
+        ranged_dustR: 0.184
+        ranged_dustG: 0.329
+        ranged_dustB: 0.612
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 13
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Water Breathing Cloud - Ring 2 of 3"}''}']
+        # Second color here #aeced3 (Secondary Color for Water Breathing)
+        ranged_dustR: 0.682
+        ranged_dustG: 0.808
+        ranged_dustB: 0.827
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 13
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Water Breathing Cloud - Ring 3 of 3"}''}']
+        # Third color here #2F549C (Primary Color for Water Breathing)
+        ranged_dustR: 0.184
+        ranged_dustG: 0.329
+        ranged_dustB: 0.612
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 13
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-negative-unluck:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Luck Cloud - Ring 1 of 3"}''}']
+        # First color here #C0A44D (Primary Color for Bad Luck)
+        ranged_dustR: 0.753
+        ranged_dustG: 0.643
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 27
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Luck Cloud - Ring 2 of 3"}''}']
+        # Second color here #99af90 (Secondary Color for Bad Luck)
+        ranged_dustR: 0.600
+        ranged_dustG: 0.686
+        ranged_dustB: 0.565
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 27
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50  # Represents a delay applied to the execution of this command measured in ticks. (20 ticks = 1 second)
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Luck Cloud - Ring 3 of 3"}''}']
+        # Third color here #C0A44D (Primary Color for Bad Luck)
+        ranged_dustR: 0.753
+        ranged_dustG: 0.643
+        ranged_dustB: 0.302
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 27
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-bad_omen:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Omen Cloud - Ring 1 of 3"}''}']
+        # First color here #0B6138 (Primary Color for Bad Omen)
+        ranged_dustR: 0.043
+        ranged_dustG: 0.380
+        ranged_dustB: 0.220
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 31
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Omen Cloud - Ring 2 of 3"}''}']
+        # Second color here #cdcc6c (Secondary Color for Bad Omen)
+        ranged_dustR: 0.804
+        ranged_dustG: 0.800
+        ranged_dustB: 0.424
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 31
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Bad Omen Cloud - Ring 3 of 3"}''}']
+        # Third color here #0B6138 (Primary Color for Bad Omen)
+        ranged_dustR: 0.043
+        ranged_dustG: 0.380
+        ranged_dustB: 0.220
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 31
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-blindness:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Blindness Cloud - Ring 1 of 3"}''}']
+        # First color here #1F1F23 (Primary Color forBlindness)
+        ranged_dustR: 0.122
+        ranged_dustG: 0.122
+        ranged_dustB: 0.137
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 15
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Blindness Cloud - Ring 2 of 3"}''}']
+        # Second color here #306577 (Secondary Color for Blindness)
+        ranged_dustR: 0.188
+        ranged_dustG: 0.396
+        ranged_dustB: 0.467
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 15
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Blindness Cloud - Ring 3 of 3"}''}']
+        # Third color here #1F1F23 (Primary Color for Blindness)
+        ranged_dustR: 0.122
+        ranged_dustG: 0.122
+        ranged_dustB: 0.137
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 15
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-negative-darkness:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Darkness Cloud - Ring 1 of 3"}''}']
+        # First color here #292721 (Primary Color for Darkness)
+        ranged_dustR: 0.161
+        ranged_dustG: 0.153
+        ranged_dustB: 0.129
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 33
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Darkness Cloud - Ring 2 of 3"}''}']
+        # Second color here #2d6375 (Secondary Color for Darkness)
+        ranged_dustR: 0.176
+        ranged_dustG: 0.388
+        ranged_dustB: 0.459
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 33
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Darkness Cloud - Ring 3 of 3"}''}']
+        # Third color here #292721 (Primary Color for Darkness)
+        ranged_dustR: 0.161
+        ranged_dustG: 0.153
+        ranged_dustB: 0.129
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 33
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-negative-glowing:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Glowing Cloud - Ring 1 of 3"}''}']
+        # First color here #94A061 (Primary Color for Glowing)
+        ranged_dustR: 0.580
+        ranged_dustG: 0.627
+        ranged_dustB: 0.380
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 24
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Glowing Cloud - Ring 2 of 3"}''}']
+        # Second color here #bd8a76 (Secondary Color for Glowing)
+        ranged_dustR: 0.741
+        ranged_dustG: 0.541
+        ranged_dustB: 0.463
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 24
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Glowing Cloud - Ring 3 of 3"}''}']
+        # Third color here #94A061 (Primary Color for Glowing)
+        ranged_dustR: 0.580
+        ranged_dustG: 0.627
+        ranged_dustB: 0.380
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 24
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-hunger:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hunger Cloud - Ring 1 of 3"}''}']
+        # First color here #587653 (Primary Color for Hunger)
+        ranged_dustR: 0.345
+        ranged_dustG: 0.463
+        ranged_dustB: 0.325
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 17
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hunger Cloud - Ring 2 of 3"}''}']
+        # Second color here #b9a37d (Secondary Color for Hunger)
+        ranged_dustR: 0.725
+        ranged_dustG: 0.639
+        ranged_dustB: 0.490
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 17
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Hunger Cloud - Ring 3 of 3"}''}']
+        # Third color here #587653 (Primary Color for Hunger)
+        ranged_dustR: 0.345
+        ranged_dustG: 0.463
+        ranged_dustB: 0.325
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 17
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-instant_damage:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Damage Cloud - Ring 1 of 3"}''}']
+        # First color here #440A09 (Primary Color for Instant Damage)
+        ranged_dustR: 0.267
+        ranged_dustG: 0.039
+        ranged_dustB: 0.035
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 7
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Damage Cloud - Ring 2 of 3"}''}']
+        # Second color here #ada7a3 (Secondary Color for Instant Damage)
+        ranged_dustR: 0.678
+        ranged_dustG: 0.655
+        ranged_dustB: 0.639
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 7
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Instant Damage Cloud - Ring 3 of 3"}''}']
+        # Third color here #440A09 (Primary Color for Instant Damage)
+        ranged_dustR: 0.267
+        ranged_dustG: 0.039
+        ranged_dustB: 0.035
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 7
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-levitation:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Levitation Cloud - Ring 1 of 3"}''}']
+        # First color here #CEFFFF (Primary Color for Levitation)
+        ranged_dustR: 0.808
+        ranged_dustG: 1.000
+        ranged_dustB: 1.000
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 25
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Levitation Cloud - Ring 2 of 3"}''}']
+        # Second color here #cbc8bb (Secondary Color for Levitation)
+        ranged_dustR: 0.796
+        ranged_dustG: 0.784
+        ranged_dustB: 0.733
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 25
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Levitation Cloud - Ring 3 of 3"}''}']
+        # Third color here #CEFFFF (Primary Color for Levitation)
+        ranged_dustR: 0.808
+        ranged_dustG: 1.000
+        ranged_dustB: 1.000
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 25
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-mining_fatigue:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Mining Fatigue Cloud - Ring 1 of 3"}''}']
+        # First color here #4A4217 (Primary Color for Mining Fatigue)
+        ranged_dustR: 0.290
+        ranged_dustG: 0.259
+        ranged_dustB: 0.090
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 4
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Mining Fatigue Cloud - Ring 2 of 3"}''}']
+        # Second color here #b39684 (Secondary Color for Mining Fatigue)
+        ranged_dustR: 0.702
+        ranged_dustG: 0.588
+        ranged_dustB: 0.518
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 4
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Mining Fatigue Cloud - Ring 3 of 3"}''}']
+        # Third color here #4A4217 (Primary Color for Mining Fatigue)
+        ranged_dustR: 0.290
+        ranged_dustG: 0.259
+        ranged_dustB: 0.090
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 4
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-negative-nausea:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Nausea Cloud - Ring 1 of 3"}''}']
+        # First color here #551D4A (Primary Color for Nausea)
+        ranged_dustR: 0.333
+        ranged_dustG: 0.114
+        ranged_dustB: 0.290
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 9
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Nausea Cloud - Ring 2 of 3"}''}']
+        # Second color here #c7d0ab (Secondary Color for Nausea)
+        ranged_dustR: 0.780
+        ranged_dustG: 0.816
+        ranged_dustB: 0.671
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 9
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Nausea Cloud - Ring 3 of 3"}''}']
+        # Third color here #551D4A (Primary Color for Nausea)
+        ranged_dustR: 0.333
+        ranged_dustG: 0.114
+        ranged_dustB: 0.290
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 9
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-poison:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Poison Cloud - Ring 1 of 3"}''}']
+        # First color here #4F9632 (Primary Color for Poison)
+        ranged_dustR: 0.310
+        ranged_dustG: 0.588
+        ranged_dustB: 0.196
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 19
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Poison Cloud - Ring 2 of 3"}''}']
+        # Second color here #b8c47b (Secondary Color for Poison)
+        ranged_dustR: 0.722
+        ranged_dustG: 0.769
+        ranged_dustB: 0.482
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 19
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Poison Cloud - Ring 3 of 3"}''}']
+        # Third color here #4F9632 (Primary Color for Poison)
+        ranged_dustR: 0.310
+        ranged_dustG: 0.588
+        ranged_dustB: 0.196
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 19
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-slowness:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slowness Cloud - Ring 1 of 3"}''}']
+        # First color here #5C6E83 (Primary Color for Slowness)
+        ranged_dustR: 0.361
+        ranged_dustG: 0.431
+        ranged_dustB: 0.514
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 2
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slowness Cloud - Ring 2 of 3"}''}']
+        # Second color here #cfc3b6 (Secondary Color for Slowness)
+        ranged_dustR: 0.812
+        ranged_dustG: 0.765
+        ranged_dustB: 0.714
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 2
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Slowness Cloud - Ring 3 of 3"}''}']
+        # Third color here #5C6E83 (Primary Color for Slowness)
+        ranged_dustR: 0.361
+        ranged_dustG: 0.431
+        ranged_dustB: 0.514
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 2
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+  xeffect-aoe-negative-weakness:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Weakness Cloud - Ring 1 of 3"}''}']
+        # First color here #494E49 (Primary Color for Weakness)
+        ranged_dustR: 0.286
+        ranged_dustG: 0.306
+        ranged_dustB: 0.286
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 18
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Weakness Cloud - Ring 2 of 3"}''}']
+        # Second color here #bd9f8d (Secondary Color for Weakness)
+        ranged_dustR: 0.741
+        ranged_dustG: 0.624
+        ranged_dustB: 0.553
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 18
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Weakness Cloud - Ring 3 of 3"}''}']
+        # Third color here #494E49 (Primary Color for Weakness)
+        ranged_dustR: 0.286
+        ranged_dustG: 0.306
+        ranged_dustB: 0.286
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 18
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+        
+  xeffect-aoe-negative-wither:
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Wither Cloud - Ring 1 of 3"}''}']
+        # First color here #352A27 (Primary Color for Wither)
+        ranged_dustR: 0.208
+        ranged_dustG: 0.165
+        ranged_dustB: 0.153
+        ranged_dustSize: 0.95
+        
+        ranged_aoe_radius: 1.0
+        ranged_aoe_duration: 150
+        ranged_aoe_effectID: 20
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 2
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Wither Cloud - Ring 2 of 3"}''}']
+        # Second color here #cf786b (Secondary Color for Wither)
+        ranged_dustR: 0.812
+        ranged_dustG: 0.471
+        ranged_dustB: 0.420
+        ranged_dustSize: 0.70
+        
+        ranged_aoe_radius: 1.5
+        ranged_aoe_duration: 100
+        ranged_aoe_effectID: 20
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 1
+        delay: 50
+    - customCommand:
+        chance: 1.0
+        command: ['execute positioned %x% %y% %z% run summon area_effect_cloud %x% %y% %z% {Particle:"dust %ranged_dustR% %ranged_dustG% %ranged_dustB% %ranged_dustSize%f",Radius:%ranged_aoe_radius%f,Duration:%ranged_aoe_duration%,Effects:[{Id:%ranged_aoe_effectID%,Amplifier:%ranged_aoe_strength%b,Duration:%ranged_aoe_effectDuration%}],CustomName:''{"text":"AOE Wither Cloud - Ring 3 of 3"}''}']
+        # Third color here #352A27 (Primary Color for Wither)
+        ranged_dustR: 0.208
+        ranged_dustG: 0.165
+        ranged_dustB: 0.153
+        ranged_dustSize: 0.45
+        
+        ranged_aoe_radius: 2.0
+        ranged_aoe_duration: 50
+        ranged_aoe_effectID: 20
+        ranged_aoe_effectDuration: 50
+        ranged_aoe_strength: 0
+        delay: 100
+
+
+
+# +-------------------------------------------------------------------------------------------LM3
+# +                                                                                          +LM3
+# +   Section 05 - Advanced Message Settings                                                 +LM3
+# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
+# +                                                                                          +LM3
+# +-------------------------------------------------------------------------------------------LM3
+file-version: 10
