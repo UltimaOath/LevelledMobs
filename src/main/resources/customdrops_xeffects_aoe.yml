@@ -21,338 +21,48 @@
 # +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
 # +                                      ++                                                  +LM3
 # --------------------------------------------------------------------------------------------LM3
-#                        _____         _             ____
-#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
-#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
-#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
-#                                                                 |_|
+
+#  
+#  Drop Tables - Complete List
+#  Use this list to search for any particular table you're looking for.
 #
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 01 - Defaults                                                                  +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-defaults:
-  chance: 0.05
-  use-chunk-kill-max: true
-  amount: 1
-  minLevel: -1
-  maxLevel: -1
-  custommodeldata: -1
-  nomultiplier: false
-  nospawner: false
-  equipped: 0.0
-  equip-offhand: false
-  override: false
-  maxdropgroup: 1
-  priority: 0
-  player-caused: true
-  item-flags: ''
-  groupid: ''
-  overall_chance: 0.0
-  nbt-data: ''
-  only-drop-if-equipped: false
-  # the following defaults are for custom commands only:
-  run-on-spawn: false
-  run-on-death: true
-  min-player-level: -1
-  max-player-level: -1
-  player-level-variable: ''
+#  ===========================================================================================
+
+#  xeffect-aoe-positive-absorption
+#  xeffect-aoe-positive-conduit_power
+#  xeffect-aoe-positive-dolphins_grace
+#  xeffect-aoe-positive-fire_resistance
+#  xeffect-aoe-positive-haste
+#  xeffect-aoe-positive-health_boost
+#  xeffect-aoe-positive-hero_of_the_village
+#  xeffect-aoe-positive-instant_health
+#  xeffect-aoe-positive-invisibility
+#  xeffect-aoe-positive-jump_boost
+#  xeffect-aoe-positive-luck
+#  xeffect-aoe-positive-night_vision
+#  xeffect-aoe-positive-regeneration
+#  xeffect-aoe-positive-resistance
+#  xeffect-aoe-positive-saturation
+#  xeffect-aoe-positive-slow_falling
+#  xeffect-aoe-positive-speed
+#  xeffect-aoe-positive-strength
+#  xeffect-aoe-positive-water_breathing
+
+#  xeffect-aoe-negative-unluck
+#  xeffect-aoe-negative-bad_omen
+#  xeffect-aoe-negative-blindness
+#  xeffect-aoe-negative-darkness
+#  xeffect-aoe-negative-glowing
+#  xeffect-aoe-negative-hunger
+#  xeffect-aoe-negative-instant_damage
+#  xeffect-aoe-negative-levitation
+#  xeffect-aoe-negative-mining_fatigue
+#  xeffect-aoe-negative-nausea
+#  xeffect-aoe-negative-poison
+#  xeffect-aoe-negative-slowness
+#  xeffect-aoe-negative-weakness
+#  xeffect-aoe-negative-wither
 
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 02 - Universal Group Drops                                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-all_mobs:
-  -
-
-all_levellable_mobs:
-#  - usedroptable: xeffect-aoe-positive-absorption
-#  - usedroptable: xeffect-aoe-positive-conduit_power
-#  - usedroptable: xeffect-aoe-positive-dolphins_grace
-#  - usedroptable: xeffect-aoe-positive-fire_resistance
-#  - usedroptable: xeffect-aoe-positive-haste
-#  - usedroptable: xeffect-aoe-positive-health_boost
-#  - usedroptable: xeffect-aoe-positive-hero_of_the_village
-#  - usedroptable: xeffect-aoe-positive-instant_health
-#  - usedroptable: xeffect-aoe-positive-invisibility
-#  - usedroptable: xeffect-aoe-positive-jump_boost
-#  - usedroptable: xeffect-aoe-positive-luck
-#  - usedroptable: xeffect-aoe-positive-night_vision
-#  - usedroptable: xeffect-aoe-positive-regeneration
-#  - usedroptable: xeffect-aoe-positive-resistance
-#  - usedroptable: xeffect-aoe-positive-saturation
-#  - usedroptable: xeffect-aoe-positive-slow_falling
-#  - usedroptable: xeffect-aoe-positive-speed
-#  - usedroptable: xeffect-aoe-positive-strength
-#  - usedroptable: xeffect-aoe-positive-water_breathing
-
-#  - usedroptable: xeffect-aoe-negative-unluck
-#  - usedroptable: xeffect-aoe-negative-bad_omen
-#  - usedroptable: xeffect-aoe-negative-blindness
-#  - usedroptable: xeffect-aoe-negative-darkness
-#  - usedroptable: xeffect-aoe-negative-glowing
-#  - usedroptable: xeffect-aoe-negative-hunger
-#  - usedroptable: xeffect-aoe-negative-instant_damage
-#  - usedroptable: xeffect-aoe-negative-levitation
-#  - usedroptable: xeffect-aoe-negative-mining_fatigue
-#  - usedroptable: xeffect-aoe-negative-nausea
-#  - usedroptable: xeffect-aoe-negative-poison
-#  - usedroptable: xeffect-aoe-negative-slowness
-#  - usedroptable: xeffect-aoe-negative-weakness
-#  - usedroptable: xeffect-aoe-negative-wither
-
-all_hostile_mobs:
-  -
-
-all_passive_mobs:
-  -
-
-all_overworld_mobs:
-  -
-
-all_nether_mobs:
-  -
-
-all_flying_mobs:
-  -
-
-all_ground_mobs:
-  -
-
-all_aquatic_mobs:
-  -
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 03 - EntityType Drops                                                          +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-
-#AXOLOTL:
-#  -
-
-BAT:
-  -
-
-BEE:
-  -
-
-BLAZE:
-  -
-
-CAT:
-  -
-
-CAVE_SPIDER:
-  -
-
-CHICKEN:
-  -
-
-COD:
-  -
-
-COW:
-  -
-
-CREEPER:
-  -
-
-DOLPHIN:
-  -
-
-DONKEY:
-  -
-
-DROWNED:
-  -
-
-ELDER_GUARDIAN:
-  -
-
-ENDER_DRAGON:
-  -
-
-ENDERMAN:
-  - 
-
-ENDERMITE:
-  -
-
-EVOKER:
-  -
-
-FOX:
-  -
-
-GHAST:
-  -
-
-#GLOW_SQUID:
-#  -
-
-#GOAT:
-#  -
-
-GUARDIAN:
-  -
-
-HOGLIN:
-  -
-
-HORSE:
-  -
-
-HUSK:
-  -
-
-ILLUSIONER:
-  -
-
-IRON_GOLEM:
-  -
-
-LLAMA:
-  -
-
-MAGMA_CUBE:
-  -
-
-MULE:
-  -
-
-MUSHROOM_COW:
-  -
-
-OCELOT:
-  -
-
-PANDA:
-  -
-
-PARROT:
-  -
-
-PHANTOM:
-  -
-
-PIG:
-  -
-
-PIGLIN:
-  -
-
-PIGLIN_BRUTE:
-  -
-
-PILLAGER:
-  -
-
-POLAR_BEAR:
-  -
-
-PUFFERFISH:
-  -
-
-RABBIT:
-  -
-
-RAVAGER:
-  -
-
-SALMON:
-  -
-
-SHEEP:
-  -
-
-SHULKER:
-  -
-
-SILVERFISH:
-  -
-
-SKELETON:
-  -
-
-SKELETON_HORSE:
-  -
-
-SLIME:
-  -
-
-SNOWMAN:
-  -
-
-SPIDER:
-  -
-
-SQUID:
-  -
-
-STRAY:
-  -
-
-STRIDER:
-  -
-
-TRADER_LLAMA:
-  -
-
-TROPICAL_FISH:
-  -
-
-TURTLE:
-  -
-
-VEX:
-  -
-
-VILLAGER:
-  -
-
-VINDICATOR:
-  -
-
-WANDERING_TRADER:
-  -
-
-WITCH:
-  -
-
-WITHER:
-  -
-
-WITHER_SKELETON:
-  -
-
-WOLF:
-  -
-
-ZOGLIN:
-  -
-
-ZOMBIE:
-  -
-
-ZOMBIE_HORSE:
-  -
-
-ZOMBIE_VILLAGER:
-  -
-
-ZOMBIFIED_PIGLIN:
-  -
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 04 - Drop Tables                                                               +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-drop-table:
 #   
 #   Note from UltimaOath:
 #   
