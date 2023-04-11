@@ -21,611 +21,321 @@
 # +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
 # +                                      ++                                                  +LM3
 # --------------------------------------------------------------------------------------------LM3
-#                        _____         _             ____
-#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
-#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
-#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
-#                                                                 |_|
+
+#  
+#  Drop Tables - Complete List
+#  Use this list to search for any particular table you're looking for.
 #
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 01 - Defaults                                                                  +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-defaults:
-  chance: 0.05
-  use-chunk-kill-max: true
-  amount: 1
-  minLevel: -1
-  maxLevel: -1
-  custommodeldata: -1
-  nomultiplier: false
-  nospawner: false
-  equipped: 0.0
-  equip-offhand: false
-  override: false
-  maxdropgroup: 1
-  priority: 0
-  player-caused: true
-  item-flags: ''
-  groupid: ''
-  overall_chance: 0.0
-  nbt-data: ''
-  only-drop-if-equipped: false
-  # the following defaults are for custom commands only:
-  run-on-spawn: false
-  run-on-death: true
-  min-player-level: -1
-  max-player-level: -1
-  player-level-variable: ''
+#  ===========================================================================================
+
+#  xeffect-sounds-ambient-basalt_deltas
+#  xeffect-sounds-ambient-cave
+#  xeffect-sounds-ambient-crimson_forest
+#  xeffect-sounds-ambient-nether_wastes
+#  xeffect-sounds-ambient-soul_sand_valley
+#  xeffect-sounds-ambient-underwater
+#  xeffect-sounds-ambient-warped_forest
+#  xeffect-sounds-block-amethyst_block
+#  xeffect-sounds-block-amethyst_cluster
+#  xeffect-sounds-block-ancient_debris
+#  xeffect-sounds-block-anvil
+#  xeffect-sounds-block-azalea
+#  xeffect-sounds-block-azalea_leaves
+#  xeffect-sounds-block-bamboo
+#  xeffect-sounds-block-bamboo_sapling
+#  xeffect-sounds-block-bamboo_wood
+#  xeffect-sounds-block-bamboo_wood_button
+#  xeffect-sounds-block-bamboo_wood_door
+#  xeffect-sounds-block-bamboo_wood_fence_gate
+#  xeffect-sounds-block-bamboo_wood_hanging_sign
+#  xeffect-sounds-block-bamboo_wood_pressure_plate
+#  xeffect-sounds-block-bamboo_wood_trapdoor
+#  xeffect-sounds-block-barrel
+#  xeffect-sounds-block-basalt
+#  xeffect-sounds-block-beacon
+#  xeffect-sounds-block-beehive
+#  xeffect-sounds-block-bell
+#  xeffect-sounds-block-big_dripleaf
+#  xeffect-sounds-block-blastfurnace
+#  xeffect-sounds-block-bone_block
+#  xeffect-sounds-block-brewing_stand
+#  xeffect-sounds-block-cake
+#  xeffect-sounds-block-calcite
+#  xeffect-sounds-block-campfire
+#  xeffect-sounds-block-candle
+#  xeffect-sounds-block-cave_vines
+#  xeffect-sounds-block-chain
+#  xeffect-sounds-block-cherry_sapling
+#  xeffect-sounds-block-cherry_wood
+#  xeffect-sounds-block-cherry_wood_button
+#  xeffect-sounds-block-cherry_wood_door
+#  xeffect-sounds-block-cherry_wood_fence_gate
+#  xeffect-sounds-block-cherry_wood_hanging_sign
+#  xeffect-sounds-block-cherry_wood_pressure_plate
+#  xeffect-sounds-block-cherry_wood_trapdoor
+#  xeffect-sounds-block-chest
+#  xeffect-sounds-block-chiseled_bookshelf
+#  xeffect-sounds-block-chorus_flower
+#  xeffect-sounds-block-comparator
+#  xeffect-sounds-block-composter
+#  xeffect-sounds-block-conduit
+#  xeffect-sounds-block-copper
+#  xeffect-sounds-block-coral_block
+#  xeffect-sounds-block-crop
+#  xeffect-sounds-block-decorated_pot
+#  xeffect-sounds-block-deepslate
+#  xeffect-sounds-block-deepslate_bricks
+#  xeffect-sounds-block-deepslate_tiles
+#  xeffect-sounds-block-dispenser
+#  xeffect-sounds-block-dripstone_block
+#  xeffect-sounds-block-enchantment_table
+#  xeffect-sounds-block-end_gateway
+#  xeffect-sounds-block-end_portal_frame
+#  xeffect-sounds-block-end_portal
+#  xeffect-sounds-block-ender_chest
+#  xeffect-sounds-block-fence_gate
+#  xeffect-sounds-block-fire
+#  xeffect-sounds-block-flowering_azalea
+#  xeffect-sounds-block-froglight
+#  xeffect-sounds-block-frogspawn
+#  xeffect-sounds-block-fungus
+#  xeffect-sounds-block-furnace
+#  xeffect-sounds-block-gilded_blackstone
+#  xeffect-sounds-block-glass
+#  xeffect-sounds-block-grass
+#  xeffect-sounds-block-gravel
+#  xeffect-sounds-block-grindstone
+#  xeffect-sounds-block-growing_plant
+#  xeffect-sounds-block-hanging_roots
+#  xeffect-sounds-block-hanging_sign
+#  xeffect-sounds-block-honey_block
+#  xeffect-sounds-block-iron_door
+#  xeffect-sounds-block-iron_trapdoor
+#  xeffect-sounds-block-ladder
+#  xeffect-sounds-block-lantern
+#  xeffect-sounds-block-large_amethyst_bud
+#  xeffect-sounds-block-lava
+#  xeffect-sounds-block-lever
+#  xeffect-sounds-block-lily_pad
+#  xeffect-sounds-block-lodestone
+#  xeffect-sounds-block-mangrove_roots
+#  xeffect-sounds-block-medium_amethyst_bud
+#  xeffect-sounds-block-metal
+#  xeffect-sounds-block-metal_pressure_plate
+#  xeffect-sounds-block-moss
+#  xeffect-sounds-block-moss_carpet
+#  xeffect-sounds-block-mud
+#  xeffect-sounds-block-mud_bricks
+#  xeffect-sounds-block-muddy_mangrove_roots
+#  xeffect-sounds-block-nether_bricks
+#  xeffect-sounds-block-nether_gold_ore
+#  xeffect-sounds-block-nether_ore
+#  xeffect-sounds-block-nether_sprouts
+#  xeffect-sounds-block-nether_wart
+#  xeffect-sounds-block-nether_wood
+#  xeffect-sounds-block-nether_wood_button
+#  xeffect-sounds-block-nether_wood_door
+#  xeffect-sounds-block-nether_wood_fence_gate
+#  xeffect-sounds-block-nether_wood_hanging_sign
+#  xeffect-sounds-block-nether_wood_pressure_plate
+#  xeffect-sounds-block-nether_wood_trapdoor
+#  xeffect-sounds-block-netherite_block
+#  xeffect-sounds-block-netherrack
+#  xeffect-sounds-block-netherrack
+#  xeffect-sounds-block-nylium
+#  xeffect-sounds-block-packed_mud
+#  xeffect-sounds-block-pink_petals
+#  xeffect-sounds-block-piston
+#  xeffect-sounds-block-pointed_dripstone
+#  xeffect-sounds-block-polished_deepslate
+#  xeffect-sounds-block-polished_deepslate
+#  xeffect-sounds-block-powder_snow
+#  xeffect-sounds-block-pumpkin
+#  xeffect-sounds-block-redstone_torch
+#  xeffect-sounds-block-powder_snow
+#  xeffect-sounds-block-rooted_dirt
+#  xeffect-sounds-block-roots
+#  xeffect-sounds-block-sand
+#  xeffect-sounds-block-scaffolding
+#  xeffect-sounds-block-sculk
+#  xeffect-sounds-block-sculk_catalyst
+#  xeffect-sounds-block-sculk_sensor
+#  xeffect-sounds-block-sculk_shrieker
+#  xeffect-sounds-block-sculk_vein
+#  xeffect-sounds-block-shroomlight
+#  xeffect-sounds-block-shulker_box
+#  xeffect-sounds-block-slime_block
+#  xeffect-sounds-block-small_amethyst_bud
+#  xeffect-sounds-block-small_dripleaf
+#  xeffect-sounds-block-smithing_table
+#  xeffect-sounds-block-smoker
+#  xeffect-sounds-block-snow
+#  xeffect-sounds-block-soul_sand
+#  xeffect-sounds-block-soul_soil
+#  xeffect-sounds-block-spore_blossom
+#  xeffect-sounds-block-stem
+#  xeffect-sounds-block-stone
+#  xeffect-sounds-block-stone_button
+#  xeffect-sounds-block-stone_pressure_plate
+#  xeffect-sounds-block-sweet_berry_bush
+#  xeffect-sounds-block-tripwire
+#  xeffect-sounds-block-tuff
+#  xeffect-sounds-block-vine
+#  xeffect-sounds-block-wart_block
+#  xeffect-sounds-block-water
+#  xeffect-sounds-block-weeping_vines
+#  xeffect-sounds-block-wet_grass
+#  xeffect-sounds-block-wood
+#  xeffect-sounds-block-wooden_button
+#  xeffect-sounds-block-wooden_door
+#  xeffect-sounds-block-wooden_pressure_plate
+#  xeffect-sounds-block-wooden_trapdoor
+#  xeffect-sounds-block-wool
+#  xeffect-sounds-block-enchant
+#  xeffect-sounds-entity-allay
+#  xeffect-sounds-entity-armor_stand
+#  xeffect-sounds-entity-arrow
+#  xeffect-sounds-entity-axolotl
+#  xeffect-sounds-entity-bat
+#  xeffect-sounds-entity-bee
+#  xeffect-sounds-entity-blaze
+#  xeffect-sounds-entity-boat
+#  xeffect-sounds-entity-camel
+#  xeffect-sounds-entity-cat
+#  xeffect-sounds-entity-chicken
+#  xeffect-sounds-entity-cod
+#  xeffect-sounds-entity-cow
+#  xeffect-sounds-entity-creeper
+#  xeffect-sounds-entity-dolphin
+#  xeffect-sounds-entity-donkey
+#  xeffect-sounds-entity-dragon_fireball
+#  xeffect-sounds-entity-drowned
+#  xeffect-sounds-entity-egg
+#  xeffect-sounds-entity-elder_guardian
+#  xeffect-sounds-entity-ender_dragon
+#  xeffect-sounds-entity-ender_eye
+#  xeffect-sounds-entity-ender_pearl
+#  xeffect-sounds-entity-enderman
+#  xeffect-sounds-entity-endermite
+#  xeffect-sounds-entity-evoker
+#  xeffect-sounds-entity-experience_bottle
+#  xeffect-sounds-entity-experience_orb
+#  xeffect-sounds-entity-firework_rocket
+#  xeffect-sounds-entity-fish
+#  xeffect-sounds-entity-fishing_bobber
+#  xeffect-sounds-entity-fox
+#  xeffect-sounds-entity-frog
+#  xeffect-sounds-entity-generic
+#  xeffect-sounds-entity-ghast
+#  xeffect-sounds-entity-glow_item_frame
+#  xeffect-sounds-entity-glow_squid
+#  xeffect-sounds-entity-goat
+#  xeffect-sounds-entity-guardian
+#  xeffect-sounds-entity-hoglin
+#  xeffect-sounds-entity-horse
+#  xeffect-sounds-entity-hostile
+#  xeffect-sounds-entity-husk
+#  xeffect-sounds-entity-illusioner
+#  xeffect-sounds-entity-iron_golem
+#  xeffect-sounds-entity-item
+#  xeffect-sounds-entity-item_frame
+#  xeffect-sounds-entity-leash_knot
+#  xeffect-sounds-entity-lightning_bolt
+#  xeffect-sounds-entity-lingering_potion
+#  xeffect-sounds-entity-llama
+#  xeffect-sounds-entity-magma_cube
+#  xeffect-sounds-entity-minecart
+#  xeffect-sounds-entity-mooshroom
+#  xeffect-sounds-entity-mule
+#  xeffect-sounds-entity-ocelot
+#  xeffect-sounds-entity-painting
+#  xeffect-sounds-entity-panda
+#  xeffect-sounds-entity-parrot
+#  xeffect-sounds-entity-phantom
+#  xeffect-sounds-entity-pig
+#  xeffect-sounds-entity-piglin
+#  xeffect-sounds-entity-piglin_brute
+#  xeffect-sounds-entity-pillager
+#  xeffect-sounds-entity-player
+#  xeffect-sounds-entity-polar_bear
+#  xeffect-sounds-entity-puffer_fish
+#  xeffect-sounds-entity-rabbit
+#  xeffect-sounds-entity-ravager
+#  xeffect-sounds-entity-salmon
+#  xeffect-sounds-entity-sheep
+#  xeffect-sounds-entity-shulker
+#  xeffect-sounds-entity-silverfish
+#  xeffect-sounds-entity-skeleton
+#  xeffect-sounds-entity-slime
+#  xeffect-sounds-entity-sniffer
+#  xeffect-sounds-entity-snow_golem
+#  xeffect-sounds-entity-snowball
+#  xeffect-sounds-entity-spider
+#  xeffect-sounds-entity-splash_potion
+#  xeffect-sounds-entity-squid
+#  xeffect-sounds-entity-stray
+#  xeffect-sounds-entity-strider
+#  xeffect-sounds-entity-tnt
+#  xeffect-sounds-entity-villager
+#  xeffect-sounds-entity-vindicator
+#  xeffect-sounds-entity-wandering_trader
+#  xeffect-sounds-entity-warden
+#  xeffect-sounds-entity-witch
+#  xeffect-sounds-entity-wither
+#  xeffect-sounds-entity-wither_skeleton
+#  xeffect-sounds-entity-wolf
+#  xeffect-sounds-entity-zoglin
+#  xeffect-sounds-entity-zombie
+#  xeffect-sounds-entity-zombie_villager
+#  xeffect-sounds-entity-zombified_piglin
+#  xeffect-sounds-event-raid
+#  xeffect-sounds-item-armor
+#  xeffect-sounds-item-axe
+#  xeffect-sounds-item-bone_meal
+#  xeffect-sounds-item-book
+#  xeffect-sounds-item-bottle
+#  xeffect-sounds-item-brush
+#  xeffect-sounds-item-bucket
+#  xeffect-sounds-item-bundle
+#  xeffect-sounds-item-chorus_fruit
+#  xeffect-sounds-item-crop
+#  xeffect-sounds-item-crossbow
+#  xeffect-sounds-item-dye
+#  xeffect-sounds-item-elytra
+#  xeffect-sounds-item-firecharge
+#  xeffect-sounds-item-flintandsteel
+#  xeffect-sounds-item-glow_ink_sac
+#  xeffect-sounds-item-goat_horn
+#  xeffect-sounds-item-hoe
+#  xeffect-sounds-item-honey_bottle
+#  xeffect-sounds-item-honeycomb
+#  xeffect-sounds-item-ink_sac
+#  xeffect-sounds-item-lodestone_compass
+#  xeffect-sounds-item-nether_wart
+#  xeffect-sounds-item-shield
+#  xeffect-sounds-item-shovel
+#  xeffect-sounds-item-spyglass
+#  xeffect-sounds-item-totem
+#  xeffect-sounds-item-trident
+#  xeffect-sounds-music-creative
+#  xeffect-sounds-music-credits
+#  xeffect-sounds-music-disc
+#  xeffect-sounds-music-dragon
+#  xeffect-sounds-music-end
+#  xeffect-sounds-music-game
+#  xeffect-sounds-music-menu
+#  xeffect-sounds-music-nether
+#  xeffect-sounds-music-overworld
+#  xeffect-sounds-music-under
+#  xeffect-sounds-particle-soul
+#  xeffect-sounds-ui-button
+#  xeffect-sounds-ui-cartography_table
+#  xeffect-sounds-ui-loom
+#  xeffect-sounds-ui-stonecutter
+#  xeffect-sounds-ui-toast
+#  xeffect-sounds-weather-rain-a
+#  xeffect-sounds-weather-rain-b
 
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 02 - Universal Group Drops                                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-all_mobs:
-  -
-
-all_levellable_mobs:
-#  - usedroptable: xeffect-sounds-ambient-basalt_deltas
-#  - usedroptable: xeffect-sounds-ambient-cave
-#  - usedroptable: xeffect-sounds-ambient-crimson_forest
-#  - usedroptable: xeffect-sounds-ambient-nether_wastes
-#  - usedroptable: xeffect-sounds-ambient-soul_sand_valley
-#  - usedroptable: xeffect-sounds-ambient-underwater
-#  - usedroptable: xeffect-sounds-ambient-warped_forest
-#  - usedroptable: xeffect-sounds-block-amethyst_block
-#  - usedroptable: xeffect-sounds-block-amethyst_cluster
-#  - usedroptable: xeffect-sounds-block-ancient_debris
-#  - usedroptable: xeffect-sounds-block-anvil
-#  - usedroptable: xeffect-sounds-block-azalea
-#  - usedroptable: xeffect-sounds-block-azalea_leaves
-#  - usedroptable: xeffect-sounds-block-bamboo
-#  - usedroptable: xeffect-sounds-block-bamboo_sapling
-#  - usedroptable: xeffect-sounds-block-bamboo_wood
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_button
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_door
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_fence_gate
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_hanging_sign
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_pressure_plate
-#  - usedroptable: xeffect-sounds-block-bamboo_wood_trapdoor
-#  - usedroptable: xeffect-sounds-block-barrel
-#  - usedroptable: xeffect-sounds-block-basalt
-#  - usedroptable: xeffect-sounds-block-beacon
-#  - usedroptable: xeffect-sounds-block-beehive
-#  - usedroptable: xeffect-sounds-block-bell
-#  - usedroptable: xeffect-sounds-block-big_dripleaf
-#  - usedroptable: xeffect-sounds-block-blastfurnace
-#  - usedroptable: xeffect-sounds-block-bone_block
-#  - usedroptable: xeffect-sounds-block-brewing_stand
-#  - usedroptable: xeffect-sounds-block-cake
-#  - usedroptable: xeffect-sounds-block-calcite
-#  - usedroptable: xeffect-sounds-block-campfire
-#  - usedroptable: xeffect-sounds-block-candle
-#  - usedroptable: xeffect-sounds-block-cave_vines
-#  - usedroptable: xeffect-sounds-block-chain
-#  - usedroptable: xeffect-sounds-block-cherry_sapling
-#  - usedroptable: xeffect-sounds-block-cherry_wood
-#  - usedroptable: xeffect-sounds-block-cherry_wood_button
-#  - usedroptable: xeffect-sounds-block-cherry_wood_door
-#  - usedroptable: xeffect-sounds-block-cherry_wood_fence_gate
-#  - usedroptable: xeffect-sounds-block-cherry_wood_hanging_sign
-#  - usedroptable: xeffect-sounds-block-cherry_wood_pressure_plate
-#  - usedroptable: xeffect-sounds-block-cherry_wood_trapdoor
-#  - usedroptable: xeffect-sounds-block-chest
-#  - usedroptable: xeffect-sounds-block-chiseled_bookshelf
-#  - usedroptable: xeffect-sounds-block-chorus_flower
-#  - usedroptable: xeffect-sounds-block-comparator
-#  - usedroptable: xeffect-sounds-block-composter
-#  - usedroptable: xeffect-sounds-block-conduit
-#  - usedroptable: xeffect-sounds-block-copper
-#  - usedroptable: xeffect-sounds-block-coral_block
-#  - usedroptable: xeffect-sounds-block-crop
-#  - usedroptable: xeffect-sounds-block-decorated_pot
-#  - usedroptable: xeffect-sounds-block-deepslate
-#  - usedroptable: xeffect-sounds-block-deepslate_bricks
-#  - usedroptable: xeffect-sounds-block-deepslate_tiles
-#  - usedroptable: xeffect-sounds-block-dispenser
-#  - usedroptable: xeffect-sounds-block-dripstone_block
-#  - usedroptable: xeffect-sounds-block-enchantment_table
-#  - usedroptable: xeffect-sounds-block-end_gateway
-#  - usedroptable: xeffect-sounds-block-end_portal_frame
-#  - usedroptable: xeffect-sounds-block-end_portal
-#  - usedroptable: xeffect-sounds-block-ender_chest
-#  - usedroptable: xeffect-sounds-block-fence_gate
-#  - usedroptable: xeffect-sounds-block-fire
-#  - usedroptable: xeffect-sounds-block-flowering_azalea
-#  - usedroptable: xeffect-sounds-block-froglight
-#  - usedroptable: xeffect-sounds-block-frogspawn
-#  - usedroptable: xeffect-sounds-block-fungus
-#  - usedroptable: xeffect-sounds-block-furnace
-#  - usedroptable: xeffect-sounds-block-gilded_blackstone
-#  - usedroptable: xeffect-sounds-block-glass
-#  - usedroptable: xeffect-sounds-block-grass
-#  - usedroptable: xeffect-sounds-block-gravel
-#  - usedroptable: xeffect-sounds-block-grindstone
-#  - usedroptable: xeffect-sounds-block-growing_plant
-#  - usedroptable: xeffect-sounds-block-hanging_roots
-#  - usedroptable: xeffect-sounds-block-hanging_sign
-#  - usedroptable: xeffect-sounds-block-honey_block
-#  - usedroptable: xeffect-sounds-block-iron_door
-#  - usedroptable: xeffect-sounds-block-iron_trapdoor
-#  - usedroptable: xeffect-sounds-block-ladder
-#  - usedroptable: xeffect-sounds-block-lantern
-#  - usedroptable: xeffect-sounds-block-large_amethyst_bud
-#  - usedroptable: xeffect-sounds-block-lava
-#  - usedroptable: xeffect-sounds-block-lever
-#  - usedroptable: xeffect-sounds-block-lily_pad
-#  - usedroptable: xeffect-sounds-block-lodestone
-#  - usedroptable: xeffect-sounds-block-mangrove_roots
-#  - usedroptable: xeffect-sounds-block-medium_amethyst_bud
-#  - usedroptable: xeffect-sounds-block-metal
-#  - usedroptable: xeffect-sounds-block-metal_pressure_plate
-#  - usedroptable: xeffect-sounds-block-moss
-#  - usedroptable: xeffect-sounds-block-moss_carpet
-#  - usedroptable: xeffect-sounds-block-mud
-#  - usedroptable: xeffect-sounds-block-mud_bricks
-#  - usedroptable: xeffect-sounds-block-muddy_mangrove_roots
-#  - usedroptable: xeffect-sounds-block-nether_bricks
-#  - usedroptable: xeffect-sounds-block-nether_gold_ore
-#  - usedroptable: xeffect-sounds-block-nether_ore
-#  - usedroptable: xeffect-sounds-block-nether_sprouts
-#  - usedroptable: xeffect-sounds-block-nether_wart
-#  - usedroptable: xeffect-sounds-block-nether_wood
-#  - usedroptable: xeffect-sounds-block-nether_wood_button
-#  - usedroptable: xeffect-sounds-block-nether_wood_door
-#  - usedroptable: xeffect-sounds-block-nether_wood_fence_gate
-#  - usedroptable: xeffect-sounds-block-nether_wood_hanging_sign
-#  - usedroptable: xeffect-sounds-block-nether_wood_pressure_plate
-#  - usedroptable: xeffect-sounds-block-nether_wood_trapdoor
-#  - usedroptable: xeffect-sounds-block-netherite_block
-#  - usedroptable: xeffect-sounds-block-netherrack
-#  - usedroptable: xeffect-sounds-block-netherrack
-#  - usedroptable: xeffect-sounds-block-nylium
-#  - usedroptable: xeffect-sounds-block-packed_mud
-#  - usedroptable: xeffect-sounds-block-pink_petals
-#  - usedroptable: xeffect-sounds-block-piston
-#  - usedroptable: xeffect-sounds-block-pointed_dripstone
-#  - usedroptable: xeffect-sounds-block-polished_deepslate
-#  - usedroptable: xeffect-sounds-block-polished_deepslate
-#  - usedroptable: xeffect-sounds-block-powder_snow
-#  - usedroptable: xeffect-sounds-block-pumpkin
-#  - usedroptable: xeffect-sounds-block-redstone_torch
-#  - usedroptable: xeffect-sounds-block-powder_snow
-#  - usedroptable: xeffect-sounds-block-rooted_dirt
-#  - usedroptable: xeffect-sounds-block-roots
-#  - usedroptable: xeffect-sounds-block-sand
-#  - usedroptable: xeffect-sounds-block-scaffolding
-#  - usedroptable: xeffect-sounds-block-sculk
-#  - usedroptable: xeffect-sounds-block-sculk_catalyst
-#  - usedroptable: xeffect-sounds-block-sculk_sensor
-#  - usedroptable: xeffect-sounds-block-sculk_shrieker
-#  - usedroptable: xeffect-sounds-block-sculk_vein
-#  - usedroptable: xeffect-sounds-block-shroomlight
-#  - usedroptable: xeffect-sounds-block-shulker_box
-#  - usedroptable: xeffect-sounds-block-slime_block
-#  - usedroptable: xeffect-sounds-block-small_amethyst_bud
-#  - usedroptable: xeffect-sounds-block-small_dripleaf
-#  - usedroptable: xeffect-sounds-block-smithing_table
-#  - usedroptable: xeffect-sounds-block-smoker
-#  - usedroptable: xeffect-sounds-block-snow
-#  - usedroptable: xeffect-sounds-block-soul_sand
-#  - usedroptable: xeffect-sounds-block-soul_soil
-#  - usedroptable: xeffect-sounds-block-spore_blossom
-#  - usedroptable: xeffect-sounds-block-stem
-#  - usedroptable: xeffect-sounds-block-stone
-#  - usedroptable: xeffect-sounds-block-stone_button
-#  - usedroptable: xeffect-sounds-block-stone_pressure_plate
-#  - usedroptable: xeffect-sounds-block-sweet_berry_bush
-#  - usedroptable: xeffect-sounds-block-tripwire
-#  - usedroptable: xeffect-sounds-block-tuff
-#  - usedroptable: xeffect-sounds-block-vine
-#  - usedroptable: xeffect-sounds-block-wart_block
-#  - usedroptable: xeffect-sounds-block-water
-#  - usedroptable: xeffect-sounds-block-weeping_vines
-#  - usedroptable: xeffect-sounds-block-wet_grass
-#  - usedroptable: xeffect-sounds-block-wood
-#  - usedroptable: xeffect-sounds-block-wooden_button
-#  - usedroptable: xeffect-sounds-block-wooden_door
-#  - usedroptable: xeffect-sounds-block-wooden_pressure_plate
-#  - usedroptable: xeffect-sounds-block-wooden_trapdoor
-#  - usedroptable: xeffect-sounds-block-wool
-#  - usedroptable: xeffect-sounds-block-enchant
-#  - usedroptable: xeffect-sounds-entity-allay
-#  - usedroptable: xeffect-sounds-entity-armor_stand
-#  - usedroptable: xeffect-sounds-entity-arrow
-#  - usedroptable: xeffect-sounds-entity-axolotl
-#  - usedroptable: xeffect-sounds-entity-bat
-#  - usedroptable: xeffect-sounds-entity-bee
-#  - usedroptable: xeffect-sounds-entity-blaze
-#  - usedroptable: xeffect-sounds-entity-boat
-#  - usedroptable: xeffect-sounds-entity-camel
-#  - usedroptable: xeffect-sounds-entity-cat
-#  - usedroptable: xeffect-sounds-entity-chicken
-#  - usedroptable: xeffect-sounds-entity-cod
-#  - usedroptable: xeffect-sounds-entity-cow
-#  - usedroptable: xeffect-sounds-entity-creeper
-#  - usedroptable: xeffect-sounds-entity-dolphin
-#  - usedroptable: xeffect-sounds-entity-donkey
-#  - usedroptable: xeffect-sounds-entity-dragon_fireball
-#  - usedroptable: xeffect-sounds-entity-drowned
-#  - usedroptable: xeffect-sounds-entity-egg
-#  - usedroptable: xeffect-sounds-entity-elder_guardian
-#  - usedroptable: xeffect-sounds-entity-ender_dragon
-#  - usedroptable: xeffect-sounds-entity-ender_eye
-#  - usedroptable: xeffect-sounds-entity-ender_pearl
-#  - usedroptable: xeffect-sounds-entity-enderman
-#  - usedroptable: xeffect-sounds-entity-endermite
-#  - usedroptable: xeffect-sounds-entity-evoker
-#  - usedroptable: xeffect-sounds-entity-experience_bottle
-#  - usedroptable: xeffect-sounds-entity-experience_orb
-#  - usedroptable: xeffect-sounds-entity-firework_rocket
-#  - usedroptable: xeffect-sounds-entity-fish
-#  - usedroptable: xeffect-sounds-entity-fishing_bobber
-#  - usedroptable: xeffect-sounds-entity-fox
-#  - usedroptable: xeffect-sounds-entity-frog
-#  - usedroptable: xeffect-sounds-entity-generic
-#  - usedroptable: xeffect-sounds-entity-ghast
-#  - usedroptable: xeffect-sounds-entity-glow_item_frame
-#  - usedroptable: xeffect-sounds-entity-glow_squid
-#  - usedroptable: xeffect-sounds-entity-goat
-#  - usedroptable: xeffect-sounds-entity-guardian
-#  - usedroptable: xeffect-sounds-entity-hoglin
-#  - usedroptable: xeffect-sounds-entity-horse
-#  - usedroptable: xeffect-sounds-entity-hostile
-#  - usedroptable: xeffect-sounds-entity-husk
-#  - usedroptable: xeffect-sounds-entity-illusioner
-#  - usedroptable: xeffect-sounds-entity-iron_golem
-#  - usedroptable: xeffect-sounds-entity-item
-#  - usedroptable: xeffect-sounds-entity-item_frame
-#  - usedroptable: xeffect-sounds-entity-leash_knot
-#  - usedroptable: xeffect-sounds-entity-lightning_bolt
-#  - usedroptable: xeffect-sounds-entity-lingering_potion
-#  - usedroptable: xeffect-sounds-entity-llama
-#  - usedroptable: xeffect-sounds-entity-magma_cube
-#  - usedroptable: xeffect-sounds-entity-minecart
-#  - usedroptable: xeffect-sounds-entity-mooshroom
-#  - usedroptable: xeffect-sounds-entity-mule
-#  - usedroptable: xeffect-sounds-entity-ocelot
-#  - usedroptable: xeffect-sounds-entity-painting
-#  - usedroptable: xeffect-sounds-entity-panda
-#  - usedroptable: xeffect-sounds-entity-parrot
-#  - usedroptable: xeffect-sounds-entity-phantom
-#  - usedroptable: xeffect-sounds-entity-pig
-#  - usedroptable: xeffect-sounds-entity-piglin
-#  - usedroptable: xeffect-sounds-entity-piglin_brute
-#  - usedroptable: xeffect-sounds-entity-pillager
-#  - usedroptable: xeffect-sounds-entity-player
-#  - usedroptable: xeffect-sounds-entity-polar_bear
-#  - usedroptable: xeffect-sounds-entity-puffer_fish
-#  - usedroptable: xeffect-sounds-entity-rabbit
-#  - usedroptable: xeffect-sounds-entity-ravager
-#  - usedroptable: xeffect-sounds-entity-salmon
-#  - usedroptable: xeffect-sounds-entity-sheep
-#  - usedroptable: xeffect-sounds-entity-shulker
-#  - usedroptable: xeffect-sounds-entity-silverfish
-#  - usedroptable: xeffect-sounds-entity-skeleton
-#  - usedroptable: xeffect-sounds-entity-slime
-#  - usedroptable: xeffect-sounds-entity-sniffer
-#  - usedroptable: xeffect-sounds-entity-snow_golem
-#  - usedroptable: xeffect-sounds-entity-snowball
-#  - usedroptable: xeffect-sounds-entity-spider
-#  - usedroptable: xeffect-sounds-entity-splash_potion
-#  - usedroptable: xeffect-sounds-entity-squid
-#  - usedroptable: xeffect-sounds-entity-stray
-#  - usedroptable: xeffect-sounds-entity-strider
-#  - usedroptable: xeffect-sounds-entity-tnt
-#  - usedroptable: xeffect-sounds-entity-villager
-#  - usedroptable: xeffect-sounds-entity-vindicator
-#  - usedroptable: xeffect-sounds-entity-wandering_trader
-#  - usedroptable: xeffect-sounds-entity-warden
-#  - usedroptable: xeffect-sounds-entity-witch
-#  - usedroptable: xeffect-sounds-entity-wither
-#  - usedroptable: xeffect-sounds-entity-wither_skeleton
-#  - usedroptable: xeffect-sounds-entity-wolf
-#  - usedroptable: xeffect-sounds-entity-zoglin
-#  - usedroptable: xeffect-sounds-entity-zombie
-#  - usedroptable: xeffect-sounds-entity-zombie_villager
-#  - usedroptable: xeffect-sounds-entity-zombified_piglin
-#  - usedroptable: xeffect-sounds-event-raid
-#  - usedroptable: xeffect-sounds-item-armor
-#  - usedroptable: xeffect-sounds-item-axe
-#  - usedroptable: xeffect-sounds-item-bone_meal
-#  - usedroptable: xeffect-sounds-item-book
-#  - usedroptable: xeffect-sounds-item-bottle
-#  - usedroptable: xeffect-sounds-item-brush
-#  - usedroptable: xeffect-sounds-item-bucket
-#  - usedroptable: xeffect-sounds-item-bundle
-#  - usedroptable: xeffect-sounds-item-chorus_fruit
-#  - usedroptable: xeffect-sounds-item-crop
-#  - usedroptable: xeffect-sounds-item-crossbow
-#  - usedroptable: xeffect-sounds-item-dye
-#  - usedroptable: xeffect-sounds-item-elytra
-#  - usedroptable: xeffect-sounds-item-firecharge
-#  - usedroptable: xeffect-sounds-item-flintandsteel
-#  - usedroptable: xeffect-sounds-item-glow_ink_sac
-#  - usedroptable: xeffect-sounds-item-goat_horn
-#  - usedroptable: xeffect-sounds-item-hoe
-#  - usedroptable: xeffect-sounds-item-honey_bottle
-#  - usedroptable: xeffect-sounds-item-honeycomb
-#  - usedroptable: xeffect-sounds-item-ink_sac
-#  - usedroptable: xeffect-sounds-item-lodestone_compass
-#  - usedroptable: xeffect-sounds-item-nether_wart
-#  - usedroptable: xeffect-sounds-item-shield
-#  - usedroptable: xeffect-sounds-item-shovel
-#  - usedroptable: xeffect-sounds-item-spyglass
-#  - usedroptable: xeffect-sounds-item-totem
-#  - usedroptable: xeffect-sounds-item-trident
-#  - usedroptable: xeffect-sounds-music-creative
-#  - usedroptable: xeffect-sounds-music-credits
-#  - usedroptable: xeffect-sounds-music-disc
-#  - usedroptable: xeffect-sounds-music-dragon
-#  - usedroptable: xeffect-sounds-music-end
-#  - usedroptable: xeffect-sounds-music-game
-#  - usedroptable: xeffect-sounds-music-menu
-#  - usedroptable: xeffect-sounds-music-nether
-#  - usedroptable: xeffect-sounds-music-overworld
-#  - usedroptable: xeffect-sounds-music-under
-#  - usedroptable: xeffect-sounds-particle-soul
-#  - usedroptable: xeffect-sounds-ui-button
-#  - usedroptable: xeffect-sounds-ui-cartography_table
-#  - usedroptable: xeffect-sounds-ui-loom
-#  - usedroptable: xeffect-sounds-ui-stonecutter
-#  - usedroptable: xeffect-sounds-ui-toast
-#  - usedroptable: xeffect-sounds-weather-rain-a
-#  - usedroptable: xeffect-sounds-weather-rain-b
-
-all_hostile_mobs:
-  -
-
-all_passive_mobs:
-  -
-
-all_overworld_mobs:
-  -
-
-all_nether_mobs:
-  -
-
-all_flying_mobs:
-  -
-
-all_ground_mobs:
-  -
-
-all_aquatic_mobs:
-  -
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 03 - EntityType Drops                                                          +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-
-#AXOLOTL:
-#  -
-
-BAT:
-  -
-
-BEE:
-  -
-
-BLAZE:
-  -
-
-CAT:
-  -
-
-CAVE_SPIDER:
-  -
-
-CHICKEN:
-  -
-
-COD:
-  -
-
-COW:
-  -
-
-CREEPER:
-  -
-
-DOLPHIN:
-  -
-
-DONKEY:
-  -
-
-DROWNED:
-  -
-
-ELDER_GUARDIAN:
-  -
-
-ENDER_DRAGON:
-  -
-
-ENDERMAN:
-  - 
-
-ENDERMITE:
-  -
-
-EVOKER:
-  -
-
-FOX:
-  -
-
-GHAST:
-  -
-
-#GLOW_SQUID:
-#  -
-
-#GOAT:
-#  -
-
-GUARDIAN:
-  -
-
-HOGLIN:
-  -
-
-HORSE:
-  -
-
-HUSK:
-  -
-
-ILLUSIONER:
-  -
-
-IRON_GOLEM:
-  -
-
-LLAMA:
-  -
-
-MAGMA_CUBE:
-  -
-
-MULE:
-  -
-
-MUSHROOM_COW:
-  -
-
-OCELOT:
-  -
-
-PANDA:
-  -
-
-PARROT:
-  -
-
-PHANTOM:
-  -
-
-PIG:
-  -
-
-PIGLIN:
-  -
-
-PIGLIN_BRUTE:
-  -
-
-PILLAGER:
-  -
-
-POLAR_BEAR:
-  -
-
-PUFFERFISH:
-  -
-
-RABBIT:
-  -
-
-RAVAGER:
-  -
-
-SALMON:
-  -
-
-SHEEP:
-  -
-
-SHULKER:
-  -
-
-SILVERFISH:
-  -
-
-SKELETON:
-  -
-
-SKELETON_HORSE:
-  -
-
-SLIME:
-  -
-
-SNOWMAN:
-  -
-
-SPIDER:
-  -
-
-SQUID:
-  -
-
-STRAY:
-  -
-
-STRIDER:
-  -
-
-TRADER_LLAMA:
-  -
-
-TROPICAL_FISH:
-  -
-
-TURTLE:
-  -
-
-VEX:
-  -
-
-VILLAGER:
-  -
-
-VINDICATOR:
-  -
-
-WANDERING_TRADER:
-  -
-
-WITCH:
-  -
-
-WITHER:
-  -
-
-WITHER_SKELETON:
-  -
-
-WOLF:
-  -
-
-ZOGLIN:
-  -
-
-ZOMBIE:
-  -
-
-ZOMBIE_HORSE:
-  -
-
-ZOMBIE_VILLAGER:
-  -
-
-ZOMBIFIED_PIGLIN:
-  -
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 04 - Drop Tables                                                               +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-drop-table:
   xeffect-sounds-ambient-basalt_deltas:
     - customCommand:
         chance: 1.0
