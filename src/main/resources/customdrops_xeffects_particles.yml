@@ -7,138 +7,90 @@
 #
 # --------------------------------------------------------------------------------------------LM3
 # +                                      ++                                                  +LM3
-# +  Main Developers                     ++  Need Support Documentation?                     +LM3
+# +  Main Developers                     ++  Documentation (on our Wiki)                     +LM3
 # +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
-# +      Original Author and Developer   ++                                                  +LM3
-# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
-# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
-# +                                      ++                                                  +LM3
-# +    stumper66                         ++  Special Thanks:                                 +LM3
-# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
-# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
-# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
-# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
-# +    UltimaOath                        ++                                                  +LM3
-# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
-# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
-# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
-# +                                      ++    limzikiki                                     +LM3
+# +      Author and developer            ++                                                  +LM3
+# +      https://ko-fi.com/lokka30       ++  Support/Discussion (on our Discord)             +LM3
+# +                                      ++    Join our Discord for free, quality support.   +LM3
+# +    PenalBuffalo (aka. stumper66)     ++    If you are unable to, PM @lokka30 on SpigotMC +LM3
+# +      LevelledMobs 3 maintainer       ++    https://discord.gg/RQ8M4A5                    +LM3
+# +      https://ko-fi.com/penalbuffalo  ++                                                  +LM3
+# +                                      ++  Welcome to LevelledMobs 3! Please read the      +LM3
+# +    UltimaOath (aka. Oathkeeper)      ++  relevant documentation prior to attempting any  +LM3
+# +      Docs and configs since v2       ++  changes to this file.                           +LM3
+# +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
 # +                                      ++                                                  +LM3
 # --------------------------------------------------------------------------------------------LM3
-#                        _____         _             ____
-#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
-#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
-#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
-#                                                                 |_|
+
+#  
+#  Drop Tables - Complete List
+#  Use this list to search for any particular table you're looking for.
 #
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 01 - Defaults                                                                  +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-defaults:
-  chance: 0.2
-  use-chunk-kill-max: true
-  amount: 1
-  minLevel: -1
-  maxLevel: -1
-  custommodeldata: -1
-  nomultiplier: false
-  nospawner: false
-  equipped: 1.0
-  equip-offhand: true
-  override: false
-  maxdropgroup: 1
-  priority: 0
-  player-caused: true
-  item-flags: ''
-  groupid: ''
-  overall_chance: 0.0
-  nbt-data: ''
-  only-drop-if-equipped: false
-  # the following defaults are for custom commands only:
-  run-on-spawn: false
-  run-on-death: true
-  min-player-level: -1
-  max-player-level: -1
-  player-level-variable: ''
-  
+#  ===========================================================================================
 
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 02 - Universal Group Drops                                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-all_mobs:
-#  - usedroptable: xeffect-particles-ambient_entity_effect
-#  - usedroptable: xeffect-particles-angry_villager
-#  - usedroptable: xeffect-particles-ash
-#  - usedroptable: xeffect-particles-bubble_pop
-#  - usedroptable: xeffect-particles-campfire_cosy_smoke
-#  - usedroptable: xeffect-particles-campfire_signal_smoke
-#  - usedroptable: xeffect-particles-cloud
-#  - usedroptable: xeffect-particles-composter
-#  - usedroptable: xeffect-particles-crimson_spore
-#  - usedroptable: xeffect-particles-crit
-#  - usedroptable: xeffect-particles-damage_indicator
-#  - usedroptable: xeffect-particles-dolphin
-#  - usedroptable: xeffect-particles-dragon_breath
-#  - usedroptable: xeffect-particles-dripping_lava
-#  - usedroptable: xeffect-particles-dripping_water
-#  - usedroptable: xeffect-particles-dripping_honey
-#  - usedroptable: xeffect-particles-dripping_obsidian_tear
-#  - usedroptable: xeffect-particles-effect
-#  - usedroptable: xeffect-particles-elder_guardian
-#  - usedroptable: xeffect-particles-enchant
-#  - usedroptable: xeffect-particles-enchanted_hit
-#  - usedroptable: xeffect-particles-end_rod
-#  - usedroptable: xeffect-particles-entity_effect
-#  - usedroptable: xeffect-particles-explosion
-#  - usedroptable: xeffect-particles-explosion_emitter
-#  - usedroptable: xeffect-particles-falling_lava
-#  - usedroptable: xeffect-particles-falling_water
-#  - usedroptable: xeffect-particles-falling_obsidian_tear
-#  - usedroptable: xeffect-particles-falling_nectar
-#  - usedroptable: xeffect-particles-falling_honey
-#  - usedroptable: xeffect-particles-firework
-#  - usedroptable: xeffect-particles-fishing
-#  - usedroptable: xeffect-particles-flame
-#  - usedroptable: xeffect-particles-flash
-#  - usedroptable: xeffect-particles-happy_villager
-#  - usedroptable: xeffect-particles-heart
-#  - usedroptable: xeffect-particles-instant_effect
-#  - usedroptable: xeffect-particles-item_slime
-#  - usedroptable: xeffect-particles-item_snowball
-#  - usedroptable: xeffect-particles-landing_honey
-#  - usedroptable: xeffect-particles-landing_lava
-#  - usedroptable: xeffect-particles-landing_obsidian_tear
-#  - usedroptable: xeffect-particles-large_smoke
-#  - usedroptable: xeffect-particles-lava
-#  - usedroptable: xeffect-particles-mycelium
-#  - usedroptable: xeffect-particles-nautilus
-#  - usedroptable: xeffect-particles-poof
-#  - usedroptable: xeffect-particles-portal
-#  - usedroptable: xeffect-particles-rain
-#  - usedroptable: xeffect-particles-reverse_portal
-#  - usedroptable: xeffect-particles-smoke
-#  - usedroptable: xeffect-particles-sneeze
-#  - usedroptable: xeffect-particles-soul
-#  - usedroptable: xeffect-particles-soul_fire_flame
-#  - usedroptable: xeffect-particles-spit
-#  - usedroptable: xeffect-particles-splash
-#  - usedroptable: xeffect-particles-squid_ink
-#  - usedroptable: xeffect-particles-sweep_attack
-#  - usedroptable: xeffect-particles-totem_of_undying
-#  - usedroptable: xeffect-particles-warped_spore
-#  - usedroptable: xeffect-particles-white_ash
-#  - usedroptable: xeffect-particles-witch
+#  xeffect-particles-ambient_entity_effect
+#  xeffect-particles-angry_villager
+#  xeffect-particles-ash
+#  xeffect-particles-bubble_pop
+#  xeffect-particles-campfire_cosy_smoke
+#  xeffect-particles-campfire_signal_smoke
+#  xeffect-particles-cloud
+#  xeffect-particles-composter
+#  xeffect-particles-crimson_spore
+#  xeffect-particles-crit
+#  xeffect-particles-damage_indicator
+#  xeffect-particles-dolphin
+#  xeffect-particles-dragon_breath
+#  xeffect-particles-dripping_lava
+#  xeffect-particles-dripping_water
+#  xeffect-particles-dripping_honey
+#  xeffect-particles-dripping_obsidian_tear
+#  xeffect-particles-effect
+#  xeffect-particles-elder_guardian
+#  xeffect-particles-enchant
+#  xeffect-particles-enchanted_hit
+#  xeffect-particles-end_rod
+#  xeffect-particles-entity_effect
+#  xeffect-particles-explosion
+#  xeffect-particles-explosion_emitter
+#  xeffect-particles-falling_lava
+#  xeffect-particles-falling_water
+#  xeffect-particles-falling_obsidian_tear
+#  xeffect-particles-falling_nectar
+#  xeffect-particles-falling_honey
+#  xeffect-particles-firework
+#  xeffect-particles-fishing
+#  xeffect-particles-flame
+#  xeffect-particles-flash
+#  xeffect-particles-happy_villager
+#  xeffect-particles-heart
+#  xeffect-particles-instant_effect
+#  xeffect-particles-item_slime
+#  xeffect-particles-item_snowball
+#  xeffect-particles-landing_honey
+#  xeffect-particles-landing_lava
+#  xeffect-particles-landing_obsidian_tear
+#  xeffect-particles-large_smoke
+#  xeffect-particles-lava
+#  xeffect-particles-mycelium
+#  xeffect-particles-nautilus
+#  xeffect-particles-poof
+#  xeffect-particles-portal
+#  xeffect-particles-rain
+#  xeffect-particles-reverse_portal
+#  xeffect-particles-smoke
+#  xeffect-particles-sneeze
+#  xeffect-particles-soul
+#  xeffect-particles-soul_fire_flame
+#  xeffect-particles-spit
+#  xeffect-particles-splash
+#  xeffect-particles-squid_ink
+#  xeffect-particles-sweep_attack
+#  xeffect-particles-totem_of_undying
+#  xeffect-particles-warped_spore
+#  xeffect-particles-white_ash
+#  xeffect-particles-witch
 
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 04 - Drop Tables                                                               +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-drop-table:
   xeffect-particles-ambient_entity_effect:
     - customCommand:
         command: ['execute at %player% run particle minecraft:ambient_entity_effect %x% %y% %z% %ranged_BWidthX% %ranged_BHeight% %ranged_BWidthZ% %ranged_Speed% %ranged_Count% force %player%']
@@ -872,14 +824,5 @@ drop-table:
         ranged_BWidthX: 0.35
         ranged_BWidthZ: 0.35
         ranged_BHeight: 1.5
-
-
         
         
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 05 - Advanced Message Settings                                                 +LM3
-# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-file-version: 10
