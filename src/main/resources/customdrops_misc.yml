@@ -375,6 +375,190 @@ drop-table:
         ranged_BWidthZ-mycelium: 0.35
         ranged_BHeight-mycelium: 1.25
 
+# This drop table will have a chance to give the player an amount of money via the EssentialsX Economy command.
+# It also sends a text message which is different based on the amount of coins dropped.
+  give-money:
+  # C-Tier Money Drops (1-5)
+  # A few coins litter the floor.
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
+        chance: 0.75
+        ranged_count: 1-4
+        groupid: give-money
+        maxdropgroup: 1
+        maxLevel: 1
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 2-5
+        groupid: give-money
+        maxLevel: 2
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 3-6
+        groupid: give-money
+        maxLevel: 3
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 4-7
+        groupid: give-money
+        maxLevel: 4
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 5-8
+        groupid: give-money
+        maxLevel: 5
+  # B-Tier Money Drops (6-10)
+  # A modest purse of coins fall to the floor.
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A modest purse of coins fall to the floor.","italic":true,"color":"green"}']
+        chance: 0.75
+        ranged_count: 6-9
+        groupid: give-money
+        minLevel: 2
+        maxLevel: 6
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A modest purse of coins fall to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 7-10
+        groupid: give-money
+        minLevel: 3
+        maxLevel: 7
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A modest purse of coins fall to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 8-11
+        groupid: give-money
+        minLevel: 4
+        maxLevel: 8
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A modest purse of coins fall to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 9-12
+        groupid: give-money
+        minLevel: 5
+        maxLevel: 9
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A modest purse of coins fall to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 10-13
+        groupid: give-money
+        minLevel: 6
+        maxLevel: 10
+  # A-Tier Money Drops (11-15)
+  # A small bag of coins cling to the floor.
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A small bag of coins cling to the floor.","italic":true,"color":"green"}']
+        chance: 0.75
+        ranged_count: 11-14
+        groupid: give-money
+        minLevel: 7
+        maxLevel: 11
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A small bag of coins cling to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 12-15
+        groupid: give-money
+        minLevel: 8
+        maxLevel: 12
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A small bag of coins cling to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 13-16
+        groupid: give-money
+        minLevel: 9
+        maxLevel: 13
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A small bag of coins cling to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 14-17
+        groupid: give-money
+        minLevel: 10
+        maxLevel: 14
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A small bag of coins cling to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 15-18
+        groupid: give-money
+        minLevel: 11
+        maxLevel: 15
+  # S-Tier Money Drops (16-20)
+  # A large bag of coins slam to the floor.
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A large bag of coins slam to the floor.","italic":true,"color":"green"}']
+        chance: 0.75
+        ranged_count: 16-19
+        groupid: give-money
+        minLevel: 12
+        maxLevel: 16
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A large bag of coins slam to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 17-20
+        groupid: give-money
+        minLevel: 13
+        maxLevel: 17
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A large bag of coins slam to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 18-21
+        groupid: give-money
+        minLevel: 14
+        maxLevel: 18
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A large bag of coins slam to the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 19-22
+        groupid: give-money
+        minLevel: 15
+        maxLevel: 19
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A large bag of coins slam to the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 20-23
+        groupid: give-money
+        minLevel: 16
+        maxLevel: 20
+  # SS-Tier Money Drops (21-25)
+  # A hoard of coins cover the floor.
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A hoard of coins cover the floor.","italic":true,"color":"green"}']
+        chance: 0.75
+        ranged_count: 21-24
+        groupid: give-money
+        minLevel: 17
+        maxLevel: 21
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A hoard of coins cover the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 22-25
+        groupid: give-money
+        minLevel: 18
+        maxLevel: 22
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A hoard of coins cover the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 23-26
+        groupid: give-money
+        minLevel: 19
+        maxLevel: 23
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A hoard of coins cover the floor.","italic":true,"color":"green"}']
+        chance: 0.45
+        ranged_count: 24-28
+        groupid: give-money
+        minLevel: 20
+        maxLevel: 24
+    - customCommand:
+        command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A hoard of coins cover the floor.","italic":true,"color":"green"}']
+        chance: 0.15
+        ranged_count: 25-30
+        groupid: give-money
+        minLevel: 21
+        maxLevel: 25
         
         
 # +-------------------------------------------------------------------------------------------LM3
