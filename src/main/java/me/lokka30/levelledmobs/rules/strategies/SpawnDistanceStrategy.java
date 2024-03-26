@@ -7,9 +7,10 @@ package me.lokka30.levelledmobs.rules.strategies;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.concurrent.ThreadLocalRandom;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Holds the configuration and logic for applying a levelling system that is based upon the distance
@@ -87,8 +88,11 @@ public class SpawnDistanceStrategy implements LevellingStrategy, Cloneable {
         return sb.toString();
     }
 
-    public int generateLevel(@NotNull final LivingEntityWrapper lmEntity, final int minLevel,
-        final int maxLevel) {
+    public int generateLevel(final @Nullable LivingEntityWrapper lmEntity, final int minLevel,
+                             final int maxLevel) {
+
+        if (lmEntity == null) return minLevel;
+
         Location spawnLocation = lmEntity.getWorld().getSpawnLocation();
 
         if (this.spawnLocation_Z != null || this.spawnLocation_X != null) {
@@ -108,9 +112,10 @@ public class SpawnDistanceStrategy implements LevellingStrategy, Cloneable {
         final int distanceFromSpawn = (int) spawnLocation.distance(lmEntity.getLocation());
         final int levelDistance = Math.max(distanceFromSpawn - startDistance, 0);
 
-        int variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(lmEntity);
-        if (variance > 0) {
-            variance = ThreadLocalRandom.current().nextInt(0, variance + 1);
+        final Integer variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(lmEntity);
+        int varianceAdded = 0;
+        if (variance != null) {
+            varianceAdded = ThreadLocalRandom.current().nextInt(0, variance + 1);
         }
 
         int increaseLevelDistance =
@@ -121,7 +126,7 @@ public class SpawnDistanceStrategy implements LevellingStrategy, Cloneable {
 
         //Get the level thats meant to be at a given distance
         final int spawnDistanceAssignment = Math.min(
-            (levelDistance / increaseLevelDistance) + minLevel + variance, maxLevel);
+            (levelDistance / increaseLevelDistance) + minLevel + varianceAdded, maxLevel);
         if (this.blendedLevellingEnabled == null || !this.blendedLevellingEnabled) {
             return spawnDistanceAssignment;
         }
@@ -155,9 +160,9 @@ public class SpawnDistanceStrategy implements LevellingStrategy, Cloneable {
         result = result < 0.0 ?
             Math.ceil(result) + spawnDistanceLevelAssignment :
             Math.floor(result) + spawnDistanceLevelAssignment;
-        final int variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(
+        final Integer variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(
             lmEntity);
-        if (variance > 0) {
+        if (variance != null && variance > 0) {
             result += ThreadLocalRandom.current().nextInt(0, variance + 1);
         }
 

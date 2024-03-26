@@ -6,12 +6,15 @@ package me.lokka30.levelledmobs.listeners;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.misc.AdditionalLevelInformation;
 import me.lokka30.levelledmobs.misc.DebugType;
 import me.lokka30.levelledmobs.misc.LevellableState;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
-import me.lokka30.levelledmobs.util.Utils;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
+import me.lokka30.levelledmobs.rules.LevelledMobSpawnReason;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -39,15 +42,18 @@ public class EntityTransformListener implements Listener {
     public void onTransform(@NotNull final EntityTransformEvent event) {
         // is the original entity a living entity
         if (!(event.getEntity() instanceof LivingEntity)) {
-            Utils.debugLog(main, DebugType.ENTITY_TRANSFORM_FAIL, event.getEntity().getType().name()
-                + ": entity was &bnot&7 an instance of LivingEntity");
+            DebugManager.log(DebugType.ENTITY_MISC, event.getEntity(), false, () ->
+                    event.getEntity().getType().name() +
+                ": entity was &bnot&7 an instance of LivingEntity");
             return;
         }
 
         // is the original entity levelled
         if (!main.levelManager.isLevelled((LivingEntity) event.getEntity())) {
-            Utils.debugLog(main, DebugType.ENTITY_TRANSFORM_FAIL,
-                event.getEntity() + ": original entity was &bnot&7 levelled");
+            DebugManager.log(DebugType.ENTITY_MISC, event.getEntity(), false, () ->
+                    event.getEntity().getName() + ": original entity was &bnot&7 levelled");
+            if (event.getTransformReason() == EntityTransformEvent.TransformReason.SPLIT)
+                checkForSlimeSplit((LivingEntity) event.getEntity(), event.getTransformedEntities());
             return;
         }
 
@@ -64,8 +70,8 @@ public class EntityTransformListener implements Listener {
 
         for (final Entity transformedEntity : event.getTransformedEntities()) {
             if (!(transformedEntity instanceof LivingEntity)) {
-                Utils.debugLog(main, DebugType.ENTITY_TRANSFORM_FAIL,
-                    event.getEntity().getType().name()
+                DebugManager.log(DebugType.ENTITY_MISC, event.getEntity(), false, () ->
+                        event.getEntity().getType().name()
                         + ": entity was&b not&7 an instance of LivingEntity (loop)");
                 continue;
             }
@@ -75,8 +81,8 @@ public class EntityTransformListener implements Listener {
             final LevellableState levelledState = main.levelInterface.getLevellableState(
                 transformedLmEntity);
             if (levelledState != LevellableState.ALLOWED) {
-                Utils.debugLog(main, DebugType.ENTITY_TRANSFORM_FAIL,
-                    transformedEntity.getType().name()
+                DebugManager.log(DebugType.ENTITY_MISC, event.getEntity(), false, () ->
+                        transformedEntity.getType().name()
                         + ": transformed entity was &bnot&7 levellable, reason: &b"
                         + levelledState);
                 main.levelManager.updateNametagWithDelay(transformedLmEntity);
@@ -84,7 +90,14 @@ public class EntityTransformListener implements Listener {
                 continue;
             }
 
+            DebugManager.log(DebugType.ENTITY_MISC, event.getEntity(), true, () ->
+                    transformedEntity.getType().name() + ": entity was transformed");
+
             if (useInheritance) {
+                if (lmEntity.getSpawnReason() == LevelledMobSpawnReason.LM_SPAWNER) {
+                    transformedLmEntity.setSpawnReason(LevelledMobSpawnReason.SPAWNER);
+                }
+
                 main.levelInterface.applyLevelToMob(
                     transformedLmEntity,
                     level,
@@ -103,5 +116,24 @@ public class EntityTransformListener implements Listener {
         }
 
         lmEntity.free();
+    }
+
+    private void checkForSlimeSplit(final @NotNull LivingEntity livingEntity, final @NotNull List<Entity> transformedEntities){
+        final LivingEntityWrapper parent = LivingEntityWrapper.getInstance(livingEntity, main);
+        if (parent.getSpawnReason() == LevelledMobSpawnReason.DEFAULT ||
+                parent.getSpawnReason() == LevelledMobSpawnReason.SLIME_SPLIT){
+            parent.free();
+            return;
+        }
+
+        for (final Entity transformedEntity : transformedEntities) {
+            if (!(transformedEntity instanceof final LivingEntity le)) continue;
+
+            final LivingEntityWrapper lew = LivingEntityWrapper.getInstance(le, main);
+            lew.setSpawnReason(parent.getSpawnReason());
+            lew.free();
+        }
+
+        parent.free();
     }
 }

@@ -5,11 +5,16 @@ import io.github.stumper66.lm_items.GetItemResult;
 import io.github.stumper66.lm_items.ItemsAPI;
 import io.github.stumper66.lm_items.LM_Items;
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.misc.DebugType;
 import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Interfaces with the plugin LM_Items so can custom items from 3rd party plugins can be used
@@ -58,10 +63,10 @@ public class LMItemsParser {
         }
 
         item.isExternalItem = true;
-        return getExternalItem(item);
+        return getExternalItem(item, null);
     }
 
-    public boolean getExternalItem(final @NotNull CustomDropItem item) {
+    public boolean getExternalItem(final @NotNull CustomDropItem item, final @Nullable CustomDropProcessingInfo info) {
         final ItemsAPI itemsAPI = LM_Items.plugin.getItemAPIForPlugin(item.externalPluginName);
 
         if (itemsAPI == null) {
@@ -73,7 +78,33 @@ public class LMItemsParser {
         final ExternalItemRequest itemRequest = new ExternalItemRequest(item.externalItemId);
         itemRequest.itemType = item.externalType;
         itemRequest.amount = item.externalAmount;
-        itemRequest.extras = item.externalExtras;
+
+        if (main.companion.externalCompatibilityManager.doesLMIMeetVersionRequirement2()){
+            itemRequest.getMultipleItems = "-".equals(itemRequest.itemId);
+            itemRequest.minItems = item.minItems;
+            itemRequest.maxItems = item.maxItems;
+            itemRequest.allowedList = item.allowedList;
+            itemRequest.excludedList = item.excludedList;
+            itemRequest.isDebugEnabled = main.debugManager.isEnabled();
+        }
+
+        if (item.externalExtras != null){
+            itemRequest.extras = new Hashtable<>(item.externalExtras.size());
+
+            for (final String key : item.externalExtras.keySet()){
+                Object value = item.externalExtras.get(key);
+                if (value instanceof String stringValue && stringValue.contains("%")){
+                    if (info != null) {
+                        value = main.levelManager.replaceStringPlaceholders(stringValue, info.lmEntity, true, info.mobKiller, false);
+                    }
+                    else if (ExternalCompatibilityManager.hasPapiInstalled()) {
+                        value = ExternalCompatibilityManager.getPapiPlaceholder(null, stringValue);
+                    }
+                }
+
+                itemRequest.extras.put(key, value);
+            }
+        }
 
         final GetItemResult result = itemsAPI.getItem(itemRequest);
 
@@ -85,7 +116,7 @@ public class LMItemsParser {
         }
 
         final ItemStack itemStack = result.itemStack;
-        if (itemStack == null) {
+        if (itemStack == null && (result.itemStacks == null || result.itemStacks.isEmpty())) {
             if (result.typeIsNotSupported) {
                 if (item.externalType == null) {
                     Utils.logger.warning(
@@ -100,21 +131,36 @@ public class LMItemsParser {
                 return false;
             }
 
-            if (main.companion.debugsEnabled.contains(DebugType.CUSTOM_DROPS)) {
-                if (item.externalType == null) {
-                    Utils.logger.warning(String.format("custom item '%s:%s' returned a null item",
-                        item.externalPluginName, item.externalItemId));
-                } else {
-                    Utils.logger.warning(
-                        String.format("custom item '%s:%s' (%s) returned a null item",
-                            item.externalPluginName, item.externalItemId, item.externalType));
-                }
+            final String msg = item.externalType == null ?
+                    String.format("&4custom item '%s:%s' returned a null item&r",
+                            item.externalPluginName, item.externalItemId) :
+                    String.format("&4custom item '%s:%s' (%s) returned a null item&r",
+                            item.externalPluginName, item.externalItemId, item.externalType);
+
+            // on server startup show as warning message
+            // after reload show as debug
+
+            if (main.companion.hasFinishedLoading){
+                DebugManager.log(DebugType.CUSTOM_DROPS, () -> msg);
             }
+            else{
+                Utils.logger.warning(msg);
+            }
+
+            main.customDropsHandler.customDropsParser.invalidExternalItems.add(msg);
 
             return false;
         }
 
-        item.setItemStack(itemStack);
+        if (main.companion.externalCompatibilityManager.doesLMIMeetVersionRequirement2()){
+            if (result.itemStacks != null && !result.itemStacks.isEmpty())
+                item.setItemStacks((List<ItemStack>) result.itemStacks);
+            else if (itemStack != null)
+                item.setItemStack(itemStack);
+        }
+        else if (itemStack != null){
+            item.setItemStack(itemStack);
+        }
 
         return true;
     }

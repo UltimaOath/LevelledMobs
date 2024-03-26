@@ -19,6 +19,7 @@ public class NamespacedKeys {
         overridenEntityNameKey = new NamespacedKey(main, "overridenEntityName");
         hasCustomNameTag = new NamespacedKey(main, "hasCustomNameTag");
         playerLevellingId = new NamespacedKey(main, "playerLevelling_Id");
+        playerLevellingValue = new NamespacedKey(main, "playerLevelling_Value");
         chanceRuleAllowed = new NamespacedKey(main, "chanceRule_Allowed");
         chanceRuleDenied = new NamespacedKey(main, "chanceRule_Denied");
         denyLmNametag = new NamespacedKey(main, "denyLM_Nametag");
@@ -33,6 +34,9 @@ public class NamespacedKeys {
         lockedNameOverride = new NamespacedKey(main, "lockedNameOverride");
         lockedDropRules = new NamespacedKey(main, "lockedDropRules");
         lockedDropRulesOverride = new NamespacedKey(main, "lockedDropRulesOverride");
+        playerLevellingSourceNumber = new NamespacedKey(main, "playerLevellingSourceNumber");
+        lastDamageTime = new NamespacedKey(main, "lastDamageTime");
+        mobHash = new NamespacedKey(main, "mobHash");
 
         spawnerEgg = new NamespacedKey(main, "spawnerEgg");
         spawnerEggName = new NamespacedKey(main, "spawnerEggName");
@@ -50,6 +54,7 @@ public class NamespacedKeys {
         keySpawnerSpawnRange = new NamespacedKey(main, "spawnrange");
         keySpawnerCustomName = new NamespacedKey(main, "customname");
         keySpawnerLore = new NamespacedKey(main, "lore");
+        pickedUpItems = new NamespacedKey(main, "pickedUpItems");
 
         this.overallChanceKey = new NamespacedKey(main, "overallChance");
     }
@@ -61,6 +66,7 @@ public class NamespacedKeys {
     public final NamespacedKey overridenEntityNameKey;
     public final NamespacedKey hasCustomNameTag;
     public final NamespacedKey playerLevellingId;
+    public final NamespacedKey playerLevellingValue;
     public final NamespacedKey chanceRuleAllowed;
     public final NamespacedKey chanceRuleDenied;
     public final NamespacedKey denyLmNametag;
@@ -70,6 +76,10 @@ public class NamespacedKeys {
     public final NamespacedKey playerNetherCoords;
     public final NamespacedKey playerNetherCoordsIntoWorld;
     public final NamespacedKey skyLightLevel;
+    public final NamespacedKey playerLevellingSourceNumber;
+    public final NamespacedKey lastDamageTime;
+    public final NamespacedKey mobHash;
+    public final NamespacedKey pickedUpItems;
 
     public final NamespacedKey lockSettings;
     public final NamespacedKey lockedNametag;

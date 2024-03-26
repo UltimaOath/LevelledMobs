@@ -9,6 +9,7 @@ import java.util.Stack;
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.LivingEntityInterface;
 import me.lokka30.levelledmobs.rules.RuleInfo;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapperBase;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -21,32 +22,24 @@ import org.jetbrains.annotations.NotNull;
  * @author stumper66
  * @since 3.0.0
  */
-public class LivingEntityPlaceHolder extends LivingEntityWrapperBase implements
-    LivingEntityInterface {
+public class LivingEntityPlaceholder
+    extends LivingEntityWrapperBase
+    implements
+    LivingEntityInterface
+{
 
-    private LivingEntityPlaceHolder(final @NotNull LevelledMobs main) {
+    private LivingEntityPlaceholder(final @NotNull LevelledMobs main) {
         super(main);
-    }
-
-    @Deprecated
-    public LivingEntityPlaceHolder(final EntityType entityType, final @NotNull Location location,
-        final @NotNull World world, final @NotNull LevelledMobs main) {
-        // this constructor is provided for backwards compatibility only
-        // to get an instance, LivingEntityPlaceHolder#getInstance should be called instead
-        // when finished with it, LivingEntityPlaceHolder#free should be called
-
-        super(main);
-        populateEntityData(entityType, location, world);
     }
 
     private EntityType entityType;
     private final static Object cachedPlaceHolders_Lock = new Object();
-    private final static Stack<LivingEntityPlaceHolder> cache = new Stack<>();
+    private final static Stack<LivingEntityPlaceholder> cache = new Stack<>();
 
     @NotNull
-    public static LivingEntityPlaceHolder getInstance(final EntityType entityType,
+    public static LivingEntityPlaceholder getInstance(final EntityType entityType,
         final @NotNull Location location, final @NotNull LevelledMobs main) {
-        final LivingEntityPlaceHolder leph;
+        final LivingEntityPlaceholder leph;
 
         if (location.getWorld() == null) {
             throw new NullPointerException("World can't be null");
@@ -54,7 +47,7 @@ public class LivingEntityPlaceHolder extends LivingEntityWrapperBase implements
 
         synchronized (cachedPlaceHolders_Lock) {
             if (cache.empty()) {
-                leph = new LivingEntityPlaceHolder(main);
+                leph = new LivingEntityPlaceholder(main);
             } else {
                 leph = cache.pop();
             }
@@ -90,8 +83,7 @@ public class LivingEntityPlaceHolder extends LivingEntityWrapperBase implements
         super.clearEntityData();
     }
 
-    @NotNull
-    public EntityType getEntityType() {
+    @NotNull public EntityType getEntityType() {
         if (this.entityType == null) {
             throw new NullPointerException("EntityType was null");
         }
@@ -103,8 +95,7 @@ public class LivingEntityPlaceHolder extends LivingEntityWrapperBase implements
         return main.rulesManager.getApplicableRules(this).allApplicableRules;
     }
 
-    @NotNull
-    public String getTypeName() {
+    @NotNull public String getTypeName() {
         return this.entityType.name();
     }
 

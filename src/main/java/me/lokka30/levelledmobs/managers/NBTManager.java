@@ -12,11 +12,11 @@ import de.tr7zw.nbtapi.NBTItem;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import me.lokka30.levelledmobs.customdrops.CustomDropItem;
 import me.lokka30.levelledmobs.misc.DebugType;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.result.NBTApplyResult;
-import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NBTManager {
 
-    @NotNull
-    public static NBTApplyResult applyNBT_Data_Item(@NotNull final CustomDropItem item,
+    @NotNull public static NBTApplyResult applyNBT_Data_Item(@NotNull final CustomDropItem item,
         @NotNull final String nbtStuff) {
         final NBTApplyResult result = new NBTApplyResult();
         final NBTItem nbtent = new NBTItem(item.getItemStack());
@@ -51,12 +50,12 @@ public class NBTManager {
             nbtent.mergeCompound(new NBTContainer(nbtStuff));
             final String jsonAfter = nbtent.toString();
 
-            if (lmEntity.getMainInstance().companion.debugsEnabled.contains(
-                DebugType.NBT_APPLY_SUCCESS)) {
+            if (lmEntity.getMainInstance().debugManager.isDebugTypeEnabled(
+                DebugType.NBT_APPLICATION)) {
                 showChangedJson(jsonBefore, jsonAfter, result);
             }
 
-            if (jsonBefore.equals(jsonAfter)) {
+            if (lmEntity.getMainInstance().debugManager.isDebugTypeEnabled(DebugType.NBT_APPLICATION) && jsonBefore.equals(jsonAfter)) {
                 result.exceptionMessage = "No NBT data changed.  Make sure you have used proper NBT strings";
             }
         } catch (final Exception e) {
@@ -64,11 +63,6 @@ public class NBTManager {
         }
 
         return result;
-    }
-
-    public static String getNbtDumpOfEntity(final @NotNull LivingEntity entity) {
-        final NBTEntity nbt = new NBTEntity(entity);
-        return nbt.toString();
     }
 
     private static void showChangedJson(final String jsonBefore, final String jsonAfter,

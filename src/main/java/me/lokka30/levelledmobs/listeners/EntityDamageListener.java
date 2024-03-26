@@ -4,15 +4,16 @@
 
 package me.lokka30.levelledmobs.listeners;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.misc.Addition;
 import me.lokka30.levelledmobs.misc.DebugType;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.QueueItem;
 import me.lokka30.levelledmobs.rules.NametagVisibilityEnum;
-import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
@@ -27,6 +28,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,23 +49,30 @@ public class EntityDamageListener implements Listener {
     // When the mob is damaged, update their nametag.
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onEntityDamageEvent(@NotNull final EntityDamageEvent event) {
-        if (event.getFinalDamage() == 0.0) {
-            return;
-        }
         if (!(event.getEntity() instanceof LivingEntity)) {
             return;
         }
-        if (event.getFinalDamage() == 0.0) {
+
+        final boolean isCritical = event.getFinalDamage() == 0.0;
+
+        if (event instanceof final EntityDamageByEntityEvent edee && isCritical &&
+                edee.getDamager() instanceof Player player) {
+            // this is so custom drops can associate the killer if the mob was
+            // killed via a custom projectile such as magic
+            main.entityDeathListener.damageMappings.put(edee.getEntity().getUniqueId(), player);
+            return;
+        }
+
+        if (isCritical) {
             return;
         }
 
         if (event.getEntity() instanceof Player) {
-            if (!(event instanceof EntityDamageByEntityEvent)) {
+            if (!(event instanceof final EntityDamageByEntityEvent entityDamageByEntityEvent)) {
                 return;
             }
 
             // if a mob hit a player then show the mob's nametag
-            final EntityDamageByEntityEvent entityDamageByEntityEvent = (EntityDamageByEntityEvent) event;
             if (!(entityDamageByEntityEvent.getDamager() instanceof LivingEntity)
                 || entityDamageByEntityEvent.getDamager() instanceof Player) {
                 return;
@@ -103,23 +112,30 @@ public class EntityDamageListener implements Listener {
             }
         }
 
+        boolean wasDamagedByEntity = false;
+        if (event instanceof final EntityDamageByEntityEvent entityDamageByEntityEvent){
+            wasDamagedByEntity = true;
+            if (entityDamageByEntityEvent.getDamager() instanceof Player player) {
+                lmEntity.associatedPlayer = player;
+            }
+        }
         final List<NametagVisibilityEnum> nametagVisibilityEnums = main.rulesManager.getRuleCreatureNametagVisbility(
             lmEntity);
         final long nametagVisibleTime = lmEntity.getNametagCooldownTime();
 
-        if (nametagVisibleTime > 0L && event instanceof EntityDamageByEntityEvent &&
+        if (nametagVisibleTime > 0L && wasDamagedByEntity &&
             nametagVisibilityEnums.contains(NametagVisibilityEnum.ATTACKED)) {
-            final EntityDamageByEntityEvent entityDamageByEntityEvent = (EntityDamageByEntityEvent) event;
 
-            if (entityDamageByEntityEvent.getDamager() instanceof Player) {
+            if (lmEntity.associatedPlayer != null) {
                 if (lmEntity.playersNeedingNametagCooldownUpdate == null) {
                     lmEntity.playersNeedingNametagCooldownUpdate = new HashSet<>();
                 }
 
-                lmEntity.playersNeedingNametagCooldownUpdate.add(
-                    (Player) entityDamageByEntityEvent.getDamager());
+                lmEntity.playersNeedingNametagCooldownUpdate.add(lmEntity.associatedPlayer);
             }
         }
+
+        lmEntity.getPDC().set(main.namespacedKeys.lastDamageTime, PersistentDataType.LONG, Instant.now().toEpochMilli());
 
         // Update their nametag with a 1 tick delay so that their health after the damage is shown
         main.levelManager.updateNametagWithDelay(lmEntity);
@@ -151,10 +167,9 @@ public class EntityDamageListener implements Listener {
             return;
         }
 
-        if (!(event.getDamager() instanceof Projectile)) {
+        if (!(event.getDamager() instanceof final Projectile projectile)) {
             return;
         }
-        final Projectile projectile = (Projectile) event.getDamager();
 
         if (projectile.getShooter() == null) {
             return;
@@ -200,20 +215,19 @@ public class EntityDamageListener implements Listener {
             main.mobsQueueManager.addToQueue(new QueueItem(shooter, event));
         }
 
-        final double newDamage =
-            event.getDamage() + main.mobDataManager.getAdditionsForLevel(shooter,
-                Addition.CUSTOM_RANGED_ATTACK_DAMAGE, event.getDamage());
-        Utils.debugLog(main, DebugType.RANGED_DAMAGE_MODIFICATION, String.format(
+        final float newDamage =
+                (float) event.getDamage() + main.mobDataManager.getAdditionsForLevel(shooter,
+                Addition.CUSTOM_RANGED_ATTACK_DAMAGE, (float) event.getDamage());
+        DebugManager.log(DebugType.RANGED_DAMAGE_MODIFICATION, shooter, () -> String.format(
             "&7Source: &b%s&7 (lvl &b%s&7), damage: &b%s&7, new damage: &b%s&7",
             shooter.getNameIfBaby(), shooter.getMobLevel(), event.getDamage(), newDamage));
         event.setDamage(newDamage);
     }
 
     private void processOtherRangedDamage(@NotNull final EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof LivingEntity)) {
+        if (!(event.getDamager() instanceof final LivingEntity livingEntity)) {
             return;
         }
-        final LivingEntity livingEntity = (LivingEntity) event.getDamager();
 
         if (
             !(livingEntity instanceof Guardian) &&
@@ -230,17 +244,17 @@ public class EntityDamageListener implements Listener {
             return;
         }
 
-        Utils.debugLog(main, DebugType.RANGED_DAMAGE_MODIFICATION,
-            "Range attack damage modified for &b" + livingEntity.getName() + "&7:");
-        Utils.debugLog(main, DebugType.RANGED_DAMAGE_MODIFICATION,
-            "Previous guardianDamage: &b" + event.getDamage());
+        DebugManager.log(DebugType.RANGED_DAMAGE_MODIFICATION, livingEntity, () ->
+                "Range attack damage modified for &b" + livingEntity.getName() + "&7:");
+        DebugManager.log(DebugType.RANGED_DAMAGE_MODIFICATION, livingEntity, () ->
+                "Previous guardianDamage: &b" + event.getDamage());
 
         final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(livingEntity, main);
         event.setDamage(
             main.mobDataManager.getAdditionsForLevel(lmEntity, Addition.CUSTOM_RANGED_ATTACK_DAMAGE,
-                event.getDamage())); // use ranged attack damage value
-        Utils.debugLog(main, DebugType.RANGED_DAMAGE_MODIFICATION,
-            "New guardianDamage: &b" + event.getDamage());
+                    (float) event.getDamage())); // use ranged attack damage value
+        DebugManager.log(DebugType.RANGED_DAMAGE_MODIFICATION, livingEntity, () ->
+                "New guardianDamage: &b" + event.getDamage());
         lmEntity.free();
     }
 }

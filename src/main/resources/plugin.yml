@@ -1,8 +1,9 @@
 name: 'LevelledMobs'
 version: '${project.version}'
 description: '${project.description}'
-authors: [ 'lokka30', 'PenalBuffalo', 'Oathkeeper' ]
+authors: [ 'PenalBuffalo', 'lokka30', 'UltimaOath' ]
 website: 'https://github.com/lokka30/LevelledMobs/'
+folia-supported: true
 
 main: 'me.lokka30.levelledmobs.LevelledMobs'
 api-version: '1.16'
@@ -18,6 +19,7 @@ softdepend:
   - SimplePets
   - Essentials
   - LM_Items
+  - SCore
 
 commands:
   levelledmobs:

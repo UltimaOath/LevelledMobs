@@ -19,22 +19,27 @@ import me.lokka30.levelledmobs.customdrops.CustomDropsHandler;
 import me.lokka30.levelledmobs.listeners.BlockPlaceListener;
 import me.lokka30.levelledmobs.listeners.ChunkLoadListener;
 import me.lokka30.levelledmobs.listeners.EntityDamageDebugListener;
+import me.lokka30.levelledmobs.listeners.EntityDeathListener;
 import me.lokka30.levelledmobs.listeners.PlayerInteractEventListener;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.managers.LevelManager;
 import me.lokka30.levelledmobs.managers.MobDataManager;
-import me.lokka30.levelledmobs.managers.MobHeadManager;
 import me.lokka30.levelledmobs.managers.MobsQueueManager;
 import me.lokka30.levelledmobs.managers.NametagQueueManager;
 import me.lokka30.levelledmobs.managers.PlaceholderApiIntegration;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.FileLoader;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.NamespacedKeys;
 import me.lokka30.levelledmobs.misc.NametagTimerChecker;
 import me.lokka30.levelledmobs.misc.YmlParsingHelper;
+import me.lokka30.levelledmobs.nametag.Definitions;
+import me.lokka30.levelledmobs.nametag.ServerVersionInfo;
 import me.lokka30.levelledmobs.rules.RulesManager;
 import me.lokka30.levelledmobs.rules.RulesParsingManager;
 import me.lokka30.levelledmobs.util.ConfigUtils;
+import me.lokka30.levelledmobs.util.QuickTimer;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.maths.QuickTimer;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -59,9 +64,9 @@ public final class LevelledMobs extends JavaPlugin {
     public ChunkLoadListener chunkLoadListener;
     public BlockPlaceListener blockPlaceListener;
     public PlayerInteractEventListener playerInteractEventListener;
+    public EntityDeathListener entityDeathListener;
     public NamespacedKeys namespacedKeys;
     public Companion companion;
-    public MobHeadManager mobHeadManager;
     public RulesParsingManager rulesParsingManager;
     public RulesManager rulesManager;
     public MobsQueueManager mobsQueueManager;
@@ -75,11 +80,14 @@ public final class LevelledMobs extends JavaPlugin {
     public YmlParsingHelper helperSettings;
     public long playerLevellingMinRelevelTime;
     public int maxPlayersRecorded;
+    public DebugManager debugManager;
+    private Definitions definitions;
+    private ServerVersionInfo ver;
+    private static LevelledMobs instance;
 
     // Configuration
     public YamlConfiguration settingsCfg;
     public YamlConfiguration messagesCfg;
-    public YamlConfiguration attributesCfg;
     public YamlConfiguration dropsCfg;
     public final ConfigUtils configUtils = new ConfigUtils(this);
 
@@ -91,14 +99,21 @@ public final class LevelledMobs extends JavaPlugin {
     public Stack<LivingEntityWrapper> cacheCheck;
 
     @Override
+    public void onLoad() {
+        instance = this;
+    }
+
+    @Override
     public void onEnable() {
         final QuickTimer timer = new QuickTimer();
 
+        this.debugManager = new DebugManager();
+        this.ver = new ServerVersionInfo();
+        this.definitions = new Definitions();
         this.nametagQueueManager = new NametagQueueManager(this);
         this.mobsQueueManager = new MobsQueueManager(this);
         this.companion = new Companion(this);
         this.mobDataManager = new MobDataManager(this);
-        this.mobHeadManager = new MobHeadManager(this);
         this.rulesParsingManager = new RulesParsingManager(this);
         this.rulesManager = new RulesManager(this);
         this.nametagTimerChecker = new NametagTimerChecker(this);
@@ -108,11 +123,17 @@ public final class LevelledMobs extends JavaPlugin {
         this.random = new Random();
         this.customMobGroups = new TreeMap<>();
         this.levelInterface = new LevelManager(this);
+        this.entityDeathListener = new EntityDeathListener(this);
         if (!companion.loadFiles(false)) {
             // had fatal error reading required files
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
+        definitions.useTranslationComponents = helperSettings.getBoolean(settingsCfg,
+                "use-translation-components", true);
+        definitions.setUseLegacySerializer(helperSettings.getBoolean(settingsCfg,
+                "use-legacy-serializer", true));
+        nametagQueueManager.nametagSenderHandler.refresh();
         companion.registerListeners();
         companion.registerCommands();
 
@@ -121,6 +142,8 @@ public final class LevelledMobs extends JavaPlugin {
             levelManager.startNametagAutoUpdateTask();
             levelManager.startNametagTimer();
         }
+
+        prepareToLoadCustomDrops();
         companion.startCleanupTask();
         companion.setupMetrics();
         companion.checkUpdates();
@@ -129,8 +152,28 @@ public final class LevelledMobs extends JavaPlugin {
         Utils.logger.info("Start-up complete (took " + loadTime + "ms)");
     }
 
+    private void prepareToLoadCustomDrops(){
+        if (Bukkit.getPluginManager().getPlugin("LM_Items") != null){
+            final SchedulerWrapper wrapper = new SchedulerWrapper(() -> {
+                customDropsHandler.customDropsParser.loadDrops(
+                        FileLoader.loadFile( "customdrops", FileLoader.CUSTOMDROPS_FILE_VERSION));
+                companion.hasFinishedLoading = true;
+                if (companion.showCustomDrops)
+                    customDropsHandler.customDropsParser.showCustomDropsDebugInfo(null);
+            });
+            wrapper.runDelayed(10L);
+        }
+        else{
+            customDropsHandler.customDropsParser.loadDrops(
+                    FileLoader.loadFile( "customdrops", FileLoader.CUSTOMDROPS_FILE_VERSION));
+            if (companion.showCustomDrops)
+                customDropsHandler.customDropsParser.showCustomDropsDebugInfo(null);
+        }
+    }
+
     public void reloadLM(final @NotNull CommandSender sender) {
         migratedFromPre30 = false;
+        customDropsHandler.customDropsParser.invalidExternalItems.clear();
         List<String> reloadStartedMsg = messagesCfg.getStringList(
             "command.levelledmobs.reload.started");
         reloadStartedMsg = Utils.replaceAllInList(reloadStartedMsg, "%prefix%",
@@ -138,6 +181,7 @@ public final class LevelledMobs extends JavaPlugin {
         reloadStartedMsg = Utils.colorizeAllInList(reloadStartedMsg);
         reloadStartedMsg.forEach(sender::sendMessage);
 
+        companion.reloadSender = sender;
         companion.loadFiles(true);
 
         List<String> reloadFinishedMsg = messagesCfg.getStringList(
@@ -145,11 +189,6 @@ public final class LevelledMobs extends JavaPlugin {
         reloadFinishedMsg = Utils.replaceAllInList(reloadFinishedMsg, "%prefix%",
             configUtils.getPrefix());
         reloadFinishedMsg = Utils.colorizeAllInList(reloadFinishedMsg);
-
-        if (nametagQueueManager.hasNametagSupport() && (levelManager.nametagAutoUpdateTask == null
-            || levelManager.nametagAutoUpdateTask.isCancelled())) {
-            levelManager.startNametagAutoUpdateTask();
-        }
 
         if (helperSettings.getBoolean(settingsCfg, "debug-entity-damage")
             && !configUtils.debugEntityDamageWasEnabled) {
@@ -173,12 +212,28 @@ public final class LevelledMobs extends JavaPlugin {
 
         levelManager.entitySpawnListener.processMobSpawns = helperSettings.getBoolean(settingsCfg,
             "level-mobs-upon-spawn", true);
+
         levelManager.clearRandomLevellingCache();
         configUtils.playerLevellingEnabled = rulesManager.isPlayerLevellingEnabled();
         rulesManager.clearTempDisabledRulesCounts();
+        definitions.useTranslationComponents = helperSettings.getBoolean(settingsCfg,
+                "use-translation-components", true);
+        definitions.setUseLegacySerializer(helperSettings.getBoolean(settingsCfg,
+                "use-legacy-serializer", true));
+        nametagQueueManager.nametagSenderHandler.refresh();
 
         reloadFinishedMsg.forEach(sender::sendMessage);
     }
+
+    public static LevelledMobs getInstance(){
+        return instance;
+    }
+
+    public @NotNull Definitions getDefinitions(){
+        return this.definitions;
+    }
+
+    public @NotNull ServerVersionInfo getVerInfo() { return this.ver; }
 
     @Override
     public void onDisable() {

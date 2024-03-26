@@ -5,8 +5,10 @@
 package me.lokka30.levelledmobs.listeners;
 
 import me.lokka30.levelledmobs.LevelledMobs;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.util.Utils;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.QueueItem;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -41,19 +43,34 @@ public class ChunkLoadListener implements Listener {
         for (final Entity entity : event.getChunk().getEntities()) {
 
             // Must be a *living* entity
-            if (!(entity instanceof LivingEntity)) {
+            if (!(entity instanceof final LivingEntity livingEntity)) {
                 continue;
             }
-            final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(
-                (LivingEntity) entity, main);
 
-            if (lmEntity.isLevelled()) {
+            checkEntity(livingEntity, event);
+        }
+    }
+
+    private void checkEntity(final LivingEntity livingEntity, final ChunkLoadEvent event){
+        final SchedulerWrapper wrapper = new SchedulerWrapper(livingEntity, () -> {
+            final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(
+                    livingEntity, main);
+
+            if (main.levelManager.doCheckMobHash && Utils.checkIfMobHashChanged(lmEntity)) {
+                lmEntity.reEvaluateLevel = true;
+                lmEntity.isRulesForceAll = true;
+                lmEntity.wasPreviouslyLevelled = lmEntity.isLevelled();
+            }
+            else if (lmEntity.isLevelled()) {
                 lmEntity.free();
-                continue;
+                return;
             }
 
             main.mobsQueueManager.addToQueue(new QueueItem(lmEntity, event));
             lmEntity.free();
-        }
+        });
+
+        wrapper.runDirectlyInBukkit = true;
+        wrapper.run();
     }
 }

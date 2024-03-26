@@ -10,12 +10,12 @@ import java.util.Set;
 import java.util.TreeSet;
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.commands.MessagesBase;
+import me.lokka30.levelledmobs.nametag.ServerVersionInfo;
 import me.lokka30.levelledmobs.rules.DoNotMerge;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.PaperUtils;
 import me.lokka30.levelledmobs.util.SpigotUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
-import me.lokka30.microlib.other.VersionUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -79,8 +79,7 @@ public class SpawnerBaseClass extends MessagesBase {
         return keyValue;
     }
 
-    @Nullable
-    private String parseFlagValue(final String keyName, final int argNumber,
+    @Nullable private String parseFlagValue(final String keyName, final int argNumber,
         final String @NotNull [] args, final boolean mustBeNumber) {
         if (argNumber + 1 >= args.length || args[argNumber + 1].startsWith("/")) {
             showMessage("command.levelledmobs.spawner.no-value", "%keyname%", keyName);
@@ -103,7 +102,10 @@ public class SpawnerBaseClass extends MessagesBase {
             return;
         }
 
-        if (VersionUtils.isRunningPaper() && info.main.companion.useAdventure) {
+        final ServerVersionInfo ver = LevelledMobs.getInstance().getVerInfo();
+
+        if (ver.getIsRunningPaper()
+                && info.main.companion.useAdventure) {
             PaperUtils.updateItemDisplayName(meta,
                 info.customName == null ? defaultName : info.customName);
         } else {
@@ -139,7 +141,7 @@ public class SpawnerBaseClass extends MessagesBase {
                     itemsCount = 0;
                 }
 
-                if (loreLine.length() > 0) {
+                if (!loreLine.isEmpty()) {
                     loreLine.append(", ");
                 }
                 loreLine.append(String.format("&7%s: &b%s&7", name, f.get(info)));
@@ -154,7 +156,7 @@ public class SpawnerBaseClass extends MessagesBase {
 
         if (!info.noLore && info.lore == null && info.customLore == null) {
             lore = Utils.colorizeAllInList(lore);
-            if (VersionUtils.isRunningPaper() && info.main.companion.useAdventure) {
+            if (ver.getIsRunningPaper() && info.main.companion.useAdventure) {
                 PaperUtils.updateItemMetaLore(meta, lore);
             } else {
                 SpigotUtils.updateItemMetaLore(meta, lore);
@@ -162,7 +164,7 @@ public class SpawnerBaseClass extends MessagesBase {
 
             final StringBuilder sbLore = new StringBuilder();
             for (final String loreLine : lore) {
-                if (sbLore.length() > 0) {
+                if (!sbLore.isEmpty()) {
                     sbLore.append("\n");
                 }
                 sbLore.append(loreLine);
@@ -176,7 +178,7 @@ public class SpawnerBaseClass extends MessagesBase {
 
             lore.clear();
             lore.addAll(List.of(useLore.split("\n")));
-            if (VersionUtils.isRunningPaper() && info.main.companion.useAdventure) {
+            if (ver.getIsRunningPaper() && info.main.companion.useAdventure) {
                 PaperUtils.updateItemMetaLore(meta, lore);
             } else {
                 SpigotUtils.updateItemMetaLore(meta, lore);
@@ -187,7 +189,7 @@ public class SpawnerBaseClass extends MessagesBase {
         }
     }
 
-    List<String> checkTabCompletion(final List<String> options, final String @NotNull [] args) {
+    @NotNull List<String> checkTabCompletion(final List<String> options, final String @NotNull [] args) {
         final Set<String> commandsList = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         commandsList.addAll(options);
 
@@ -207,7 +209,7 @@ public class SpawnerBaseClass extends MessagesBase {
 
         final String lastArg = args[args.length - 1];
 
-        if (inQuotes || lastArg.length() > 0 && lastArg.charAt(lastArg.length() - 1) == '\"') {
+        if (inQuotes || !lastArg.isEmpty() && lastArg.charAt(lastArg.length() - 1) == '\"') {
             return Collections.emptyList();
         }
 
@@ -226,16 +228,12 @@ public class SpawnerBaseClass extends MessagesBase {
             this.spawnType = EntityType.UNKNOWN;
         }
 
-        @DoNotMerge
-        final public LevelledMobs main;
-        @DoNotMerge
-        final String label;
-        @DoNotMerge
-        public Player player;
+        @DoNotMerge final public LevelledMobs main;
+        @DoNotMerge final String label;
+        @DoNotMerge public Player player;
         public int minLevel;
         public int maxLevel;
-        @DoNotMerge
-        boolean noLore;
+        @DoNotMerge boolean noLore;
         public Integer delay;
         public Integer maxNearbyEntities;
         public Integer minSpawnDelay;
@@ -244,11 +242,9 @@ public class SpawnerBaseClass extends MessagesBase {
         public Integer spawnCount;
         public Integer spawnRange;
         public String customDropId;
-        @DoNotMerge
-        public String customName;
+        @DoNotMerge public String customName;
         public EntityType spawnType;
-        @DoNotMerge
-        String customLore;
+        @DoNotMerge String customLore;
         public String lore;
     }
 }

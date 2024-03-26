@@ -4,7 +4,6 @@
 
 package me.lokka30.levelledmobs.commands;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,10 +16,13 @@ import me.lokka30.levelledmobs.commands.subcommands.RulesSubcommand;
 import me.lokka30.levelledmobs.commands.subcommands.SpawnerEggCommand;
 import me.lokka30.levelledmobs.commands.subcommands.SpawnerSubCommand;
 import me.lokka30.levelledmobs.commands.subcommands.SummonSubcommand;
+import me.lokka30.levelledmobs.util.PaperUtils;
+import me.lokka30.levelledmobs.util.SpigotUtils;
 import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 
@@ -68,33 +70,16 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
             } else {
                 switch (args[0].toLowerCase()) {
                     // Retain alphabetical order please.
-                    case "debug":
-                        debugSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "egg":
-                        spawnerEggCommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "info":
-                        infoSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "kill":
-                        killSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "reload":
-                        reloadSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "rules":
-                        rulesSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "spawner":
-                        spawnerSubCommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    case "summon":
-                        summonSubcommand.parseSubcommand(main, sender, label, args);
-                        break;
-                    default:
-                        sendMainUsage(sender, label);
-                        break;
+                    case "debug" -> debugSubcommand.parseSubcommand(main, sender, label, args);
+                    case "egg" -> spawnerEggCommand.parseSubcommand(main, sender, label, args);
+                    case "help" -> showHelp(sender);
+                    case "info" -> infoSubcommand.parseSubcommand(main, sender, label, args);
+                    case "kill" -> killSubcommand.parseSubcommand(main, sender, label, args);
+                    case "reload" -> reloadSubcommand.parseSubcommand(main, sender, label, args);
+                    case "rules" -> rulesSubcommand.parseSubcommand(main, sender, label, args);
+                    case "spawner" -> spawnerSubCommand.parseSubcommand(main, sender, label, args);
+                    case "summon" -> summonSubcommand.parseSubcommand(main, sender, label, args);
+                    default -> sendMainUsage(sender, label);
                 }
             }
         } else {
@@ -111,9 +96,27 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
         mainUsage.forEach(sender::sendMessage);
     }
 
+    private void showHelp(@NotNull final CommandSender sender){
+        final String message = "Click here to open the wiki FAQ";
+        final String url = "https://tinyurl.com/yc8xds5a";
+
+        if (sender instanceof ConsoleCommandSender){
+            // hyperlinks don't work on console
+            sender.sendMessage(String.format("%s: %s",
+                    message, url));
+            return;
+        }
+
+        if (main.getVerInfo().getIsRunningPaper()) {
+            PaperUtils.sendHyperlink(sender, message, url);
+        } else {
+            SpigotUtils.sendHyperlink(sender, message, url);
+        }
+    }
+
     // Retain alphabetical order please.
-    private final List<String> commandsToCheck = Arrays.asList("debug", "egg", "summon", "kill",
-        "reload", "info", "spawner", "rules");
+    private final List<String> commandsToCheck = List.of("debug", "egg", "help",
+        "info", "kill", "reload", "rules", "spawner", "summon");
 
     @Override
     public List<String> onTabComplete(final @NotNull CommandSender sender,
@@ -130,24 +133,17 @@ public class LevelledMobsCommand implements CommandExecutor, TabCompleter {
 
             return suggestions;
         } else {
-            switch (args[0].toLowerCase()) {
+            return switch (args[0].toLowerCase()) {
                 // Retain alphabetical order please.
-                case "kill":
-                    return killSubcommand.parseTabCompletions(main, sender, args);
-                case "rules":
-                    return rulesSubcommand.parseTabCompletions(main, sender, args);
-                case "spawner":
-                    return spawnerSubCommand.parseTabCompletions(main, sender, args);
-                case "summon":
-                    return summonSubcommand.parseTabCompletions(main, sender, args);
-                case "egg":
-                    return spawnerEggCommand.parseTabCompletions(main, sender, args);
-                case "debug":
-                    return debugSubcommand.parseTabCompletions(main, sender, args);
+                case "kill" -> killSubcommand.parseTabCompletions(main, sender, args);
+                case "rules" -> rulesSubcommand.parseTabCompletions(main, sender, args);
+                case "spawner" -> spawnerSubCommand.parseTabCompletions(main, sender, args);
+                case "summon" -> summonSubcommand.parseTabCompletions(main, sender, args);
+                case "egg" -> spawnerEggCommand.parseTabCompletions(main, sender, args);
+                case "debug" -> debugSubcommand.parseTabCompletions(main, sender, args);
                 // the missing subcommands don't have tab completions, don't bother including them.
-                default:
-                    return Collections.emptyList();
-            }
+                default -> Collections.emptyList();
+            };
         }
     }
 }

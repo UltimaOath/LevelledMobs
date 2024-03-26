@@ -21,17 +21,20 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.UUID;
+
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.commands.MessagesBase;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.rules.PlayerLevellingOptions;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.QueueItem;
 import me.lokka30.levelledmobs.rules.RuleInfo;
 import me.lokka30.levelledmobs.util.PaperUtils;
 import me.lokka30.levelledmobs.util.SpigotUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
-import me.lokka30.microlib.other.VersionUtils;
+import me.lokka30.levelledmobs.util.MessageUtils;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -42,7 +45,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -97,7 +99,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             for (final RuleInfo rpi : main.rulesParsingManager.rulePresets.values()) {
                 sb.append(
                     "\n--------------------------------- Preset rule ----------------------------------\n");
-                sb.append(rpi.formatRulesVisually(List.of("ruleIsEnabled")));
+                sb.append(rpi.formatRulesVisually(false, List.of("ruleIsEnabled")));
             }
 
             sb.append(
@@ -149,6 +151,12 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
     }
 
     private void forceRelevel(final CommandSender sender) {
+        //TODO: make this work in Folia
+        if (main.getVerInfo().getIsRunningFolia()){
+            sender.sendMessage("Sorry this command doesn't work in Folia");
+            return;
+        }
+
         int worldCount = 0;
         int entityCount = 0;
 
@@ -157,7 +165,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
         for (final World world : Bukkit.getWorlds()) {
             worldCount++;
             for (final Entity entity : world.getEntities()) {
-                if (!(entity instanceof LivingEntity)) {
+                if (!(entity instanceof LivingEntity) || entity instanceof Player) {
                     continue;
                 }
 
@@ -191,21 +199,14 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             return;
         }
 
-        ResetDifficulty difficulty = ResetDifficulty.UNSPECIFIED;
-        switch (args[2].toLowerCase()) {
-            case "basic":
-                difficulty = ResetDifficulty.BASIC;
-                break;
-            case "average":
-                difficulty = ResetDifficulty.AVERAGE;
-                break;
-            case "advanced":
-                difficulty = ResetDifficulty.ADVANCED;
-                break;
-            case "extreme":
-                difficulty = ResetDifficulty.EXTREME;
-                break;
-        }
+        ResetDifficulty difficulty = switch (args[2].toLowerCase()) {
+            case "vanilla" -> ResetDifficulty.VANILLA;
+            case "basic" -> ResetDifficulty.BASIC;
+            case "average" -> ResetDifficulty.AVERAGE;
+            case "advanced" -> ResetDifficulty.ADVANCED;
+            case "extreme" -> ResetDifficulty.EXTREME;
+            default -> ResetDifficulty.UNSPECIFIED;
+        };
 
         if (difficulty == ResetDifficulty.UNSPECIFIED) {
             showMessage("command.levelledmobs.rules.invalid-difficulty", "%difficulty%", args[2]);
@@ -227,30 +228,26 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             String.valueOf(difficulty));
 
         final String filename = "rules.yml";
-        final String[] replaceWhat = new String[]{"    - average_challenge",
-            "    - weighted_random_average", "", ""};
-        final String[] replaceWith = new String[]{"#    - average_challenge",
-            "#    - weighted_random_average", "", ""};
+        final String[] replaceWhat = new String[]{"    - average_challenge", ""};
+        final String[] replaceWith = new String[]{"    #- average_challenge", ""};
 
         switch (difficulty) {
-            case BASIC:
-                replaceWhat[2] = "#- basic_challenge";
-                replaceWith[2] = "- basic_challenge";
-                replaceWhat[3] = "#- weighted_random_basic";
-                replaceWith[3] = "- weighted_random_basic";
-                break;
-            case ADVANCED:
-                replaceWhat[2] = "#- advanced_challenge";
-                replaceWith[2] = "- advanced_challenge";
-                replaceWhat[3] = "#- weighted_random_advanced";
-                replaceWith[3] = "- weighted_random_advanced_difficulty";
-                break;
-            case EXTREME:
-                replaceWhat[2] = "#- extreme_challenge";
-                replaceWith[2] = "- extreme_challenge";
-                replaceWhat[3] = "#- weighted_random_extreme";
-                replaceWith[3] = "- weighted_random_extreme";
-                break;
+            case VANILLA -> {
+                replaceWhat[1] = "#- vanilla_challenge";
+                replaceWith[1] = "- vanilla_challenge";
+            }
+            case BASIC -> {
+                replaceWhat[1] = "#- basic_challenge";
+                replaceWith[1] = "- basic_challenge";
+            }
+            case ADVANCED -> {
+                replaceWhat[1] = "#- advanced_challenge";
+                replaceWith[1] = "- advanced_challenge";
+            }
+            case EXTREME -> {
+                replaceWhat[1] = "#- extreme_challenge";
+                replaceWith[1] = "- extreme_challenge";
+            }
         }
 
         try (final InputStream stream = main.getResource(filename)) {
@@ -262,9 +259,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             String rulesText = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
             if (difficulty != ResetDifficulty.AVERAGE) {
                 rulesText = rulesText.replace(replaceWhat[0], replaceWith[0])
-                    .replace(replaceWhat[1], replaceWith[1])
-                    .replace(replaceWhat[2], replaceWith[2])
-                    .replace(replaceWhat[3], replaceWith[3]);
+                    .replace(replaceWhat[1], replaceWith[1]);
             }
 
             final File rulesFile = new File(main.getDataFolder(), filename);
@@ -290,7 +285,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
     }
 
     private enum ResetDifficulty {
-        BASIC, AVERAGE, ADVANCED, EXTREME, UNSPECIFIED
+        VANILLA, BASIC, AVERAGE, ADVANCED, EXTREME, UNSPECIFIED
     }
 
     private void showHyperlink(final CommandSender sender, final String message, final String url) {
@@ -299,7 +294,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             return;
         }
 
-        if (VersionUtils.isRunningPaper()) {
+        if (main.getVerInfo().getIsRunningPaper()) {
             PaperUtils.sendHyperlink(sender, message, url);
         } else {
             SpigotUtils.sendHyperlink(sender, message, url);
@@ -325,7 +320,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
         for (int i = 2; i < args.length; i++) {
             final String arg = args[i].toLowerCase();
 
-            if (foundRule == null && arg.length() > 0 && !arg.startsWith("/")) {
+            if (foundRule == null && !arg.isEmpty() && !arg.startsWith("/")) {
                 if (allRuleNames.containsKey(arg)) {
                     foundRule = args[i];
                 } else if (badRuleName == null) {
@@ -354,7 +349,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             rule.getRuleName()));
         sb.append("\n");
 
-        sb.append(rule.formatRulesVisually(List.of("id")));
+        sb.append(rule.formatRulesVisually(false, List.of("id")));
         if (showOnConsole) {
             Utils.logger.info(sb.toString());
         } else {
@@ -364,7 +359,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
 
     private void showEffectiveRules(@NotNull final Player player, final boolean showOnConsole,
         final boolean findNearbyEntities) {
-        final LivingEntityWrapper lmEntity = getMobBeingLookedAt(player, findNearbyEntities);
+        final LivingEntityWrapper lmEntity = getMobBeingLookedAt(player, findNearbyEntities, this.commandSender);
         if (lmEntity == null) {
             return;
         }
@@ -379,7 +374,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             lmEntity.getLivingEntity().getLocation().getBlockX(),
             lmEntity.getLivingEntity().getLocation().getBlockY(),
             lmEntity.getLivingEntity().getLocation().getBlockZ());
-        final String mobLevel = lmEntity.isLevelled() ? lmEntity.getMobLevel() + "" : "0";
+        final String mobLevel = lmEntity.isLevelled() ? String.valueOf(lmEntity.getMobLevel()) : "0";
         final List<String> messages = getMessage("command.levelledmobs.rules.effective-rules",
             new String[]{"%mobname%", "%entitytype%", "%location%", "%world%", "%level%"},
             new String[]{entityName, lmEntity.getNameIfBaby(), locationStr, lmEntity.getWorldName(),
@@ -394,32 +389,36 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             sb.setLength(0);
         }
 
-        final BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                showEffectiveValues(player, lmEntity, showOnConsole, sb);
-                lmEntity.free();
+        if (lmEntity.getPDC().has(main.namespacedKeys.mobHash, PersistentDataType.STRING)){
+            final String mobHash = lmEntity.getPDC().get(main.namespacedKeys.mobHash, PersistentDataType.STRING);
+            if (mobHash != null){
+                sb.append("&r\nmobHash: ");
+                sb.append(mobHash);
             }
-        };
+        }
+
+        final SchedulerWrapper scheduler = new SchedulerWrapper(lmEntity.getLivingEntity(), () -> {
+            showEffectiveValues(player, lmEntity, showOnConsole, sb);
+            lmEntity.free();
+        });
 
         lmEntity.inUseCount.getAndIncrement();
-        runnable.runTaskLater(main, 25);
+        scheduler.runDelayed(25L);
     }
 
-    @Nullable
-    public LivingEntityWrapper getMobBeingLookedAt(@NotNull final Player player,
-        final boolean findNearbyEntities) {
+    @Nullable public LivingEntityWrapper getMobBeingLookedAt(@NotNull final Player player,
+        final boolean findNearbyEntities, final @NotNull CommandSender sender) {
+        this.commandSender = sender;
         LivingEntity livingEntity = null;
         LivingEntityWrapper lmEntity = null;
         final Location eye = player.getEyeLocation();
         final SortedMap<Double, LivingEntity> entities = new TreeMap<>();
 
         for (final Entity entity : player.getNearbyEntities(10, 10, 10)) {
-            if (!(entity instanceof LivingEntity)) {
+            if (!(entity instanceof final LivingEntity le)) {
                 continue;
             }
 
-            final LivingEntity le = (LivingEntity) entity;
             if (findNearbyEntities) {
                 final double distance = le.getLocation().distanceSquared(player.getLocation());
                 entities.put(distance, le);
@@ -449,26 +448,24 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
         return lmEntity;
     }
 
-    private void createParticleEffect(@NotNull final Location location) {
+    private void createParticleEffect(final @NotNull Location location) {
         final World world = location.getWorld();
         if (world == null) {
             return;
         }
 
-        final BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                try {
-                    for (int i = 0; i < 10; i++) {
-                        world.spawnParticle(Particle.SPELL, location, 20, 0, 0, 0, 0.1);
-                        Thread.sleep(50);
-                    }
-                } catch (final InterruptedException ignored) {
-                }
-            }
-        };
+        final SchedulerWrapper scheduler = new SchedulerWrapper(() -> spawnParticles(location, world));
+        scheduler.locationForRegionScheduler = location;
+        scheduler.run();
+    }
 
-        runnable.runTaskAsynchronously(main);
+    private void spawnParticles(final @NotNull Location location, final @NotNull World world){
+        try {
+            for (int i = 0; i < 10; i++) {
+                world.spawnParticle(Particle.SPELL, location, 20, 0, 0, 0, 0.1);
+                Thread.sleep(50);
+            }
+        } catch (final InterruptedException ignored) { }
     }
 
     private void showEffectiveValues(final CommandSender sender,
@@ -489,7 +486,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
             return;
         }
 
-        if (sb.length() > 0) {
+        if (!sb.isEmpty()) {
             sb.append("\n");
         }
 
@@ -498,6 +495,8 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
                 final RuleInfo pi = effectiveRules.get(i);
 
                 for (final Field f : pi.getClass().getDeclaredFields()) {
+                    String showValue = null;
+
                     if (Modifier.isPrivate(f.getModifiers())) {
                         continue;
                     }
@@ -508,10 +507,13 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
                     if (printedKeys.contains(f.getName())) {
                         continue;
                     }
-                    if (f.getName().equals("ruleSourceNames")) {
+                    if (f.getName().equals("ruleSourceNames") || f.getName().equals("ruleIsEnabled")) {
                         continue;
                     }
                     final Object value = f.get(pi);
+                    if (value instanceof final PlayerLevellingOptions opts){
+                        showValue = getPlayerLevellingFormatting(opts, lmEntity);
+                    }
                     if (value instanceof Map && ((Map<?, ?>) value).isEmpty()) {
                         continue;
                     }
@@ -523,11 +525,10 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
                             value.toString()))) {
                         continue;
                     }
-                    if (f.getName().equals("ruleIsEnabled")) {
-                        continue;
-                    }
 
-                    String showValue = f.getName() + ", value: " + value;
+                    if (showValue == null){
+                        showValue = f.getName() + ", value: " + value;
+                    }
                     showValue += ", &1source: " + (
                         pi.ruleSourceNames.containsKey(f.getName()) ? pi.ruleSourceNames.get(
                             f.getName()) : pi.getRuleName()
@@ -561,6 +562,44 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
         }
     }
 
+    private @NotNull String getPlayerLevellingFormatting(final @NotNull PlayerLevellingOptions opts,
+                                                         final @NotNull LivingEntityWrapper lmEntity){
+        StringBuilder sb = new StringBuilder("playerLevellingOptions, value: ");
+
+        String userId = null;
+        String plValue = null;
+
+        if (lmEntity.getPDC().has(main.namespacedKeys.playerLevellingId)) {
+            userId = lmEntity.getPDC().get(main.namespacedKeys.playerLevellingId, PersistentDataType.STRING);
+        }
+        if (lmEntity.getPDC().has(main.namespacedKeys.playerLevellingValue)) {
+            plValue = lmEntity.getPDC().get(main.namespacedKeys.playerLevellingValue, PersistentDataType.STRING);
+        }
+
+        if (plValue != null){
+            sb.append(plValue);
+        }
+
+        boolean foundName = false;
+        if (userId != null){
+            final UUID uuid = UUID.fromString(userId);
+            final Player player = Bukkit.getPlayer(uuid);
+            if (player != null){
+                foundName = true;
+                if (plValue != null) sb.append(", ");
+
+                sb.append("plr: ").append(player.getName());
+            }
+        }
+
+        if (plValue != null || foundName){
+            sb.append(", ");
+        }
+
+        sb.append(opts);
+        return sb.toString();
+    }
+
     @Override
     public List<String> parseTabCompletions(final LevelledMobs main,
         final @NotNull CommandSender sender, @NotNull final String[] args) {
@@ -575,7 +614,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
                 "show_effective", "show_rule", "show_temp_disabled");
         } else if (args.length >= 3) {
             if ("reset".equalsIgnoreCase(args[1]) && args.length == 3) {
-                suggestions.addAll(List.of("basic", "average", "advanced", "extreme"));
+                suggestions.addAll(List.of("vanilla", "basic", "average", "advanced", "extreme"));
             } else if ("show_all".equalsIgnoreCase(args[1])) {
                 boolean showOnConsole = false;
                 for (int i = 2; i < args.length; i++) {
@@ -604,7 +643,7 @@ public class RulesSubcommand extends MessagesBase implements Subcommand {
                 for (int i = 2; i < args.length; i++) {
                     final String arg = args[i].toLowerCase();
 
-                    if (arg.length() > 0 && !arg.startsWith("/") && allRuleNames.contains(arg)) {
+                    if (!arg.isEmpty() && !arg.startsWith("/") && allRuleNames.contains(arg)) {
                         foundValue = true;
                     }
 

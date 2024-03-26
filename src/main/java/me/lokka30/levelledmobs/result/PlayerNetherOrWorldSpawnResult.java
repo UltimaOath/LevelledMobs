@@ -3,16 +3,14 @@ package me.lokka30.levelledmobs.result;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerNetherOrWorldSpawnResult {
+/**
+ * Used to hold info that is used for various
+ * custom placeholders
+ *
+ * @author stumper66
+ * @since 3.6.0
+ */
+public record PlayerNetherOrWorldSpawnResult(@NotNull Location location, boolean isNetherPortalLocation,
+                                             boolean isWorldPortalLocation) {
 
-    public PlayerNetherOrWorldSpawnResult(final @NotNull Location location,
-        final boolean isNetherPortalLocation, final boolean isWorldPortalLocation) {
-        this.location = location;
-        this.isNetherPortalLocation = isNetherPortalLocation;
-        this.isWorldPortalLocation = isWorldPortalLocation;
-    }
-
-    public final @NotNull Location location;
-    public final boolean isNetherPortalLocation;
-    public final boolean isWorldPortalLocation;
 }

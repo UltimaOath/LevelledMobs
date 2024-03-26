@@ -5,13 +5,14 @@
 package me.lokka30.levelledmobs.managers;
 
 import java.io.InvalidObjectException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.LivingEntityInterface;
 import me.lokka30.levelledmobs.misc.LevellableState;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.VersionInfo;
 import me.lokka30.levelledmobs.result.PlayerHomeCheckResult;
 import me.lokka30.levelledmobs.util.Utils;
@@ -19,13 +20,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
-import simplepets.brainsynder.api.plugin.SimplePets;
 
 /**
  * This class handles compatibility with other plugins such as EliteMobs and Citizens
@@ -37,6 +38,7 @@ public class ExternalCompatibilityManager {
 
     private static Boolean useNewerEliteMobsKey = null;
     private Boolean lmiMeetsVersionRequirement;
+    private Boolean lmiMeetsVersionRequirement2;
 
     public boolean doesLMIMeetVersionRequirement(){
         // must be 1.1.0 or newer
@@ -57,6 +59,27 @@ public class ExternalCompatibilityManager {
         }
 
         return lmiMeetsVersionRequirement;
+    }
+
+    public boolean doesLMIMeetVersionRequirement2(){
+        // must be 1.3.0 or newer
+        if (lmiMeetsVersionRequirement2 != null)
+            return lmiMeetsVersionRequirement2;
+
+        final Plugin lmi = Bukkit.getPluginManager().getPlugin("LM_Items");
+        if (lmi == null) return false;
+
+        try {
+            final VersionInfo requiredVersion = new VersionInfo("1.3.0");
+            final VersionInfo lmiVersion = new VersionInfo(lmi.getDescription().getVersion());
+
+            lmiMeetsVersionRequirement2 = requiredVersion.compareTo(lmiVersion) <= 0;
+        } catch (InvalidObjectException e) {
+            e.printStackTrace();
+            lmiMeetsVersionRequirement2 = false;
+        }
+
+        return lmiMeetsVersionRequirement2;
     }
 
     public enum ExternalCompatibility {
@@ -124,8 +147,7 @@ public class ExternalCompatibilityManager {
         return checkIfPluginIsInstalledAndEnabled("NBTAPI");
     }
 
-    @NotNull
-    public static String getPapiPlaceholder(final Player player, final String placeholder) {
+    public @NotNull static String getPapiPlaceholder(final Player player, final String placeholder) {
         return me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, placeholder);
     }
 
@@ -137,11 +159,15 @@ public class ExternalCompatibilityManager {
         return checkIfPluginIsInstalledAndEnabled("MythicMobs");
     }
 
+    public static boolean hasLibsDisguisesInstalled() {
+        return checkIfPluginIsInstalledAndEnabled("LibsDisguises");
+    }
+
     public static boolean hasWorldGuardInstalled() {
         return checkIfPluginIsInstalledAndEnabled("WorldGuard");
     }
 
-    private static boolean isMobOfSimplePets(@NotNull final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfSimplePets(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("SimplePets");
         if (plugin == null || !plugin.isEnabled()) {
             return false;
@@ -157,11 +183,11 @@ public class ExternalCompatibilityManager {
 
             return false;
         } else {
-            return SimplePets.isPetEntity(lmEntity.getLivingEntity());
+            return isSimplePets(lmEntity);
         }
     }
 
-    private static boolean isMobOfEliteBosses(@NotNull final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfEliteBosses(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("EliteBosses");
         if (plugin == null || !plugin.isEnabled()) {
             return false;
@@ -176,45 +202,34 @@ public class ExternalCompatibilityManager {
         return false;
     }
 
-    private static boolean isMobOfBloodNight(@NotNull final LivingEntityWrapper lmEntity) {
+    public static boolean isMobOfBloodNight(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("BloodNight");
         if (plugin == null || !plugin.isEnabled()) {
             return false;
         }
 
-        return lmEntity.getPDC()
-            .has(new NamespacedKey(plugin, "mobtype"), PersistentDataType.STRING);
+        final boolean isBloodNightMob = lmEntity.getPDC()
+                .has(new NamespacedKey(plugin, "mobtype"), PersistentDataType.STRING);
+
+        if (isBloodNightMob)
+            lmEntity.setMobExternalType(ExternalCompatibility.BLOOD_NIGHT);
+
+        return isBloodNightMob;
     }
 
-    public static boolean isMythicMob(@NotNull final LivingEntityWrapper lmEntity) {
+    public static boolean isMythicMob(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin p = Bukkit.getPluginManager().getPlugin("MythicMobs");
         if (p == null || !p.isEnabled()) {
             return false;
         }
 
-        if (!p.getDescription().getVersion().startsWith("4.12") && !p.getDescription().getVersion()
-            .startsWith("5.")) {
-            final NamespacedKey mmKey = new NamespacedKey(p, "type");
-            synchronized (lmEntity.getLivingEntity().getPersistentDataContainer()) {
-                return lmEntity.getPDC().has(mmKey, PersistentDataType.STRING);
-            }
+        final NamespacedKey mmKey = new NamespacedKey(p, "type");
+        synchronized (lmEntity.getLivingEntity().getPersistentDataContainer()) {
+            return lmEntity.getPDC().has(mmKey, PersistentDataType.STRING);
         }
-
-        if (lmEntity.getLivingEntity().hasMetadata("mythicmob")) {
-            final List<MetadataValue> metadatas = lmEntity.getLivingEntity()
-                .getMetadata("mythicmob");
-            for (final MetadataValue md : metadatas) {
-                if (md.asBoolean()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
-    @NotNull
-    public static String getMythicMobInternalName(@NotNull final LivingEntityWrapper lmEntity) {
+    public @NotNull static String getMythicMobInternalName(final @NotNull LivingEntityWrapper lmEntity) {
         if (!isMythicMob(lmEntity)) {
             return "";
         }
@@ -224,42 +239,20 @@ public class ExternalCompatibilityManager {
             return "";
         }
 
-        final boolean useNamespaceKey =
-            p.getDescription().getVersion().startsWith("5.") &&
-                !p.getDescription().getVersion().startsWith("5.01") &&
-                !p.getDescription().getVersion().startsWith("5.00");
-
-        if (useNamespaceKey) {
-            final NamespacedKey mmKey = new NamespacedKey(p, "type");
-            synchronized (lmEntity.getLivingEntity().getPersistentDataContainer()) {
-                if (lmEntity.getPDC().has(mmKey, PersistentDataType.STRING)) {
-                    final String type = lmEntity.getPDC().get(mmKey, PersistentDataType.STRING);
-                    return type == null ? "" : type;
-                } else {
-                    return "";
-                }
-            }
-        }
-
-        // MM version 4, 5.00 and 5.01 detection below:
-
-        if (!lmEntity.getLivingEntity().hasMetadata("mobname")) {
-            return "";
-        }
-
-        final List<MetadataValue> metadatas = lmEntity.getLivingEntity().getMetadata("mobname");
-        for (final MetadataValue md : metadatas) {
-            if ("true".equalsIgnoreCase(md.asString())) {
-                return md.asString();
+        final NamespacedKey mmKey = new NamespacedKey(p, "type");
+        synchronized (lmEntity.getLivingEntity().getPersistentDataContainer()) {
+            if (lmEntity.getPDC().has(mmKey, PersistentDataType.STRING)) {
+                final String type = lmEntity.getPDC().get(mmKey, PersistentDataType.STRING);
+                return type == null ? "" : type;
             }
         }
 
         return "";
     }
 
-    static LevellableState checkAllExternalCompats(final LivingEntityWrapper lmEntity,
-        final @NotNull LevelledMobs main) {
-        final Map<ExternalCompatibilityManager.ExternalCompatibility, Boolean> compatRules = main.rulesManager.getRuleExternalCompatibility(
+    static LevellableState checkAllExternalCompats(final @NotNull LivingEntityWrapper lmEntity) {
+        final Map<ExternalCompatibilityManager.ExternalCompatibility, Boolean> compatRules =
+                lmEntity.getMainInstance().rulesManager.getRuleExternalCompatibility(
             lmEntity);
 
         if (!isExternalCompatibilityEnabled(ExternalCompatibility.DANGEROUS_CAVES, compatRules)) {
@@ -325,12 +318,25 @@ public class ExternalCompatibilityManager {
         return LevellableState.ALLOWED;
     }
 
+    public static void updateAllExternalCompats(final @NotNull LivingEntityWrapper lmEntity) {
+        isMobOfDangerousCaves(lmEntity);
+        isMobOfEcoBosses(lmEntity);
+        isMobOfMythicMobs(lmEntity);
+        isMobOfEliteMobs(lmEntity);
+        isMobOfInfernalMobs(lmEntity);
+        isMobOfCitizens(lmEntity);
+        isMobOfShopkeepers(lmEntity);
+        isMobOfSimplePets(lmEntity);
+        isMobOfEliteMobs(lmEntity);
+        isMobOfBloodNight(lmEntity);
+    }
+
     /**
      * @param lmEntity mob to check
      * @return if Dangerous Caves compatibility enabled and entity is from DangerousCaves
      * @author lokka30, stumper66, imDaniX (author of DC2 - provided part of this method)
      */
-    private static boolean isMobOfDangerousCaves(final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfDangerousCaves(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("DangerousCaves");
         if (plugin == null) {
             return false;
@@ -355,7 +361,7 @@ public class ExternalCompatibilityManager {
      * @return if the compat is enabled and if the mob belongs to EcoBosses
      * @author lokka30, Auxilor (author of EcoBosses - provided part of this method)
      */
-    private static boolean isMobOfEcoBosses(final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfEcoBosses(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("EcoBosses");
         if (plugin == null) {
             return false;
@@ -379,7 +385,7 @@ public class ExternalCompatibilityManager {
      * @param lmEntity mob to check
      * @return if MythicMobs compatibility enabled and entity is from MythicMobs
      */
-    private static boolean isMobOfMythicMobs(final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfMythicMobs(final @NotNull LivingEntityWrapper lmEntity) {
         if (!ExternalCompatibilityManager.hasMythicMobsInstalled()) {
             return false;
         }
@@ -399,7 +405,7 @@ public class ExternalCompatibilityManager {
      * @param lmEntity mob to check
      * @return if EliteMobs compatibility enabled and entity is from EliteMobs
      */
-    private static boolean isMobOfEliteMobs(final LivingEntityWrapper lmEntity) {
+    private static boolean isMobOfEliteMobs(final @NotNull LivingEntityWrapper lmEntity) {
         final Plugin p = Bukkit.getPluginManager().getPlugin("EliteMobs");
         if (p != null) {
             // 7.3.12 and newer uses a different namespaced key
@@ -483,8 +489,7 @@ public class ExternalCompatibilityManager {
         return isExternalType;
     }
 
-    @NotNull
-    public static List<String> getWGRegionsAtLocation(
+    public @NotNull static List<String> getWGRegionsAtLocation(
         @NotNull final LivingEntityInterface lmInterface) {
         if (!ExternalCompatibilityManager.hasWorldGuardInstalled()) {
             return Collections.emptyList();
@@ -493,8 +498,7 @@ public class ExternalCompatibilityManager {
         return WorldGuardIntegration.getWorldGuardRegionsForLocation(lmInterface);
     }
 
-    @NotNull
-    public static PlayerHomeCheckResult getPlayerHomeLocation(final @NotNull Player player,
+    public @NotNull static PlayerHomeCheckResult getPlayerHomeLocation(final @NotNull Player player,
         final boolean allowBed) {
         final Plugin plugin = Bukkit.getPluginManager().getPlugin("essentials");
         if (plugin == null) {
@@ -521,5 +525,27 @@ public class ExternalCompatibilityManager {
 
         return new PlayerHomeCheckResult(null, user.getHome(user.getHomes().get(0)),
             user.getHomes().get(0));
+    }
+
+    private static boolean isSimplePets(final @NotNull LivingEntityWrapper lmEntity){
+        try {
+            final Class<?> clazz_PetCore = Class.forName(
+                    "simplepets.brainsynder.api.plugin.SimplePets");
+            final Class<?> clazz_IPetsPlugin = Class.forName(
+                    "simplepets.brainsynder.api.plugin.IPetsPlugin");
+
+            final Method method_getPlugin = clazz_PetCore.getDeclaredMethod("getPlugin");
+            // returns public class PetCore extends JavaPlugin implements IPetsPlugin
+            final Object objIPetsPlugin = method_getPlugin.invoke(null);
+
+            final Method method_isPetEntity = clazz_IPetsPlugin.getDeclaredMethod("isPetEntity", Entity.class);
+            return (boolean)method_isPetEntity.invoke(objIPetsPlugin, lmEntity.getLivingEntity());
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException |
+            ClassNotFoundException e) {
+            Utils.logger.error("Error checking if " + lmEntity.getNameIfBaby() + " is a SimplePet");
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

@@ -13,8 +13,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.UUID;
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.compatibility.Compat1_17;
+import me.lokka30.levelledmobs.compatibility.Compat1_19;
+import me.lokka30.levelledmobs.compatibility.Compat1_20;
+import me.lokka30.levelledmobs.compatibility.Compat1_21;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.managers.NBTManager;
 import me.lokka30.levelledmobs.misc.CachedModalList;
@@ -22,10 +26,14 @@ import me.lokka30.levelledmobs.misc.CustomUniversalGroups;
 import me.lokka30.levelledmobs.misc.DebugType;
 import me.lokka30.levelledmobs.misc.YmlParsingHelper;
 import me.lokka30.levelledmobs.result.NBTApplyResult;
+import me.lokka30.levelledmobs.rules.MinAndMax;
 import me.lokka30.levelledmobs.rules.RuleInfo;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemoryConfiguration;
 import org.bukkit.configuration.MemorySection;
@@ -51,8 +59,12 @@ public class CustomDropsParser {
     CustomDropsParser(final LevelledMobs main, final CustomDropsHandler handler) {
         this.main = main;
         this.defaults = new CustomDropsDefaults();
+        this.defaults.groupId = defaultName;
         this.handler = handler;
         this.ymlHelper = new YmlParsingHelper();
+        this.invalidExternalItems = new LinkedList<>();
+        this.invalidEntityTypesToIgnore = new LinkedList<>();
+        buildInvalidEntityTypesToIgnore();
     }
 
     private final LevelledMobs main;
@@ -61,6 +73,18 @@ public class CustomDropsParser {
     private final CustomDropsHandler handler;
     private boolean hasMentionedNBTAPI_Missing;
     public boolean dropsUtilizeNBTAPI;
+    public final List<String> invalidExternalItems;
+    //private CustomDropBase dropBase;
+    private CustomDropInstance dropInstance;
+    private final String defaultName = "default";
+    private final List<String> invalidEntityTypesToIgnore;
+
+    private void buildInvalidEntityTypesToIgnore(){
+        invalidEntityTypesToIgnore.addAll(Compat1_17.all17Mobs());
+        invalidEntityTypesToIgnore.addAll(Compat1_19.all19Mobs());
+        invalidEntityTypesToIgnore.addAll(Compat1_20.all20Mobs());
+        invalidEntityTypesToIgnore.addAll(Compat1_21.all21Mobs());
+    }
 
     public void loadDrops(final YamlConfiguration customDropsCfg) {
         this.dropsUtilizeNBTAPI = false;
@@ -83,8 +107,15 @@ public class CustomDropsParser {
         }
 
         if (isDropsEnabledForAnyRule) {
+            handler.clearGroupIdMappings();
             parseCustomDrops(customDropsCfg);
         }
+
+        DebugManager.log(DebugType.CUSTOM_DROPS, () -> "Group Limits: " + handler.groupLimitsMap);
+    }
+
+    public @NotNull CustomDropsDefaults getDefaults(){
+        return this.defaults;
     }
 
     private void processDefaults(final ConfigurationSection cs) {
@@ -96,26 +127,24 @@ public class CustomDropsParser {
         // configure bogus items so we can utilize the existing attribute parse logic
         final CustomDropItem drop = new CustomDropItem(this.defaults);
         drop.setMaterial(Material.AIR);
-        final CustomDropInstance dropInstance = new CustomDropInstance(
-            EntityType.AREA_EFFECT_CLOUD);
+        drop.isDefaultDrop = true;
+        dropInstance = new CustomDropInstance(EntityType.AREA_EFFECT_CLOUD);
         dropInstance.customItems.add(drop);
 
         // this sets the drop and dropinstance defaults
-        parseCustomDropsAttributes(drop, cs, dropInstance);
+        parseCustomDropsAttributes(drop, cs);
 
         // now we'll use the attributes here for defaults
         this.defaults.setDefaultsFromDropItem(drop);
         this.defaults.override = dropInstance.overrideStockDrops;
         this.defaults.overallChance = dropInstance.overallChance;
         this.defaults.overallPermissions.addAll(dropInstance.overallPermissions);
+        handler.customDropIDs.put(this.defaults.groupId, dropInstance);
     }
 
-    private void parseCustomDrops(final ConfigurationSection config) {
-        if (config == null) {
-            return;
-        }
-
+    private void parseCustomDrops(final @NotNull ConfigurationSection config) {
         handler.customItemGroups = new TreeMap<>();
+
         processDefaults(objectToConfigurationSection2(config, "defaults"));
 
         final String dropTableKey = ymlHelper.getKeyNameFromConfig(config, "drop-table");
@@ -126,10 +155,10 @@ public class CustomDropsParser {
 
                 for (final Map.Entry<String, Object> itemGroup : itemGroups.entrySet()) {
                     final String itemGroupName = itemGroup.getKey();
-                    final CustomDropInstance dropInstance = new CustomDropInstance(
+                    dropInstance = new CustomDropInstance(
                         EntityType.AREA_EFFECT_CLOUD); // entity type doesn't matter
-                    parseCustomDrops2((List<?>) itemGroup.getValue(), dropInstance);
-                    if (!dropInstance.customItems.isEmpty() || dropInstance.overrideStockDrops) {
+                    parseCustomDrops2((List<?>) itemGroup.getValue());
+                    if (!dropInstance.customItems.isEmpty() || dropInstance.getOverrideStockDrops()) {
                         handler.customItemGroups.put(itemGroupName, dropInstance);
                         handler.customDropIDs.put(itemGroupName, dropInstance);
                     }
@@ -154,7 +183,6 @@ public class CustomDropsParser {
                 CustomUniversalGroups universalGroup = null;
                 final boolean isEntityTable = (mobTypeOrGroup.equalsIgnoreCase("drop-table"));
                 final boolean isUniversalGroup = mobTypeOrGroup.toLowerCase().startsWith("all_");
-                final CustomDropInstance dropInstance;
 
                 if (isUniversalGroup) {
                     try {
@@ -180,8 +208,10 @@ public class CustomDropsParser {
                     try {
                         entityType = EntityType.valueOf(mobTypeOrGroup.toUpperCase());
                     } catch (final Exception e) {
-                        Utils.logger.warning(
-                            "invalid mob type in customdrops.yml: " + mobTypeOrGroup);
+                        if (!invalidEntityTypesToIgnore.contains(mobTypeOrGroup.toUpperCase())){
+                            Utils.logger.warning(
+                                    "invalid mob type in customdrops.yml: " + mobTypeOrGroup);
+                        }
                         continue;
                     }
                     dropInstance = new CustomDropInstance(entityType, isBabyMob);
@@ -196,7 +226,7 @@ public class CustomDropsParser {
                 if (!isEntityTable) {
                     if (config.getList(item) != null) {
                         // standard drop processing
-                        parseCustomDrops2(config.getList(item), dropInstance);
+                        parseCustomDrops2(config.getList(item));
                     } else if (config.get(item) instanceof MemorySection) {
                         // drop is using a item group
                         final ConfigurationSection csItem = objectToConfigurationSection2(config,
@@ -223,80 +253,54 @@ public class CustomDropsParser {
                             if (refDrop.utilizesGroupIds) {
                                 dropInstance.utilizesGroupIds = true;
                             }
-                            if (refDrop.overrideStockDrops) {
+                            if (refDrop.getOverrideStockDrops()) {
                                 dropInstance.overrideStockDrops = true;
                             }
                         }
                     }
                 } // end if not entity table
 
-                if (!dropInstance.customItems.isEmpty() || dropInstance.overrideStockDrops) {
+                if (!dropInstance.customItems.isEmpty() || dropInstance.getOverrideStockDrops()) {
                     if (isUniversalGroup) {
-                        if (handler.customDropsitems_groups.containsKey(
+                        if (handler.getCustomDropsitems_groups().containsKey(
                             universalGroup.toString())) {
-                            handler.customDropsitems_groups.get(universalGroup.toString())
+                            handler.getCustomDropsitems_groups().get(universalGroup.toString())
                                 .combineDrop(dropInstance);
                         } else {
-                            handler.customDropsitems_groups.put(universalGroup.toString(),
-                                dropInstance);
+                            handler.addCustomDropGroup(universalGroup.toString(), dropInstance);
                         }
                     } else {
                         final Map<EntityType, CustomDropInstance> dropMap = dropInstance.isBabyMob ?
-                            handler.customDropsitems_Babies : handler.customDropsitems;
+                            handler.customDropsitems_Babies : handler.getCustomDropsitems();
 
                         if (dropMap.containsKey(entityType)) {
                             dropMap.get(entityType).combineDrop(dropInstance);
                         } else {
                             dropMap.put(entityType, dropInstance);
+                            handler.addCustomDropItem(entityType, dropInstance);
                         }
                     }
                 }
             } // next mob or group
         } // next root item from file
-
-        if (main.companion.debugsEnabled.contains(DebugType.CUSTOM_DROPS)) {
-            int dropsCount = 0;
-            int commandsCount = 0;
-            for (final CustomDropInstance cdi : handler.customDropsitems.values()) {
-                for (final CustomDropBase base : cdi.customItems) {
-                    if (base instanceof CustomDropItem) {
-                        dropsCount++;
-                    } else if (base instanceof CustomCommand) {
-                        commandsCount++;
-                    }
-                }
-            }
-
-            final StringBuilder sbMain = new StringBuilder();
-            final int itemsCount =
-                handler.customDropsitems_groups.size() + handler.customDropsitems_Babies.size();
-            sbMain.append(String.format(
-                "drop instances: %s, custom groups: %s, item groups: %s, items: %s, commands: %s",
-                handler.customDropsitems.size(), itemsCount, handler.customItemGroups.size(),
-                dropsCount, commandsCount));
-
-            showCustomDropsDebugInfo(sbMain);
-        }
     }
 
-    private void parseCustomDrops2(final List<?> itemConfigurations,
-        final CustomDropInstance dropInstance) {
+    private void parseCustomDrops2(final List<?> itemConfigurations) {
         if (itemConfigurations == null) {
             return;
         }
 
         for (final Object itemObject : itemConfigurations) {
-            if (itemObject instanceof String) {
+            if (itemObject instanceof final String materialName) {
                 // just the string was given
                 final CustomDropItem item = new CustomDropItem(this.defaults);
-                final String materialName = (String) itemObject;
 
                 if ("override".equalsIgnoreCase(materialName)) {
                     dropInstance.overrideStockDrops = true;
                     continue;
                 }
 
-                addMaterialToDrop(materialName, dropInstance, item);
+                addMaterialToDrop(materialName, item);
                 continue;
             }
             final ConfigurationSection itemConfiguration = objectToConfigurationSection_old(
@@ -305,17 +309,17 @@ public class CustomDropsParser {
                 continue;
             }
 
-            final Set<Map.Entry<String, Object>> ItemsToCheck = itemConfiguration.getValues(false)
+            final Set<Map.Entry<String, Object>> itemsToCheck = itemConfiguration.getValues(false)
                 .entrySet();
 
-            if (ItemsToCheck.isEmpty() && itemObject.getClass().equals(LinkedHashMap.class)) {
+            if (itemsToCheck.isEmpty() && itemObject.getClass().equals(LinkedHashMap.class)) {
                 // empty list means a material name was provided with no attributes
                 final LinkedHashMap<String, Object> materials = (LinkedHashMap<String, Object>) itemObject;
                 boolean needsContinue = false;
                 for (final String materialName : materials.keySet()) {
                     final CustomDropItem item = new CustomDropItem(this.defaults);
 
-                    if (addMaterialToDrop(materialName, dropInstance, item)) {
+                    if (addMaterialToDrop(materialName, item)) {
                         needsContinue = true;
                         break;
                     }
@@ -325,19 +329,16 @@ public class CustomDropsParser {
                 }
             }
 
-            for (final Map.Entry<String, Object> itemEntry : ItemsToCheck) {
+            for (final Map.Entry<String, Object> itemEntry : itemsToCheck) {
                 final String materialName = itemEntry.getKey();
 
-                if (checkForMobOverride(itemEntry, dropInstance)) {
+                if (checkForMobOverride(itemEntry)) {
                     continue;
                 }
 
                 if ("overall_chance".equalsIgnoreCase(materialName)) {
-                    if (itemEntry.getValue() instanceof Double) {
-                        dropInstance.overallChance = (float) itemEntry.getValue();
-                    } else if (itemEntry.getValue() instanceof Integer) {
-                        dropInstance.overallChance = Float.valueOf((Integer) itemEntry.getValue());
-                    }
+                    dropInstance.overallChance = parseSlidingChance(itemConfiguration,
+                            "overall_chance", defaults.overallChance);
                     continue;
                 } else if ("overall_permission".equalsIgnoreCase(materialName)) {
                     if (itemEntry.getValue() instanceof String) {
@@ -373,7 +374,7 @@ public class CustomDropsParser {
                         if (refDrop.utilizesGroupIds) {
                             dropInstance.utilizesGroupIds = true;
                         }
-                        if (refDrop.overrideStockDrops) {
+                        if (refDrop.getOverrideStockDrops()) {
                             dropInstance.overrideStockDrops = true;
                         }
                     }
@@ -386,7 +387,7 @@ public class CustomDropsParser {
                     continue;
                 }
 
-                final CustomDropBase dropBase;
+                CustomDropBase dropBase;
                 if ("customCommand".equalsIgnoreCase(materialName)) {
                     dropBase = new CustomCommand(defaults);
                 } else {
@@ -397,20 +398,14 @@ public class CustomDropsParser {
                             "external-amount", this.defaults.externalAmount);
                     item.externalExtras = parseExternalExtras(itemInfoConfiguration);
 
-                    if (!addMaterialToDrop(materialName, dropInstance, item)) {
+                    if (!addMaterialToDrop(materialName, item)) {
                         continue;
-                    }
-
-                    if (item.isExternalItem && main.companion.externalCompatibilityManager.doesLMIMeetVersionRequirement()) {
-                        if (!handler.lmItemsParser.getExternalItem(item)) {
-                            continue;
-                        }
                     }
 
                     dropBase = item;
                 }
 
-                parseCustomDropsAttributes(dropBase, itemInfoConfiguration, dropInstance);
+                parseCustomDropsAttributes(dropBase, itemInfoConfiguration);
             }
         } // next item
     }
@@ -432,9 +427,9 @@ public class CustomDropsParser {
             return results;
     }
 
-    private void parseCustomDropsAttributes(@NotNull final CustomDropBase dropBase,
-        @NotNull final ConfigurationSection cs, final @NotNull CustomDropInstance dropInstance) {
-        dropBase.chance = ymlHelper.getFloat(cs, "chance", this.defaults.chance);
+    private void parseCustomDropsAttributes(final @NotNull CustomDropBase dropBase,
+        final @NotNull ConfigurationSection cs) {
+        dropBase.chance = parseSlidingChance(cs, "chance", defaults.chance);
         dropBase.useChunkKillMax = ymlHelper.getBoolean(cs, "use-chunk-kill-max",
             this.defaults.useChunkKillMax);
         dropBase.permissions.addAll(this.defaults.permissions);
@@ -448,12 +443,21 @@ public class CustomDropsParser {
             this.defaults.maxPlayerLevel);
         dropBase.playerLevelVariable = ymlHelper.getString(cs, "player-level-variable",
             this.defaults.playerLevelVariable);
+        dropBase.playeerVariableMatches.addAll(ymlHelper.getStringOrList(cs, "player-variable-match-value"));
+
         dropBase.playerCausedOnly = ymlHelper.getBoolean(cs, "player-caused",
             this.defaults.playerCausedOnly);
         dropBase.maxDropGroup = ymlHelper.getInt(cs, "maxdropgroup", this.defaults.maxDropGroup);
-        dropBase.groupId = ymlHelper.getString(cs, "groupid", dropBase.groupId);
+        if (!dropBase.isDefaultDrop){
+            dropBase.groupId = ymlHelper.getString(cs, "groupid");
+        }
 
-        dropInstance.utilizesGroupIds = !Utils.isNullOrEmpty(dropBase.groupId);
+        if (dropBase.hasGroupId()) {
+            handler.setDropInstanceFromId(dropBase.groupId, dropInstance);
+        }
+
+        dropInstance.utilizesGroupIds = dropBase.hasGroupId();
+        parseGroupLimits(dropBase, cs);
 
         if (!Utils.isNullOrEmpty(ymlHelper.getString(cs, "amount"))) {
             if (!dropBase.setAmountRangeFromString(ymlHelper.getString(cs, "amount"))) {
@@ -464,10 +468,9 @@ public class CustomDropsParser {
         }
 
         if (!Utils.isNullOrEmpty(ymlHelper.getString(cs, "overall_chance"))) {
-            dropInstance.overallChance = ymlHelper.getFloat(cs, "overall_chance");
-            if (dropInstance.overallChance == 0.0) {
-                dropInstance.overallChance = null;
-            }
+            final SlidingChance overallChance = parseSlidingChance(cs, "overall_chance", null);
+            if (overallChance == null || !overallChance.isDefault())
+                dropInstance.overallChance = overallChance;
         }
 
         if (cs.get(ymlHelper.getKeyNameFromConfig(cs, "overall_permission")) != null) {
@@ -475,65 +478,102 @@ public class CustomDropsParser {
                 ymlHelper.getStringSet(cs, "overall_permission"));
         }
 
-        if (dropBase instanceof CustomCommand) {
-            final CustomCommand customCommand = (CustomCommand) dropBase;
-            final List<String> commandsList = cs.getStringList(
-                ymlHelper.getKeyNameFromConfig(cs, "command"));
-            final String singleCommand = ymlHelper.getString(cs, "command");
-            if (!commandsList.isEmpty()) {
-                customCommand.commands.addAll(commandsList);
-            } else if (singleCommand != null) {
-                customCommand.commands.add(singleCommand);
-            }
+        dropBase.causeOfDeathReqs = buildCachedModalListOfDamageCause(cs,
+                this.defaults.causeOfDeathReqs);
 
-            customCommand.commandName = ymlHelper.getString(cs, "name");
-            customCommand.delay = ymlHelper.getInt(cs, "delay", 0);
-            customCommand.runOnSpawn = ymlHelper.getBoolean(cs, "run-on-spawn", false);
-            customCommand.runOnDeath = ymlHelper.getBoolean(cs, "run-on-death", true);
-            parseRangedVariables(customCommand, cs);
-
-            if (customCommand.commands.isEmpty()) {
-                Utils.logger.warning("no command was specified for custom command");
-            } else {
-                dropInstance.customItems.add(dropBase);
-            }
+        if (dropBase instanceof final CustomCommand customCommand) {
+            parseCustomCommand(customCommand, cs);
             return;
         }
 
-        final CustomDropItem item = (CustomDropItem) dropBase;
+        parseCustomItem(cs, (CustomDropItem) dropBase);
+    }
 
+    private @Nullable SlidingChance parseSlidingChance(
+            final @NotNull ConfigurationSection cs,
+            final @NotNull String keyName,
+            final @Nullable SlidingChance defaultValue){
+        final Object chanceOptsMap = cs.get(keyName);
+        ConfigurationSection chanceOpts = null;
+
+        if (chanceOptsMap instanceof LinkedHashMap<?,?> || chanceOptsMap instanceof MemorySection) {
+            chanceOpts = objTo_CS(cs, keyName);
+        }
+
+        if (chanceOpts == null) {
+            final Float parsedValue = ymlHelper.getFloat2(cs, keyName, null);
+
+            if (defaultValue == null && parsedValue == null) return null;
+
+            final SlidingChance result = new SlidingChance();
+            if (parsedValue != null)
+                result.chance = parsedValue;
+            else
+                result.setFromInstance(defaultValue);
+
+            result.defaults = defaultValue;
+            return result;
+        }
+
+        final Map<MinAndMax, MinAndMax> chanceRange = new LinkedHashMap<>();
+        final Map<String, Object> values = chanceOpts.getValues(false);
+        for (String str : values.keySet()){
+            final Object value = values.get(str);
+            if (str == null || value == null) continue;
+
+            final MinAndMax mobLvl = MinAndMax.setAmountRangeFromString(str);
+            final MinAndMax assignment = MinAndMax.setAmountRangeFromString(value.toString());
+
+            if (mobLvl != null && assignment != null) {
+                mobLvl.showAsInt = true;
+                chanceRange.put(mobLvl, assignment);
+            }
+        }
+
+        SlidingChance result;
+        if (chanceRange.isEmpty()){
+            if (defaultValue == null) return null;
+            result = new SlidingChance();
+            result.setFromInstance(defaultValue);
+        }
+        else{
+            result = new SlidingChance();
+            result.setFromInstance(defaultValue);
+            result.changeRange = chanceRange;
+        }
+
+        result.defaults = defaultValue;
+        return result;
+    }
+
+    private void parseCustomItem(final @NotNull ConfigurationSection cs, final @NotNull CustomDropItem item){
         checkEquippedChance(item, cs);
-        parseItemFlags(item, cs, dropInstance);
-        item.causeOfDeathReqs = buildCachedModalListOfDamageCause(cs,
-            this.defaults.causeOfDeathReqs);
+        parseItemFlags(item, cs);
+
         item.onlyDropIfEquipped = ymlHelper.getBoolean(cs, "only-drop-if-equipped",
-            this.defaults.onlyDropIfEquipped);
+                this.defaults.onlyDropIfEquipped);
+        item.equipOnHelmet = ymlHelper.getBoolean(cs, "equip-on-helmet", this.defaults.equipOnHelmet);
         item.equipOffhand = ymlHelper.getBoolean(cs, "equip-offhand", this.defaults.equipOffhand);
         item.priority = ymlHelper.getInt(cs, "priority", this.defaults.priority);
         item.noMultiplier = ymlHelper.getBoolean(cs, "nomultiplier", this.defaults.noMultiplier);
         item.noSpawner = ymlHelper.getBoolean(cs, "nospawner", this.defaults.noSpawner);
         item.customModelDataId = ymlHelper.getInt(cs, "custommodeldata",
-            this.defaults.customModelData);
+                this.defaults.customModelData);
         item.externalType = ymlHelper.getString(cs, "type", this.defaults.externalType);
         item.externalAmount = ymlHelper.getDouble2(cs, "external-amount",
-            this.defaults.externalAmount);
-        item.mobHeadTexture = ymlHelper.getString(cs, "mobhead-texture");
-        final String mobHeadIdStr = ymlHelper.getString(cs, "mobhead-id");
-        if (mobHeadIdStr != null) {
-            try {
-                item.customPlayerHeadId = UUID.fromString(mobHeadIdStr);
-            } catch (final Exception e) {
-                Utils.logger.warning("Invalid UUID: " + mobHeadIdStr);
-            }
-        }
+                this.defaults.externalAmount);
+        item.minItems = ymlHelper.getInt(cs, "min-items", 1);
+        item.maxItems = ymlHelper.getInt(cs, "max-items", 1);
+        item.allowedList = ymlHelper.getStringOrList(cs, "allowed-list");
+        item.excludedList = ymlHelper.getStringOrList(cs, "excluded-list");
 
-        dropInstance.overrideStockDrops = ymlHelper.getBoolean(cs, "override",
-            dropInstance.overrideStockDrops);
+        dropInstance.overrideStockDrops = ymlHelper.getBoolean2(cs, "override",
+                this.defaults.override);
 
         if (!Utils.isNullOrEmpty(ymlHelper.getString(cs, "damage"))) {
             if (!item.setDamageRangeFromString(ymlHelper.getString(cs, "damage"))) {
                 Utils.logger.warning(String.format("Invalid number range for damage on %s, %s",
-                    dropInstance.getMobOrGroupName(), ymlHelper.getString(cs, "damage")));
+                        dropInstance.getMobOrGroupName(), ymlHelper.getString(cs, "damage")));
             }
         }
         if (!cs.getStringList(ymlHelper.getKeyNameFromConfig(cs, "lore")).isEmpty()) {
@@ -543,7 +583,7 @@ public class CustomDropsParser {
 
         if (!Utils.isNullOrEmpty(ymlHelper.getString(cs, "excludemobs"))) {
             final String[] excludes = Objects.requireNonNull(ymlHelper.getString(cs, "excludemobs"))
-                .split(";");
+                    .split(";");
             item.excludedMobs.clear();
             for (final String exclude : excludes) {
                 item.excludedMobs.add(exclude.trim());
@@ -557,16 +597,16 @@ public class CustomDropsParser {
                 final NBTApplyResult result = NBTManager.applyNBT_Data_Item(item, item.nbtData);
                 if (result.hadException()) {
                     Utils.logger.warning(
-                        String.format("custom drop %s for %s has invalid NBT data: %s",
-                            item.getMaterial(), dropInstance.getMobOrGroupName(),
-                            result.exceptionMessage));
+                            String.format("custom drop %s for %s has invalid NBT data: %s",
+                                    item.getMaterial(), dropInstance.getMobOrGroupName(),
+                                    result.exceptionMessage));
                 } else if (result.itemStack != null) {
                     item.setItemStack(result.itemStack);
                     this.dropsUtilizeNBTAPI = true;
                 }
             } else if (!hasMentionedNBTAPI_Missing) {
                 Utils.logger.warning(
-                    "NBT Data has been specified in customdrops.yml but required plugin NBTAPI is not installed!");
+                        "NBT Data has been specified in customdrops.yml but required plugin NBTAPI is not installed!");
                 hasMentionedNBTAPI_Missing = true;
             }
         }
@@ -574,8 +614,43 @@ public class CustomDropsParser {
         applyMetaAttributes(item);
     }
 
-    @NotNull
-    private CachedModalList<DeathCause> buildCachedModalListOfDamageCause(
+    private void parseGroupLimits(final @NotNull CustomDropBase base, final @NotNull ConfigurationSection csParent){
+        final ConfigurationSection cs = objTo_CS(csParent, "group-limits");
+        if (cs == null) {
+            return;
+        }
+
+        if(!base.hasGroupId()) return;
+
+        final GroupLimits limits = new GroupLimits();
+        limits.capPerItem = ymlHelper.getInt(cs, "cap-per-item");
+        limits.capTotal = ymlHelper.getInt(cs, "cap-total");
+        limits.capEquipped = ymlHelper.getInt(cs, "cap-equipped");
+        limits.capSelect = ymlHelper.getInt(cs, "cap-select");
+        limits.retries = ymlHelper.getInt(cs, "retries");
+
+        if (!limits.isEmpty() || base.isDefaultDrop){
+            handler.groupLimitsMap.put(base.groupId, limits);
+        }
+    }
+
+    private void parseCustomCommand(final @NotNull CustomCommand customCommand, final @NotNull ConfigurationSection cs){
+        customCommand.commands.addAll(ymlHelper.getStringOrList(cs, "command"));
+        customCommand.commandName = ymlHelper.getString(cs, "name");
+        customCommand.delay = ymlHelper.getInt(cs, "delay", 0);
+        customCommand.runOnSpawn = ymlHelper.getBoolean(cs, "run-on-spawn", false);
+        customCommand.runOnDeath = ymlHelper.getBoolean(cs, "run-on-death", true);
+        customCommand.mobScale = ymlHelper.getDouble2(cs, "mob-scale", null);
+        parseRangedVariables(customCommand, cs);
+
+        if (customCommand.commands.isEmpty()) {
+            Utils.logger.warning("no command was specified for custom command");
+        } else {
+            dropInstance.customItems.add(customCommand);
+        }
+    }
+
+    private @NotNull CachedModalList<DeathCause> buildCachedModalListOfDamageCause(
         final ConfigurationSection cs,
         final CachedModalList<DeathCause> defaultValue) {
         if (cs == null) {
@@ -653,22 +728,39 @@ public class CustomDropsParser {
         return cachedModalList;
     }
 
-    private void parseEnchantments(final ConfigurationSection cs, final CustomDropItem item) {
+    private void parseEnchantments(final @Nullable ConfigurationSection cs, final @NotNull CustomDropItem item) {
         if (cs == null) {
             return;
         }
 
         final Map<String, Object> enchantMap = cs.getValues(false);
+
         for (final Map.Entry<String, Object> enchants : enchantMap.entrySet()) {
             final String enchantName = enchants.getKey();
             final Object value = enchants.getValue();
+
+            if (value instanceof LinkedHashMap){
+                // contains enchantment chances
+
+                final Enchantment en = Registry.ENCHANTMENT.get(
+                        NamespacedKey.minecraft(enchantName.toLowerCase()));
+
+                if (en == null){
+                    Utils.logger.warning("Invalid enchantment: " + enchantName);
+                    continue;
+                }
+
+                final Map<Object, Object> enchantments = (Map<Object, Object>) value;
+                parseEnchantmentChances(en, enchantments, item);
+                continue;
+            }
 
             int enchantLevel = 1;
             if (value != null && Utils.isInteger(value.toString())) {
                 enchantLevel = Integer.parseInt(value.toString());
             }
 
-            final Enchantment en = Enchantment.getByKey(
+            final Enchantment en = Registry.ENCHANTMENT.get(
                 NamespacedKey.minecraft(enchantName.toLowerCase()));
             if (en != null) {
                 if (item.getMaterial() == Material.ENCHANTED_BOOK) {
@@ -688,6 +780,75 @@ public class CustomDropsParser {
 
     }
 
+    private void parseEnchantmentChances(final @NotNull Enchantment enchantment,
+                                         final @NotNull Map<Object, Object> enchantmentsMap,
+                                         final @NotNull CustomDropItem item){
+        final Map<Integer, Float> items = new TreeMap<>();
+        Integer defaultLevel = null;
+        Boolean doShuttle = null;
+
+        /*
+        * ENCHANTMENTS:
+        *  sharpness:
+        *    1: 0.4
+        *    2: 0.5
+        *    3: 0.6
+        *    default: 1
+        */
+
+        for (final Map.Entry<Object, Object> map : enchantmentsMap.entrySet()){
+            if ("shuffle".equalsIgnoreCase(map.getKey().toString())){
+                if ("false".equalsIgnoreCase(map.getValue().toString()))
+                    doShuttle = false;
+                continue;
+            }
+
+            final boolean isDefault = defaultName.equalsIgnoreCase(map.getKey().toString());
+            int enchantmentLevel = 0;
+
+            if (!isDefault) {
+                if (!Utils.isInteger(map.getKey().toString())) {
+                    Utils.logger.warning(String.format("Enchantment: %s, invalid enchantment level %s",
+                            enchantment, map.getKey()));
+                    continue;
+                }
+                enchantmentLevel = Integer.parseInt(map.getKey().toString());
+            }
+
+            double chanceValue;
+            try{
+                chanceValue = Double.parseDouble(map.getValue().toString());
+            }
+            catch (Exception ignored){
+                Utils.logger.warning(String.format("Enchantment: %s, invalid chance specified: %s",
+                        enchantment, map.getValue()));
+                continue;
+            }
+
+            if (isDefault)
+                defaultLevel = (int) chanceValue;
+            else
+                items.put(enchantmentLevel, (float)chanceValue);
+        }
+
+        if (items.isEmpty()) return;
+
+        if (item.enchantmentChances == null)
+            item.enchantmentChances = new EnchantmentChances();
+
+        if (doShuttle != null || defaultLevel != null) {
+            final EnchantmentChances.ChanceOptions opts = item.enchantmentChances.options.computeIfAbsent(
+                    enchantment, k-> new EnchantmentChances.ChanceOptions());
+
+            if (defaultLevel != null)
+                opts.defaultLevel = defaultLevel;
+            if (doShuttle != null)
+                opts.doShuffle = false;
+        }
+
+        item.enchantmentChances.items.put(enchantment, items);
+    }
+
     private void parseRangedVariables(final CustomCommand cc,
         @NotNull final ConfigurationSection cs) {
         for (final String key : cs.getKeys(false)) {
@@ -705,6 +866,8 @@ public class CustomDropsParser {
     }
 
     private void applyMetaAttributes(@NotNull final CustomDropItem item) {
+        if (item.getItemStack() == null) return;
+
         final ItemMeta meta = item.getItemStack().getItemMeta();
         if (meta == null) {
             return;
@@ -731,8 +894,7 @@ public class CustomDropsParser {
         }
     }
 
-    private void parseItemFlags(final CustomDropItem item, final ConfigurationSection cs,
-        final CustomDropInstance dropInstance) {
+    private void parseItemFlags(final CustomDropItem item, final ConfigurationSection cs) {
         if (cs == null) {
             return;
         }
@@ -782,27 +944,26 @@ public class CustomDropsParser {
         }
     }
 
-    private void checkEquippedChance(final CustomDropItem item,
+    private void checkEquippedChance(final @NotNull CustomDropItem item,
         @NotNull final ConfigurationSection cs) {
+
+        item.equippedChance = parseSlidingChance(cs, "equipped", this.defaults.equippedChance);
+
+        if (this.defaults.equippedChance == null ||
+                item.equippedChance != null && !item.equippedChance.isDefault()) return;
         final String temp = ymlHelper.getString(cs, "equipped");
         if (Utils.isNullOrEmpty(temp)) {
             return;
         }
 
         if ("false".equalsIgnoreCase(temp)) {
-            item.equippedSpawnChance = 0.0F;
-            return;
+            item.equippedChance.chance = 0.0F;
         } else if ("true".equalsIgnoreCase(temp)) {
-            item.equippedSpawnChance = 1.0F;
-            return;
+            item.equippedChance.chance = 1.0F;
         }
-
-        item.equippedSpawnChance = ymlHelper.getFloat(cs, "equipped",
-            this.defaults.equippedSpawnChance);
     }
 
-    @Nullable
-    private ConfigurationSection objectToConfigurationSection2(final ConfigurationSection cs,
+    private @Nullable ConfigurationSection objectToConfigurationSection2(final ConfigurationSection cs,
         final String path) {
         if (cs == null) {
             return null;
@@ -823,15 +984,14 @@ public class CustomDropsParser {
         } else {
             final String currentPath = Utils.isNullOrEmpty(cs.getCurrentPath()) ?
                 path : cs.getCurrentPath() + "." + path;
-            Utils.logger.warning(
-                currentPath + ": couldn't parse Config of type: " + object.getClass()
-                    .getSimpleName() + ", value: " + object);
+            Utils.logger.warning(String.format(
+                "%s: couldn't parse Config of type: %s, value: %s",
+                    currentPath, object.getClass().getSimpleName(), object));
             return null;
         }
     }
 
-    @Nullable
-    private ConfigurationSection objectToConfigurationSection_old(final Object object) {
+    private @Nullable ConfigurationSection objectToConfigurationSection_old(final Object object) {
         if (object == null) {
             return null;
         }
@@ -851,7 +1011,7 @@ public class CustomDropsParser {
     }
 
     private boolean addMaterialToDrop(@NotNull String materialName,
-        final CustomDropInstance dropInstance, final CustomDropItem item) {
+        final CustomDropItem item) {
         materialName = Utils.replaceEx(materialName, "mob_head", "player_head");
         materialName = Utils.replaceEx(materialName, "mobhead", "player_head");
 
@@ -897,8 +1057,7 @@ public class CustomDropsParser {
         return true;
     }
 
-    private boolean checkForMobOverride(@NotNull final Map.Entry<String, Object> itemEntry,
-        final CustomDropInstance dropInstance) {
+    private boolean checkForMobOverride(final @NotNull Map.Entry<String, Object> itemEntry) {
         if (itemEntry.getKey().equalsIgnoreCase("override")) {
             final Object value = itemEntry.getValue();
             if (value.getClass().equals(Boolean.class)) {
@@ -910,11 +1069,39 @@ public class CustomDropsParser {
         return false;
     }
 
-    private void showCustomDropsDebugInfo(final StringBuilder sbMain) {
+    public void showCustomDropsDebugInfo(final @Nullable CommandSender sender) {
+        final StringBuilder sbMain = new StringBuilder();
+
+        int dropsCount = 0;
+        int commandsCount = 0;
+        for (final CustomDropInstance cdi : handler.getCustomDropsitems().values()) {
+            for (final CustomDropBase base : cdi.customItems) {
+                if (base instanceof CustomDropItem) {
+                    dropsCount++;
+                } else if (base instanceof CustomCommand) {
+                    commandsCount++;
+                }
+            }
+        }
+
+        final Map<String, CustomDropInstance> allGroups = handler.getCustomDropsitems_groups();
+        final int itemsCount =
+                allGroups.size() + handler.customDropsitems_Babies.size();
+        final int customItemGroupCount = handler.customItemGroups != null ?
+                handler.customItemGroups.size() : 0;
+        sbMain.append(String.format(
+                "drop instances: %s, custom groups: %s, item groups: %s, items: %s, commands: %s, ",
+                handler.getCustomDropsitems().size(), itemsCount, customItemGroupCount,
+                dropsCount, commandsCount));
+
+        for (final String msg : invalidExternalItems){
+            sbMain.append("\n&4").append(msg).append("&r");
+        }
+
         // build string list to alphabeticalize the drops by entity type including babies
         final SortedMap<String, EntityType> typeNames = new TreeMap<>();
 
-        for (final EntityType ent : handler.customDropsitems.keySet()) {
+        for (final EntityType ent : handler.getCustomDropsitems().keySet()) {
             typeNames.put(ent.toString(), ent);
         }
 
@@ -927,9 +1114,9 @@ public class CustomDropsParser {
             final EntityType ent = EntityType.valueOf(
                 isBaby ? entTypeStr.substring(0, entTypeStr.length() - 2) : entTypeStr);
             final CustomDropInstance dropInstance = isBaby ?
-                handler.customDropsitems_Babies.get(ent) : handler.customDropsitems.get(ent);
+                handler.customDropsitems_Babies.get(ent) : handler.getCustomDropsitems().get(ent);
 
-            final String override = dropInstance.overrideStockDrops ? " (override)" : "";
+            final String override = dropInstance.getOverrideStockDrops() ? " (override)" : "";
             final String overallChance = dropInstance.overallChance != null ? " (overall_chance: "
                 + dropInstance.overallChance + ")" : "";
             sbMain.append(System.lineSeparator());
@@ -956,12 +1143,12 @@ public class CustomDropsParser {
             }
         }
 
-        for (final Map.Entry<String, CustomDropInstance> customDrops : handler.customDropsitems_groups.entrySet()) {
+        for (final Map.Entry<String, CustomDropInstance> customDrops : allGroups.entrySet()) {
             final CustomDropInstance dropInstance = customDrops.getValue();
-            final String override = dropInstance.overrideStockDrops ? " (override)" : "";
+            final String override = dropInstance.getOverrideStockDrops() ? " (override)" : "";
             final String overallChance = dropInstance.overallChance != null ? " (overall_chance: "
                 + dropInstance.overallChance + ")" : "";
-            if (sbMain.length() > 0) {
+            if (!sbMain.isEmpty()) {
                 sbMain.append(System.lineSeparator());
             }
             sbMain.append("group: ");
@@ -977,7 +1164,10 @@ public class CustomDropsParser {
             }
         }
 
-        Utils.logger.info(sbMain.toString());
+        if (sender != null)
+            sender.sendMessage(MessageUtils.colorizeAll(sbMain.toString()));
+        else
+            Utils.logger.info(sbMain.toString());
     }
 
     private @NotNull String showCustomDropsDebugInfo2(final CustomDropBase baseItem) {
@@ -990,10 +1180,11 @@ public class CustomDropsParser {
         if (item != null) {
             final String itemMaterial =
                 item.getMaterial() != null ? item.getMaterial().toString() : "(unknown)";
-            sb.append(String.format("    &b%s&r, amount: &b%s&r, chance: &b%s&r", itemMaterial,
+            sb.append(String.format("  &b%s&r, amount: &b%s&r, chance: &b%s&r", itemMaterial,
                 item.getAmountAsString(), baseItem.chance));
-        } else {
-            sb.append(String.format("    COMMAND, chance: &b%s&r", baseItem.chance));
+        } else if (baseItem instanceof final CustomCommand cc) {
+            sb.append(String.format("  COMMAND, chance: &b%s&r, run-on-spawn: %s, run-on-death: %s",
+                    baseItem.chance, cc.runOnSpawn, cc.runOnDeath));
         }
 
         if (baseItem.minLevel > -1) {
@@ -1033,11 +1224,12 @@ public class CustomDropsParser {
             sb.append(baseItem.causeOfDeathReqs);
         }
 
-        if (!Utils.isNullOrEmpty(baseItem.groupId)) {
+        if (baseItem.hasGroupId()) {
             sb.append(", gId: &b");
             sb.append(baseItem.groupId);
             sb.append("&r");
-            if (baseItem.maxDropGroup > 0) {
+
+            if (baseItem.maxDropGroup > 0 && !handler.groupLimitsMap.containsKey(baseItem.groupId)) {
                 sb.append(", maxDropGroup: &b");
                 sb.append(baseItem.maxDropGroup);
                 sb.append("&r");
@@ -1080,13 +1272,16 @@ public class CustomDropsParser {
         if (!item.excludedMobs.isEmpty()) {
             sb.append(", hasExcludes");
         }
-        if (item.equippedSpawnChance > 0.0) {
+        if (item.equippedChance != null && !item.equippedChance.isDefault()) {
             sb.append(", equipChance: &b");
-            sb.append(item.equippedSpawnChance);
+            sb.append(item.equippedChance);
             sb.append("&r");
         }
         if (item.onlyDropIfEquipped) {
             sb.append(", &bonlyDropIfEquipped&r");
+        }
+        if (item.equipOnHelmet){
+            sb.append(", &bequipHelmet&r");
         }
         if (item.itemFlags != null && !item.itemFlags.isEmpty()) {
             sb.append(", itemflags: &b");
@@ -1116,22 +1311,53 @@ public class CustomDropsParser {
             }
         }
 
+        if (item.enchantmentChances != null && !item.enchantmentChances.isEmpty()){
+            final StringBuilder enchantmentLevels = new StringBuilder();
+            enchantmentLevels.append("encht-lvls: ");
+            for (final Enchantment enchantment : item.enchantmentChances.items.keySet()){
+                if (enchantmentLevels.length() > 12) enchantmentLevels.append("; ");
+                enchantmentLevels.append("&b");
+                enchantmentLevels.append(enchantment.getKey().value());
+                enchantmentLevels.append("&r: ");
+                boolean isFirst = true;
+                for (final Map.Entry<Integer, Float> chances : item.enchantmentChances.items.get(enchantment).entrySet()){
+                    if (!isFirst) enchantmentLevels.append(", ");
+                    enchantmentLevels.append(String.format("%s-&b%s&r",
+                            chances.getKey(), chances.getValue()));
+
+                    isFirst = false;
+                }
+
+                if (item.enchantmentChances.options.containsKey(enchantment)) {
+                    EnchantmentChances.ChanceOptions opts = item.enchantmentChances.options.get(enchantment);
+                    if (opts.defaultLevel != null)
+                        enchantmentLevels.append(", dflt: ").append(opts.defaultLevel);
+                    if (!opts.doShuffle)
+                        enchantmentLevels.append(", no shfl");
+                }
+            }
+
+            sb.append(System.lineSeparator());
+            sb.append("    ");
+            sb.append(enchantmentLevels);
+        }
+
         if (item.getItemStack() != null) {
             final ItemMeta meta = item.getItemStack().getItemMeta();
             final StringBuilder sb2 = new StringBuilder();
             if (meta != null) {
                 for (final Enchantment enchant : meta.getEnchants().keySet()) {
-                    if (sb2.length() > 0) {
-                        sb.append(", ");
+                    if (!sb2.isEmpty()) {
+                        sb2.append(", ");
                     }
                     sb2.append(String.format("&b%s&r (%s)", enchant.getKey().getKey(),
                         item.getItemStack().getItemMeta().getEnchants().get(enchant)));
                 }
             }
 
-            if (sb2.length() > 0) {
+            if (!sb2.isEmpty()) {
                 sb.append(System.lineSeparator());
-                sb.append("         ");
+                sb.append("    ");
                 sb.append(sb2);
             }
         }
@@ -1139,8 +1365,7 @@ public class CustomDropsParser {
         return sb.toString();
     }
 
-    @Nullable
-    private ConfigurationSection objTo_CS(final ConfigurationSection cs, final String path) {
+    private @Nullable ConfigurationSection objTo_CS(final ConfigurationSection cs, final String path) {
         if (cs == null) {
             return null;
         }

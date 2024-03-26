@@ -10,22 +10,27 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.customdrops.DeathCause;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.misc.CachedModalList;
 import me.lokka30.levelledmobs.misc.DebugType;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.result.PlayerNetherOrWorldSpawnResult;
+import me.lokka30.levelledmobs.rules.LevelledMobSpawnReason;
 import me.lokka30.levelledmobs.rules.MinAndMax;
 import me.lokka30.levelledmobs.rules.RulesManager;
-import me.lokka30.microlib.messaging.MessageUtils;
-import me.lokka30.microlib.messaging.MicroLogger;
-import me.lokka30.microlib.other.VersionUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,8 +50,8 @@ public final class Utils {
         throw new UnsupportedOperationException();
     }
 
-    @NotNull
-    public static final MicroLogger logger = new MicroLogger("&bLevelledMobs:&7 ");
+    @NotNull public static final MicroLogger logger = new MicroLogger("&bLevelledMobs:&7 ");
+    private static final Pattern timeUnitPattern = Pattern.compile("(\\d+\\.?\\d+|\\d+)?(\\w+)");
 
     /**
      * Rounds value to 2 decimal points.
@@ -72,8 +77,7 @@ public final class Utils {
      * @return modified message
      * @author stumper66
      */
-    @NotNull
-    public static String replaceEx(@NotNull final String message, @NotNull final String replaceWhat,
+    @NotNull public static String replaceEx(@NotNull final String message, @NotNull final String replaceWhat,
         @NotNull final String replaceTo) {
         int count, position0, position1;
         count = position0 = 0;
@@ -138,12 +142,10 @@ public final class Utils {
         return (str == null || str.isEmpty());
     }
 
-    @NotNull
-    public static final List<String> oneToNine = List.of("1", "2", "3", "4", "5", "6", "7", "8",
+    @NotNull public static final List<String> oneToNine = List.of("1", "2", "3", "4", "5", "6", "7", "8",
         "9");
 
-    @NotNull
-    public static List<String> replaceAllInList(@NotNull final List<String> oldList,
+    @NotNull public static List<String> replaceAllInList(@NotNull final List<String> oldList,
         @NotNull final String replaceWhat, @NotNull final String replaceTo) {
         final List<String> newList = new ArrayList<>(oldList.size());
         for (final String string : oldList) {
@@ -152,8 +154,7 @@ public final class Utils {
         return newList;
     }
 
-    @NotNull
-    public static List<String> colorizeAllInList(@NotNull final List<String> oldList) {
+    @NotNull public static List<String> colorizeAllInList(@NotNull final List<String> oldList) {
         final List<String> newList = new ArrayList<>(oldList.size());
 
         for (final String string : oldList) {
@@ -161,25 +162,6 @@ public final class Utils {
         }
 
         return newList;
-    }
-
-    /**
-     * Sends a debug message to console if enabled in settings
-     *
-     * @param instance  LevelledMobs class
-     * @param debugType Reference to whereabouts the debug log is called so that it can be traced
-     *                  back easily
-     * @param msg       Message to help de-bugging
-     */
-    public static void debugLog(@NotNull final LevelledMobs instance,
-        @NotNull final DebugType debugType, @NotNull final String msg) {
-        if (instance.settingsCfg == null) {
-            return;
-        }
-
-        if (instance.companion.debugsEnabled.contains(debugType)) {
-            logger.info("&8[&bDebug: " + debugType + "&8]&7 " + msg);
-        }
     }
 
     /**
@@ -191,8 +173,7 @@ public final class Utils {
      * @param str string to capitalize
      * @return a string with each word capitalized
      */
-    @NotNull
-    public static String capitalize(@NotNull final String str) {
+    @NotNull public static String capitalize(@NotNull final String str) {
         final StringBuilder builder = new StringBuilder();
         final String[] words = str.toLowerCase().split(" "); // each word separated from str
         for (int i = 0; i < words.length; i++) {
@@ -213,11 +194,6 @@ public final class Utils {
         }
 
         return builder.toString();
-    }
-
-    public static boolean isLivingEntityInModalList(final CachedModalList<String> list,
-        final LivingEntityWrapper lmEntity) {
-        return isLivingEntityInModalList(list, lmEntity, false);
     }
 
     public static boolean isLivingEntityInModalList(@NotNull final CachedModalList<String> list,
@@ -349,8 +325,7 @@ public final class Utils {
         return Duration.between(instant, Instant.now()).toMillis();
     }
 
-    @NotNull
-    public static PlayerNetherOrWorldSpawnResult getPortalOrWorldSpawn(
+    @NotNull public static PlayerNetherOrWorldSpawnResult getPortalOrWorldSpawn(
         final @NotNull LevelledMobs main, final @NotNull Player player) {
         Location location = null;
         boolean isNetherPortalCoord = false;
@@ -375,7 +350,7 @@ public final class Utils {
     }
 
     public static long getChunkKey(final @NotNull Chunk chunk) {
-        if (VersionUtils.isRunningPaper()) {
+        if (LevelledMobs.getInstance().getVerInfo().getIsRunningPaper()) {
             return chunk.getChunkKey();
         }
 
@@ -391,5 +366,197 @@ public final class Utils {
     @Contract(value = "_, _ -> new", pure = true)
     public static <T, U> Map.@NotNull Entry<T, U> getPair(T first, U second) {
         return new AbstractMap.SimpleEntry<>(first, second);
+    }
+
+    public static LevelledMobSpawnReason adaptVanillaSpawnReason(
+            final CreatureSpawnEvent.@NotNull SpawnReason spawnReason) {
+        return LevelledMobSpawnReason.valueOf(spawnReason.toString());
+    }
+
+    public static boolean matchWildcardString(final @NotNull String input, final @NotNull String match){
+        if (!match.contains("*")){
+            return input.equalsIgnoreCase(match);
+        }
+
+        final String[] chopped = match.split("\\*");
+        // 0 = *, 1 = text, 2 = *
+        if (chopped.length > 3){
+            Utils.logger.warning("Invalid wildcard pattern: " + match);
+            return input.equalsIgnoreCase(match);
+        }
+
+        final String inputL = input.toLowerCase();
+        final String matchL = match.toLowerCase();
+
+        String useSearch;
+        if (matchL.startsWith("*") && matchL.endsWith("*")){
+            useSearch = matchL.substring(1, matchL.length() - 1);
+            return inputL.contains(useSearch);
+        }
+        else if (matchL.startsWith("*")){
+            useSearch = matchL.substring(1);
+            return inputL.endsWith(useSearch);
+        }
+        else{
+            useSearch = matchL.substring(0, matchL.length() - 1);
+            return inputL.startsWith(useSearch);
+        }
+    }
+
+    public static String removeColorCodes(final @NotNull String input){
+        String formatted = input.replace("§", "&");
+
+        if (input.contains("&")){
+            formatted = input.replaceAll("&.", "");
+        }
+        return formatted;
+    }
+
+    public static @NotNull String showLocation(final @NotNull Location location){
+        return String.format("%s at %s,%s,%s",
+                location.getWorld().getName(),
+                location.getBlockX(),
+                location.getBlockY(),
+                location.getBlockZ()
+        );
+    }
+
+    public static boolean checkIfMobHashChanged(final @NotNull LivingEntityWrapper lmEntity){
+        final LevelledMobs main = LevelledMobs.getInstance();
+
+        if (!lmEntity.getPDC().has(main.namespacedKeys.mobHash, PersistentDataType.STRING)) {
+            return true;
+        }
+
+        boolean hadHash = false;
+        String mobHash = null;
+        if (lmEntity.getPDC().has(main.namespacedKeys.mobHash, PersistentDataType.STRING)) {
+            mobHash = lmEntity.getPDC().get(main.namespacedKeys.mobHash, PersistentDataType.STRING);
+            hadHash = true;
+        }
+
+        final boolean hashChanged = !main.rulesManager.getCurrentRulesHash().equals(mobHash);
+        if (hashChanged) {
+            if (hadHash){
+                DebugManager.log(DebugType.MOB_HASH, lmEntity, false, () -> String.format("Invalid hash for %s %s"
+                        , lmEntity.getNameIfBaby(), Utils.showLocation(lmEntity.getLocation())));
+            }
+            else{
+                DebugManager.log(DebugType.MOB_HASH, lmEntity, false, () -> String.format("Hash missing for %s %s"
+                        , lmEntity.getNameIfBaby(), Utils.showLocation(lmEntity.getLocation())));
+            }
+
+            // also setting the PDC key here because if the mob is not eligable for levelling then it will
+            // run this same code repeatidly
+            lmEntity.getPDC().set(main.namespacedKeys.mobHash, PersistentDataType.STRING, main.rulesManager.getCurrentRulesHash());
+        }
+        else {
+            DebugManager.log(DebugType.MOB_HASH, lmEntity, true, () -> String.format("Hash missing for %s %s"
+                    , lmEntity.getNameIfBaby(), Utils.showLocation(lmEntity.getLocation())));
+        }
+
+        return hashChanged;
+    }
+
+    public static Long parseTimeUnit(final @Nullable String input, final Long defaultTime,
+                                     final boolean useMS, final @Nullable CommandSender sender) {
+        if (input == null) {
+            return defaultTime;
+        }
+        if ("0".equals(input)) {
+            return 0L;
+        }
+
+        final Matcher match = timeUnitPattern.matcher(input);
+
+        if (!match.matches() || match.groupCount() != 2) {
+            if (sender != null)
+                sender.sendMessage("Invalid time: " + input);
+            else
+                Utils.logger.warning("Invalid time: " + input);
+
+            return defaultTime;
+        }
+
+        long time;
+        double remainder = 0.0;
+        String numberPart = match.group(1) != null ? match.group(1) : match.group(2);
+        String unit = match.group(1) != null ? match.group(2).toLowerCase() : "";
+
+        if (Utils.isInteger(input)){
+            // number only, no time unit was specified
+            numberPart = input;
+            unit = "";
+        }
+
+        if (numberPart.contains(".")) {
+            final String[] split = numberPart.split("\\.");
+            try {
+                remainder = 1.0 - Double.parseDouble("0." + split[1]);
+                numberPart = split[0];
+            } catch (Exception e) {
+                if (sender != null)
+                    sender.sendMessage("Invalid time: " + input);
+                else
+                    Utils.logger.warning("Invalid time: " + input);
+
+                return defaultTime;
+            }
+        }
+
+        try {
+            time = Long.parseLong(numberPart);
+        } catch (Exception e) {
+            if (sender != null)
+                sender.sendMessage("Invalid time: " + input);
+            else
+                Utils.logger.warning("Invalid time: " + input);
+
+            return defaultTime;
+        }
+
+        Duration duration = null;
+        switch (unit) {
+            case "ms", "millisecond", "milliseconds" -> duration = Duration.ofMillis(time);
+            case "s", "second", "seconds" -> {
+                duration = Duration.ofSeconds(time);
+                if (remainder > 0.0) {
+                    duration = duration.plusMillis((long) (1000.0 * remainder));
+                }
+            }
+            case "m", "minute", "minutes" -> {
+                duration = Duration.ofMinutes(time);
+                if (remainder > 0.0) {
+                    duration = duration.plusMillis((long) (60000.0 * remainder));
+                }
+            }
+            case "h", "hour", "hours" -> {
+                duration = Duration.ofHours(time);
+                if (remainder > 0.0) {
+                    duration = duration.plusMillis((long) (3600000.0 * remainder));
+                }
+            }
+            case "d", "day", "days" -> {
+                duration = Duration.ofDays(time);
+                if (remainder > 0.0) {
+                    duration = duration.plusSeconds((long) (86400.0 * remainder));
+                }
+            }
+            case "" -> duration = useMS ? Duration.ofMillis(time) : Duration.ofSeconds(time);
+            default -> {
+                if (sender != null)
+                    sender.sendMessage("Invalid time unit specified: " + input + " (" + unit + ")");
+                else
+                    Utils.logger.warning("Invalid time unit specified: " + input + " (" + unit + ")");
+            }
+        }
+
+        if (duration != null) {
+            return useMS ?
+                    duration.toMillis() :
+                    duration.getSeconds();
+        }
+
+        return defaultTime;
     }
 }

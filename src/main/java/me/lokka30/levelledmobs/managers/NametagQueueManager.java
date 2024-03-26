@@ -11,20 +11,24 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+
 import me.lokka30.levelledmobs.LevelledMobs;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.util.LibsDisguisesUtils;
+import me.lokka30.levelledmobs.util.MessageUtils;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.NametagTimerChecker;
 import me.lokka30.levelledmobs.misc.QueueItem;
-import me.lokka30.levelledmobs.nms.NMSHandler;
-import me.lokka30.levelledmobs.nms.NMSUtil;
+import me.lokka30.levelledmobs.nametag.NametagSenderHandler;
+import me.lokka30.levelledmobs.nametag.NametagSender;
+import me.lokka30.levelledmobs.result.NametagResult;
 import me.lokka30.levelledmobs.rules.NametagVisibilityEnum;
 import me.lokka30.levelledmobs.util.Utils;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,25 +41,27 @@ public class NametagQueueManager {
 
     public NametagQueueManager(final LevelledMobs main) {
         this.main = main;
-        this.nmsHandler = new NMSHandler(main);
+        this.nametagSenderHandler = new NametagSenderHandler();
         this.queue = new LinkedBlockingQueue<>();
+        this.hasLibsDisguisesInstalled = ExternalCompatibilityManager.hasLibsDisguisesInstalled();
+
         getNMSUtil();
     }
 
     private final LevelledMobs main;
     private boolean isRunning;
     private boolean doThread;
-    private NMSUtil nmsUtil;
+    private NametagSender nametagSender;
+    private final boolean hasLibsDisguisesInstalled;
     private final LinkedBlockingQueue<QueueItem> queue;
-    public final NMSHandler nmsHandler;
+    public final NametagSenderHandler nametagSenderHandler;
 
     private void getNMSUtil() {
-
-        this.nmsUtil = nmsHandler.getCurrentUtil();
+        this.nametagSender = nametagSenderHandler.getCurrentUtil();
     }
 
     public boolean hasNametagSupport() {
-        return this.nmsUtil != null;
+        return this.nametagSender != null;
     }
 
     public void start() {
@@ -65,19 +71,15 @@ public class NametagQueueManager {
         doThread = true;
         isRunning = true;
 
-        final BukkitRunnable bgThread = new BukkitRunnable() {
-            @Override
-            public void run() {
-                try {
-                    main();
-                } catch (final InterruptedException ignored) {
-                    isRunning = false;
-                }
-                Utils.logger.info("Nametag update queue Manager has exited");
+        final SchedulerWrapper scheduler = new SchedulerWrapper(() -> {
+            try {
+                mainThread();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        };
-
-        bgThread.runTaskAsynchronously(main);
+            Utils.logger.info("Nametag update queue Manager has exited");
+        });
+        scheduler.run();
     }
 
     public void stop() {
@@ -85,9 +87,10 @@ public class NametagQueueManager {
     }
 
     void addToQueue(final @NotNull QueueItem item) {
-        if (Bukkit.getOnlinePlayers().size() == 0) {
+        if (Bukkit.getOnlinePlayers().isEmpty()) {
             return;
         }
+
         if (item.lmEntity.getLivingEntity() == null ||
             main.rulesManager.getRuleCreatureNametagVisbility(item.lmEntity)
                 .contains(NametagVisibilityEnum.DISABLED)) {
@@ -98,39 +101,51 @@ public class NametagQueueManager {
         queue.offer(item);
     }
 
-    private void main() throws InterruptedException {
+    private void mainThread() throws InterruptedException {
         while (doThread) {
 
             final QueueItem item = queue.poll(200, TimeUnit.MILLISECONDS);
             if (item == null) {
                 continue;
             }
-            if (item.lmEntity.getLivingEntity() == null) {
-                item.lmEntity.free();
-                continue;
-            }
 
-            String lastEntityType = null;
-            try {
-                lastEntityType = item.lmEntity.getNameIfBaby();
-                processItem(item);
-            } catch (final Exception ex) {
-                final var entityName = lastEntityType == null ? "Unknown Entity" : lastEntityType;
-
-                Utils.logger.error("Unable to process nametag update for '" + entityName + "'. " +
-                    "This is usually caused by not running the correct ProtocolLib version for " +
-                    "your server's Minecraft version (e.g., MC 1.18 requires PL v4.8.0).");
-                ex.printStackTrace();
-            } finally {
+            final SchedulerWrapper scheduler = new SchedulerWrapper(
+                    item.lmEntity.getLivingEntity(), () -> {
+                preProcessItem(item);
                 item.lmEntity.free();
-            }
+            });
+
+            scheduler.runDirectlyInBukkit = true;
+            scheduler.entity = item.lmEntity.getLivingEntity();
+            item.lmEntity.inUseCount.getAndIncrement();
+            scheduler.run();
         }
 
         isRunning = false;
     }
 
+    private void preProcessItem(final @NotNull QueueItem item){
+        if (item.lmEntity.getLivingEntity() == null) {
+            item.lmEntity.free();
+            return;
+        }
+
+        String lastEntityType = null;
+        try {
+            lastEntityType = item.lmEntity.getNameIfBaby();
+            processItem(item);
+        } catch (final Exception ex) {
+            final var entityName = lastEntityType == null ? "Unknown Entity" : lastEntityType;
+
+            Utils.logger.error("Unable to process nametag update for '" + entityName + "'. ");
+            ex.printStackTrace();
+        } finally {
+            item.lmEntity.free();
+        }
+    }
+
     private void processItem(final @NotNull QueueItem item) {
-        if (this.nmsUtil == null) {
+        if (this.nametagSender == null) {
             // this would happen if the Minecraft version isn't supported directly by NMS
             // and ProtocolLib is not installed
             return;
@@ -138,7 +153,7 @@ public class NametagQueueManager {
 
         final long nametagTimerResetTime = item.lmEntity.getNametagCooldownTime();
 
-        if (nametagTimerResetTime > 0L && !Utils.isNullOrEmpty(item.nametag)) {
+        if (nametagTimerResetTime > 0L && !item.nametag.isNullOrEmpty()) {
             synchronized (NametagTimerChecker.nametagTimer_Lock) {
                 final Map<Player, WeakHashMap<LivingEntity, Instant>> nametagCooldownQueue = main.nametagTimerChecker.getNametagCooldownQueue();
 
@@ -202,7 +217,7 @@ public class NametagQueueManager {
         }
 
         if (main.helperSettings.getBoolean(main.settingsCfg, "use-customname-for-mob-nametags")) {
-            updateNametagCustomName(item.lmEntity, item.nametag);
+            updateNametagCustomName(item.lmEntity, item.nametag.getNametag());
             return;
         }
 
@@ -215,7 +230,7 @@ public class NametagQueueManager {
         updateNametag(item.lmEntity, item.nametag, item.players);
     }
 
-    private void updateNametag(final @NotNull LivingEntityWrapper lmEntity, final String nametag,
+    private void updateNametag(final @NotNull LivingEntityWrapper lmEntity, final @NotNull NametagResult nametag,
         final List<Player> players) {
         final int loopCount = lmEntity.playersNeedingNametagCooldownUpdate == null ?
             1 : 2;
@@ -226,7 +241,7 @@ public class NametagQueueManager {
             final List<NametagVisibilityEnum> nametagVisibilityEnum = main.rulesManager.getRuleCreatureNametagVisbility(
                 lmEntity);
             final boolean doAlwaysVisible = i == 1 ||
-                    nametag != null && !nametag.isEmpty() && lmEntity.getLivingEntity().isCustomNameVisible() ||
+                    !nametag.isNullOrEmpty() && lmEntity.getLivingEntity().isCustomNameVisible() ||
                 nametagVisibilityEnum.contains(NametagVisibilityEnum.ALWAYS_ON);
 
             if (i == 0) {
@@ -237,20 +252,27 @@ public class NametagQueueManager {
                         continue;
                     }
 
-                    nmsUtil.sendNametag(lmEntity.getLivingEntity(), nametag, player,
+                    nametagSender.sendNametag(lmEntity.getLivingEntity(), nametag, player,
                         doAlwaysVisible);
                 }
             } else {
                 // these players are getting always on nametags
                 for (final Player player : lmEntity.playersNeedingNametagCooldownUpdate) {
-                    nmsUtil.sendNametag(lmEntity.getLivingEntity(), nametag, player, true);
+                    nametagSender.sendNametag(lmEntity.getLivingEntity(), nametag, player, true);
                 }
+            }
+
+            if (hasLibsDisguisesInstalled && LibsDisguisesUtils.isMobUsingLibsDisguises(lmEntity)){
+                final String useNametag = nametag.getNametag() != null ?
+                        MessageUtils.colorizeAll(nametag.getNametag()) : null;
+                LibsDisguisesUtils.updateLibsDisguiseNametag(lmEntity, useNametag);
             }
         }
     }
 
+    @SuppressWarnings("deprecation")
     private void updateNametagCustomName(final @NotNull LivingEntityWrapper lmEntity,
-        final String nametag) {
+                                         final String nametag) {
         synchronized (lmEntity.getLivingEntity().getPersistentDataContainer()) {
             if (lmEntity.getPDC()
                 .has(main.namespacedKeys.hasCustomNameTag, PersistentDataType.INTEGER)) {

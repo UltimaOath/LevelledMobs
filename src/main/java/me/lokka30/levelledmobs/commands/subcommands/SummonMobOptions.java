@@ -1,26 +1,34 @@
 package me.lokka30.levelledmobs.commands.subcommands;
 
-import me.lokka30.levelledmobs.misc.LivingEntityPlaceHolder;
+import me.lokka30.levelledmobs.misc.LivingEntityPlaceholder;
 import me.lokka30.levelledmobs.misc.RequestedLevel;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Holds information on used for creating a spawner cube, egg
+ * or mob summon
+ *
+ * @author stumper66
+ * @since 3.2.3
+ */
 public class SummonMobOptions {
 
-    SummonMobOptions(@NotNull final LivingEntityPlaceHolder lmPlaceHolder,
-        final CommandSender sender) {
-        this.lmPlaceHolder = lmPlaceHolder;
+    SummonMobOptions(
+        @NotNull final LivingEntityPlaceholder lmPlaceholder,
+        @NotNull final CommandSender sender
+    ) {
+        this.lmPlaceholder = lmPlaceholder;
         this.sender = sender;
     }
 
-    @NotNull
-    final LivingEntityPlaceHolder lmPlaceHolder;
+    public final LivingEntityPlaceholder lmPlaceholder;
     public final CommandSender sender;
-    SummonSubcommand.SummonType summonType;
+    public SummonSubcommand.SummonType summonType;
     public int amount;
-    RequestedLevel requestedLevel;
+    public RequestedLevel requestedLevel;
     public Player player;
     public boolean override;
-    String nbtData;
+    public String nbtData;
 }

@@ -4,10 +4,12 @@
 
 package me.lokka30.levelledmobs.rules;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import me.lokka30.levelledmobs.misc.Addition;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -16,113 +18,96 @@ import org.jetbrains.annotations.Nullable;
  * @author stumper66
  * @since 3.0.0
  */
-public class FineTuningAttributes implements Cloneable {
+public class FineTuningAttributes implements MergableRule, Cloneable {
+    public FineTuningAttributes(){
+        this.multipliers = new LinkedHashMap<>();
+    }
 
-    public Double attackDamage;
-    public Double creeperExplosionRadius;
-    public Double maxHealth;
-    public Double movementSpeed;
-    public Double rangedAttackDamage;
-    public Integer itemDrop;
-    public Double armorBonus;
-    public Double armorToughness;
-    public Double attackKnockback;
-    public Double flyingSpeed;
-    public Double knockbackResistance;
-    public Double horseJumpStrength;
-    public Double zombieReinforcements;
-    public Double followRange;
-    public Integer xpDrop;
+    private Map<Addition, Multiplier> multipliers;
     public boolean doNotMerge;
+    public Boolean useStacked;
 
-    void mergeAttributes(final @Nullable FineTuningAttributes attributes) {
-        if (attributes == null) {
+    public boolean getUseStacked(){
+        return useStacked != null && useStacked;
+    }
+
+    public boolean isEmpty(){
+        return this.multipliers.isEmpty() && !doNotMerge && useStacked == null;
+    }
+
+    public void merge(final @Nullable MergableRule mergableRule) {
+        if (!(mergableRule instanceof final FineTuningAttributes attributes)) {
             return;
         }
 
-        try {
-            for (final Field f : attributes.getClass().getDeclaredFields()) {
-                if (!Modifier.isPublic(f.getModifiers())) {
-                    continue;
-                }
-                if (f.get(attributes) == null) {
-                    continue;
-                }
-                final Object presetValue = f.get(attributes);
-
-                if (presetValue instanceof Integer && ((Integer) presetValue == 0)) {
-                    continue;
-                }
-                if (presetValue instanceof Double && ((Double) presetValue == 0.0)) {
-                    continue;
-                }
-
-                this.getClass().getDeclaredField(f.getName()).set(this, presetValue);
-            }
-        } catch (final IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        this.multipliers.putAll(attributes.copyMultipliers());
     }
 
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        final List<String> list = new LinkedList<>();
-        if (maxHealth != null) {
-            list.add("maxHlth: " + maxHealth);
-        }
-        if (attackDamage != null) {
-            list.add("attkDmg: " + attackDamage);
-        }
-        if (itemDrop != null) {
-            list.add("itemDrp: " + itemDrop);
-        }
-        if (xpDrop != null) {
-            list.add("xpDrp: " + xpDrop);
-        }
-        if (movementSpeed != null) {
-            list.add("moveSpd: " + movementSpeed);
-        }
-        if (rangedAttackDamage != null) {
-            list.add("rangdAtkDmg: " + rangedAttackDamage);
-        }
-        if (creeperExplosionRadius != null) {
-            list.add("creeperDmg: " + creeperExplosionRadius);
-        }
-        if (armorBonus != null) {
-            list.add("armrBns: " + armorBonus);
-        }
-        if (armorToughness != null) {
-            list.add("armrTuf: " + armorToughness);
-        }
-        if (attackKnockback != null) {
-            list.add("attkKnbk: " + attackKnockback);
-        }
-        if (flyingSpeed != null) {
-            list.add("flySpd: " + flyingSpeed);
-        }
-        if (knockbackResistance != null) {
-            list.add("knbkRst: " + knockbackResistance);
-        }
-        if (horseJumpStrength != null) {
-            list.add("horseJump: " + horseJumpStrength);
-        }
-        if (zombieReinforcements != null) {
-            list.add("zmbRnfrce: " + zombieReinforcements);
-        }
-        if (followRange != null) {
-            list.add("flwRng: " + followRange);
+    public void addItem(final Addition addition, final Multiplier multiplier){
+        this.multipliers.put(addition, multiplier);
+    }
+
+    public boolean doMerge(){
+        return !this.doNotMerge;
+    }
+
+    public @Nullable Multiplier getItem(final @NotNull Addition addition){
+        return this.multipliers.get(addition);
+    }
+
+    static @NotNull String getShortName(final @NotNull Addition addition){
+        switch (addition){
+            case ATTRIBUTE_ATTACK_DAMAGE -> { return "attkDmg"; }
+            case CREEPER_BLAST_DAMAGE -> { return "creeperDmg"; }
+            case ATTRIBUTE_MAX_HEALTH -> { return "maxHlth"; }
+            case ATTRIBUTE_MOVEMENT_SPEED -> { return "moveSpd"; }
+            case CUSTOM_RANGED_ATTACK_DAMAGE -> { return "rangdAtkDmg"; }
+            case CUSTOM_ITEM_DROP -> { return "itemDrp"; }
+            case ATTRIBUTE_ARMOR_BONUS -> { return "armrBns"; }
+            case ATTRIBUTE_ARMOR_TOUGHNESS -> { return "armrTuf"; }
+            case ATTRIBUTE_ATTACK_KNOCKBACK -> { return "attkKnbk"; }
+            case ATTRIBUTE_FLYING_SPEED -> { return "flySpd"; }
+            case ATTRIBUTE_KNOCKBACK_RESISTANCE -> { return "knbkRst"; }
+            case ATTRIBUTE_HORSE_JUMP_STRENGTH -> { return "horseJump"; }
+            case ATTRIBUTE_ZOMBIE_SPAWN_REINFORCEMENTS -> { return "zmbRnfrce"; }
+            case ATTRIBUTE_FOLLOW_RANGE -> { return "flwRng"; }
+            case CUSTOM_XP_DROP -> { return "xpDrp"; }
         }
 
-        for (final String item : list) {
-            if (sb.length() > 0) {
-                sb.append(", ");
-            }
-            sb.append(item);
+        throw new UnsupportedOperationException("No short name was added for " + addition);
+    }
+
+    public @NotNull Addition getAdditionFromLMMultiplier(final @NotNull LMMultiplier lmMultiplier){
+        switch (lmMultiplier){
+            case ATTACK_DAMAGE -> { return Addition.ATTRIBUTE_ATTACK_DAMAGE; }
+            case CREEPER_BLAST_DAMAGE -> { return Addition.CREEPER_BLAST_DAMAGE; }
+            case MAX_HEALTH -> { return Addition.ATTRIBUTE_MAX_HEALTH; }
+            case MOVEMENT_SPEED -> { return Addition.ATTRIBUTE_MOVEMENT_SPEED; }
+            case RANGED_ATTACK_DAMAGE -> { return Addition.CUSTOM_RANGED_ATTACK_DAMAGE; }
+            case ITEM_DROP -> { return Addition.CUSTOM_ITEM_DROP; }
+            case ARMOR_BONUS -> { return Addition.ATTRIBUTE_ARMOR_BONUS; }
+            case ARMOR_TOUGHNESS -> { return Addition.ATTRIBUTE_ARMOR_TOUGHNESS; }
+            case ATTACK_KNOCKBACK -> { return Addition.ATTRIBUTE_ATTACK_KNOCKBACK; }
+            case FLYING_SPEED -> { return Addition.ATTRIBUTE_FLYING_SPEED; }
+            case KNOCKBACK_RESISTANCE -> { return Addition.ATTRIBUTE_KNOCKBACK_RESISTANCE; }
+            case HORSE_JUMP_STRENGTH -> { return Addition.ATTRIBUTE_HORSE_JUMP_STRENGTH; }
+            case ZOMBIE_SPAWN_REINFORCEMENTS -> { return Addition.ATTRIBUTE_ZOMBIE_SPAWN_REINFORCEMENTS; }
+            case FOLLOW_RANGE -> { return Addition.ATTRIBUTE_FOLLOW_RANGE; }
+            case XP_DROP -> { return Addition.CUSTOM_XP_DROP; }
         }
 
-        if (sb.length() == 0) {
-            return "No items";
-        } else {
+        throw new UnsupportedOperationException("No addition mapping for: " + lmMultiplier);
+    }
+
+    public record Multiplier(Addition addition, boolean useStacked, float value){
+        @Contract(pure = true)
+        public @NotNull String toString(){
+            final StringBuilder sb = new StringBuilder();
+            sb.append(FineTuningAttributes.getShortName(addition()));
+            if (useStacked()) sb.append(" (stkd): ");
+            else sb.append(": ");
+            sb.append(value());
+
             return sb.toString();
         }
     }
@@ -131,10 +116,58 @@ public class FineTuningAttributes implements Cloneable {
         FineTuningAttributes copy = null;
         try {
             copy = (FineTuningAttributes) super.clone();
+            copy.cloneMultipliers();
         } catch (final Exception e) {
             e.printStackTrace();
         }
 
         return copy;
     }
+
+    private void cloneMultipliers(){
+        final Map<Addition, Multiplier> copy = copyMultipliers();
+        this.multipliers = new LinkedHashMap<>(copy.size());
+        this.multipliers.putAll(copy);
+    }
+
+    private @NotNull Map<Addition, Multiplier> copyMultipliers(){
+        final Map<Addition, Multiplier> copy = new LinkedHashMap<>(this.multipliers.size());
+
+        for (final Addition addition : this.multipliers.keySet()){
+            final Multiplier old = this.multipliers.get(addition);
+            copy.put(addition, new Multiplier(addition, old.useStacked, old.value));
+        }
+
+        return copy;
+    }
+
+    public String toString() {
+        if (this.isEmpty())
+            return "No items";
+
+        final StringBuilder sb = new StringBuilder();
+
+        if (this.getUseStacked())
+            sb.append("(all stk)");
+
+        for (final Multiplier item : this.multipliers.values()) {
+            if (!sb.isEmpty()) sb.append(", ");
+
+            sb.append(getShortName(item.addition()));
+            sb.append(": ");
+            sb.append(item.value());
+            if (item.useStacked()){
+                sb.append(" (");
+                sb.append("stk)");
+            }
+        }
+
+        if (doNotMerge){
+            if (!sb.isEmpty()) sb.append(", ");
+            sb.append("noMerge");
+        }
+
+        return sb.toString();
+    }
+
 }

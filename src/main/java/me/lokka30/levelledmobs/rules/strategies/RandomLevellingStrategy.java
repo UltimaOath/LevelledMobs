@@ -7,9 +7,12 @@ package me.lokka30.levelledmobs.rules.strategies;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.util.Utils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Holds the configuration and logic for applying a levelling system that is based upon random
@@ -19,27 +22,28 @@ import me.lokka30.levelledmobs.util.Utils;
  * @since 3.1.0
  */
 public class RandomLevellingStrategy implements LevellingStrategy, Cloneable {
+    public RandomLevellingStrategy() {
+        this.weightedRandom = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        this.enabled = true;
+    }
 
-    public Map<String, Integer> weightedRandom;
+    public final @NotNull Map<String, Integer> weightedRandom;
     public boolean doMerge;
     private int[] randomArray;
     private int minLevel;
     private int maxLevel;
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    private boolean hasWeightedRandom() {
-        return this.weightedRandom != null && !this.weightedRandom.isEmpty();
-    }
+    public boolean autoGenerate;
+    public boolean enabled;
 
     public int generateLevel(final int minLevel, final int maxLevel) {
         return generateLevel(null, minLevel, maxLevel);
     }
 
     @Override
-    public int generateLevel(final LivingEntityWrapper lmEntity, final int minLevel,
-        final int maxLevel) {
+    public int generateLevel(final @Nullable LivingEntityWrapper lmEntity, final int minLevel,
+                             final int maxLevel) {
         // this function only has lmEmtity to satify the interface requirement
-        if (!this.hasWeightedRandom()) {
+        if (this.weightedRandom.isEmpty()) {
             return getRandomLevel(minLevel, maxLevel);
         }
 
@@ -47,12 +51,18 @@ public class RandomLevellingStrategy implements LevellingStrategy, Cloneable {
             populateWeightedRandom(minLevel, maxLevel);
         }
 
+        // populateWeightedRandom(..) should've populated randomArray but if weightedRandom
+        // was empty then it won't do anything
+        if (this.randomArray == null) {
+            return getRandomLevel(minLevel, maxLevel);
+        }
+
         final int useArrayNum = ThreadLocalRandom.current().nextInt(0, this.randomArray.length);
         return this.randomArray[useArrayNum];
     }
 
     public void populateWeightedRandom(final int minLevel, final int maxLevel) {
-        if (!this.hasWeightedRandom()) {
+        if (this.weightedRandom.isEmpty()) {
             return;
         }
 
@@ -130,7 +140,7 @@ public class RandomLevellingStrategy implements LevellingStrategy, Cloneable {
         }
     }
 
-    private int[] parseNumberRange(final String range) {
+    private int[] parseNumberRange(final @NotNull String range) {
         final int[] results = {-1, -1};
 
         if (!range.contains("-")) {
@@ -162,20 +172,19 @@ public class RandomLevellingStrategy implements LevellingStrategy, Cloneable {
         return results;
     }
 
-    private int getRandomLevel(final int minLevel, final int maxLevel) {
+    private int getRandomLevel(int minLevel, int maxLevel) {
+        minLevel = Math.max(minLevel, 0);
+        maxLevel = Math.max(minLevel, maxLevel);
         return ThreadLocalRandom.current().nextInt(minLevel, maxLevel + 1);
     }
 
     @Override
     public void mergeRule(final LevellingStrategy levellingStrategy) {
-        if (!(levellingStrategy instanceof RandomLevellingStrategy)) {
+        if (!(levellingStrategy instanceof final RandomLevellingStrategy randomLevelling)) {
             return;
         }
 
-        final RandomLevellingStrategy randomLevelling = (RandomLevellingStrategy) levellingStrategy;
-        if (this.weightedRandom == null || randomLevelling.doMerge) {
-            this.weightedRandom = randomLevelling.weightedRandom;
-        } else if (randomLevelling.weightedRandom != null) {
+        if (randomLevelling.doMerge && randomLevelling.enabled) {
             this.weightedRandom.putAll(randomLevelling.weightedRandom);
         }
     }
@@ -193,8 +202,11 @@ public class RandomLevellingStrategy implements LevellingStrategy, Cloneable {
     }
 
     public String toString() {
-        if (!this.hasWeightedRandom()) {
-            return "RandomLevellingStrategy";
+        if (this.weightedRandom.isEmpty()) {
+            if (this.autoGenerate)
+                return "RandomLevellingStrategy (auto generate)";
+            else
+                return "RandomLevellingStrategy";
         }
 
         if (minLevel == 0) {

@@ -5,8 +5,9 @@
 package me.lokka30.levelledmobs.rules.strategies;
 
 import java.util.concurrent.ThreadLocalRandom;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Holds the configuration and logic for applying a levelling system that is based upon the distance
@@ -51,8 +52,10 @@ public class YDistanceStrategy implements LevellingStrategy, Cloneable {
         );
     }
 
-    public int generateLevel(@NotNull final LivingEntityWrapper lmEntity, final int minLevel,
-        final int maxLevel) {
+    public int generateLevel(final @Nullable LivingEntityWrapper lmEntity, final int minLevel,
+                             final int maxLevel) {
+
+        if (lmEntity == null) return minLevel;
 
         final int mobYLocation = lmEntity.getLivingEntity().getLocation().getBlockY();
         final int yStart = this.startingYLevel == null ? 0 : this.startingYLevel;
@@ -61,7 +64,7 @@ public class YDistanceStrategy implements LevellingStrategy, Cloneable {
         int useLevel;
         final double diff = yEnd - yStart;
 
-        if (yPeriod > 0) {
+        if (yPeriod != 0) {
             final double lvlPerPeriod = (maxLevel - minLevel) / (diff / yPeriod);
             useLevel = (int) Math.floor(
                 minLevel + (lvlPerPeriod * (mobYLocation - yStart) / yPeriod));
@@ -73,20 +76,17 @@ public class YDistanceStrategy implements LevellingStrategy, Cloneable {
 
         useLevel += getVariance(lmEntity, useLevel >= maxLevel);
 
-        if (useLevel < minLevel) {
-            useLevel = minLevel;
-        } else if (useLevel > maxLevel) {
-            useLevel = maxLevel;
-        }
+        useLevel = Math.max(useLevel, minLevel);
+        useLevel = Math.min(useLevel, maxLevel);
 
         return useLevel;
     }
 
     private int getVariance(@NotNull final LivingEntityWrapper lmEntity,
         final boolean isAtMaxLevel) {
-        final int variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(
+        final Integer variance = lmEntity.getMainInstance().rulesManager.getRuleMaxRandomVariance(
             lmEntity);
-        if (variance == 0) {
+        if (variance == null || variance == 0) {
             return 0;
         }
 

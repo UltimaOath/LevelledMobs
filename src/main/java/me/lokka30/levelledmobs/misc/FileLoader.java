@@ -6,8 +6,10 @@ package me.lokka30.levelledmobs.misc;
 
 import java.io.File;
 import java.io.FileInputStream;
+
+import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.FileUtil;
@@ -23,20 +25,20 @@ import org.yaml.snakeyaml.Yaml;
  */
 public final class FileLoader {
 
-    public static final int SETTINGS_FILE_VERSION = 33;    // Last changed: v3.4.0 b621
+    public static final int SETTINGS_FILE_VERSION = 35;    // Last changed: v3.12.0 b770
     public static final int MESSAGES_FILE_VERSION = 8;     // Last changed: v3.4.0 b621
     public static final int CUSTOMDROPS_FILE_VERSION = 10; // Last changed: v3.1.0 b474
-    public static final int RULES_FILE_VERSION = 3;        // Last changed: v3.4.0 b621
+    public static final int RULES_FILE_VERSION = 4;        // Last changed: v3.13.0 b789
 
     private FileLoader() {
         throw new UnsupportedOperationException();
     }
 
-    @Nullable
-    public static YamlConfiguration loadFile(@NotNull final Plugin plugin, String cfgName,
+    @Nullable public static YamlConfiguration loadFile(String cfgName,
         final int compatibleVersion) {
-        cfgName = cfgName + ".yml";
+        cfgName += ".yml";
 
+        final Plugin plugin = LevelledMobs.getInstance();
         Utils.logger.info("&fFile Loader: &7Loading file '&b" + cfgName + "&7'...");
 
         final File file = new File(plugin.getDataFolder(), cfgName);
@@ -46,20 +48,16 @@ public final class FileLoader {
             new Yaml().load(fs);
         } catch (final Exception e) {
             final String parseErrorMessage =
-                "LevelledMobs was unable to read file &b%s&r due to a user-caused YAML syntax error.\n"
-                    +
-                    "Copy the contents of your file into a YAML Parser website, such as < https://tinyurl.com/yamlp >  to help locate the line of the mistake.\n"
-                    +
-                    "Failure to resolve this issue will cause LevelledMobs to function improperly, or likely not at all.\n"
-                    +
-                    "Below represents where LevelledMobs became confused while attempting to read your file:\n"
-                    +
-                    "&b---- START ERROR ----&r\n" +
-                    "&4%s&r\n" +
-                    "&b---- END ERROR ----&r\n" +
-                    "If you have attempted to resolve this issue yourself, and are unable to, then please &b#create-a-ticket&r in the Official Arcane Plugins Support Discord:\n"
-                    +
-                    "&bhttps://discord.io/arcaneplugins";
+                    """
+                            LevelledMobs was unable to read file &b%s&r due to a user-caused YAML syntax error.
+                            Copy the contents of your file into a YAML Parser website, such as < https://tinyurl.com/yamlp >  to help locate the line of the mistake.
+                            Failure to resolve this issue will cause LevelledMobs to function improperly, or likely not at all.
+                            Below represents where LevelledMobs became confused while attempting to read your file:
+                            &b---- START ERROR ----&r
+                            &4%s&r
+                            &b---- END ERROR ----&r
+                            If an attempt to solve this error has come to no avail, you are welcome to ask for assistance in the ArcanePlugins Discord Guild.
+                            &bhttps://discord.io/arcaneplugins""";
 
             Utils.logger.error(String.format(parseErrorMessage, cfgName, e));
             return null;

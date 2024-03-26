@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import me.lokka30.levelledmobs.misc.CachedModalList;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Holds all default values for either all custom drop items
@@ -15,8 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * @author stumper66
  * @since 2.4.0
  */
-class CustomDropsDefaults {
-
+public class CustomDropsDefaults {
     boolean noMultiplier;
     boolean noSpawner;
     public boolean override;
@@ -27,14 +27,15 @@ class CustomDropsDefaults {
     public int minLevel;
     public int maxLevel;
     public boolean equipOffhand;
+    public boolean equipOnHelmet;
     int customModelData;
     int maxDropGroup;
     int minPlayerLevel;
     int maxPlayerLevel;
-    public float chance;
+    public SlidingChance chance;
     public boolean useChunkKillMax;
-    float equippedSpawnChance;
-    Float overallChance;
+    @Nullable SlidingChance equippedChance;
+    @Nullable SlidingChance overallChance;
     String groupId;
     String playerLevelVariable;
     String nbtData;
@@ -50,7 +51,6 @@ class CustomDropsDefaults {
 
     CustomDropsDefaults() {
         // these are the defaults of the defaults
-        this.chance = 0.2F;
         this.amount = 1;
         this.minLevel = -1;
         this.maxLevel = -1;
@@ -58,7 +58,6 @@ class CustomDropsDefaults {
         this.maxPlayerLevel = -1;
         this.customModelData = -1;
         this.priority = 0;
-        this.equippedSpawnChance = 0.0F;
         this.maxDropGroup = 0;
         this.noMultiplier = false;
         this.noSpawner = false;
@@ -68,10 +67,14 @@ class CustomDropsDefaults {
         this.overallPermissions = new LinkedList<>();
         this.runOnSpawn = false;
         this.runOnDeath = true;
+        this.equipOnHelmet = false;
     }
 
     void setDefaultsFromDropItem(@NotNull final CustomDropBase dropBase) {
-        this.chance = dropBase.chance;
+        if (this.chance != null)
+            this.chance.setFromInstance(dropBase.chance);
+        else
+            this.chance = dropBase.chance;
         this.useChunkKillMax = dropBase.useChunkKillMax;
         this.amount = dropBase.getAmount();
         this.minLevel = dropBase.minLevel;
@@ -80,17 +83,21 @@ class CustomDropsDefaults {
         this.maxDropGroup = dropBase.maxDropGroup;
         this.noSpawner = dropBase.noSpawner;
         this.playerCausedOnly = dropBase.playerCausedOnly;
-        this.groupId = dropBase.groupId;
+        if (!"default".equals(dropBase.groupId)){
+            this.groupId = dropBase.groupId;
+        }
         this.minPlayerLevel = dropBase.minPlayerLevel;
         this.maxPlayerLevel = dropBase.maxPlayerLevel;
         this.playerLevelVariable = dropBase.playerLevelVariable;
         this.permissions.addAll(dropBase.permissions);
         this.causeOfDeathReqs = dropBase.causeOfDeathReqs;
 
-        if (dropBase instanceof CustomDropItem) {
-            final CustomDropItem dropItem = (CustomDropItem) dropBase;
+        if (dropBase instanceof final CustomDropItem dropItem) {
             this.customModelData = dropItem.customModelDataId;
-            this.equippedSpawnChance = dropItem.equippedSpawnChance;
+            if (this.equippedChance != null)
+                this.equippedChance.setFromInstance(dropItem.equippedChance);
+            else
+                this.equippedChance = dropItem.equippedChance;
             this.noMultiplier = dropItem.noMultiplier;
             this.onlyDropIfEquipped = dropItem.onlyDropIfEquipped;
             this.externalType = dropItem.externalType;
@@ -99,8 +106,8 @@ class CustomDropsDefaults {
             this.equipOffhand = dropItem.equipOffhand;
             this.nbtData = dropItem.nbtData;
             this.itemFlagsStrings = dropItem.itemFlagsStrings;
-        } else if (dropBase instanceof CustomCommand) {
-            final CustomCommand command = (CustomCommand) dropBase;
+            this.equipOnHelmet = dropItem.equipOnHelmet;
+        } else if (dropBase instanceof final CustomCommand command) {
             this.runOnSpawn = command.runOnSpawn;
             this.runOnDeath = command.runOnDeath;
         }

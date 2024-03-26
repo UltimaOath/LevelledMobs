@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import me.lokka30.levelledmobs.LevelledMobs;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.PaperUtils;
 import me.lokka30.levelledmobs.util.SpigotUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
-import me.lokka30.microlib.other.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -19,6 +18,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Gives the user a specialized spawn egg that only spawns mobs within certain level criteria
+ *
+ * @author stumper66
+ * @since 3.3.0
+ */
 public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
 
     public SpawnerEggCommand(final LevelledMobs main) {
@@ -41,7 +46,7 @@ public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
             return;
         }
 
-        if (!VersionUtils.isRunningPaper()) {
+        if (!main.getVerInfo().getIsRunningPaper()) {
             showMessage("command.levelledmobs.spawn_egg.no-paper");
             return;
         }
@@ -97,30 +102,20 @@ public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
             }
 
             switch (command) {
-                case "/name":
-                    info.customName = foundValue;
-                    break;
-                case "/customdropid":
-                    info.customDropId = foundValue;
-                    break;
-                case "/lore":
-                    info.customLore = foundValue;
-                    break;
-                case "/entity":
+                case "/name" -> info.customName = foundValue;
+                case "/customdropid" -> info.customDropId = foundValue;
+                case "/lore" -> info.customLore = foundValue;
+                case "/entity" -> {
                     try {
                         info.spawnType = EntityType.valueOf(foundValue.toUpperCase());
                     } catch (final Exception ignored) {
                         commandSender.sendMessage("Invalid spawn type: " + foundValue);
                         return;
                     }
-                    break;
-                case "/minlevel":
-                    info.minLevel = Integer.parseInt(foundValue);
-                    break;
-                case "/maxlevel":
-                    info.maxLevel = Integer.parseInt(foundValue);
-                    break;
-                case "/giveplayer":
+                }
+                case "/minlevel" -> info.minLevel = Integer.parseInt(foundValue);
+                case "/maxlevel" -> info.maxLevel = Integer.parseInt(foundValue);
+                case "/giveplayer" -> {
                     if (Utils.isNullOrEmpty(foundValue)) {
                         showMessage("command.levelledmobs.spawn_egg.no-player-specified");
                         return;
@@ -135,7 +130,7 @@ public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
                         showMessage("common.player-offline", "%player%", foundValue);
                         return;
                     }
-                    break;
+                }
             }
         }
 
@@ -217,7 +212,7 @@ public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
 
         info.player.getInventory().setItem(useInvSlotNum, item);
 
-        final String playerName = VersionUtils.isRunningPaper() ?
+        final String playerName = main.getVerInfo().getIsRunningPaper() ?
             PaperUtils.getPlayerDisplayName(info.player)
             : SpigotUtils.getPlayerDisplayName(info.player);
 
@@ -247,20 +242,21 @@ public class SpawnerEggCommand extends SpawnerBaseClass implements Subcommand {
         final @NotNull CommandSender sender, @NotNull final String @NotNull [] args) {
         if (!Utils.isNullOrEmpty(args[args.length - 2])) {
             switch (args[args.length - 2].toLowerCase()) {
-                case "/entity":
+                case "/entity" -> {
                     final List<String> entityNames = new LinkedList<>();
                     for (final EntityType entityType : EntityType.values()) {
                         entityNames.add(entityType.toString().toLowerCase());
                     }
-
                     return entityNames;
-                case "/giveplayer":
+                }
+                case "/giveplayer" -> {
                     final List<String> players = new LinkedList<>();
                     for (final Player player : Bukkit.getOnlinePlayers()) {
                         players.add(player.getName());
                     }
                     players.sort(String.CASE_INSENSITIVE_ORDER);
                     return players;
+                }
             }
         }
 

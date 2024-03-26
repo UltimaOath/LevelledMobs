@@ -10,7 +10,9 @@ import java.util.UUID;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.misc.LastMobKilledInfo;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.misc.StringReplacer;
+import me.lokka30.levelledmobs.util.MessageUtils;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -31,24 +33,38 @@ public class PlaceholderApiIntegration extends PlaceholderExpansion {
     public PlaceholderApiIntegration(final LevelledMobs main) {
         this.main = main;
         this.mobsByPlayerTracking = new TreeMap<>();
+        this.playerDeathInfo = new TreeMap<>();
     }
 
     private final LevelledMobs main;
     private final Map<UUID, LastMobKilledInfo> mobsByPlayerTracking;
+    private final Map<UUID, LastMobKilledInfo> playerDeathInfo;
 
     public void putPlayerOrMobDeath(final @NotNull Player player,
-        final @Nullable LivingEntityWrapper lmEntity) {
-        LastMobKilledInfo mobInfo = this.mobsByPlayerTracking.get(player.getUniqueId());
-        if (mobInfo == null) {
-            mobInfo = new LastMobKilledInfo();
-            this.mobsByPlayerTracking.put(player.getUniqueId(), mobInfo);
-        }
+        final @Nullable LivingEntityWrapper lmEntity, final boolean isPlayerDeath) {
+        LastMobKilledInfo mobInfo = this.mobsByPlayerTracking.computeIfAbsent(
+                player.getUniqueId(), k -> new LastMobKilledInfo());
 
         mobInfo.entityLevel = lmEntity != null && lmEntity.isLevelled() ?
             lmEntity.getMobLevel() : null;
 
         mobInfo.entityName = lmEntity != null ?
-            main.levelManager.getNametag(lmEntity, false) : null;
+            main.levelManager.getNametag(lmEntity, false).getNametag() : null;
+
+        if (isPlayerDeath)
+            putPlayerKillerInfo(player, lmEntity);
+    }
+
+    public void putPlayerKillerInfo(final @NotNull Player player,
+                                    final @Nullable LivingEntityWrapper lmEntity) {
+        LastMobKilledInfo mobInfo = new LastMobKilledInfo();
+        this.playerDeathInfo.put(player.getUniqueId(), mobInfo);
+
+        mobInfo.entityLevel = lmEntity != null && lmEntity.isLevelled() ?
+                lmEntity.getMobLevel() : null;
+
+        mobInfo.entityName = lmEntity != null ?
+                main.levelManager.getNametag(lmEntity, false).getNametag() : null;
     }
 
     public void playedLoggedOut(final @NotNull Player player) {
@@ -97,12 +113,14 @@ public class PlaceholderApiIntegration extends PlaceholderExpansion {
         } else if ("mob-target".equalsIgnoreCase(identifier)) {
             return getMobNametagWithinPlayerSight(player);
         }
+        else if ("killed-by".equalsIgnoreCase(identifier)){
+            return getKilledByInfo(player);
+        }
 
         return null;
     }
 
-    @NotNull
-    private String getLevelFromPlayer(final @NotNull Player player) {
+    private @NotNull String getLevelFromPlayer(final @NotNull Player player) {
         if (!this.mobsByPlayerTracking.containsKey(player.getUniqueId())) {
             return "";
         }
@@ -112,19 +130,27 @@ public class PlaceholderApiIntegration extends PlaceholderExpansion {
             "" : String.valueOf(mobInfo.entityLevel);
     }
 
-    @NotNull
-    private String getDisplaynameFromPlayer(final @NotNull Player player) {
+    private @NotNull String getDisplaynameFromPlayer(final @NotNull Player player) {
         if (!this.mobsByPlayerTracking.containsKey(player.getUniqueId())) {
             return "";
         }
 
         final LastMobKilledInfo mobInfo = this.mobsByPlayerTracking.get(player.getUniqueId());
         return mobInfo == null || mobInfo.entityName == null ?
-            "" : mobInfo.entityName;
+            "" : mobInfo.entityName + "&r";
     }
 
-    @NotNull
-    private String getMobNametagWithinPlayerSight(final @Nullable Player player) {
+    private @NotNull String getKilledByInfo(final @NotNull Player player) {
+        if (!this.playerDeathInfo.containsKey(player.getUniqueId())) {
+            return "";
+        }
+
+        final LastMobKilledInfo mobInfo = this.playerDeathInfo.get(player.getUniqueId());
+        return mobInfo == null || mobInfo.entityName == null ?
+                "" : MessageUtils.colorizeAll(mobInfo.entityName + "&r");
+    }
+
+    private @NotNull String getMobNametagWithinPlayerSight(final @Nullable Player player) {
         if (player == null) {
             return "";
         }
@@ -139,7 +165,8 @@ public class PlaceholderApiIntegration extends PlaceholderExpansion {
         if (!Utils.isNullOrEmpty(nametag)) {
             final boolean useCustomNameForNametags = main.helperSettings.getBoolean(
                 main.settingsCfg, "use-customname-for-mob-nametags");
-            nametag = main.levelManager.updateNametag(lmEntity, nametag, useCustomNameForNametags);
+            nametag = main.levelManager.updateNametag(lmEntity, new StringReplacer(nametag),
+                    useCustomNameForNametags, null).getNametagNonNull();
 
             if ("disabled".equalsIgnoreCase(nametag)) {
                 return "";
@@ -147,28 +174,33 @@ public class PlaceholderApiIntegration extends PlaceholderExpansion {
         }
 
         if (Utils.isNullOrEmpty(nametag) && lmEntity.isLevelled()) {
-            nametag = main.levelManager.getNametag(lmEntity, false);
+            nametag = main.levelManager.getNametag(lmEntity, false).getNametag() + "&r";
         }
 
         lmEntity.free();
 
-        return nametag != null ?
-            nametag : "";
+        if (nametag != null){
+            if (nametag.endsWith("&r")){
+                nametag = nametag.substring(0, nametag.length() - 2);
+            }
+            return nametag;
+        }
+        else{
+            return "";
+        }
     }
 
-    @Nullable
-    private LivingEntity getMobBeingLookedAt(final @NotNull Player player) {
+    private @Nullable LivingEntity getMobBeingLookedAt(final @NotNull Player player) {
         LivingEntity livingEntity = null;
         final Location eye = player.getEyeLocation();
         final int maxBlocks = main.helperSettings.getInt(main.settingsCfg,
             "nametag-placeholder-maxblocks", 30);
 
         for (final Entity entity : player.getNearbyEntities(maxBlocks, maxBlocks, maxBlocks)) {
-            if (!(entity instanceof LivingEntity)) {
+            if (!(entity instanceof final LivingEntity le)) {
                 continue;
             }
 
-            final LivingEntity le = (LivingEntity) entity;
             final Vector toEntity = le.getEyeLocation().toVector().subtract(eye.toVector());
             final double dot = toEntity.normalize().dot(eye.getDirection());
             if (dot >= 0.975D) {

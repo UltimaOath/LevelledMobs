@@ -18,23 +18,25 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import me.lokka30.levelledmobs.commands.LevelledMobsCommand;
 import me.lokka30.levelledmobs.compatibility.Compat1_16;
 import me.lokka30.levelledmobs.compatibility.Compat1_17;
 import me.lokka30.levelledmobs.compatibility.Compat1_19;
+import me.lokka30.levelledmobs.compatibility.Compat1_20;
+import me.lokka30.levelledmobs.compatibility.Compat1_21;
 import me.lokka30.levelledmobs.customdrops.CustomDropsHandler;
 import me.lokka30.levelledmobs.listeners.BlockPlaceListener;
 import me.lokka30.levelledmobs.listeners.ChunkLoadListener;
 import me.lokka30.levelledmobs.listeners.CombustListener;
 import me.lokka30.levelledmobs.listeners.EntityDamageDebugListener;
 import me.lokka30.levelledmobs.listeners.EntityDamageListener;
-import me.lokka30.levelledmobs.listeners.EntityDeathListener;
 import me.lokka30.levelledmobs.listeners.EntityNametagListener;
+import me.lokka30.levelledmobs.listeners.EntityPickupItemListener;
 import me.lokka30.levelledmobs.listeners.EntityRegainHealthListener;
 import me.lokka30.levelledmobs.listeners.EntitySpawnListener;
 import me.lokka30.levelledmobs.listeners.EntityTameListener;
@@ -44,7 +46,6 @@ import me.lokka30.levelledmobs.listeners.PlayerDeathListener;
 import me.lokka30.levelledmobs.listeners.PlayerInteractEventListener;
 import me.lokka30.levelledmobs.listeners.PlayerJoinListener;
 import me.lokka30.levelledmobs.listeners.PlayerPortalEventListener;
-import me.lokka30.levelledmobs.listeners.ServerStartListener;
 import me.lokka30.levelledmobs.managers.ExternalCompatibilityManager;
 import me.lokka30.levelledmobs.managers.LevelManager;
 import me.lokka30.levelledmobs.managers.PlaceholderApiIntegration;
@@ -52,24 +53,25 @@ import me.lokka30.levelledmobs.misc.ChunkKillInfo;
 import me.lokka30.levelledmobs.misc.DebugType;
 import me.lokka30.levelledmobs.misc.FileLoader;
 import me.lokka30.levelledmobs.misc.FileMigrator;
+import me.lokka30.levelledmobs.misc.OutdatedServerVersionException;
 import me.lokka30.levelledmobs.misc.VersionInfo;
+import me.lokka30.levelledmobs.nametag.ServerVersionInfo;
 import me.lokka30.levelledmobs.rules.MetricsInfo;
+import me.lokka30.levelledmobs.util.UpdateChecker;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.exceptions.OutdatedServerVersionException;
-import me.lokka30.microlib.other.UpdateChecker;
-import me.lokka30.microlib.other.VersionUtils;
+import me.lokka30.levelledmobs.wrappers.SchedulerResult;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimpleBarChart;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,7 +95,6 @@ public class Companion {
         this.metricsInfo = new MetricsInfo(main);
         this.spawnerCopyIds = new LinkedList<>();
         this.spawnerInfoIds = new LinkedList<>();
-        this.debugsEnabled = new LinkedList<>();
         this.entityDeathInChunkCounter = new HashMap<>();
         this.chunkKillNoticationTracker = new HashMap<>();
         this.externalCompatibilityManager = new ExternalCompatibilityManager();
@@ -106,17 +107,19 @@ public class Companion {
     public List<String> updateResult;
     private boolean hadRulesLoadError;
     public boolean useAdventure;
+    public CommandSender reloadSender;
+    public boolean hasFinishedLoading;
+    public boolean showCustomDrops;
     final private HashMap<Long, Map<EntityType, ChunkKillInfo>> entityDeathInChunkCounter;
     final private HashMap<Long, Map<UUID, Instant>> chunkKillNoticationTracker;
     final public Map<Player, Location> playerNetherPortals;
     final public Map<Player, Location> playerWorldPortals;
     final public List<UUID> spawnerCopyIds;
     final public List<UUID> spawnerInfoIds;
-    final public List<DebugType> debugsEnabled;
     final private PluginManager pluginManager = Bukkit.getPluginManager();
     final private MetricsInfo metricsInfo;
     final public ExternalCompatibilityManager externalCompatibilityManager;
-    private BukkitTask hashMapCleanUp;
+    private SchedulerResult hashMapCleanUp;
     final static private Object playerLogonTimesLock = new Object();
     final static private Object playerNetherPortalsLock = new Object();
     final static private Object entityDeathInChunkCounterLock = new Object();
@@ -140,7 +143,7 @@ public class Companion {
     boolean loadFiles(final boolean isReload) {
         Utils.logger.info("&fFile Loader: &7Loading files...");
 
-        final YamlConfiguration rulesFile = FileLoader.loadFile(main, "rules",
+        final YamlConfiguration rulesFile = FileLoader.loadFile( "rules",
             FileLoader.RULES_FILE_VERSION);
         this.hadRulesLoadError = rulesFile == null;
         main.rulesParsingManager.parseRulesMain(rulesFile);
@@ -153,11 +156,11 @@ public class Companion {
             FileMigrator.migrateSettingsToRules(main);
         }
 
-        main.settingsCfg = FileLoader.loadFile(main, "settings", FileLoader.SETTINGS_FILE_VERSION);
+        main.settingsCfg = FileLoader.loadFile( "settings", FileLoader.SETTINGS_FILE_VERSION);
 
         if (main.settingsCfg != null) // only load if settings were loaded successfully
         {
-            main.messagesCfg = FileLoader.loadFile(main, "messages",
+            main.messagesCfg = FileLoader.loadFile( "messages",
                 FileLoader.MESSAGES_FILE_VERSION);
         } else {
             // had an issue reading the file.  Disable the plugin now
@@ -167,10 +170,7 @@ public class Companion {
         main.customDropsHandler = new CustomDropsHandler(main);
 
         if (!isReload) {
-            main.attributesCfg = loadEmbeddedResource("defaultAttributes.yml");
             main.dropsCfg = loadEmbeddedResource("defaultDrops.yml");
-            main.mobHeadManager.loadTextures(
-                Objects.requireNonNull(loadEmbeddedResource("textures.yml")));
 
             // remove legacy files if they exist
             final String[] legacyFile = {"attributes.yml", "drops.yml"};
@@ -186,15 +186,17 @@ public class Companion {
                 }
             }
 
+            parseDebugsEnabled();
         } else {
             // if not reloading then it is called from the server load event to make sure any dependent
             // plugins are already loaded
+            parseDebugsEnabled();
             main.customDropsHandler.customDropsParser.loadDrops(
-                FileLoader.loadFile(main, "customdrops", FileLoader.CUSTOMDROPS_FILE_VERSION)
+                FileLoader.loadFile( "customdrops", FileLoader.CUSTOMDROPS_FILE_VERSION)
             );
+            if (main.companion.showCustomDrops)
+                main.customDropsHandler.customDropsParser.showCustomDropsDebugInfo(null);
         }
-
-        parseDebugsEnabled();
 
         main.configUtils.load();
         main.playerLevellingMinRelevelTime = main.helperSettings.getIntTimeUnitMS(main.settingsCfg,
@@ -205,34 +207,48 @@ public class Companion {
     }
 
     private void parseDebugsEnabled() {
-        this.debugsEnabled.clear();
-
         final List<String> debugsEnabled = main.settingsCfg.getStringList(
             main.helperSettings.getKeyNameFromConfig(main.settingsCfg, "debug-misc"));
         if (debugsEnabled.isEmpty()) {
             return;
         }
 
+        boolean useAllDebugs = false;
+        boolean addedDebugs = false;
         for (final String debug : debugsEnabled) {
             if (Utils.isNullOrEmpty(debug)) {
                 continue;
             }
 
+            if ("*".equalsIgnoreCase(debug)){
+                useAllDebugs = true;
+                continue;
+            }
+
             try {
                 final DebugType debugType = DebugType.valueOf(debug.toUpperCase());
-                this.debugsEnabled.add(debugType);
+                main.debugManager.filterDebugTypes.add(debugType);
+                addedDebugs = true;
             } catch (final Exception ignored) {
                 Utils.logger.warning("Invalid value for debug-misc: " + debug);
             }
         }
 
-        if (!this.debugsEnabled.isEmpty()) {
-            Utils.logger.info("debug-misc items enabled: &b" + this.debugsEnabled);
+        if (useAllDebugs){
+            main.debugManager.filterDebugTypes.clear();
         }
+
+        if (addedDebugs && !main.debugManager.isEnabled()) {
+            final CommandSender useSender = this.reloadSender != null ?
+                    this.reloadSender : Bukkit.getConsoleSender();
+            main.debugManager.enableDebug(useSender, false, false);
+            useSender.sendMessage(main.debugManager.getDebugStatus());
+        }
+
+        this.showCustomDrops = main.debugManager.isDebugTypeEnabled(DebugType.CUSTOM_DROPS);
     }
 
-    @Nullable
-    private YamlConfiguration loadEmbeddedResource(final String filename) {
+    @Nullable private YamlConfiguration loadEmbeddedResource(final String filename) {
         YamlConfiguration result = null;
         final InputStream inputStream = main.getResource(filename);
         if (inputStream == null) {
@@ -271,7 +287,7 @@ public class Companion {
 
         pluginManager.registerEvents(main.levelManager.entitySpawnListener, main);
         pluginManager.registerEvents(new EntityDamageListener(main), main);
-        pluginManager.registerEvents(new EntityDeathListener(main), main);
+        pluginManager.registerEvents(main.entityDeathListener, main);
         pluginManager.registerEvents(new EntityRegainHealthListener(main), main);
         pluginManager.registerEvents(new EntityTransformListener(main), main);
         pluginManager.registerEvents(new EntityNametagListener(main), main);
@@ -282,7 +298,7 @@ public class Companion {
         pluginManager.registerEvents(new CombustListener(main), main);
         pluginManager.registerEvents(main.blockPlaceListener, main);
         pluginManager.registerEvents(new PlayerPortalEventListener(main), main);
-        pluginManager.registerEvents(new ServerStartListener(main), main);
+        pluginManager.registerEvents(new EntityPickupItemListener(), main);
         main.chunkLoadListener = new ChunkLoadListener(main);
         main.playerInteractEventListener = new PlayerInteractEventListener(main);
         pluginManager.registerEvents(main.playerInteractEventListener, main);
@@ -339,17 +355,16 @@ public class Companion {
     }
 
     void startCleanupTask() {
-        this.hashMapCleanUp = new BukkitRunnable() {
-            @Override
-            public void run() {
-                synchronized (entityDeathInChunkCounterLock) {
-                    chunkKillLimitCleanup();
-                }
-                synchronized (entityDeathInChunkNotifierLock) {
-                    chunkKillNoticationCleanup();
-                }
+        final SchedulerWrapper scheduler = new SchedulerWrapper(() -> {
+            synchronized (entityDeathInChunkCounterLock) {
+                chunkKillLimitCleanup();
             }
-        }.runTaskTimerAsynchronously(main, 100, 40);
+            synchronized (entityDeathInChunkNotifierLock) {
+                chunkKillNoticationCleanup();
+            }
+        });
+
+        this.hashMapCleanUp = scheduler.runTaskTimerAsynchronously(5000, 2000);
     }
 
     private void chunkKillLimitCleanup() {
@@ -401,15 +416,13 @@ public class Companion {
         }
     }
 
-    @NotNull
-    public Map<EntityType, ChunkKillInfo> getorAddPairForSpecifiedChunk(final long chunkKey) {
+    @NotNull public Map<EntityType, ChunkKillInfo> getorAddPairForSpecifiedChunk(final long chunkKey) {
         synchronized (entityDeathInChunkCounterLock) {
             return this.entityDeathInChunkCounter.computeIfAbsent(chunkKey, k -> new HashMap<>());
         }
     }
 
-    @NotNull
-    public List<Map<EntityType, ChunkKillInfo>> getorAddPairForSpecifiedChunks(
+    @NotNull public List<Map<EntityType, ChunkKillInfo>> getorAddPairForSpecifiedChunks(
         final @NotNull List<Long> chunkKeys) {
         final List<Map<EntityType, ChunkKillInfo>> results = new ArrayList<>(chunkKeys.size());
 
@@ -559,12 +572,15 @@ public class Companion {
         main.mobsQueueManager.stop();
         main.nametagQueueManager.stop();
         if (hashMapCleanUp != null) {
-            hashMapCleanUp.cancel();
+            hashMapCleanUp.cancelTask();
         }
-        Bukkit.getScheduler().cancelTasks(main);
+        if (!main.getVerInfo().getIsRunningFolia()) {
+            Bukkit.getScheduler().cancelTasks(main);
+        }
     }
 
     private void buildUniversalGroups() {
+        final ServerVersionInfo versionInfo = main.nametagQueueManager.nametagSenderHandler.versionInfo;
 
         // include interfaces: Monster, Boss
         hostileMobsGroup = Stream.of(
@@ -576,7 +592,7 @@ public class Companion {
             EntityType.SLIME
         ).collect(Collectors.toCollection(HashSet::new));
 
-        if (VersionUtils.isOneSeventeen() || VersionUtils.isOneSixteen()) {
+        if (versionInfo.getMinecraftVersion() >= 1.16) {
             hostileMobsGroup.addAll(Compat1_16.getHostileMobs());
         }
 
@@ -586,17 +602,23 @@ public class Companion {
             EntityType.SNOWMAN
         ).collect(Collectors.toCollection(HashSet::new));
 
-        if (VersionUtils.isOneSeventeen()) {
+        if (versionInfo.getMinecraftVersion() >= 1.17) {
             passiveMobsGroup.addAll(Compat1_17.getPassiveMobs());
         }
-        if (main.nametagQueueManager.nmsHandler.minecraftVersion >= 1.19) {
+        if (versionInfo.getMajorVersion() >= 1.19) {
             passiveMobsGroup.addAll(Compat1_19.getPassiveMobs());
         }
+        if (versionInfo.getMajorVersion() >= 1.20) {
+            passiveMobsGroup.addAll(Compat1_20.getPassiveMobs());
+        }
+        if (versionInfo.getMajorVersion() >= 1.21) {
+            passiveMobsGroup.addAll(Compat1_21.getPassiveMobs());
+        }
 
-        if (main.nametagQueueManager.nmsHandler.minecraftVersion >= 1.16) {
+        if (versionInfo.getMajorVersion() >= 1.16) {
             hostileMobsGroup.addAll(Compat1_16.getHostileMobs());
         }
-        if (main.nametagQueueManager.nmsHandler.minecraftVersion >= 1.19) {
+        if (versionInfo.getMajorVersion() >= 1.19) {
             hostileMobsGroup.addAll(Compat1_19.getHostileMobs());
         }
 
@@ -608,7 +630,7 @@ public class Companion {
             EntityType.TURTLE
         ).collect(Collectors.toCollection(HashSet::new));
 
-        if (main.nametagQueueManager.nmsHandler.minecraftVersion >= 1.19) {
+        if (versionInfo.getMajorVersion() >= 1.19) {
             aquaticMobsGroup.addAll(Compat1_19.getAquaticMobs());
         }
     }
@@ -619,8 +641,7 @@ public class Companion {
         }
     }
 
-    @Nullable
-    public Instant getRecentlyJoinedPlayerLogonTime(final Player player) {
+    @Nullable public Instant getRecentlyJoinedPlayerLogonTime(final Player player) {
         synchronized (playerLogonTimesLock) {
             return recentlyJoinedPlayers.get(player);
         }
@@ -632,8 +653,7 @@ public class Companion {
         }
     }
 
-    @Nullable
-    public Location getPlayerNetherPortalLocation(final @NotNull Player player) {
+    @Nullable public Location getPlayerNetherPortalLocation(final @NotNull Player player) {
         synchronized (playerNetherPortalsLock) {
             return playerNetherPortals.get(player);
         }
@@ -646,8 +666,7 @@ public class Companion {
         }
     }
 
-    @Nullable
-    public Location getPlayerWorldPortalLocation(final @NotNull Player player) {
+    @Nullable public Location getPlayerWorldPortalLocation(final @NotNull Player player) {
         synchronized (playerNetherPortalsLock) {
             return playerWorldPortals.get(player);
         }

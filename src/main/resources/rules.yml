@@ -1,36 +1,37 @@
-#                    _                   _ _          _ __  __       _
-#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
-#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
-#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
-#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
-#                             The Ultimate RPG Levelled Mobs Solution
+#                _                   _ _          _ __  __       _
+#               | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
+#               | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
+#               | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
+#               |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
+#                         The Ultimate RPG Levelled Mobs Solution
 #
-# --------------------------------------------------------------------------------------------LM3
-# +                                      ++                                                  +LM3
-# +  Main Developers                     ++  Documentation (on our Wiki)                     +LM3
-# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
-# +      Author and developer            ++                                                  +LM3
-# +      https://ko-fi.com/lokka30       ++  Support/Discussion (on our Discord)             +LM3
-# +                                      ++    Join our Discord for free, quality support.   +LM3
-# +    PenalBuffalo (aka. stumper66)     ++    If you are unable to, PM @lokka30 on SpigotMC +LM3
-# +      LevelledMobs 3 maintainer       ++    https://discord.gg/RQ8M4A5                    +LM3
-# +      https://ko-fi.com/penalbuffalo  ++                                                  +LM3
-# +                                      ++  Welcome to LevelledMobs 3! Please read the      +LM3
-# +    UltimaOath (aka. Oathkeeper)      ++  relevant documentation prior to attempting any  +LM3
-# +      Docs and configs since v2       ++  changes to this file.                           +LM3
-# +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
-# +                                      ++                                                  +LM3
-# --------------------------------------------------------------------------------------------LM3
+# -------------------------------------------------------------------------------------------LM3
+# +                                  ++                                                     +LM3
+# +    Developers and Maintainers    ++ Documentation (on our Wiki)                         +LM3
+# +                                  ++ . Wiki: https://tinyurl.com/lm-git-wiki             +LM3
+# + PenalBuffalo (aka. stumper66)    ++ . FAQ: https://tinyurl.com/lm-git-faq               +LM3
+# + . Primary Developer; LM3+        ++ . Sample Rules: https://tinyurl.com/lm-sample-rules +LM3
+# + . https://ko-fi.com/penalbuffalo ++ . Sample Drops: https://tinyurl.com/lm-sample-drops +LM3
+# +                                  ++                                                     +LM3
+# + lokka30                          ++ Support Discord and Forum                           +LM3
+# + . Original Plugin Author; LM0+   ++ . Join our Discord for free, quality support.       +LM3
+# + . https://ko-fi.com/lokka30      ++ . https://discord.gg/RQ8M4A5                        +LM3
+# +                                  ++                                                     +LM3
+# + UltimaOath (aka. Oathkeeper)     ++ Please Review Our Plugin!                           +LM3
+# + . Docs, Configs, Tester; LM2+    ++ . Hangar - https://tinyurl.com/lm-hangar            +LM3
+# + . https://ko-fi.com/ultimaoath   ++ . SpigotMC - https://tinyurl.com/lm-spigotmc        +LM3
+# +                                  ++                                                     +LM3
+# -------------------------------------------------------------------------------------------LM3
 #                                     _____     _
 #                                    | __  |_ _| |___ ___
 #                                    |    -| | | | -_|_ -|
 #                                    |__|__|___|_|___|___|
 #
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 01 - Custom Entity and Biome Groups                                            +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
+# +------------------------------------------------------------------------------------------LM3
+# +                                                                                         +LM3
+# +   Section 01 - Custom Entity and Biome Groups                                           +LM3
+# +                                                                                         +LM3
+# +------------------------------------------------------------------------------------------LM3
 mob-groups:
   commons:
     - ZOMBIE
@@ -42,19 +43,15 @@ mob-groups:
     - SHEEP
     - PIG
 
-
 biome-groups:
-  taigas:
-    - TAIGA
-    - TAIGA_MOUNTAINS
-    - SNOWY_TUNDRA
+  cold_biomes:
+    - SNOWY_BEACH
+    - SNOWY_PLAINS
+    - SNOWY_SLOPES
     - SNOWY_TAIGA
-    - SNOWY_TAIGA_HILLS
-    - GIANT_TREE_TAIGA
-    - GIANT_SPRUCE_TAIGA
-    - GIANT_SPRUCE_TAIGA_HILLS
-    - GIANT_TREE_TAIGA_HILLS
-    - SNOWY_TAIGA_MOUNTAINS
+    - FROZEN_OCEAN
+    - FROZEN_PEAKS
+    - FROZEN_RIVER
   flowers:
     - FLOWER_FOREST
     - SUNFLOWER_PLAINS
@@ -73,7 +70,6 @@ biome-groups:
 # +-------------------------------------------------------------------------------------------LM3
 presets:
   spawn_Levelling:
-    # This Strategy Preset controls the Spawn-Distance-Levelling system.
     name: 'LVLling Strategy - Distance-From-Spawn'
     strategies:
       distance-from-spawn:
@@ -83,9 +79,8 @@ presets:
           x: default
           z: default
 
-  blended_Levelling:
-    # This Strategy Preset controls the Blended-Levelling sub-system to Spawn-Distance-Levelling.
-    name: 'LVLling Strategy - Blended-Levelling'
+  lvl-mod_spawn-blended:
+    name: 'LVLling Modifier - Blended Addon to Distance-From-Spawn'
     strategies:
       distance-from-spawn:
         blended-levelling:
@@ -96,64 +91,24 @@ presets:
           scale-downward: true
 
   random_Levelling:
-    # This Strategy Preset controls the Random-Levelling system.
     name: 'LVLling Strategy - Random'
     strategies:
       random: true
-      lower-mob-level-bias-factor: 5
 
-  weighted_random_basic:
-    # This Strategy Preset controls Weighted Random Bias.
-    name: 'LVLling Strategy - Weighted Random Bias BASIC Challenge'
+  weighted_random_Levelling:
+    name: 'LVLling Strategy - Weighted Random'
     strategies:
-      weighted-random:
-        1-2: 5
-        3-4: 4
-        5-6: 3
-        7-8: 2
-        9-10: 1
+      weighted-random: true
 
-  weighted_random_average:
-    # This Strategy Preset controls Weighted Random Bias.
-    name: 'LVLling Strategy - Weighted Random Bias AVERAGE Challenge'
-    strategies:
-      weighted-random:
-        1-5: 5
-        6-10: 4
-        11-15: 3
-        16-20: 2
-        21-25: 1
-
-  weighted_random_advanced:
-    # This Strategy Preset controls Weighted Random Bias.
-    name: 'LVLling Strategy - Weighted Random Bias ADVANCED Challenge'
-    strategies:
-      weighted-random:
-        1-9: 5
-        10-19: 4
-        20-29: 3
-        30-39: 2
-        40-50: 1
-
-  weighted_random_extreme:
-    # This Strategy Preset controls Weighted Random Bias.
-    name: 'LVLling Strategy - Weighted Random Bias EXTREME Challenge'
-    strategies:
-      weighted-random:
-        1-19: 5
-        20-39: 4
-        40-59: 3
-        60-79: 2
-        80-100: 1
-
-  player_Levelling:
-    # This Strategy Preset controls the player-stat based levelling system.
-    name: 'LVLling Strategy - Player Based AVERAGE CHALLENGE'
+  lvl-mod_player-variable:
+    name: 'LVLling Modifier - Player Variable'
     strategies:
       player-levelling:
-        match-level: true
+        match-level: false
         use-player-max-level: false
         decrease-level: true
+        recheck-players: false
+        preserve-entity: 10s
         player-level-scale: 1.0
         level-cap: 30
         tiers:
@@ -162,14 +117,12 @@ presets:
           31-45: 21-25
         variable: '%level%'
 
-  apply_LevellingVariance:
-    # This Strategy Preset controls the random level variance applied.
-    name: 'LVLling Strategy - Apply Variance'
+  lvl-mod_apply-variance:
+    name: 'LVLling Modifier - Apply Variance'
     strategies:
       max-random-variance: 2
 
   ycoord_Levelling:
-    # This Strategy Preset controls Y-Coordinate-Levelling.
     name: 'LVLling Strategy - Y-LVLling'
     strategies:
       y-coordinate:
@@ -177,13 +130,33 @@ presets:
         end: 20
         period: 0
 
-  allowed_worlds:
-    # This controls the allowed worlds to apply levels too.
-    name: 'Excluded Worldlist'
+  default_worlds:
+    name: 'Default Worlds'
     conditions:
       worlds:
-        #        allowed-list: ['*']
-        excluded-list: [ 'world_the_end' ]
+        allowed-list: ['*']
+        #excluded-list: [ 'world_the_end' ]
+
+  vanilla_challenge:
+    name: 'Vanilla-Challenge No Stat Change'
+    apply-settings:
+      minLevel: 1
+      maxLevel: 1
+      multipliers:
+        merge: false
+        max-health: 0.0
+        attack-damage: 0.0
+        ranged-attack-damage: 0.0
+        item-drop: 0.0
+        xp-drop: 0.0
+
+      tiered-coloring:
+        1-1: '&#22E76B' #Green
+        default: '&#FFFFFF' #White
+      health-indicator:
+        scale: 2
+        max: 5
+        merge: true
 
   basic_challenge:
     name: 'Basic-Challenge Multipliers'
@@ -191,11 +164,12 @@ presets:
       minLevel: 1
       maxLevel: 10
       multipliers:
+        merge: false
         max-health: 2.5
         attack-damage: 1.0
         ranged-attack-damage: 1.0
-        item-drop: 3
-        xp-drop: 5
+        item-drop: 3.0
+        xp-drop: 5.0
 
       tiered-coloring:
         1-2: '&#22E76B' #Green
@@ -215,16 +189,25 @@ presets:
       minLevel: 1
       maxLevel: 25
       multipliers:
+        merge: false
         max-health: 5.0
         movement-speed: 0.15
         attack-damage: 2.25
         ranged-attack-damage: 2.25
         creeper-blast-damage: 0.75
-        item-drop: 3
-        xp-drop: 5
-        #       Special Multipliers (0.0 Min - 1.0 Max)
+        item-drop: 3.0
+        xp-drop: 5.0
+        #Special Multipliers (0.0 Min - 1.0 Max)
         armor-bonus: 0.2
         armor-toughness: 0.15
+        #Optional: Use Stacked Multipliers instead (check wiki)
+        #max-health: [ '4.25', 'STACKED' ]
+        #movement-speed: [ '0.002', 'STACKED' ]
+        #attack-damage: [ '0.25', 'STACKED' ]
+        #ranged-attack-damage: [ '0.25', 'STACKED' ]
+        #creeper-blast-damage: [ '0.03', 'STACKED' ]
+        #item-drop: [ '0.25', 'STACKED' ]
+        #xp-drop: [ '17.5', 'STACKED' ]
 
       tiered-coloring:
         1-5: '&#22E76B' #Green
@@ -244,15 +227,16 @@ presets:
       minLevel: 1
       maxLevel: 50
       multipliers:
+        merge: false
         max-health: 8.0
         movement-speed: 0.35
         attack-damage: 3.5
         ranged-attack-damage: 2.75
         creeper-blast-damage: 1.75
         follow-range: 0.25
-        item-drop: 3
-        xp-drop: 5
-        #       Special Multipliers (0.0 Min - 1.0 Max)
+        item-drop: 3.0
+        xp-drop: 5.0
+        #Special Multipliers (0.0 Min - 1.0 Max)
         armor-bonus: 0.3
         armor-toughness: 0.3
         attack-knockback: 0.5
@@ -276,15 +260,16 @@ presets:
       minLevel: 1
       maxLevel: 100
       multipliers:
+        merge: false
         max-health: 15.0
         movement-speed: 1.0
         attack-damage: 5.0
         ranged-attack-damage: 4.0
         creeper-blast-damage: 2.5
         follow-range: 0.5
-        item-drop: 3
-        xp-drop: 5
-        #       Special Multipliers (0.0 Min - 1.0 Max)
+        item-drop: 3.0
+        xp-drop: 5.0
+        #Special Multipliers (0.0 Min - 1.0 Max)
         armor-bonus: 0.5
         armor-toughness: 0.5
         attack-knockback: 0.5
@@ -304,7 +289,6 @@ presets:
         merge: true
 
   nametag_using_indicator:
-    #   This controls the nametag, where the health is displayed using %health-indicator%
     name: 'Nametag - Health Indicator'
     apply-settings:
       nametag: '&8&l༺ %tiered%Lvl %mob-lvl%&8 | &f%displayname%&8 | &f%entity-health-rounded% %tiered%%heart_symbol% &r%health-indicator% &8&l༻'
@@ -322,10 +306,15 @@ presets:
         merge: true
 
   nametag_using_numbers:
-    #   This controls the nametag, where the health is displayed using %entity-health-rounded%
     name: 'Nametag - Health Numerical'
     apply-settings:
       nametag: '&8&l༺ %tiered%Lvl %mob-lvl%&8 | &f%displayname%&8 | &f%entity-health-rounded%&8/&f%entity-max-health-rounded% %tiered%%heart_symbol% &8&l༻'
+      
+  nametag_no_level:
+    name: 'Nametag - No Level Tag'
+    apply-settings:
+      nametag: '&8&l༺ &f%displayname%&8 | &f%entity-health-rounded%&8/&f%entity-max-health-rounded% %tiered%%heart_symbol% &8&l༻'
+      creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
 
 
 # +-------------------------------------------------------------------------------------------LM3
@@ -342,28 +331,25 @@ presets:
 # +-------------------------------------------------------------------------------------------LM3
 default-rule:
   use-preset:
-    - allowed_worlds
+    - default_worlds
     - nametag_using_numbers
     #- nametag_using_indicator
+    #- nametag_no_level
+    #- vanilla_challenge
     #- basic_challenge
     - average_challenge
     #- advanced_challenge
     #- extreme_challenge
-    #- apply_LevellingVariance
-    #- weighted_random_basic
-    - weighted_random_average
-    #- weighted_random_advanced
-    #- weighted_random_extreme
+    - weighted_random_Levelling
     #- spawn_Levelling
-    #- blended_Levelling
+    #- lvl-mod_spawn-blended
     #- ycoord_Levelling
     #- random_Levelling
-    #- player_Levelling
+    #- lvl-mod_player-variable
+    #- lvl-mod_apply-variance
+
 
   conditions:
-    allowed-spawn-reasons:
-      excluded-list: [ 'SPAWNER' ]
-
     level-plugins:
       DANGEROUS_CAVES: false
       ECO_BOSSES: false
@@ -386,7 +372,12 @@ default-rule:
     mob-customname-status: EITHER
     mob-tamed-status: EITHER
 
+
   apply-settings:
+    multipliers:
+      vanilla-bonus:
+        excluded-list: ['LEADER_ZOMBIE_BONUS', 'RANDOM_SPAWN_BONUS']
+
     sunlight-intensity: 5
     creeper-max-damage-radius: 3
 
@@ -396,6 +387,9 @@ default-rule:
       #PILLAGER: ['Raider', 'Barbarian']
 
     creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
+    death-messages:
+      #3: ['%player% was killed by a %death_nametag%!']
+      #1: ['A level %mob-lvl% %displayname% slaughtered %player%!']
     nametag-placeholder-levelled: ''
     nametag-placeholder-unlevelled: ''
     nametag-visible-time: 1s
@@ -411,6 +405,8 @@ default-rule:
     max-adjacent-chunks: 3
     chunk-max-cooldown-seconds: 300s
     disable-vanilla-drops-on-chunk-max: false
+    disable-item-boost-on-chunk-max: true
+    disable-xp-boost-on-chunk-max: true
 
     spawner-particles: 'SOUL'
     spawner-particles-count: 10
@@ -429,68 +425,92 @@ default-rule:
 # +-------------------------------------------------------------------------------------------LM3
 custom-rules:
   - enabled: true
-    name: 'CR - NoLevel All Passive + EntityTypes'
-    use-preset: allowed_worlds
+    name: 'No Stat Change for Specific Entities'
+    use-preset: vanilla_challenge, nametag_no_level
     conditions:
       entities:
         allowed-groups: [ 'all_passive_mobs' ]
-        allowed-list: [ 'BABY_', 'ENDER_DRAGON', 'WITHER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'WANDERING_TRADER', 'PHANTOM', 'BAT', 'RAVAGER', 'WARDEN' ]
-    apply-settings:
-      maxLevel: 0
+        allowed-list: [ 'BABY_', 'WANDERING_TRADER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'BAT' ]
 
   - enabled: true
-    name: 'CR - Custom Nether Levelling'
-    use-preset: apply_LevellingVariance
+    name: 'Custom Nether Levelling'
     conditions:
-      worlds:
-        allowed-list: [ 'world_nether' ]
+      worlds: 'world_nether'
     strategies:
       y-coordinate:
         start: 100
         end: 40
         period: 0
+        
+  - enabled: true
+    name: 'Custom End Levelling'
+    conditions:
+      worlds: 'world_the_end'
+    strategies:
+      distance-from-spawn:
+        increase-level-distance: 200
+        start-distance: 1000
+        spawn-location:
+          x: 0
+          z: 0
 
   - enabled: true
-    name: 'CR - Custom Entity Attributes'
-    use-preset: allowed_worlds
+    name: 'Custom Entity Attributes'
     apply-settings:
       multipliers:
         custom-mob-level:
           ENDERMAN:
-            max-health: 0.0
+            max-health: 0.5
+            movement-speed: 0.0
+          ENDERMITE:
+            max-health: 0.5
             movement-speed: 0.0
           SILVERFISH:
-            max-health: 0.0
+            max-health: 0.5
             movement-speed: 0.0
           CREEPER:
-            movement-speed: 0.025
-          WITHER_SKELETON:
-            max-health: 1.0
+            movement-speed: 0.05
 
   - enabled: true
-    name: 'CR - Custom Zombie Piglin Levelling'
+    name: 'Custom Entity Specific Levelling'
+    use-preset: basic_challenge
     conditions:
-      worlds:
-        allowed-list: [ 'world_nether' ]
-      entities:
-        allowed-list: [ 'ZOMBIFIED_PIGLIN' ]
+      entities: ['ZOMBIFIED_PIGLIN', 'SHULKER', 'VEX', 'RAVAGER', 'PHANTOM', 'PILLAGER']
     strategies:
-      random: true
+      weighted-random: true
     apply-settings:
-      minLevel: 1
+      maxLevel: 5
+        
+  - enabled: true
+    name: 'Custom Boss Entity Specific Levelling'
+    use-preset: basic_challenge, nametag_no_level
+    conditions:
+      entities: ['ENDER_DRAGON', 'ELDER_GUARDIAN', 'WITHER', 'WARDEN']
+    strategies:
+      weighted-random: true
+    apply-settings:
+      maxLevel: 5
+        
+  - enabled: true
+    name: 'Armor and Weapons CustomDrop Table'
+    conditions:
+      entities: ['ZOMBIE', 'HUSK', 'PIGLIN', 'ZOMBIFIED_PIGLIN']
+    apply-settings:
+      use-droptable-id: armor_and_weapons
+      
+  - enabled: true
+    name: 'Spawner Cube Entities'
+    use-preset: basic_challenge
+    conditions:
+      allowed-spawn-reasons: ['SPAWNER']
+    strategies:
+      weighted-random: true
+    apply-settings:
       maxLevel: 5
       multipliers:
-        custom-mob-level:
-          ZOMBIFIED_PIGLIN:
-            max-health: 1.0
-            movement-speed: 0.25
-            attack-damage: 0.5
-            ranged-attack-damage: 0.0
-            item-drop: 0.5
-            xp-drop: 1.0
-      tiered-coloring:
-        1-5: '&#22E76B' #Green
-
+        max-health: 0.0 #For Farms
+      entity-name-override:
+        all_entities: 'Spawner %displayname%'
 
 # +-------------------------------------------------------------------------------------------LM3
 # +                                                                                          +LM3
@@ -498,4 +518,4 @@ custom-rules:
 # +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
 # +                                                                                          +LM3
 # +-------------------------------------------------------------------------------------------LM3
-file-version: 3
+file-version: 4

@@ -7,7 +7,7 @@ package me.lokka30.levelledmobs;
 import java.util.HashSet;
 import me.lokka30.levelledmobs.misc.AdditionalLevelInformation;
 import me.lokka30.levelledmobs.misc.LevellableState;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +28,7 @@ public interface LevelInterface {
      * @param lmInterface target mob
      * @return if the mob is allowed to be levelled (yes/no), with reason
      */
-    @NotNull
-    LevellableState getLevellableState(@NotNull final LivingEntityInterface lmInterface);
+    @NotNull LevellableState getLevellableState(@NotNull final LivingEntityInterface lmInterface);
 
     /**
      * This method generates a level for the mob. It utilises the levelling mode specified by the

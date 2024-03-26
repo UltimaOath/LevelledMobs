@@ -4,14 +4,16 @@
 
 package me.lokka30.levelledmobs.listeners;
 
-import java.util.Collections;
 import java.util.List;
+
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.misc.FileLoader;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.PlayerQueueItem;
+import me.lokka30.levelledmobs.result.NametagResult;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
+import me.lokka30.levelledmobs.wrappers.SchedulerWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -27,7 +29,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,12 +48,17 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(@NotNull final PlayerJoinEvent event) {
+        if (event.getPlayer().isOp() && main.debugManager.playerThatEnabledDebug == null){
+            main.debugManager.playerThatEnabledDebug = event.getPlayer();
+        }
+
         main.companion.addRecentlyJoinedPlayer(event.getPlayer());
         checkForNetherPortalCoords(event.getPlayer());
         main.nametagTimerChecker.addPlayerToQueue(new PlayerQueueItem(event.getPlayer(), true));
         parseUpdateChecker(event.getPlayer());
 
-        updateNametagsInWorldAsync(event.getPlayer(), event.getPlayer().getWorld().getEntities());
+        if (!main.getVerInfo().getIsRunningFolia())
+            updateNametagsInWorldAsync(event.getPlayer(), event.getPlayer().getWorld().getEntities());
 
         if (event.getPlayer().isOp()) {
             if (main.companion.getHadRulesLoadError()) {
@@ -138,14 +144,10 @@ public class PlayerJoinListener implements Listener {
     }
 
     private void updateNametagsInWorldAsync(final Player player, final List<Entity> entities) {
-        final BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                updateNametagsInWorld(player, entities);
-            }
-        };
-
-        runnable.runTaskAsynchronously(main);
+        final SchedulerWrapper scheduler = new SchedulerWrapper(() ->
+                updateNametagsInWorld(player, entities));
+        scheduler.runDirectlyInFolia = true;
+        scheduler.run();
     }
 
     private void updateNametagsInWorld(final Player player, @NotNull final List<Entity> entities) {
@@ -155,11 +157,9 @@ public class PlayerJoinListener implements Listener {
         }
 
         for (final Entity entity : entities) {
-            if (!(entity instanceof LivingEntity)) {
+            if (!(entity instanceof final LivingEntity livingEntity)) {
                 continue;
             }
-
-            final LivingEntity livingEntity = (LivingEntity) entity;
 
             // mob must be alive
             if (!livingEntity.isValid()) {
@@ -174,8 +174,9 @@ public class PlayerJoinListener implements Listener {
             final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(livingEntity,
                 main);
 
-            main.levelManager.updateNametag(lmEntity, main.levelManager.getNametag(lmEntity, false),
-                Collections.singletonList(player));
+            final boolean preserveMobName = !main.nametagQueueManager.nametagSenderHandler.isUsingProtocolLib;
+            final NametagResult nametag = main.levelManager.getNametag(lmEntity, false, preserveMobName);
+            main.levelManager.updateNametag(lmEntity, nametag, List.of(player));
             lmEntity.free();
         }
     }

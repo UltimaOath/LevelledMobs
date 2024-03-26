@@ -5,18 +5,23 @@
 package me.lokka30.levelledmobs.listeners;
 
 import java.time.Instant;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import me.lokka30.levelledmobs.LevelledMobs;
 import me.lokka30.levelledmobs.customdrops.CustomDropResult;
+import me.lokka30.levelledmobs.managers.DebugManager;
 import me.lokka30.levelledmobs.misc.ChunkKillInfo;
 import me.lokka30.levelledmobs.misc.DebugType;
-import me.lokka30.levelledmobs.misc.LivingEntityWrapper;
+import me.lokka30.levelledmobs.rules.ChunkKillOptions;
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import me.lokka30.levelledmobs.misc.NametagTimerChecker;
 import me.lokka30.levelledmobs.result.AdjacentChunksResult;
+import me.lokka30.levelledmobs.util.MessageUtils;
 import me.lokka30.levelledmobs.util.Utils;
-import me.lokka30.microlib.messaging.MessageUtils;
 import org.bukkit.Chunk;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -40,9 +45,11 @@ import org.jetbrains.annotations.Nullable;
 public class EntityDeathListener implements Listener {
 
     private final LevelledMobs main;
+    final Map<UUID, Player> damageMappings;
 
     public EntityDeathListener(final LevelledMobs main) {
         this.main = main;
+        this.damageMappings = new LinkedHashMap<>();
     }
 
     // These entity types will be forced not to be processed
@@ -51,6 +58,12 @@ public class EntityDeathListener implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onDeath(@NotNull final EntityDeathEvent event) {
+        Player damagingPlayer = null;
+        if (damageMappings.containsKey(event.getEntity().getUniqueId())){
+            damagingPlayer = damageMappings.get(event.getEntity().getUniqueId());
+            damageMappings.remove(event.getEntity().getUniqueId());
+        }
+
         if (event.getEntity() instanceof Player) {
             return;
         }
@@ -58,34 +71,48 @@ public class EntityDeathListener implements Listener {
             return;
         }
 
+        final Player killer = damagingPlayer != null ?
+                damagingPlayer : event.getEntity().getKiller();
+
         synchronized (NametagTimerChecker.entityTarget_Lock) {
             main.nametagTimerChecker.entityTargetMap.remove(event.getEntity());
         }
 
         final LivingEntityWrapper lmEntity = LivingEntityWrapper.getInstance(event.getEntity(),
             main);
-        if (event.getEntity().getKiller() != null) {
-            lmEntity.playerForPermissionsCheck = event.getEntity().getKiller();
-        }
 
+        lmEntity.associatedPlayer = killer;
         final EntityDamageEvent damage = lmEntity.getLivingEntity().getLastDamageCause();
+
         if (damage != null) {
             lmEntity.deathCause = damage.getCause();
         }
 
-        if (lmEntity.getLivingEntity().getKiller() != null
-            && main.placeholderApiIntegration != null) {
+        if (killer != null && main.placeholderApiIntegration != null) {
             main.placeholderApiIntegration.putPlayerOrMobDeath(
-                lmEntity.getLivingEntity().getKiller(), lmEntity);
+                killer, lmEntity, false);
         }
 
-        if (lmEntity.isLevelled() && lmEntity.getLivingEntity().getKiller() != null
+        boolean doNotMultiplyDrops = false;
+        boolean doNotBoostXp = false;
+        boolean disableXpDrops = false;
+
+        if (lmEntity.isLevelled() && killer != null
             && main.rulesManager.getMaximumDeathInChunkThreshold(lmEntity) > 0) {
 
             // Only counts if mob is killed by player
-            if (hasReachedEntityDeathChunkMax(lmEntity, lmEntity.getLivingEntity().getKiller())
-                && main.rulesManager.disableVanillaDropsOnChunkMax(lmEntity)) {
-                event.getDrops().clear();
+            if (hasReachedEntityDeathChunkMax(lmEntity, killer)){
+                final ChunkKillOptions opts = main.rulesManager.getRuleUseCustomDropsForMob(lmEntity).chunkKillOptions;
+                if (opts.getDisableVanillaDrops()){
+                    event.getDrops().clear();
+                    disableXpDrops = true;
+                }
+                if (opts.getDisableItemBoost()){
+                    doNotMultiplyDrops = true;
+                }
+                if (opts.getDisableXpDrops()){
+                    doNotBoostXp = true;
+                }
             }
         }
 
@@ -103,18 +130,23 @@ public class EntityDeathListener implements Listener {
 
         if (lmEntity.isLevelled()) {
             // Set levelled item drops
-            main.levelManager.setLevelledItemDrops(lmEntity, event.getDrops());
+            main.levelManager.setLevelledItemDrops(lmEntity, event.getDrops(), doNotMultiplyDrops);
 
             // Set levelled exp drops
-            if (event.getDroppedExp() > 0) {
-                event.setDroppedExp(
-                    main.levelManager.getLevelledExpDrops(lmEntity, event.getDroppedExp()));
+            if (disableXpDrops){
+                event.setDroppedExp(0);
+            }
+            else if (!doNotBoostXp){
+                if (event.getDroppedExp() > 0) {
+                    event.setDroppedExp(
+                            main.levelManager.getLevelledExpDrops(lmEntity, event.getDroppedExp()));
+                }
             }
         } else if (lmEntity.lockedCustomDrops != null || main.rulesManager.getRuleUseCustomDropsForMob(lmEntity).useDrops) {
             final List<ItemStack> drops = new LinkedList<>();
             final CustomDropResult result = main.customDropsHandler.getCustomItemDrops(lmEntity,
                 drops, false);
-            if (result.hasOverride) {
+            if (result.hasOverride()) {
                 main.levelManager.removeVanillaDrops(lmEntity, event.getDrops());
             }
 
@@ -159,8 +191,8 @@ public class EntityDeathListener implements Listener {
                 return true;
             }
 
-            Utils.debugLog(main, DebugType.CHUNK_KILL_COUNT,
-                String.format("%s: player: %s, entity: %s, reached chunk kill limit, max: %s",
+            DebugManager.log(DebugType.CHUNK_KILL_COUNT, lmEntity, () ->
+                    String.format("%s: player: %s, entity: %s, reached chunk kill limit, max: %s",
                     Utils.displayChunkLocation(lmEntity.getLocation()), player.getName(),
                     lmEntity.getTypeName(), maximumDeathInChunkThreshold));
 
@@ -177,8 +209,7 @@ public class EntityDeathListener implements Listener {
         return true;
     }
 
-    @Nullable
-    private AdjacentChunksResult getNumberOfEntityDeathsInAdjacentChunks(
+    @Nullable private AdjacentChunksResult getNumberOfEntityDeathsInAdjacentChunks(
         final @NotNull LivingEntityWrapper lmEntity) {
         final int adjacentChunksToCheck = main.rulesManager.getAdjacentChunksToCheck(lmEntity);
         if (adjacentChunksToCheck <= 0) {

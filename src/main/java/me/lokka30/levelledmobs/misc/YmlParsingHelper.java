@@ -4,14 +4,11 @@
 
 package me.lokka30.levelledmobs.misc;
 
-import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import me.lokka30.levelledmobs.util.Utils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemoryConfiguration;
@@ -23,13 +20,6 @@ import org.jetbrains.annotations.Nullable;
  * @since 3.1.0
  */
 public class YmlParsingHelper {
-
-    public YmlParsingHelper() {
-        this.timeUnitPattern = Pattern.compile("(\\d+\\.?\\d+|\\d+)?(\\w+)");
-    }
-
-    private final Pattern timeUnitPattern;
-
     public boolean getBoolean(final ConfigurationSection cs, @NotNull final String name) {
         return getBoolean(cs, name, false);
     }
@@ -44,8 +34,7 @@ public class YmlParsingHelper {
         return cs.getBoolean(useName, defaultValue);
     }
 
-    @Nullable
-    public Boolean getBoolean2(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public Boolean getBoolean2(final ConfigurationSection cs, @NotNull final String name,
         final Boolean defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -59,13 +48,11 @@ public class YmlParsingHelper {
         }
     }
 
-    @Nullable
-    public String getString(final ConfigurationSection cs, @NotNull final String name) {
+    @Nullable public String getString(final ConfigurationSection cs, @NotNull final String name) {
         return getString(cs, name, null);
     }
 
-    @Nullable
-    public String getString(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public String getString(final ConfigurationSection cs, @NotNull final String name,
         final String defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -75,8 +62,7 @@ public class YmlParsingHelper {
         return cs.getString(useName, defaultValue);
     }
 
-    @NotNull
-    public Set<String> getStringSet(final ConfigurationSection cs, @NotNull final String name) {
+    @NotNull public Set<String> getStringSet(final ConfigurationSection cs, @NotNull final String name) {
         final String useName = getKeyNameFromConfig(cs, name);
 
         final Set<String> results = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
@@ -104,8 +90,7 @@ public class YmlParsingHelper {
         return cs.getInt(useName, defaultValue);
     }
 
-    @Nullable
-    public Integer getInt2(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public Integer getInt2(final ConfigurationSection cs, @NotNull final String name,
         final Integer defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -130,8 +115,7 @@ public class YmlParsingHelper {
         return cs.getDouble(useName, 0);
     }
 
-    @Nullable
-    public Double getDouble2(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public Double getDouble2(final ConfigurationSection cs, @NotNull final String name,
         final Double defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -159,8 +143,7 @@ public class YmlParsingHelper {
         return (float) cs.getDouble(useName, defaultValue);
     }
 
-    @Nullable
-    public Float getFloat2(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public Float getFloat2(final ConfigurationSection cs, @NotNull final String name,
         final Float defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -174,8 +157,7 @@ public class YmlParsingHelper {
         }
     }
 
-    @Nullable
-    public Integer getIntTimeUnit(final ConfigurationSection cs, @NotNull final String name,
+    @Nullable public Integer getIntTimeUnit(final ConfigurationSection cs, @NotNull final String name,
         final Integer defaultValue) {
         if (cs == null) {
             return defaultValue;
@@ -189,7 +171,7 @@ public class YmlParsingHelper {
 
             final String temp = cs.getString(useName);
             final Long useDefaultValue = defaultValue != null ? Long.valueOf(defaultValue) : null;
-            Long result = parseTimeUnit(temp, useDefaultValue, false);
+            Long result = Utils.parseTimeUnit(temp, useDefaultValue, false, null);
             return result != null ?
                 Math.toIntExact(result) :
                 null;
@@ -210,110 +192,13 @@ public class YmlParsingHelper {
                 return cs.getLong(useName);
             }
             final String temp = cs.getString(useName);
-            return parseTimeUnit(temp, defaultValue, true);
+            return Utils.parseTimeUnit(temp, defaultValue, true, null);
         } else {
             return defaultValue;
         }
     }
 
-    private Long parseTimeUnit(final @Nullable String input, final Long defaultTime,
-        final boolean useMS) {
-        if (input == null) {
-            return defaultTime;
-        }
-        if ("0".equals(input)) {
-            return 0L;
-        }
-
-        final Matcher match = timeUnitPattern.matcher(input);
-
-        if (!match.matches() || match.groupCount() != 2) {
-            Utils.logger.warning("Invalid time: " + input);
-            return defaultTime;
-        }
-
-        long time;
-        double remainder = 0.0;
-        String numberPart = match.group(1) != null ? match.group(1) : match.group(2);
-        final String unit = match.group(1) != null ? match.group(2).toLowerCase() : "";
-
-        if (numberPart.contains(".")) {
-            final String[] split = numberPart.split("\\.");
-            try {
-                remainder = 1.0 - Double.parseDouble("0." + split[1]);
-                numberPart = split[0];
-            } catch (Exception e) {
-                Utils.logger.warning("Invalid time: " + input);
-                return defaultTime;
-            }
-        }
-
-        try {
-            time = Long.parseLong(numberPart);
-        } catch (Exception e) {
-            Utils.logger.warning("Invalid time: " + input);
-            return defaultTime;
-        }
-
-        Duration duration = null;
-        switch (unit) {
-            case "ms":
-            case "millisecond":
-            case "milliseconds":
-                duration = Duration.ofMillis(time);
-                break;
-            case "s":
-            case "second":
-            case "seconds":
-                duration = Duration.ofSeconds(time);
-                if (remainder > 0.0) {
-                    duration = duration.plusMillis((long) (1000.0 * remainder));
-                }
-                break;
-            case "m":
-            case "minute":
-            case "minutes":
-                duration = Duration.ofMinutes(time);
-                if (remainder > 0.0) {
-                    duration = duration.plusMillis((long) (60000.0 * remainder));
-                }
-                break;
-            case "h":
-            case "hour":
-            case "hours":
-                duration = Duration.ofHours(time);
-                if (remainder > 0.0) {
-                    duration = duration.plusMillis((long) (3600000.0 * remainder));
-                }
-                break;
-            case "d":
-            case "day":
-            case "days":
-                duration = Duration.ofDays(time);
-                if (remainder > 0.0) {
-                    duration = duration.plusSeconds((long) (86400.0 * remainder));
-                }
-                break;
-            case "":
-                duration = useMS ? Duration.ofMillis(time) : Duration.ofSeconds(time);
-                break;
-            default:
-                Utils.logger.warning("Invalid time unit specified: " + input + " (" + unit + ")");
-                Utils.logger.info(String.format("%s, %s", match.group(1), match.group(1)));
-                break;
-        }
-
-        if (duration != null) {
-            return useMS ?
-                duration.toMillis() :
-                duration.getSeconds();
-        }
-
-        return defaultTime;
-    }
-
-    @NotNull
-    public static List<String> getListFromConfigItem(@NotNull final ConfigurationSection cs,
+    @NotNull public static List<String> getListFromConfigItem(@NotNull final ConfigurationSection cs,
         final String key) {
         String foundKeyName = null;
         for (final String enumeratedKey : cs.getKeys(false)) {
@@ -336,8 +221,41 @@ public class YmlParsingHelper {
         return result;
     }
 
-    @NotNull
-    public String getKeyNameFromConfig(final @NotNull ConfigurationSection cs,
+    public @NotNull List<String> getStringOrList(final @Nullable ConfigurationSection cs, final @NotNull String key){
+        final List<String> results = new LinkedList<>();
+        if (cs == null) {
+            return results;
+        }
+
+        String foundKeyName = null;
+        for (final String enumeratedKey : cs.getKeys(false)) {
+            if (key.equalsIgnoreCase(enumeratedKey)) {
+                foundKeyName = enumeratedKey;
+                break;
+            }
+        }
+
+        if (foundKeyName == null) {
+            return results;
+        }
+
+        final List<?> lst = cs.getList(foundKeyName);
+        if (lst != null && !lst.isEmpty()){
+            for (final Object item : lst){
+                if (!item.toString().isEmpty()) results.add(item.toString());
+            }
+
+            return results;
+        }
+
+        final String temp = cs.getString(foundKeyName);
+        if (temp != null && !temp.isEmpty())
+            results.add(temp);
+
+        return results;
+    }
+
+    @NotNull public String getKeyNameFromConfig(final @NotNull ConfigurationSection cs,
         final @NotNull String key) {
         if (!key.contains(".")) {
             for (final String enumeratedKey : cs.getKeys(false)) {
@@ -357,7 +275,7 @@ public class YmlParsingHelper {
 
         for (final String thisKey : periodSplit) {
             boolean foundKey = false;
-            final String checkKeyName = sb.length() == 0 ? thisKey : sb.toString();
+            final String checkKeyName = sb.isEmpty() ? thisKey : sb.toString();
             final ConfigurationSection useCS = keysFound == 0 ? cs : objTo_CS(cs, checkKeyName);
 
             if (useCS == null) {
@@ -366,7 +284,7 @@ public class YmlParsingHelper {
 
             for (final String enumeratedKey : useCS.getKeys(false)) {
                 if (thisKey.equalsIgnoreCase(enumeratedKey)) {
-                    if (sb.length() > 0) {
+                    if (!sb.isEmpty()) {
                         sb.append(".");
                     }
                     sb.append(enumeratedKey);
@@ -382,7 +300,7 @@ public class YmlParsingHelper {
 
         // if only some of the keys were found then add the remaining ones
         for (int i = keysFound; i < periodSplit.length; i++) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(".");
             }
             sb.append(periodSplit[i]);
@@ -391,8 +309,7 @@ public class YmlParsingHelper {
         return sb.toString();
     }
 
-    @Nullable
-    public ConfigurationSection objTo_CS(final ConfigurationSection cs, final String path) {
+    @Nullable public ConfigurationSection objTo_CS(final ConfigurationSection cs, final String path) {
         if (cs == null) {
             return null;
         }

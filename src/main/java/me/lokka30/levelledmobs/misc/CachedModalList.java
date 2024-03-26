@@ -7,6 +7,8 @@ package me.lokka30.levelledmobs.misc;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
+
+import me.lokka30.levelledmobs.wrappers.LivingEntityWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,14 +35,10 @@ public class CachedModalList<T extends Comparable<T>> implements Cloneable {
         this.excludedGroups = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     }
 
-    @NotNull
-    public Set<T> allowedList;
-    @NotNull
-    public Set<String> allowedGroups;
-    @NotNull
-    public Set<T> excludedList;
-    @NotNull
-    public Set<String> excludedGroups;
+    @NotNull public Set<T> allowedList;
+    @NotNull public Set<String> allowedGroups;
+    @NotNull public Set<T> excludedList;
+    @NotNull public Set<String> excludedGroups;
     public boolean doMerge;
     public boolean allowAll;
     public boolean excludeAll;
@@ -91,21 +89,21 @@ public class CachedModalList<T extends Comparable<T>> implements Cloneable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         if (!this.allowedList.isEmpty()) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("lst: ");
             sb.append(this.allowedList);
         }
         if (this.allowAll) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("all allowed");
         }
 
         if (!this.allowedGroups.isEmpty()) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("grps: ");
@@ -113,21 +111,21 @@ public class CachedModalList<T extends Comparable<T>> implements Cloneable {
         }
 
         if (this.excludeAll) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("all excluded");
         }
 
         if (!this.excludedList.isEmpty()) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("ex-lst: ");
             sb.append(this.excludedList);
         }
         if (!this.excludedGroups.isEmpty()) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append("ex-grps: ");
