@@ -15,6 +15,7 @@
 
 * [🌟 Understanding the Modular Rules System](the-default-files/understanding-the-modular-rules-system.md)
 * [🌟 Running the Default Configuration](the-default-files/running-the-default-configuration/README.md)
+  * [The Default / Presets](the-default-files/running-the-default-configuration/the-default-presets.md)
   * [The Default / Default Rule](the-default-files/running-the-default-configuration/the-default-default-rule.md)
   * [The Default / Custom Rules](the-default-files/running-the-default-configuration/the-default-custom-rules.md)
 * [🌟 rules.yml](the-default-files/rules.yml/README.md)
