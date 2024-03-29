@@ -48,16 +48,19 @@ Referencing the code above:
 
 You can apply a **Preset** to either the **Default Rule** or to any **Custom Rule** via the `use-preset:` configuration option. Below are samples of both usages:
 
-<pre class="language-yaml" data-overflow="wrap"><code class="lang-yaml"><strong>default-rule:
-</strong>  use-preset:
+{% code overflow="wrap" %}
+```yaml
+default-rule:
+  use-preset:
     - presetName
-    - otherPresetName  
-<strong>
-</strong><strong>custom-rules:
-</strong>  - enabled: true
+    - otherPresetName
+
+custom-rules:
+  - enabled: true
     name: 'Sample of Custom Rule Presets'
     use-preset: presetName, otherPresetName
-</code></pre>
+```
+{% endcode %}
 
 
 
@@ -110,7 +113,7 @@ Here is a sample of what any **Custom Rules** might look like with the all possi
 ```yaml
 custom-rules:
   - enabled: true
-    name: ''
+    name: 'A Sample Custom Rule'
     use-preset: 
     conditions: 
       x:
@@ -133,7 +136,8 @@ Referencing the code above:
 
 Several **Modular Option Conditions** can be expressed by using various _included_ and _excluded_ list or group options.
 
-The sample below represents all possible list options:
+The sample below represents all possible list options:\
+Note: `x:` represents the various available sub-setting of the respective **Modular Option Conditions**.
 
 {% code overflow="wrap" %}
 ```yaml
@@ -147,25 +151,33 @@ conditions:
 ```
 {% endcode %}
 
-These list options are fairly simple to read. You can specify either one _included list_ or _excluded list_ and one _included group_ or _excluded groups_ when using the lists (only `entities:` and `biomes:` accept _group_ type lists).
+These list options are fairly simple to read. You can specify either one _included list_ or _excluded list_ and one _included group_ or _excluded groups_ when using the lists (only `entities:` and `biomes:` accept _group_ type lists). For any option, you can use `*` to signify all available options.
+
+You can also include `merge: true` alongside any listed entry, which would mean that the custom rule will accept any other `conditions:` of the same defined type from the `default-rule:` as a part of the acceptable conditions. It will also accept any prior custom rule's `conditions:` of the same defined type where the same entity successfully took on that rules' settings before proceeding.
+
+This essentially means that any list option which uses `merge: true` is taking the `conditions:` set for that setting in the rule, as well as any previously successful application of that condition on the same entity, and combine the list of `included-list:` and `excluded-list:` options into one larger list. This is a more advanced-user option and not recommended for the average user.
 
 If you use both `included-list:` and `excluded-list:` as part of the same `conditions:` check, then the `included-list:` will be read and `excluded-list:` will be ignored, as only listening to the _included list_ is more explicit. Below are several examples of to use a list-option:
 
 
 
-**Example:** If you want the Condition to check whether an entity is a zombie, husk, or skeleton, you would use the `included-list:`, meaning the list will only allow those which you have approved to meet the Condition.
+### Example: How to use lists
+
+***
+
+**Example One:** If you want the **Condition** to check whether the biome where the entity is was the Ice Spikes or Deep Dark biomes, you would use the `included-list:`, meaning the list will only allow those which are being processed in those established biomes to meet the **Condition**.
 
 {% code overflow="wrap" %}
 ```yaml
 conditions:
-  entities:
-    included-list: ['ZOMBIE', 'HUSK', 'SKELETON']
+  biomes:
+    included-list: ['ICE_SPIKES', 'DEEP_DARK']
 ```
 {% endcode %}
 
 
 
-**Example:** If you want the Condition to apply to all worlds, except for the default world\_the\_end, then you would use `excluded-list:`, meaning the list will allow all worlds except for the world you excluded from meeting the Condition.
+**Example Two:** If you want the **Condition** to check for mobs in all accessible worlds, except for the default `world_the_end` world, then you would use `excluded-list:`, meaning the list will allow all worlds except for the world you excluded from meeting the **Condition**.
 
 {% code overflow="wrap" %}
 ```yaml
@@ -177,22 +189,17 @@ conditions:
 
 
 
-**Example:** If you want the Condition to apply to the `all_passive_mobs` group, but want to skip the birds, the bees, donkeys, and mules, you would use a combination of `includeded-groups:`, `excluded-groups:`, and `excluded-list:`.\
+**Example Three:** If you want the Condition to apply to the `all_passive_mobs` group, but want to skip the birds, the bees, donkeys, and mules, you would use a combination of `included-groups:`, `excluded-groups:`, and `excluded-list:`.\
 First you would allow the all passive mobs group to meet the Condition check, then remove the all flying mobs group to cover the birds and bees, then you would remove the individual entities of the donkeys and mules.
 
-{% code overflow="wrap" %}
-```yaml
-conditions:
+<pre class="language-yaml" data-overflow="wrap"><code class="lang-yaml">conditions:
   entities:
     included-groups: ['all_passive_mobs']
     excluded-groups: ['all_flying_mobs']
-    excluded-list: ['DONKEY', 'MULE']
-```
-{% endcode %}
+<strong>    excluded-list: ['DONKEY', 'MULE']
+</strong></code></pre>
+
+***
 
 
-
-You can also include `merge: true` alongside any listed entry, which would mean that the custom rule will accept any other `conditions:` of the same defined type from the `default-rule:` as a part of the acceptable conditions. It will also accept any prior custom rule's `conditions:` of the same defined type where the same entity successfully took on that rules' settings before proceeding.
-
-This essentially means that any list option which uses `merge: true` is taking the `conditions:` set for that setting in the rule, as well as any previously successful application of that condition on the same entity, and combine the list of `included-list:` and `excluded-list:` options into one larger list. This is a more advanced-user option and not recommended for the average user.
 
