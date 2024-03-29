@@ -90,19 +90,23 @@ $$
 round(pre.result) + spawn.distance.level
 $$
 
-<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>distance-from-origin:</code></td><td>When set to <code>true</code>, enables the Distance-from-Origin Levelling Strategy</td></tr><tr><td></td><td></td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>distance-from-origin:</code></td><td>Initiates the Distance-from-Origin Levelling Strategy.</td></tr><tr><td><code>origin-coordinates:</code></td><td>Initiates the section where you can specify the <code>x:</code> or <code>z:</code> coordinate of the center-point which is referenced by this <strong>Strategy</strong>.</td></tr><tr><td><code>buffer-distance:</code></td><td>Represents the buffer zone between the center-point coordinates and the number of blocks measured away from that center-point where the mobs will be the lowest level applied to them. Good for providing a safer initial zone.</td></tr><tr><td><code>ringed-tiers:</code></td><td>The rings formed by this Strategy are circular and concentric.<br>After the <code>buffer-distance</code> has been reached, a new measurement will take place from the edge of the <code>buffer-distance</code> ring for the number of blocks specified in this coordinate. For each ring extending out from the first <code>ringed-tiers</code> ring, the level value of mobs will be increased by one.</td></tr><tr><td><code>enable-height-modifier:</code></td><td>When set to <code>true</code>, enables the Blended Distance Modifier associated with the Distance-from-Origin Levelling Strategy.<br>This adds a Y-Height component when determining the distance from the center-point coordinates.<br>Changing to <code>false</code> will disable this feature, and all subsequent configuration options will be ignored.</td></tr><tr><td><code>transition-y-height:</code></td><td>The Y-Height coordinate where the Distance-from-Origin Levelling Strategy would apply exactly, and where the transition line between a level increase or decrease trend would occur if the Blended Distance Modifier is enabled.</td></tr><tr><td><code>y-height-period:</code></td><td>The number of blocks from the <code>transition-y-height</code> before a <code>level-multiplier</code> is applied.</td></tr><tr><td><code>level-multiplier:</code></td><td>The multiplier value applied to the expected Distance-from-Origin Levelling Strategy level value. The value is applied exponentially across each instance of the <code>y-height-period</code> in either direction of the <code>transition-y-height</code>.<br><strong>For example</strong>, a higher <code>y-height-period</code> value and lower <code>level-multiplier</code> would result in a slow buildup until you reach about half way to the maximum level, and then a sharper increase as you get further out.</td></tr><tr><td><code>scale-increase-downward:</code></td><td>When set to <code>true</code>, the effect of the Blended Distance Modifier will be so that the increases in levels are applied as the player ventures from the <code>transition-y-height</code> down into caves; while the level value would decrease as the player ventured into the mountains above the same Y-Height coordinate.<br>Changing to <code>false</code> will reverse the effect.</td></tr></tbody></table>
 
 
 
+## Y-Coordinate
 
+{% code overflow="wrap" %}
+```yaml
+strategies:
+  y-coordinate:
+    start-height: 100
+    period: 0
+    end-height: 20
+```
+{% endcode %}
 
+This strategy considered the current Y-Height of the mob being processed and will provide them a level value based on that height value. The lowest level applied to the mob is from all blocks at the `start-height` and higher, while the highest level applies to the mob who is from all blocks at the `end-height` and lower. When the `period` value is any value other than zero, then the `end-height` is ignored and instead the level will move for every `period` blocks in the direction specified.
 
-
-
-
-
-
-
-
-
+<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>y-coordinate:</code></td><td>Initiates the Y-Coordinate Levelling Strategy.</td></tr><tr><td><code>start-height:</code></td><td>The starting Y-Height coordinate, where the blocks from this height and higher are at the lowest level.</td></tr><tr><td><code>period:</code></td><td>The number of blocks from <code>start-height</code> where the level will increase per instance of the <code>period</code>. <code>end-height</code> is ignored.</td></tr><tr><td><code>end-height:</code></td><td>The ending Y-Height coordinate, where the blocks from this height and lower are at the highest level.</td></tr></tbody></table>
 
