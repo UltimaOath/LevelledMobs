@@ -31,6 +31,8 @@ strategies:
 
 Just as described, a truly random selection between the min-level and max-level.
 
+Internal-Use Placeholder: `%random%`
+
 <table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>random:</code></td><td>When set to <code>true</code>, enables the Random Levelling Strategy</td></tr></tbody></table>
 
 
@@ -50,6 +52,8 @@ strategies:
 {% endcode %}
 
 **Note:** You may simply set `weighted-random: true` and it will use the min-level and max-level to generate a weighted random, where the lowest levels are the most likely to appear, while the highest are least likely.
+
+Internal-Use Placeholder: `%weighted-random%`
 
 **Example:** The above weighted random will generate a list of numbers, using the 'weight' value listed on the right to increase or decrease the chance of the level being randomly selected.\
 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 10
@@ -78,6 +82,8 @@ strategies:
 ```
 {% endcode %}
 
+Internal-Use Placeholder: `%distance-from-origin%`
+
 **Note**: When using the `enable-height-modifier:` feature, the settings which follow this configuration option are part of the same system. The system uses the following formula to derive the final applied level:
 
 $$
@@ -105,6 +111,8 @@ strategies:
     end-height: 20
 ```
 {% endcode %}
+
+Internal-Use Placeholder: `%y-coordinate%`
 
 This strategy considered the current Y-Height of the mob being processed and will provide them a level value based on that height value. The lowest level applied to the mob is from all blocks at the `start-height` and higher, while the highest level applies to the mob who is from all blocks at the `end-height` and lower. When the `period` value is any value other than zero, then the `end-height` is ignored and instead the level will move for every `period` blocks in the direction specified.
 
