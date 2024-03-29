@@ -80,14 +80,17 @@ strategies:
 
 **Note**: When using the `enable-height-modifier:` feature, the settings which follow this configuration option are part of the same system. The system uses the following formula to derive the final applied level:
 
-
+$$
+\scriptsize f(pre.result) = 
+((((transition.y.height - mob.y.height) / y.height.period) * level.multiplier) * spawn.distance.level)
+$$
 
 $$
-\footnotesize f(pre.result) = 
+\footnotesize f(post.result) = 
 round(pre.result) + spawn.distance.level
 $$
 
-<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>distance-from-origin:</code></td><td>When set to <code>true</code>, enables the Distance-from-Origin Levelling Strategy</td></tr><tr><td>Coming soon</td><td>Coming soon</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>distance-from-origin:</code></td><td>When set to <code>true</code>, enables the Distance-from-Origin Levelling Strategy</td></tr><tr><td></td><td></td></tr></tbody></table>
 
 
 
