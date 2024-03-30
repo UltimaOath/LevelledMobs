@@ -8,6 +8,8 @@ description: Still being updated!
 
 <summary><strong>/lm debug</strong></summary>
 
+To understand your _set-debug_ options, refer to the [Debugging](debugging.md) section of the wiki.
+
 * `/lm debug chunk-kill-count reset` \
   Resets chunk kill count system to zero.
 * `/lm debug create-zip` \
