@@ -20,6 +20,20 @@ layout:
 
 # 🌏 Welcome
 
+{% hint style="danger" %}
+**Important Notice**\
+New Users to LevelledMobs 4 or;\
+Users Migrating from LevelledMobs 3 -> 4\
+
+
+**For LevelledMobs4, we highly recommend you test the plugin first on a testing server prior to applying to any live server.**
+
+We would already recommend this behavior for any release of the plugin, but for users updating from **LM3** to **LM4** , or for anyone using **LM4** for the first time; we have spent over a year of development, with multiple entire rewrites, and had several months of testing, all prior to any public release. This effort means that even though **LevelledMobs3** and **LevelledMobs4** functions in a very similar way, they are in fact entirely different plugins. There may still be bugs of flaws which we have not encountered, so for the first month or two of the public release of **LevelledMobs4** we cannot suggest more forcefully that you should **test this plugin on a testing server first**, before you test or migrate the plugin to your live server.\
+
+
+**For anyone migrating from LevelledMobs 3 -> LevelledMobs 4**, even though the configuration files are similar they are different enough that they will not be automatically translated over. We of course first suggest that you experience **LevelledMobs 4** as it is out-of-the-box and see if you want to incorporate these changes into your old setup. Second, if you want to retain your old setup, you could consult this wiki and the **LM3** wiki, and recreate your rules taking note of the changes in name and formatting of various settings.
+{% endhint %}
+
 ## What server software does LevelledMobs support?
 
 \* We recommend using [PaperMC](https://papermc.io/software/paper) as your preferred server software.
@@ -41,24 +55,9 @@ layout:
 
 ## Do you need to update LevelledMobs?
 
-{% hint style="danger" %}
-Important Notice\
-Users Migrating from LevelledMobs 3 -> 4
-
-Even though both plugins function in a mostly identical way, nearly all of the configuration option names have changed in some fashion. This means simply using the old configuration from LevelledMobs 3 will not work for 4. There are three options available to you:
-
-
-
-1 ]   Using the wikis of both LM3 and LM4, compare how LM3 handled a configuration option and how LM4 handles it now. In most cases, simply changing the text of the config and leaving the formatting the same as before. We can also provide limited support with users experiencing issues converting their files.
-
-2 ]   Perform a fresh install of LM4, and referencing your LM3 file, recreate your configuration in the new system. LM4 has several new default Custom Rules and settings which will be noticeably different than previous iterations of the plugin.&#x20;
-
-3 ]   Simply run with a fresh install of LM4, and give the new defaults a test drive around the block before editing the file from scratch utilizing the many new features and abilities like multiple enabled strategies.
-{% endhint %}
-
-
-
 Updating LevelledMobs4 is as easy as downloading the latest release of the plugin from one of the above download links and replacing the previous `.jar` file. No need to change your rules from one update to the next. In most cases, we are able to push updates to your configuration which would not break it's functionality, however there may be instances where we will recommend letting a new **Rules** file to generate or for you to reference the latest version to see any new features or interesting tweaks made.
+
+The plugin itself will notify you once at server startup of any available update from Spigot or Hangar.&#x20;
 
 
 
