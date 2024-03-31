@@ -16,9 +16,7 @@ modifiers:
 
 ***
 
-
-
-## Random Variance
+## Random Variance (To be replaced with Placeholder mechanic)
 
 {% code overflow="wrap" %}
 ```yaml
