@@ -10,8 +10,8 @@ Below will be a comprehensive listing of all **Custom Rules** applied with the d
 
 {% code overflow="wrap" %}
 ```yaml
-  - enabled: true
-    name: 'Nether World Levelling Strategy'
+  - custom-rule: 'Nether World Levelling Strategy'
+    is-enabled: true
     conditions:
       worlds: 'world_nether'
     strategies:
@@ -22,8 +22,8 @@ Below will be a comprehensive listing of all **Custom Rules** applied with the d
     settings:
       construct-level: '%y-coordinate%'
 
-  - enabled: true
-    name: 'End World Levelling Strategy'
+  - custom-rule: 'End World Levelling Strategy'
+    is-enabled: true
     conditions:
       worlds: 'world_the_end'
     strategies:
@@ -50,8 +50,8 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
 
 {% code overflow="wrap" %}
 ```yaml
-  - enabled: true
-    name: 'Mobs with Vanilla Stats and Minimized Nametag'
+  - custom-rule: 'Mobs with Vanilla Stats and Minimized Nametag'
+    is-enabled: true
     use-preset: challenge-vanilla, nametag-no-level-displayed
     conditions:
       entities:
@@ -59,8 +59,8 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
         included-list: [ 'BABY_', 'WANDERING_TRADER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'BAT' ]
         excluded-list: [ 'IRON_GOLEM' ]
 
-  - enabled: true
-    name: 'Mobs with Modified Nametag Visibility'
+  - custom-rule: 'Mobs with Modified Nametag Visibility'
+    is-enabled: true
     conditions:
       entities:
         included-groups: [ 'all_passive_mobs' ]
@@ -68,8 +68,8 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
     settings:
       nametag-visibility-method: [ 'MELEE', 'ATTACKED' ]
 
-  - enabled: true
-    name: 'Bronze Challenge for Specific Mobs'
+  - custom-rule: 'Bronze Challenge for Specific Mobs'
+    is-enabled: true
     use-preset: challenge-bronze
     conditions:
       entities:
@@ -81,8 +81,8 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
       maxLevel: 10
       construct-level: '%weighted-random%'
 
-  - enabled: true
-    name: 'Bronze Challenge and Minimized Nametag for Specific Mobs'
+  - custom-rule: 'Bronze Challenge and Minimized Nametag for Specific Mobs'
+    is-enabled: true
     use-preset: challenge-bronze, nametag-no-level-displayed
     conditions:
       entities: [ 'ENDER_DRAGON', 'ELDER_GUARDIAN', 'WITHER', 'WARDEN', 'WITHER_SKELETON', 'IRON_GOLEM' ]
@@ -92,8 +92,8 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
       maxLevel: 5
       construct-level: '%weighted-random%'
 
-  - enabled: true
-    name: 'Custom Attributes for Specific Mobs'
+  - custom-rule: 'Custom Attributes for Specific Mobs'
+    is-enabled: true
     settings:
       attribute-modifier:
         custom-attribute-modifier:
@@ -128,8 +128,8 @@ The fifth rule allows you to set entity-specific attribute modifiers which would
 
 {% code overflow="wrap" %}
 ```yaml
-  - enabled: true
-    name: 'Player Farm Item and XP Limiter'
+  - custom-rule: 'Player Farm Item and XP Limiter'
+    is-enabled: true
     apply-settings:
       maximum-death-in-chunk-threshold: 12
       max-adjacent-chunks: 3
@@ -138,8 +138,8 @@ The fifth rule allows you to set entity-specific attribute modifiers which would
       disable-item-boost-on-chunk-max: true
       disable-xp-boost-on-chunk-max: true
 
-  - enabled: true
-    name: 'Spawner Cube Entities'
+  - custom-rule: 'Spawner Cube Entities'
+    is-enabled: true
     use-preset: challenge-bronze
     conditions:
       spawn-reasons: [ 'SPAWNER' ]
@@ -167,8 +167,8 @@ The second rule allows better control over the entities which are produced from 
 
 {% code overflow="wrap" %}
 ```yaml
-  - enabled: true
-    name: 'Armor and Weapons CustomDrop Table'
+  - custom-rule: 'Armor and Weapons CustomDrop Table'
+    is-enabled: true
     conditions:
       entities: [ 'ZOMBIE', 'HUSK', 'PIGLIN', 'ZOMBIFIED_PIGLIN' ]
     settings:
