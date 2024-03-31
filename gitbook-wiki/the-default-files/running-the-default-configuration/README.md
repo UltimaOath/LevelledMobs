@@ -173,11 +173,11 @@ Beneath this section resides the _Miscellaneous_ options which include presets o
 
 New to LevelledMobs4, the Construct-Level setting allows you to take the output from various _Strategies_ or _Modifiers_ and incorporate basic math functions to produce a final level to apply. This feature allows you to have multiple strategies enabled at once, each providing their own numerical 'level' value, which can be put together how you choose. Using the default configuration (sampled below), we take the output from the enabled strategies **Weighted Random** and **Y-Coordinate** in the form of the placeholders of the same name, as well as the modifiers **Player Level** and **Random Variance** under their own placeholders, and using math combine the values to provide a unique levelling strategy.
 
-If you do not specify the `construct-level:`, then the _strategies_ output will be combined together and then averaged by the number of activated strategies applied to the entity, then the value of any enabled _modifiers_ are added to the previous output to produce the final applied level.&#x20;
+If you do not specify the `construct-level:`, then the _strategies_ and _modifiers_ output will be combined together to produce the final applied level.&#x20;
 
 {% code overflow="wrap" %}
 ```yaml
-construct-level: '(%weighted-random% / 2) + (%y-coordinate% / 5) + %player-variable-mod% + %random-variance-mod%'
+construct-level: '%distance-from-origin% + %weighted-random% + %player-variable-mod%' + %random-variance-mod%'
 ```
 {% endcode %}
 

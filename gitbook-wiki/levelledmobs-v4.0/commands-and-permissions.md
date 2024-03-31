@@ -105,15 +105,52 @@ Performs a reload of the LevelledMobs plugin, including reprocessing the configu
 
 <details>
 
-<summary><strong>/lm spawner (Coming Soon)</strong></summary>
+<summary><strong>/lm spawner</strong></summary>
 
-* Coming Soon
+* `/lm spawner create` \
+  This is the start of the LevelledMobs Spawner creator. It requires at minimum the `/minlevel`, `/maxlevel`, and `/spawntype` flags for the Spawner to function.\
+  You can also reference the `/name` flag of the spawner in the **Rules** file via the `spawner-name:` condition.\
+  You can append any number of flags listed below to the end of the command, in any order.
+  * `/minlevel <amount>` \
+    The min-level of any mob spawned from this spawner.
+  * `/maxlevel <amount>` \
+    The max-level of any mob spawned from this spawner.
+  * `/name <name>` \
+    The name of the spawner cube for use in **Rules** file.
+  * `/lore <text>` \
+    Add lore to any item that can accept lore. To add a newline, use `\n`.
+  * `/nolore`\
+    Removes the lore from the item.
+  * `/customdropid <id>` \
+    Add a `drop-table` from the **Custom Drops** system.
+  * `/spawntype <entity>` \
+    The mob which this spawner will spawn.
+  * `/delay <amount>` \
+    Sets the spawners' delay, measured in ticks.
+  * `/maxnearbyentities <amount>` \
+    Sets the maximum number of spawned entities which can be within the spawning range of the spawner.&#x20;
+  * `/minspawndelay <amount>` \
+    Sets the minimum spawner delay, measured in ticks.
+  * `/maxspawndelay <amount>` \
+    Sets the maximum spawner delay, measured in ticks.
+  * `/requiredplayerrange <amount>` \
+    Sets the minimum distance the player must be from the spawner for it to activate.
+  * `/spawncount <amount>` \
+    Sets the number of mobs which will spawn at each successful spawn event.
+  * `/spawnrange <amount>` \
+    Sets the maximum distance away from the spawner cube that mobs will be spawned.
+  * `/giveplayer <player>` \
+    Gives the set player one of the created spawners. If no player specified, will be given to the command executor.&#x20;
+* `/lm spawner info <on|off>` \
+  Displays information about LevelledMobs Spawner Cubes when right clicked and set to `on`. When `off`, no information will be sent.
+* `/lm spawner copy <on|off>` \
+  Will duplicate the LevelledMobs Spawner Cube when right clicked and set to `on`. When `off`, no copy will be produced.&#x20;
 
 </details>
 
 <details>
 
-<summary><strong>/lm spawner-egg (Coming Soon)</strong></summary>
+<summary><strong>/lm spawner-egg</strong></summary>
 
 * Coming Soon
 
