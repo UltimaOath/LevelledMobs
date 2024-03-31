@@ -26,12 +26,28 @@ New Users to LevelledMobs 4 or;\
 Users Migrating from LevelledMobs 3 -> 4\
 
 
-**For LevelledMobs4, we highly recommend you test the plugin first on a testing server prior to applying to any live server.**
+**For LevelledMobs 4, we highly recommend you test the plugin first on a testing server prior to applying to any live server. We are not responsible for you skipping this step.**
 
-We would already recommend this behavior for any release of the plugin, but for users updating from **LM3** to **LM4** , or for anyone using **LM4** for the first time; we have spent over a year of development, with multiple entire rewrites, and had several months of testing, all prior to any public release. This effort means that even though **LevelledMobs3** and **LevelledMobs4** functions in a very similar way, they are in fact entirely different plugins. There may still be bugs or flaws which we have not encountered. For the first month or two of the public release of **LevelledMobs4** we cannot suggest more forcefully that you should **test this plugin on a testing server first** before you test or migrate the plugin to your live server.\
+Even for a regular release of the plugin, we would recommend testing this plugin and any others together on a testing server first before you apply things in a live environment.
+
+**LevelledMobs 4** functions in a similar way to **LevelledMobs 3**, and even the configuration files are fairly similar. However this plugin should be considered by everyone an entirely new plugin. Even though it has gone through over a year of development, with two entire re-writes, and several months of behind-the-scenes tweaking and testing, that does not mean that we have prevented or solved every possible issue.
+
+For this first month or two of the plugins' release, we cannot suggest more forcefully that you should **test this plugin first on a testing server** before applying to your live server.
 
 
-**For anyone migrating from LevelledMobs 3 -> LevelledMobs 4**, even though the configuration files are similar they are different enough that they will not be automatically translated over. We of course first suggest that you experience **LevelledMobs 4** as it is out-of-the-box and see if you want to incorporate these changes into your old setup. Second, if you want to retain your old setup, you could consult this wiki and the **LM3** wiki, and recreate your rules taking note of the changes in name and formatting of various settings.
+
+***
+
+
+
+**For anyone migrating from LevelledMobs 3 -> LevelledMobs 4**\
+**E**ven though the configuration files are similar they are different enough that they will not be automatically translated over as with previous versions of the plugin. Starting with the **LM 4** releases, subsequent migrations should work as previously.
+
+Of course we first suggest that you experience **LevelledMobs 4** as it is out-of-the-box and see if you want to incorporate the many changes and new features into your old setup.
+
+Second, if you want to retain your old setup, you could consult this wiki and the **LM 3** wiki, and recreate your rules taking note of the changes in name and formatting of various settings. For most files, it would take about five to ten minutes to convert over a file by hand.
+
+If you are genuinely struggling to convert your **LM 3** installation to **LM 4**'s formatting, you can ask for assistance in the official Support Discord linked below. To be entirely plain, we are not going to redo your file for you; we will help point to where you've made mistakes in the conversion.
 {% endhint %}
 
 ## What server software does LevelledMobs support?

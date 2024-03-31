@@ -49,4 +49,6 @@ Reference the [Command and Permissions](commands-and-permissions.md#lm-debug) pa
 * `setting_stop_processing` - When LM is instructed to stop-processing via custom-rule
 * `skylight_level` - When a skylight condition is checked
 * `thread_locks` - Outputs internal thread-lock information
+* `construct-level` - Outputs the processed `construct-level` with placeholders expressed.
+* `strategy_result` - Outputs the results of all activated _strategies_ and _modifiers_.&#x20;
 
