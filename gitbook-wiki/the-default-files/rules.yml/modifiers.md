@@ -7,7 +7,7 @@
 {% code overflow="wrap" %}
 ```yaml
 modifiers:
-  random-variance-mod: 
+  custom-formula: 
   player-variable-mod:  
 ```
 {% endcode %}
@@ -16,20 +16,21 @@ modifiers:
 
 ***
 
-## Random Variance (To be replaced with Placeholder mechanic)
+## Custom Formula
 
 {% code overflow="wrap" %}
 ```yaml
 modifiers:
-  random-variance-mod: 0-3
+  custom:
+    formula: '1 * %mob-lvl%'
+  custom_uniqueName:
+    formula: '1 + %mob-lvl%'
 ```
 {% endcode %}
 
-Essentially a random number generator. Will produce a random number between the ranged values.
+Allows for the creation of various `custom_` placeholders. Generate these placeholders by performing basic math functions combined with internal placeholders.
 
-Internal-Use Placeholder: `%random-variance-mod%`
-
-<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>random-variance-mod:</code></td><td>Generates a random value between a min and max range.</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>custom:</code></td><td>The placeholder is populated by the name of the <code>custom_</code> modifier. For example, <code>custom_uniqueName</code> would produce the placeholder <code>%custom_uniqueName%</code>.</td></tr><tr><td><code>formula:</code></td><td>This is the field where basic math calculations can take place using internal-use placeholders.</td></tr></tbody></table>
 
 
 
@@ -40,20 +41,18 @@ Internal-Use Placeholder: `%random-variance-mod%`
 modifiers:
   player-variable-mod:
     player-variable: '%level%'
-    player-variable-scale: 1.0`
+    player-variable-scale: 1.0
     player-variable-tiers:
-      '32-45': 9-17
-      '24-31': 7-14
-      '16-23': 5-11
-      '8-15': 3-8
-      '0-7': 1-5
+      '31-45': 3-7
+      '16-30': 2-5
+      '0-15': 1-3
       default: 1
     match-variable: false
     use-variable-as-max: false
-    recheck-players: false
+    recheck-players: true
     decrease-level: true
-    level-cap: 50
-    preserve-entity: 60s
+    level-cap: 25
+    preserve-entity: 5s
 ```
 {% endcode %}
 
@@ -61,4 +60,6 @@ modifiers:
 
 **Note:** This Modifier contains additional settings within the `settings.yml` file.&#x20;
 
-More information.
+The Player Variable Modifier allows you to establish predetermined outputs based on external use placeholders and a few internal-use placeholders.&#x20;
+
+<table data-full-width="false"><thead><tr><th width="251.00000000000006">Configuration</th><th>Description</th></tr></thead><tbody><tr><td><code>random:</code></td><td>When set to <code>true</code>, enables the Random Levelling Strategy</td></tr></tbody></table>

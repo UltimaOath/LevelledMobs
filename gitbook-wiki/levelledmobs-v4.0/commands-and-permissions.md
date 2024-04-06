@@ -150,7 +150,7 @@ Performs a reload of the LevelledMobs plugin, including reprocessing the configu
 
 <details>
 
-<summary><strong>/lm spawner-egg</strong></summary>
+<summary><strong>/lm spawner-egg (Coming Soon)</strong></summary>
 
 * Coming Soon
 
