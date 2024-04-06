@@ -25,6 +25,7 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
 
 ## The Applied Settings
 
+{% code overflow="wrap" %}
 ```yaml
 #
 #   ---------------  -  ------------------------------
@@ -36,7 +37,7 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
     minLevel: 1
     maxLevel: 50
 
-    construct-level: '(%weighted-random% / 2) + (%y-coordinate% / 5) + %player-variable-mod% + %random-variance-mod%'
+    construct-level: '%distance-from-origin% + %weighted-random% + %player-variable-mod% + %custom_special% + %rand_-5_5%'
 
   # CustomDrop Settings
     use-custom-item-drops-for-mobs: true
@@ -45,9 +46,9 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
     nametag-placeholder-levelled: ''
     nametag-placeholder-unlevelled: ''
     nametag-visible-time: 5s
-    nametag-visibility-method: [ 'TARGETED', 'ATTACKED', 'TRACKING' ]
+    nametag-visibility-method: [ 'ALWAYS_ON' ]
 
-  # Adjusts the `%tiered%` placeholder
+  # Adjusts the `%tiered%` and `%health-indicator-color%` placeholders
     tiered-coloring:
       1-09: '&#22E76B' #Green
       10-19: '&#528CFF' #Blue
@@ -56,13 +57,24 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
       40-49: '&#B447FF' #Purple
       50-50: '&#FFD700' #Gold
       default: '&#FFFFFF' #White
+      
+    health-indicator:
+      colored-tiers:
+        tier-1: '&#22E76B' #Green
+        tier-2: '&#528CFF' #Blue
+        tier-3: '&#FFCD56' #Yellow
+        tier-4: '&#FE803C' #Orange
+        tier-5: '&#F2003D' #Red
+        tier-6: '&#B447FF' #Purple
+        default: '&#B447FF' #White
+      scale: 5
+      max: 5
 
   # LevelledMobs Spawner Cube Settings
   # Use Command:  /lm spawner
     spawner-particles: 'SOUL'
     spawner-particles-count: 10
 
-  # Level Inheritace Settings
     baby-mobs-inherit-adult-setting: true
     transforming-mobs-inherit-level: true
     riding-passengers-match-vehicle-level: false
@@ -75,6 +87,7 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
     sunlight-intensity: 5
     creeper-max-damage-radius: 3
 ```
+{% endcode %}
 
 Here is where you would apply the default settings for the mobs conditioned to receive a level earlier.&#x20;
 

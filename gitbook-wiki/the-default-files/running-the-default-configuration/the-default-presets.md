@@ -8,10 +8,6 @@
 
 {% code overflow="wrap" fullWidth="true" %}
 ```yaml
-#   ---------------  -  ------------------------------
-#        Section 01  |  Presets
-#   ---------------  -  ------------------------------
-#
 presets:
 #
 #   ---------------  -  ------------------------------
@@ -26,7 +22,13 @@ presets:
   lvlstrategy-weighted-random:
     name: 'LVL Strategy - Weighted Random'
     strategies:
-      weighted-random: true
+      weighted-random:
+        11-50: 0
+        5-10: 1
+        4-8: 10
+        3-6: 25
+        2-4: 50
+        1-2: 100
 
   lvlstrategy-distance-from-origin:
     name: 'LVL Strategy - Distance-from-Origin'
@@ -36,11 +38,11 @@ presets:
           x: spawn
           z: spawn
         buffer-distance: 250
-        ringed-tiers: 150
+        ringed-tiers: 750
       # Y-Height Modifier
         enable-height-modifier: true
         transition-y-height: 62
-        y-height-period: 10
+        y-height-period: 15
         level-multiplier: 0.05
         scale-increase-downward: true
 
@@ -63,25 +65,31 @@ presets:
     modifiers:
       player-variable-mod:
         player-variable: '%level%'
-        player-variable-scale: 1.0`
+        player-variable-scale: 1.0
         player-variable-tiers:
-          '32-45': 9-17
-          '24-31': 7-14
-          '16-23': 5-11
-          '8-15': 3-8
-          '0-7': 1-5
+          '31-45': 3-7
+          '16-30': 2-5
+          '0-15': 1-3
           default: 1
-        match-variable: false
+        match-variable: true
         use-variable-as-max: false
         recheck-players: true
         decrease-level: true
-        level-cap: 50
-        preserve-entity: 60s
+        level-cap: 25
+        preserve-entity: 5s
 
-  lvlmodifier-random-variance:
-    name: 'LVL Modifier - Random Level Variance'
+  lvlmodifier-custom-formula:
+    name: 'LVL Modifier - Custom Formula'
     modifiers:
-      random-variance-mod: 0-3
+      custom:
+        formula: '1 * %mob-lvl%'
+      custom_special:
+        formula: '%attack-damage% * 0.1'
+      custom_nether:
+        formula: '%rand_-3_3% + %player-variable-mod%'
+      custom_end:
+        formula: '%rand_-3_3% + %player-variable-mod%'
+
 
 #
 #   ---------------  -  ------------------------------
@@ -188,39 +196,29 @@ presets:
 
 #
 #   ---------------  -  ------------------------------
-#    Section 01 - D  |  Presets / Names and Nametags
+#    Section 01 - D  |  Presets / Additional Options
 #   ---------------  -  ------------------------------
 #
   nametag-using-numbers:
     name: 'Nametag - Health Displayed with Numbers'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &f%entity-health-rounded%&8/&f%entity-max-health-rounded% %tiered%%heart_symbol% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺&r %displayname% &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
 
   nametag-using-indicator:
     name: 'Nametag - Health Displayed with Indicators'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &r%health-indicator% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺ &r%displayname% &8&l༻ %health-indicator% '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
       health-indicator:
         indicator: '█'
         indicator-half: '▌'
-        colored-tiers:
-          tier-1: '&#22E76B' #Green
-          tier-2: '&#528CFF' #Blue
-          tier-3: '&#FFCD56' #Yellow
-          tier-4: '&#FE803C' #Orange
-          tier-5: '&#F2003D' #Red
-          tier-6: '&#B447FF' #Purple
-          default: '&#FFFFFF' #White
-        scale: 8
-        max: 5
         merge: true
 
-  nametag-no-level-displayed:
+  nametag-minimized:
     name: 'Nametag - No Level Tag Displayed'
     settings:
-      nametag: ' &f%displayname%&8 %tiered%%heart_symbol% &f%entity-health-rounded% '
+      nametag: ' &f%displayname%&8 &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
 
   nametag-disabled:
@@ -229,25 +227,6 @@ presets:
       nametag: disabled
       nametag-visibility-method: [ 'DISABLED' ]
       creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
-
-  custom-entity-names:
-    name: 'Custom Entity Names'
-    conditions:
-      mob-customname-status: NOT_NAMETAGGED
-    settings:
-      entity-name-override:
-        BABY_: ['Baby %displayname%']
-        WITCH: ['Arcana', 'Winifred']
-        HUSK: ['Dessicated Corpse', 'Dusty']
-        BLAZE: ['Diablo', 'Mephisto', 'Baal']
-        SKELETON: ['Skully']
-        ENDERMAN: ['Slenderman']
-        ENDER_DRAGON: ['Smaug', 'Ancient Dragon']
-        PILLAGER: ['Raider', 'Barbarian']
-        SLIME: ['Gelatinous Cube']
-        MAGMA_CUBE: ['Magmar']
-        WITHER: ['Lich']
-        VILLAGER: ['Mike', 'Carol', 'Alice', 'Marcia', 'Jan', 'Cindy', 'Greg', 'Peter', 'Bobby']
 
   custom-death-messages:
     name: 'Custom Death Messages'
@@ -258,13 +237,6 @@ presets:
         3: ['A %death_nametag% slaughtered %player%!']
         2: ['%player% never stood a chance against a %death_nametag%']
         1: ['%player% Died | Brought to you by %death_nametag%']
-
-  external-plugins:
-    name: 'External Plugin Mobs'
-    conditions:
-      external-plugins:
-        included-list: ['eco-bosses', 'mythic-mobs', 'elite-mobs', 'infernal-mobs', 'citizens', 'shop-keepers', 'simple-pets', 'elite-bosses', 'blood-night']
-        #excluded-list: ['*']
 ```
 {% endcode %}
 
@@ -491,18 +463,25 @@ This preset controls the **Player Level Modifier** settings. This system allows 
 
 <details>
 
-<summary>Click to review the preset: <code>lvlmodifier-random-variance</code></summary>
+<summary>Click to review the preset: <code>lvlmodifier-custom-formula</code></summary>
 
 {% code overflow="wrap" fullWidth="false" %}
 ```yaml
-  lvlmodifier-random-variance:
-    name: 'LVL Modifier - Random Level Variance'
+  lvlmodifier-custom-formula:
+    name: 'LVL Modifier - Custom Formula'
     modifiers:
-      random-variance-mod: 0-3
+      custom:
+        formula: '1 * %mob-lvl%'
+      custom_special:
+        formula: '%attack-damage% * 0.2'
+      custom_nether:
+        formula: '%rand_-3_3% + %player-variable-mod%'
+      custom_end:
+        formula: '%rand_-3_3% + %player-variable-mod%'
 ```
 {% endcode %}
 
-This preset is more or less a random number generator, where it will generate a number randomly between the two set values.
+This preset allows you to establish a formula which outputs to an internal-use only placeholder which can be used in any other formula position, though specifically designed for the Construct-Level. Allows you to establish any number of modifiers to change the levels of mobs based on internal or external placeholders.
 
 </details>
 
@@ -833,33 +812,23 @@ This is an **ADVANCED FEATURE** and we will not provide support with regards to 
   nametag-using-numbers:
     name: 'Nametag - Health Displayed with Numbers'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &f%entity-health-rounded%&8/&f%entity-max-health-rounded% %tiered%%heart_symbol% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺&r %displayname% &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
 
   nametag-using-indicator:
     name: 'Nametag - Health Displayed with Indicators'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &r%health-indicator% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺ &r%displayname% &8&l༻ %health-indicator% '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
       health-indicator:
         indicator: '█'
         indicator-half: '▌'
-        colored-tiers:
-          tier-1: '&#22E76B' #Green
-          tier-2: '&#528CFF' #Blue
-          tier-3: '&#FFCD56' #Yellow
-          tier-4: '&#FE803C' #Orange
-          tier-5: '&#F2003D' #Red
-          tier-6: '&#B447FF' #Purple
-          default: '&#FFFFFF' #White
-        scale: 8
-        max: 5
         merge: true
 
-  nametag-no-level-displayed:
-    name: 'Nametag - No Level Tag Displayed'
+  nametag-minimized:
+    name: 'Nametag - Minimized'
     settings:
-      nametag: ' &f%displayname%&8 %tiered%%heart_symbol% &f%entity-health-rounded% '
+      nametag: ' &f%displayname%&8 &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
 
   nametag-disabled:
@@ -868,25 +837,6 @@ This is an **ADVANCED FEATURE** and we will not provide support with regards to 
       nametag: disabled
       nametag-visibility-method: [ 'DISABLED' ]
       creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
-
-  custom-entity-names:
-    name: 'Custom Entity Names'
-    conditions:
-      mob-customname-status: NOT_NAMETAGGED
-    settings:
-      entity-name-override:
-        BABY_: ['Baby %displayname%']
-        WITCH: ['Arcana', 'Winifred']
-        HUSK: ['Dessicated Corpse', 'Dusty']
-        BLAZE: ['Diablo', 'Mephisto', 'Baal']
-        SKELETON: ['Skully']
-        ENDERMAN: ['Slenderman']
-        ENDER_DRAGON: ['Smaug', 'Ancient Dragon']
-        PILLAGER: ['Raider', 'Barbarian']
-        SLIME: ['Gelatinous Cube']
-        MAGMA_CUBE: ['Magmar']
-        WITHER: ['Lich']
-        VILLAGER: ['Mike', 'Carol', 'Alice', 'Marcia', 'Jan', 'Cindy', 'Greg', 'Peter', 'Bobby']
 
   custom-death-messages:
     name: 'Custom Death Messages'
@@ -897,13 +847,6 @@ This is an **ADVANCED FEATURE** and we will not provide support with regards to 
         3: ['A %death_nametag% slaughtered %player%!']
         2: ['%player% never stood a chance against a %death_nametag%']
         1: ['%player% Died | Brought to you by %death_nametag%']
-
-  external-plugins:
-    name: 'External Plugin Mobs'
-    conditions:
-      external-plugins:
-        included-list: ['eco-bosses', 'mythic-mobs', 'elite-mobs', 'infernal-mobs', 'citizens', 'shop-keepers', 'simple-pets', 'elite-bosses', 'blood-night']
-        #excluded-list: ['*']
 ```
 {% endcode %}
 
@@ -918,7 +861,7 @@ This is an **ADVANCED FEATURE** and we will not provide support with regards to 
   nametag-using-numbers:
     name: 'Nametag - Health Displayed with Numbers'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &f%entity-health-rounded%&8/&f%entity-max-health-rounded% %tiered%%heart_symbol% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺&r %displayname% &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
 ```
 {% endcode %}
@@ -936,7 +879,7 @@ This preset is the default **Nametag** arrangement, where it includes the mobs l
   nametag-using-indicator:
     name: 'Nametag - Health Displayed with Indicators'
     settings:
-      nametag: ' %tiered%Lvl %mob-lvl% &8&l༺ &f%displayname%&8 &8&l༻ &r%health-indicator% '
+      nametag: ' &fꓡꓦꓡ%tiered%%mob-lvl% &8&l༺ &r%displayname% &8&l༻ %health-indicator% '
       creature-death-nametag: '%tiered%Lvl %mob-lvl%&8 | &f%displayname%'
       health-indicator:
         indicator: '█'
@@ -961,14 +904,14 @@ This preset uses a custom **Nametag** feature which allows the inclusion of _vis
 
 <details>
 
-<summary>Click to review the preset: <code>nametag-no-level-displayed</code></summary>
+<summary>Click to review the preset: <code>nametag-minimized</code></summary>
 
 {% code overflow="wrap" fullWidth="false" %}
 ```yaml
-  nametag-no-level-displayed:
-    name: 'Nametag - No Level Tag Displayed'
+  nametag-minimized:
+    name: 'Nametag - Minimized'
     settings:
-      nametag: ' &f%displayname%&8 %tiered%%heart_symbol% &f%entity-health-rounded% '
+      nametag: ' &f%displayname%&8 &8&l༻ %health-indicator-color%%entity-health-rounded%&fꓧꓑ '
       creature-death-nametag: '&f%displayname% %tiered%%heart_symbol%'
 ```
 {% endcode %}
@@ -998,41 +941,6 @@ This preset entirely disables the **Nametag** system as part of the levelling of
 
 <details>
 
-<summary>Click to review the preset: <code>custom-entity-names</code></summary>
-
-{% code overflow="wrap" fullWidth="false" %}
-```yaml
-  custom-entity-names:
-    name: 'Custom Entity Names'
-    conditions:
-      mob-customname-status: NOT_NAMETAGGED
-    settings:
-      entity-name-override:
-        BABY_: ['Baby %displayname%']
-        WITCH: ['Arcana', 'Winifred']
-        HUSK: ['Dessicated Corpse', 'Dusty']
-        BLAZE: ['Diablo', 'Mephisto', 'Baal']
-        SKELETON: ['Skully']
-        ENDERMAN: ['Slenderman']
-        ENDER_DRAGON: ['Smaug', 'Ancient Dragon']
-        PILLAGER: ['Raider', 'Barbarian']
-        SLIME: ['Gelatinous Cube']
-        MAGMA_CUBE: ['Magmar']
-        WITHER: ['Lich']
-        VILLAGER: ['Mike', 'Carol', 'Alice', 'Marcia', 'Jan', 'Cindy', 'Greg', 'Peter', 'Bobby']
-```
-{% endcode %}
-
-This preset established a collection of randomly selected names for a variety of mobs to provide a unique selection of names to provide a spread of mob options.&#x20;
-
-This preset is designed to work on entities which do not have a nametag applied, as to not interfere with player pet names or other plugins using the custom-name field.
-
-Thanks to our donors for submitting entries for the new default names!
-
-</details>
-
-<details>
-
 <summary>Click to review the preset: <code>custom-death-messages</code></summary>
 
 {% code overflow="wrap" fullWidth="false" %}
@@ -1050,25 +958,6 @@ Thanks to our donors for submitting entries for the new default names!
 {% endcode %}
 
 This preset establishes a weighted randomly selected set of customized messages sent to the player on their death from a levelled mob.
-
-</details>
-
-<details>
-
-<summary>Click to review the preset: <code>external-plugins</code></summary>
-
-{% code overflow="wrap" fullWidth="false" %}
-```yaml
-  external-plugins:
-    name: 'External Plugin Mobs'
-    conditions:
-      external-plugins:
-        included-list: ['eco-bosses', 'mythic-mobs', 'elite-mobs', 'infernal-mobs', 'citizens', 'shop-keepers', 'simple-pets', 'elite-bosses', 'blood-night']
-        #excluded-list: ['*']
-```
-{% endcode %}
-
-This preset connects to both internally supported plugins, as well as a few externally supported plugins from the `externalplugins.yml` file.
 
 </details>
 

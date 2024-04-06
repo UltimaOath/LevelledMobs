@@ -18,9 +18,9 @@ Below will be a comprehensive listing of all **Custom Rules** applied with the d
       y-coordinate:
         start-height: 100
         period: 0
-        end-height: 40
+        end-height: 60
     settings:
-      construct-level: '%y-coordinate%'
+      construct-level: '%y-coordinate% + %custom_nether%'
 
   - custom-rule: 'End World Levelling Strategy'
     is-enabled: true
@@ -34,11 +34,11 @@ Below will be a comprehensive listing of all **Custom Rules** applied with the d
           x: 0
           z: 0
     settings:
-      construct-level: '%distance-from-origin%'
+      construct-level: '%distance-from-origin% + %custom_end%'
 ```
 {% endcode %}
 
-These two custom rules are similar in function; each rule establishes a _condition_ check for the respective default Nether and The End world folder names. If the world the entity exists and matches this condition check, then this entity will use the established _strategy_ in the custom rule rather than what _strategy_ it was given prior to this rule applying. We also have to change the `construct-level:` to respect this change in _strategy_, since it would otherwise attempt to use the `construct-level:` established in the **Default Rule** which doesn't take into account the change in _strategy_.&#x20;
+These two custom rules are similar in function; each rule establishes a _condition_ check for the respective default Nether and The End world folder names. If the world the entity exists and matches this condition check, then this entity will use the established _strategy_ in the custom rule rather than what _strategy_ it was given prior to this rule applying. We also have to change the `construct-level:` to respect this change in _strategy_, since it would otherwise attempt to use the `construct-level:` established in the **Default Rule** which doesn't take into account the change in _strategy_. We incorporated a `custom_` placeholder tag which was created from the enabled **Default Rule** preset `lvlmodifier-custom-formula` providing a semi random modifier to the levels.
 
 For the Nether world, we set it to use the **Y-Coordinate** levelling strategy, where the lowest levels will be at blocks 100 and higher; respecting Piglin farms on the bedrock ceiling. While the highest levels will be at blocks 40 and lower; meaning those mobs near the lava's surface will should be far stronger at the max level available to them.
 
@@ -50,47 +50,40 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
 
 {% code overflow="wrap" %}
 ```yaml
-  - custom-rule: 'Mobs with Vanilla Stats and Minimized Nametag'
-    is-enabled: true
-    use-preset: challenge-vanilla, nametag-no-level-displayed
-    conditions:
-      entities:
-        included-groups: [ 'all_passive_mobs' ]
-        included-list: [ 'BABY_', 'WANDERING_TRADER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'BAT' ]
-        excluded-list: [ 'IRON_GOLEM' ]
-
-  - custom-rule: 'Mobs with Modified Nametag Visibility'
-    is-enabled: true
-    conditions:
-      entities:
-        included-groups: [ 'all_passive_mobs' ]
-        included-list: [ 'BAT' ]
-    settings:
-      nametag-visibility-method: [ 'MELEE', 'ATTACKED' ]
-
   - custom-rule: 'Bronze Challenge for Specific Mobs'
     is-enabled: true
     use-preset: challenge-bronze
     conditions:
       entities:
-        allowed-groups: [ 'all_flying_mobs' ]
-        allowed-list: [ 'ZOMBIFIED_PIGLIN', 'SHULKER', 'VEX', 'RAVAGER', 'PILLAGER' ]
-    strategies:
-      weighted-random: true
-    settings:
-      maxLevel: 10
-      construct-level: '%weighted-random%'
+        included-groups: [ 'all_flying_mobs' ]
+        included-list: [ 'ZOMBIFIED_PIGLIN', 'SHULKER', 'VEX', 'RAVAGER', 'HOGLIN', 'PILLAGER', 'WANDERING_TRADER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'IRON_GOLEM', 'ENDER_DRAGON', 'ELDER_GUARDIAN', 'WITHER', 'WARDEN' ]
 
-  - custom-rule: 'Bronze Challenge and Minimized Nametag for Specific Mobs'
+  - custom-rule: 'Vanilla Challenge for Specific Mobs'
     is-enabled: true
-    use-preset: challenge-bronze, nametag-no-level-displayed
+    use-preset: challenge-vanilla
     conditions:
-      entities: [ 'ENDER_DRAGON', 'ELDER_GUARDIAN', 'WITHER', 'WARDEN', 'WITHER_SKELETON', 'IRON_GOLEM' ]
-    strategies:
-      weighted-random: true
+      entities:
+        included-groups: [ 'all_passive_mobs' ]
+        included-list: [ 'BABY_' ]
+        excluded-list: [ 'IRON_GOLEM' ]
+
+  - custom-rule: 'Minimized Nametag for Specific Mobs'
+    is-enabled: true
+    use-preset: nametag-minimized
+    conditions:
+      entities:
+        included-groups: [ 'all_passive_mobs' ]
+        included-list: [ 'BABY_', 'WANDERING_TRADER', 'VILLAGER', 'ZOMBIE_VILLAGER', 'BAT', 'ENDER_DRAGON', 'ELDER_GUARDIAN', 'WITHER', 'WARDEN', 'IRON_GOLEM' ]
+
+  - custom-rule: 'Reduced Nametag Visibility'
+    is-enabled: true
+    conditions:
+      entities:
+        included-groups: [ 'all_passive_mobs' ]
+        included-list: [ 'BAT' ]
+        excluded-list: [ 'IRON_GOLEM' ]
     settings:
-      maxLevel: 5
-      construct-level: '%weighted-random%'
+      nametag-visibility-method: [ 'MELEE', 'ATTACKED' ]
 
   - custom-rule: 'Custom Attributes for Specific Mobs'
     is-enabled: true
@@ -113,12 +106,9 @@ As for the The End world, we set it to use the **Distance-From-Origin** levellin
 
 These five custom rules achieve similar results: adjust the difficulty and levelling strategy of multiple mob types, as well as apply modified nametag settings to accommodate the adjusted stat changes.
 
-In the first custom rule, _Mobs with Vanilla Stats and Minimized Nametag_, the goal of this rule is to gather a collection of mobs which many servers would prefer to leave at vanilla settings; while still allowing the entities to receive the nametag and other features. If you notice, we explicitly exclude the `IRON_GOLEM` from the rule; that is because we will apply a future rule to this entity and do not want to add information from this first rule to that entity because it would have to be undone with a future rule.
+In the first two custom rules, we simply set a reduced default challenge for a selected set of mobs. Some mobs take a single-step reduction (because their challenge is unique compared to average mobs, or they are boss/mini-boss mobs) or a two-step reduction down to vanilla stats. This is to allow all mobs to receive LevelledMobs functionality but without adjusting the stats for certain mobs which are farming specific or similar.
 
-In the second rule, we modify the nametag visibility of the nametags for all passive mobs and bats; leaving their nametags invisible unless you've attacked one or hovering over it with your cursor. This is to help prevent a field of nametags obscuring your vision when you have pens of dozens of the same animal in farm setups.&#x20;
-
-In the third and fourth custom rule, we do virtually the same thing: For the listed set of entities we move them from the default _Silver Challenge_ to the _Bronze Challenge_. This is done by virtue that the listed mobs are either considered 'boss' or 'mini-boss' mobs, or present a unique challenge to the player in some fashion. To maintain their challenge we reduced the max-level and randomized their levelling with the **Weighted Random** levelling _strategy_. \
-For the second of these rules, specific to the 'boss' or 'mini-boss' mobs, we also provide them a minimized nametag; hiding their level. This is done to give these entities an air of mystic and to demonstrate their uniqueness compared to your standard levelled mob.
+In the third and fourth custom rule, we change the nametags of these mobs. The first rule of this set we give mobs a reduced nametag which doesn't include their level output; useful for small-time mobs as well as 'special' boss/mini-boss mobs. The second rule reduces the visibility of nametags for passive mobs and similar, as to not overcrowd player farms with nametags.
 
 The fifth rule allows you to set entity-specific attribute modifiers which would override any previous established attribute modifier value. This rule is important for the fairness of the average server. For example, the movement speed of Endermen, Endermite, and Silverfish are set to produce zero change regardless of the level. This is done because these entities already have a uniquely high movement speed by vanilla standards and increasing this further makes these mobs near impossible to hit, let alone defend against.&#x20;
 
@@ -130,10 +120,10 @@ The fifth rule allows you to set entity-specific attribute modifiers which would
 ```yaml
   - custom-rule: 'Player Farm Item and XP Limiter'
     is-enabled: true
-    apply-settings:
-      maximum-death-in-chunk-threshold: 12
-      max-adjacent-chunks: 3
-      chunk-max-cooldown-seconds: 300s
+    settings:
+      maximum-death-in-chunk-threshold: 15
+      max-adjacent-chunks: 5
+      chunk-max-cooldown-seconds: 10m
       disable-vanilla-drops-on-chunk-max: false
       disable-item-boost-on-chunk-max: true
       disable-xp-boost-on-chunk-max: true
@@ -143,13 +133,7 @@ The fifth rule allows you to set entity-specific attribute modifiers which would
     use-preset: challenge-bronze
     conditions:
       spawn-reasons: [ 'SPAWNER' ]
-    strategies:
-      weighted-random: true
     settings:
-      maxLevel: 10
-      construct-level: '%weighted-random%'
-      attribute-modifier:
-        max-health: 0.0 #For Farms
       entity-name-override:
         all_entities: 'Spawner %displayname%'
 ```
@@ -178,3 +162,22 @@ The second rule allows better control over the entities which are produced from 
 
 This rule uses the setting `use-droptable-id:` which connects to the Custom Drops system from the `customdrops.yml` file. This setting is referencing a Drop Table under `drop-table:` of the name `armor_and_weapons`, which exists in the default configuration. This drop table includes a low chance to apply two pieces of armor from a randomly selected set of four iron armors, as well as a similar low chance to give the mob a sword or axe. This rule only applies to a select few entities.\
 Giving entities equipment is another way to spice up the challenge of a server without having to tweak the attributes of each and every mob.
+
+
+
+## External Plugin Support
+
+{% code overflow="wrap" %}
+```yaml
+  - custom-rule: 'External Plugins with Vanilla Stats and Minimized Nametags'
+    is-enabled: true
+    use-preset: challenge-vanilla, nametag-minimized
+    conditions:
+      external-plugins:
+        included-list: ['eco-bosses', 'mythic-mobs', 'elite-mobs', 'infernal-mobs', 'citizens', 'shop-keepers', 'simple-pets', 'elite-bosses', 'blood-night']
+        #excluded-list: ['*']
+```
+{% endcode %}
+
+This custom rule connects to both internally supported plugins, as well as a few externally supported plugins from the `externalplugins.yml` file. It adds them to the approved list of levellable mobs, assigning them the minimized nametags and no stat changes by default.
+

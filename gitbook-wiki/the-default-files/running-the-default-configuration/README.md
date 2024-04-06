@@ -34,21 +34,19 @@ default-rule:
     #===== Choose Strategies =====
     #- lvlstrategy-random
     - lvlstrategy-weighted-random
-    #- lvlstrategy-distance-from-origin
-    - lvlstrategy-y-coordinate
+    - lvlstrategy-distance-from-origin
+    #- lvlstrategy-y-coordinate
 
     #===== Choose Modifiers =====
     - lvlmodifier-player-variable
-    - lvlmodifier-random-variance
+    - lvlmodifier-custom-formula
 
     #===== Choose Additional Options =====
     - nametag-using-numbers
     #- nametag-using-indicator
-    #- nametag-no-level-displayed
+    #- nametag-minimized
     #- nametag-disabled
-    #- custom-entity-names
     #- custom-death-messages
-    #- external-plugins
 
 
 #
@@ -67,6 +65,18 @@ default-rule:
 
 #
 #   ---------------  -  ------------------------------
+#    Section 03 - A  |  Default Rule / Conditions
+#   ---------------  -  ------------------------------
+#
+  conditions:
+    worlds: ['*']
+    #biomes: ['*']
+    entities: ['*']
+
+    mob-customname-status: EITHER
+    mob-tamed-status: EITHER
+#
+#   ---------------  -  ------------------------------
 #    Section 03 - B  |  Default Rule / Settings
 #   ---------------  -  ------------------------------
 #
@@ -75,7 +85,7 @@ default-rule:
     minLevel: 1
     maxLevel: 50
 
-    construct-level: '(%weighted-random% / 2) + (%y-coordinate% / 5) + %player-variable-mod% + %random-variance-mod%'
+    construct-level: '%distance-from-origin% + %weighted-random% + %player-variable-mod% + %rand_-5_5% + %custom_special%'
 
   # CustomDrop Settings
     use-custom-item-drops-for-mobs: true
@@ -84,9 +94,9 @@ default-rule:
     nametag-placeholder-levelled: ''
     nametag-placeholder-unlevelled: ''
     nametag-visible-time: 5s
-    nametag-visibility-method: [ 'TARGETED', 'ATTACKED', 'TRACKING' ]
+    nametag-visibility-method: [ 'ATTACKED', 'TRACKING', 'TARGETED' ]
 
-  # Adjusts the `%tiered%` placeholder
+  # Adjusts the `%tiered%` and `%health-indicator-color%` placeholders
     tiered-coloring:
       1-09: '&#x26;#22E76B' #Green
       10-19: '&#x26;#528CFF' #Blue
@@ -95,13 +105,24 @@ default-rule:
       40-49: '&#x26;#B447FF' #Purple
       50-50: '&#x26;#FFD700' #Gold
       default: '&#x26;#FFFFFF' #White
+      
+    health-indicator:
+      colored-tiers:
+        tier-1: '&#x26;#22E76B' #Green
+        tier-2: '&#x26;#528CFF' #Blue
+        tier-3: '&#x26;#FFCD56' #Yellow
+        tier-4: '&#x26;#FE803C' #Orange
+        tier-5: '&#x26;#F2003D' #Red
+        tier-6: '&#x26;#B447FF' #Purple
+        default: '&#x26;#B447FF' #White
+      scale: 5
+      max: 5
 
   # LevelledMobs Spawner Cube Settings
   # Use Command:  /lm spawner
     spawner-particles: 'SOUL'
     spawner-particles-count: 10
 
-  # Level Inheritace Settings
     baby-mobs-inherit-adult-setting: true
     transforming-mobs-inherit-level: true
     riding-passengers-match-vehicle-level: false
@@ -137,21 +158,19 @@ The above set of code is copied from the `rules.yml` file for `v4.0.0 b1`.&#x20;
     #===== Choose Strategies =====
     #- lvlstrategy-random
     - lvlstrategy-weighted-random
-    #- lvlstrategy-distance-from-origin
-    - lvlstrategy-y-coordinate
+    - lvlstrategy-distance-from-origin
+    #- lvlstrategy-y-coordinate
 
     #===== Choose Modifiers =====
     - lvlmodifier-player-variable
-    - lvlmodifier-random-variance
+    - lvlmodifier-custom-formula
 
     #===== Choose Additional Options =====
     - nametag-using-numbers
     #- nametag-using-indicator
-    #- nametag-no-level-displayed
+    #- nametag-minimized
     #- nametag-disabled
-    #- custom-entity-names
     #- custom-death-messages
-    #- external-plugins
 ```
 {% endcode %}
 
@@ -161,7 +180,7 @@ In this instance, we have separated the various **Preset** types into four categ
 
 Under the _Challenges_ section, we have six degrees of play-tested challenge presets: _Vanilla_, _Bronze_, _Silver_ \[Default], _Gold_, _Platinum_, and _Formula_. These presets include the settings associated with altering the attributes of the entities, with _Vanilla_ representing zero change to the attributes; _Bronze_ containing modest increases; _Silver_, our default, being our middle ground between fun and challenge; _Gold_ often requires players to be fully armored and weaponized to take on, while _Platinum_ is made for the hardcore player or server which gives players non-vanilla abilities. _Formula_ is a new addition with LevelledMobs 4; creating a challenge on par with the _Gold_ challenge, but handled using our new custom formula mechanic, allowing you to use some degree of math to craft your own attribute changes.
 
-The _Strategies_ section includes any enabled _Strategy_ which may be used to calculate the level of a mob. This section, in tandem with the _Modifiers_ section, produce internal-use placeholder tags associated with the relevant strategy. With LevelledMobs4, you can specify multiple running _strategies_ or _modifiers_ which can be combined together in multiple ways. We suggest using the `construct-level:` configuration setting (which is described here) to build your level exactly how you desire.
+The _Strategies_ section includes any enabled _Strategy_ which may be used to calculate the level of a mob. This section, in tandem with the _Modifiers_ section, produce internal-use placeholder tags associated with the relevant strategy. With LevelledMobs 4, you can specify multiple running _strategies_ or _modifiers_ which can be combined together in multiple ways. We suggest using the `construct-level:` configuration setting (which is described below) to build your level exactly how you desire.
 
 Beneath this section resides the _Miscellaneous_ options which include presets of optional features from the unique nametags, custom entity names, custom player-death messages, health indicator display, and more.
 
@@ -171,13 +190,13 @@ Beneath this section resides the _Miscellaneous_ options which include presets o
 
 ## The Construct-Level
 
-New to LevelledMobs4, the Construct-Level setting allows you to take the output from various _Strategies_ or _Modifiers_ and incorporate basic math functions to produce a final level to apply. This feature allows you to have multiple strategies enabled at once, each providing their own numerical 'level' value, which can be put together how you choose. Using the default configuration (sampled below), we take the output from the enabled strategies **Weighted Random** and **Y-Coordinate** in the form of the placeholders of the same name, as well as the modifiers **Player Level** and **Random Variance** under their own placeholders, and using math combine the values to provide a unique levelling strategy.
+New to LevelledMobs 4, the Construct-Level setting allows you to take the output from various _Strategies_ or _Modifiers_ and incorporate basic math functions to produce a final level to apply. This feature allows you to have multiple strategies enabled at once, each providing their own numerical 'level' value, which can be put together how you choose. Using the default configuration (sampled below), we take the output from the enabled strategies **Weighted Random** and **Y-Coordinate** in the form of the placeholders of the same name, as well as the modifiers **Player Variable** and **Custom Formula** under their own placeholders, added a random variance between -5 and 5, and finally using math combine the values to provide a unique levelling strategy.
 
 If you do not specify the `construct-level:`, then the _strategies_ and _modifiers_ output will be combined together to produce the final applied level.&#x20;
 
 {% code overflow="wrap" %}
 ```yaml
-construct-level: '%distance-from-origin% + %weighted-random% + %player-variable-mod%' + %random-variance-mod%'
+construct-level: '%distance-from-origin% + %weighted-random% + %player-variable-mod% + %custom_special% + %rand_-5_5%'
 ```
 {% endcode %}
 
