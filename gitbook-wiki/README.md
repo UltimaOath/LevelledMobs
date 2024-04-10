@@ -1,11 +1,6 @@
 ---
 description: This wiki provides support for the 4th revision of the LevelledMobs plugin.
-cover: .gitbook/assets/LM4-Banner11 (1).png
-coverY: 0
 layout:
-  cover:
-    visible: true
-    size: hero
   title:
     visible: false
   description:
@@ -19,6 +14,12 @@ layout:
 ---
 
 # 🌏 Welcome
+
+<div data-full-width="true">
+
+<figure><img src=".gitbook/assets/LM4-Banner10 (1).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 {% hint style="danger" %}
 **Important Notice**\
