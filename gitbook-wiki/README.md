@@ -15,12 +15,6 @@ layout:
 
 # 🌏 Welcome
 
-<div data-full-width="true">
-
-<figure><img src=".gitbook/assets/LM4-Banner10 (1).png" alt=""><figcaption></figcaption></figure>
-
-</div>
-
 {% hint style="danger" %}
 **Important Notice**\
 New Users to LevelledMobs 4 or;\
@@ -50,6 +44,16 @@ Second, if you want to retain your old setup, you could consult this wiki and th
 
 If you are genuinely struggling to convert your **LM 3** installation to **LM 4**'s formatting, you can ask for assistance in the official Support Discord linked below. To be entirely plain, we are not going to redo your file for you; we will help point to where you've made mistakes in the conversion.
 {% endhint %}
+
+
+
+<div align="center">
+
+<figure><img src=".gitbook/assets/LM4-Banner10 (1).png" alt="" width="536"><figcaption></figcaption></figure>
+
+</div>
+
+***
 
 ## What server software does LevelledMobs support?
 
