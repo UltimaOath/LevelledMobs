@@ -1,6 +1,6 @@
 ---
 description: This wiki provides support for the 4th revision of the LevelledMobs plugin.
-cover: .gitbook/assets/LM4-Banner11.png
+cover: .gitbook/assets/LM4-Banner11 (1).png
 coverY: 0
 layout:
   cover:
