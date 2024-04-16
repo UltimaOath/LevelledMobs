@@ -150,17 +150,44 @@ Performs a reload of the LevelledMobs plugin, including reprocessing the configu
 
 <details>
 
-<summary><strong>/lm spawner-egg (Coming Soon)</strong></summary>
+<summary><strong>/lm spawner-egg</strong></summary>
 
-* Coming Soon
+* `/lm spawner-egg` \
+  This is the start of the LevelledMobs Spawner-Egg creator. It requires at minimum the `/minlevel`, `/maxlevel`, and `/spawntype` flags for the Spawner-Egg to function.\
+  You can append any number of flags listed below to the end of the command, in any order.
+  * `/customdropid <name>` \
+    The unique name of a drop-table from the Custom Drops section; adding the drop table to the mobs created from the spawner-egg.
+  * `/entity <entity>` \
+    The mob which this spawner-egg will spawn.
+  * `/giveplayer <name>` \
+    Will instead give the egg(s) being created to the specified player, rather than the command performer.
+  * `/lore <content>`\
+    Will add lore to the spawner-egg item. Separate lines with `\n`.
+  * `/maxlevel <amount>`\
+    The max-level of any mob spawned from this spawner-egg.
+  * `/minlevel <amount>`\
+    The min-level of any mob spawned from this spawner-egg.
+  * `/name <name>`\
+    A name given to the egg item.
+  * `/nolore`\
+    Will remove any lore lines on the egg item.
 
 </details>
 
 <details>
 
-<summary><strong>/lm summon (Coming Soon)</strong></summary>
+<summary><strong>/lm summon</strong></summary>
 
-* Coming Soon
+* `/lm summon`\
+  This is the start of the LevelledMobs Summon command.
+  * `... <amount> <entity> <level> ...`\
+    These options populate the middle part of the command. It allows you to specify first the amount of the mobs you want to summon, up to a cap of ten at a time. Then you select the mob type which will be summoned. Finally, you would set the level that would be applied to this mob. The mob will process itself like any other `/summon` mob, however with it's Spawn Reason changed to `LM_SUMMON` and it's level value  locked regardless of changes in Rules which do not apply explicitly to `LM_SUMMON` mobs.&#x20;
+  * `... ... at-location <x> <y> <z> <world>`\
+    After specifying the amount, mob, and level of the mob, we can specify that the mob be spawned at a specified set of coordinates in a specified world.
+  * `... ... at-player <name>`\
+    After specifying the amount, mob, and level of the mob, we can specify that the mob be spawned at a specified player's coordinates, or very nearby that player.
+  * `... ... here`\
+    After specifying the amount, mob, and level of the mob, we can specify that the mob be spawned at the command executors' position or very nearby.
 
 </details>
 
