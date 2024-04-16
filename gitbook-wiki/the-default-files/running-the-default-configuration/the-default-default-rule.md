@@ -46,7 +46,7 @@ We also offer options to help identify either pets via the `mob-tamed-status` co
     nametag-placeholder-levelled: ''
     nametag-placeholder-unlevelled: ''
     nametag-visible-time: 5s
-    nametag-visibility-method: [ 'ALWAYS_ON' ]
+    nametag-visibility-method: [ 'TARGETED', 'ATTACKED', 'TRACKING' ]
 
   # Adjusts the `%tiered%` and `%health-indicator-color%` placeholders
     tiered-coloring:

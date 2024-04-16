@@ -1,7 +1,3 @@
----
-description: Still being updated!
----
-
 # 🔑 Commands and Permissions
 
 <details>

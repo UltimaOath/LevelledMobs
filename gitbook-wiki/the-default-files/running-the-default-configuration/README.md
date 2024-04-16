@@ -94,7 +94,7 @@ default-rule:
     nametag-placeholder-levelled: ''
     nametag-placeholder-unlevelled: ''
     nametag-visible-time: 5s
-    nametag-visibility-method: [ 'ATTACKED', 'TRACKING', 'TARGETED' ]
+    nametag-visibility-method: [ 'TARGETED', 'ATTACKED', 'TRACKING' ]
 
   # Adjusts the `%tiered%` and `%health-indicator-color%` placeholders
     tiered-coloring:
