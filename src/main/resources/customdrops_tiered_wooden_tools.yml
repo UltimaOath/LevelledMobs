@@ -14,6 +14,10 @@
 # Leather Helmet [0 Damage]
     - LEATHER_HELMET:
         groupid: leather_helmet_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -51,6 +55,10 @@
 # Leather Chestplate [0 Damage]
     - LEATHER_CHESTPLATE:
         groupid: leather_chestplate_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -88,6 +96,10 @@
 # Leather Leggings [0 Damage]
     - LEATHER_LEGGINGS:
         groupid: leather_leggings_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -125,6 +137,10 @@
 # Leather Boots [0 Damage]
     - LEATHER_BOOTS:
         groupid: leather_boots_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -162,6 +178,10 @@
 # Wooden Sword [0 Damage]
     - WOODEN_SWORD:
         groupid: wooden_sword_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -199,6 +219,10 @@
 # Wooden Axe [0 Damage]
     - WOODEN_AXE:
         groupid: wooden_axe_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -235,6 +259,10 @@
   ranged_damage_tiers:
     - CROSSBOW:
         groupid: ranged_damage_tiers_weapon
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.2 # 20% Chance to Drop
         name: '&#BD8B6ACrossbow'
