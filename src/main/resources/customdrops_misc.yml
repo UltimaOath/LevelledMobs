@@ -28,12 +28,13 @@
 #
 #   -------------------------------------------------------------------------------------
 #
-#  - usedroptable: disc
-#  - usedroptable: simple_tier_c
-#  - usedroptable: simple_tier_b
-#  - usedroptable: simple_tier_a
-#  - usedroptable: simple_tier_s
-#  - usedroptable: shatter-spawn
+#  disc
+#  simple_tier_c
+#  simple_tier_b
+#  simple_tier_a
+#  simple_tier_s
+#  shatter-spawn
+#  give-money
 #
 #   -------------------------------------------------------------------------------------
 
