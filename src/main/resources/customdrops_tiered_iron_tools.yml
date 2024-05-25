@@ -14,6 +14,10 @@
 # Iron Helmet [0 Damage]
     - IRON_HELMET:
         groupid: iron_helmet_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -51,6 +55,10 @@
 # Iron Chestplate [0 Damage]
     - IRON_CHESTPLATE:
         groupid: iron_chestplate_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -88,6 +96,10 @@
 # Iron Leggings [0 Damage]
     - IRON_LEGGINGS:
         groupid: iron_leggings_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -125,6 +137,10 @@
 # Iron Boots [0 Damage]
     - IRON_BOOTS:
         groupid: iron_boots_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -162,6 +178,10 @@
 # Iron Sword [0 Damage]
     - IRON_SWORD:
         groupid: iron_sword_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -199,6 +219,10 @@
 # Iron Axe [0 Damage]
     - IRON_AXE:
         groupid: iron_axe_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -235,6 +259,10 @@
   ranged_damage_tiers:
     - CROSSBOW:
         groupid: ranged_damage_tiers_weapon
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.2 # 20% Chance to Drop
         name: '&#BD8B6ACrossbow'
