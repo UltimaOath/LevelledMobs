@@ -42,6 +42,10 @@
 # Diamond Helmet [0 Damage]
     - DIAMOND_HELMET:
         groupid: diamond_helmet_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -79,6 +83,10 @@
 # Diamond Chestplate [0 Damage]
     - DIAMOND_CHESTPLATE:
         groupid: diamond_chestplate_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -116,6 +124,10 @@
 # Diamond Leggings [0 Damage]
     - DIAMOND_LEGGINGS:
         groupid: diamond_leggings_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -153,6 +165,10 @@
 # Diamond Boots [0 Damage]
     - DIAMOND_BOOTS:
         groupid: diamond_boots_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -190,6 +206,10 @@
 # Diamond Sword [0 Damage]
     - DIAMOND_SWORD:
         groupid: diamond_sword_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -227,6 +247,10 @@
 # Diamond Axe [0 Damage]
     - DIAMOND_AXE:
         groupid: diamond_axe_damage_tiers
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.0001 # 0.01% Chance
@@ -263,6 +287,10 @@
   ranged_damage_tiers:
     - CROSSBOW:
         groupid: ranged_damage_tiers_weapon
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.2 # 20% Chance to Drop
         name: '&#BD8B6ACrossbow'
