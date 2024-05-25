@@ -1,32 +1,33 @@
-#                    _                   _ _          _ __  __       _
-#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
-#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
-#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
-#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
-#                             The Ultimate RPG Levelled Mobs Solution
+#   -------------------------------------------------------------------------------------
+#   ----------------------------------------  -  ----------------------------------------
+#    _                   _ _          _       |
+#   | |    _____   _____| | | ___  __| |      |   Developer: PenalBuffalo
+#   | |   / _ \ \ / / _ \ | |/ _ \/ _` |      |   ko-fi.com/penalbuffalo
+#   | |__|  __/\ V /  __/ | |  __/ (_| |      |
+#   |_____\___| \_/ \___|_|_|\___|\__,_|_     |   Original Author: Lokka30
+#            |  \/  | ___ | |__  ___| || |    |   ko-fi.com/lokka30
+#            | |\/| |/ _ \| '_ \/ __| || |_   |
+#            | |  | | (_) | |_) \__ \__   _|  |   Support & Wiki: UltimaOath
+#            |_|  |_|\___/|_.__/|___/  |_|    |   ko-fi.com/ultimaoath
 #
-# --------------------------------------------------------------------------------------------LM3
-# +                                      ++                                                  +LM3
-# +  Main Developers                     ++  Documentation (on our Wiki)                     +LM3
-# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
-# +      Author and developer            ++                                                  +LM3
-# +      https://ko-fi.com/lokka30       ++  Support/Discussion (on our Discord)             +LM3
-# +                                      ++    Join our Discord for free, quality support.   +LM3
-# +    PenalBuffalo (aka. stumper66)     ++    If you are unable to, PM @lokka30 on SpigotMC +LM3
-# +      LevelledMobs 3 maintainer       ++    https://discord.gg/RQ8M4A5                    +LM3
-# +      https://ko-fi.com/penalbuffalo  ++                                                  +LM3
-# +                                      ++  Welcome to LevelledMobs 3! Please read the      +LM3
-# +    UltimaOath (aka. Oathkeeper)      ++  relevant documentation prior to attempting any  +LM3
-# +      Docs and configs since v2       ++  changes to this file.                           +LM3
-# +      https://ko-fi.com/ultimaoath    ++                                                  +LM3
-# +                                      ++                                                  +LM3
-# --------------------------------------------------------------------------------------------LM3
+#   ----------------------   The Ultimate Mob Levelling Solution   ----------------------
+#
+#   Documentation                             |   Support
+#   . Wiki: tinyurl.com/lm-git-wiki           |   . Discord: discord.gg/RQ8M4A5
+#   . FAQ: tinyurl.com/lm-git-faq             |   Please review our plugin!
+#   . Ex. Rules: tinyurl.com/lm-sample-rules  |   . Hangar - tinyurl.com/lm-hangar
+#   . Ex. Drops: tinyurl.com/lm-sample-drops  |   . SpigotMC - tinyurl.com/lm-spigotmc
+#                                             |
+#   ----------------------------------------  -  ----------------------------------------
+#   -------------------------------------------------------------------------------------
 
 #  
 #  Drop Tables - Complete List
 #  Use this list to search for any particular table you're looking for.
+#  The tables listed below are made to be copied and placed into the
+#  drop-table of your Custom Drops file.
 #
-#  ===========================================================================================
+#   -------------------------------------------------------------------------------------
 
 #  xeffect-particles-ambient_entity_effect
 #  xeffect-particles-angry_villager
@@ -91,7 +92,7 @@
 #  xeffect-particles-white_ash
 #  xeffect-particles-witch
 
-#  ===========================================================================================
+#   -------------------------------------------------------------------------------------
 
 #  xeffect-sounds-ambient-basalt_deltas
 #  xeffect-sounds-ambient-cave
@@ -437,6 +438,8 @@
 #  xeffect-aoe-negative-slowness
 #  xeffect-aoe-negative-weakness
 #  xeffect-aoe-negative-wither
+
+#   -------------------------------------------------------------------------------------
 
   xeffect-particles-ambient_entity_effect:
     - customCommand:
