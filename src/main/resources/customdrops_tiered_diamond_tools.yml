@@ -28,13 +28,13 @@
 #
 #   -------------------------------------------------------------------------------------
 #
-#  - usedroptable: diamond_helmet_damage_tiers
-#  - usedroptable: diamond_chestplate_damage_tiers
-#  - usedroptable: diamond_leggings_damage_tiers
-#  - usedroptable: diamond_boots_damage_tiers
-#  - usedroptable: diamond_sword_damage_tiers
-#  - usedroptable: diamond_axe_damage_tiers
-#  - usedroptable: ranged_damage_tiers
+#  diamond_helmet_damage_tiers
+#  diamond_chestplate_damage_tiers
+#  diamond_leggings_damage_tiers
+#  diamond_boots_damage_tiers
+#  diamond_sword_damage_tiers
+#  diamond_axe_damage_tiers
+#  ranged_damage_tiers
 #
 #   -------------------------------------------------------------------------------------
 
