@@ -1,93 +1,49 @@
-#                    _                   _ _          _ __  __       _
-#                   | |    _____   _____| | | ___  __| |  \/  | ___ | |__  ___
-#                   | |   / _ \ \ / / _ \ | |/ _ \/ _` | |\/| |/ _ \| '_ \/ __|
-#                   | |__|  __/\ V /  __/ | |  __/ (_| | |  | | (_) | |_) \__ \
-#                   |_____\___| \_/ \___|_|_|\___|\__,_|_|  |_|\___/|_.__/|___/
-#                             The Ultimate RPG Levelled Mobs Solution
+#   -------------------------------------------------------------------------------------
+#   ----------------------------------------  -  ----------------------------------------
+#    _                   _ _          _       |
+#   | |    _____   _____| | | ___  __| |      |   Developer: PenalBuffalo
+#   | |   / _ \ \ / / _ \ | |/ _ \/ _` |      |   ko-fi.com/penalbuffalo
+#   | |__|  __/\ V /  __/ | |  __/ (_| |      |
+#   |_____\___| \_/ \___|_|_|\___|\__,_|_     |   Original Author: Lokka30
+#            |  \/  | ___ | |__  ___| || |    |   ko-fi.com/lokka30
+#            | |\/| |/ _ \| '_ \/ __| || |_   |
+#            | |  | | (_) | |_) \__ \__   _|  |   Support & Wiki: UltimaOath
+#            |_|  |_|\___/|_.__/|___/  |_|    |   ko-fi.com/ultimaoath
 #
-# --------------------------------------------------------------------------------------------LM3
-# +                                      ++                                                  +LM3
-# +  Main Developers                     ++  Need Support Documentation?                     +LM3
-# +    lokka30                           ++    https://github.com/lokka30/LevelledMobs/wiki  +LM3
-# +      Original Author and Developer   ++                                                  +LM3
-# +      https://ko-fi.com/lokka30       ++  ArcanePlugins Support Discord                   +LM3
-# +                                      ++    https://discord.gg/RQ8M4A5                    +LM3
-# +                                      ++                                                  +LM3
-# +    stumper66                         ++  Special Thanks:                                 +LM3
-# +      Developer since v2              ++    ArcanePlugins Developers and Testers!         +LM3
-# +      https://ko-fi.com/penalbuffalo  ++    Donators, Patrons, and other Supporters!      +LM3
-# +                                      ++    SpigotMC, PaperMC, ProtocolLib, NBT-API,      +LM3
-# +                                      ++    PlaceholderAPI, and bStats!                   +LM3
-# +    UltimaOath                        ++                                                  +LM3
-# +      Docs and Config since v2        ++  Other Contributors:                             +LM3
-# +      Support the actual Developers!  ++    Eyrian, iCodinqs, deiphiz, CoolBoy, Esophose, +LM3
-# +                                      ++    7smile7, Hugo5551, konsolas, Shevchik,        +LM3
-# +                                      ++    limzikiki                                     +LM3
-# +                                      ++                                                  +LM3
-# --------------------------------------------------------------------------------------------LM3
-#                        _____         _             ____
-#                       |     |_ _ ___| |_ ___ _____|    \ ___ ___ ___ ___
-#                       |   --| | |_ -|  _| . |     |  |  |  _| . | . |_ -|
-#                       |_____|___|___|_| |___|_|_|_|____/|_| |___|  _|___|
-#                                                                 |_|
+#   ----------------------   The Ultimate Mob Levelling Solution   ----------------------
 #
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 01 - Defaults                                                                  +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-defaults:
-  chance: 0.2
-  use-chunk-kill-max: true
-  amount: 1
-  minLevel: -1
-  maxLevel: -1
-  custommodeldata: -1
-  nomultiplier: false
-  nospawner: false
-  equipped: 1.0
-  equip-offhand: true
-  override: false
-  maxdropgroup: 1
-  priority: 0
-  player-caused: true
-  item-flags: ''
-  groupid: ''
-  overall_chance: 0.0
-  nbt-data: ''
-  only-drop-if-equipped: false
-  # the following defaults are for custom commands only:
-  run-on-spawn: false
-  run-on-death: true
-  min-player-level: -1
-  max-player-level: -1
-  player-level-variable: ''
-
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 02 - Universal Group Drops                                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-all_mobs:
+#   Documentation                             |   Support
+#   . Wiki: tinyurl.com/lm-git-wiki           |   . Discord: discord.gg/RQ8M4A5
+#   . FAQ: tinyurl.com/lm-git-faq             |   Please review our plugin!
+#   . Ex. Rules: tinyurl.com/lm-sample-rules  |   . Hangar - tinyurl.com/lm-hangar
+#   . Ex. Drops: tinyurl.com/lm-sample-drops  |   . SpigotMC - tinyurl.com/lm-spigotmc
+#                                             |
+#   ----------------------------------------  -  ----------------------------------------
+#   -------------------------------------------------------------------------------------
+#
+#  Drop Tables - Complete List
+#  Use this list to search for any particular table you're looking for.
+#  The tables listed below are made to be copied and placed into the
+#  drop-table of your Custom Drops file.
+#
+#   -------------------------------------------------------------------------------------
+#
 #  - usedroptable: disc
 #  - usedroptable: simple_tier_c
 #  - usedroptable: simple_tier_b
 #  - usedroptable: simple_tier_a
 #  - usedroptable: simple_tier_s
 #  - usedroptable: shatter-spawn
+#
+#   -------------------------------------------------------------------------------------
 
-
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 04 - Drop Tables                                                               +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-drop-table:
   disc:
     - music_disc_13:
-        maxdropgroup: 1
         groupid: disc
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 3
         chance: 0.001 # 0.1% Chance
     - music_disc_cat:
         groupid: disc
@@ -129,7 +85,10 @@ drop-table:
   simple_tier_c:
     - LEATHER_HELMET:
         groupid: tier_c_armor
-        maxdropgroup: 3
+        group-limits:
+          cap-select: 3
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.25 # 25% Chance to Drop
@@ -152,7 +111,10 @@ drop-table:
         nbt-data: "{BlockEntityTag:{Base:4,Patterns:[{Color:15,Pattern:'bo'},{Color:13,Pattern:'gra'},{Color:12,Pattern:'gru'},{Color:5,Pattern:'drs'},{Color:5,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
     - WOODEN_SWORD:
         groupid: tier_c_weapons
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.2 # 20% Chance to Equip
         chance: 0.1 # 10% Chance to Drop
     - WOODEN_AXE:
@@ -163,7 +125,10 @@ drop-table:
   simple_tier_b:
     - IRON_HELMET:
         groupid: tier_b_armor
-        maxdropgroup: 3
+        group-limits:
+          cap-select: 3
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.25 # 25% Chance to Drop
@@ -186,7 +151,10 @@ drop-table:
         nbt-data: "{BlockEntityTag:{Base:3,Patterns:[{Color:15,Pattern:'bo'},{Color:8,Pattern:'gra'},{Color:7,Pattern:'gru'},{Color:0,Pattern:'drs'},{Color:0,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
     - IRON_SWORD:
         groupid: tier_b_weapons
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.2 # 20% Chance to Equip
         chance: 0.1 # 10% Chance to Drop
     - IRON_AXE:
@@ -197,7 +165,10 @@ drop-table:
   simple_tier_a:
     - DIAMOND_HELMET:
         groupid: tier_a_armor
-        maxdropgroup: 2
+        group-limits:
+          cap-select: 3
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.25 # 25% Chance to Drop
@@ -220,7 +191,10 @@ drop-table:
         nbt-data: "{BlockEntityTag:{Base:2,Patterns:[{Color:15,Pattern:'bo'},{Color:11,Pattern:'gra'},{Color:11,Pattern:'gru'},{Color:3,Pattern:'drs'},{Color:3,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
     - DIAMOND_SWORD:
         groupid: tier_a_weapons
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.2 # 20% Chance to Equip
         chance: 0.1 # 10% Chance to Drop
     - DIAMOND_AXE:
@@ -231,7 +205,10 @@ drop-table:
   simple_tier_s:
     - NETHERITE_HELMET:
         groupid: tier_s_armor
-        maxdropgroup: 2
+        group-limits:
+          cap-select: 3
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         equipped: 0.5 # 50% Chance to Equip
         chance: 0.25 # 25% Chance to Drop
@@ -254,7 +231,10 @@ drop-table:
         nbt-data: "{BlockEntityTag:{Base:9,Patterns:[{Color:15,Pattern:'bo'},{Color:7,Pattern:'gra'},{Color:15,Pattern:'gru'},{Color:8,Pattern:'drs'},{Color:8,Pattern:'dls'},{Color:15,Pattern:'cr'}]}}"
     - NETHERITE_SWORD:
         groupid: tier_s_weapons
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         equipped: 0.2 # 20% Chance to Equip
         chance: 0.1 # 10% Chance to Drop
     - NETHERITE_AXE:
@@ -269,7 +249,10 @@ drop-table:
     - customCommand:
         command: ['lm summon 1 %entity-name% %math_0:_(%mob-lvl%-%ranged_randomlvl%)% atLocation %math_0:_(%x%-%ranged_randomx%)% %math_(%y%-%ranged_randomy%)% %math_0:_(%z%+%ranged_height%)% %world%','execute at %player% run particle minecraft:mycelium %x% %y% %z% %ranged_BWidthX-mycelium% %ranged_BHeight-mycelium% %ranged_BWidthZ-mycelium% %ranged_Speed-mycelium% %ranged_Count-mycelium% force %player%','execute at %player% run particle minecraft:ash %x% %y% %z% %ranged_BWidthX-ash% %ranged_BHeight-ash% %ranged_BWidthZ-ash% %ranged_Speed-ash% %ranged_Count-ash% force %player%']
         groupid: random-direction-respawn
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         overall_chance: 1.0
         chance: 0.25
         amount: 1
@@ -385,7 +368,10 @@ drop-table:
         chance: 0.75
         ranged_count: 1-4
         groupid: give-money
-        maxdropgroup: 1
+        group-limits:
+          cap-select: 1
+          cap-total: 1
+          retries: 0
         maxLevel: 1
     - customCommand:
         command: ['eco give %player% %ranged_count%', 'tellraw %player% {"text":"A few coins litter the floor.","italic":true,"color":"green"}']
@@ -559,12 +545,5 @@ drop-table:
         groupid: give-money
         minLevel: 21
         maxLevel: 25
+
         
-        
-# +-------------------------------------------------------------------------------------------LM3
-# +                                                                                          +LM3
-# +   Section 05 - Advanced Message Settings                                                 +LM3
-# +   DO NOT EDIT BEYOND HERE WITHOUT DEVELOPER APPROVAL                                     +LM3
-# +                                                                                          +LM3
-# +-------------------------------------------------------------------------------------------LM3
-file-version: 10
