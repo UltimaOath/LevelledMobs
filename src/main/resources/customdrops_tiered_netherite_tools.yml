@@ -28,13 +28,13 @@
 #
 #   -------------------------------------------------------------------------------------
 #
-#  - usedroptable: netherite_helmet_damage_tiers
-#  - usedroptable: netherite_chestplate_damage_tiers
-#  - usedroptable: netherite_leggings_damage_tiers
-#  - usedroptable: netherite_boots_damage_tiers
-#  - usedroptable: netherite_sword_damage_tiers
-#  - usedroptable: netherite_axe_damage_tiers
-#  - usedroptable: ranged_damage_tiers
+#  netherite_helmet_damage_tiers
+#  netherite_chestplate_damage_tiers
+#  netherite_leggings_damage_tiers
+#  netherite_boots_damage_tiers
+#  netherite_sword_damage_tiers
+#  netherite_axe_damage_tiers
+#  ranged_damage_tiers
 #
 #   -------------------------------------------------------------------------------------
 
